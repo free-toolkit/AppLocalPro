@@ -1,98 +1,547 @@
-﻿<!DOCTYPE html>
+# Crear la página home limpia y enfocada en apps
+$cleanHomeContent = @'
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppLocalPro - Demos de Apps para Negocios</title>
+    <title>AppLocalPro - Apps Móviles para Negocios Locales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
-        .header { background: white; padding: 2rem; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .demos-grid { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
-        .demo-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .demo-card:hover { transform: translateY(-5px); }
-        .demo-image { height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #666; }
-        .demo-content { padding: 1.5rem; }
-        .demo-card.peluqueria .demo-image { background: #8B4513; color: white; }
-        .demo-card.gimnasio .demo-image { background: #2E8B57; color: white; }
-        .demo-card.restaurante .demo-image { background: #DC143C; color: white; }
-        .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #007bff; color: white; text-decoration: none; border-radius: 6px; margin-top: 1rem; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: white;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Simple */
+        .header { 
+            text-align: center; 
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        .header h1 { 
+            font-size: 2.8rem; 
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid de Categorías */
+        .categories-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+            gap: 2rem; 
+        }
+        .category-card { 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .category-card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .category-image { 
+            height: 160px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 3.5rem; 
+            color: white;
+            position: relative;
+        }
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .category-content { 
+            padding: 2rem; 
+        }
+        .category-content h3 { 
+            font-size: 1.4rem; 
+            margin-bottom: 1rem; 
+            color: #2c3e50;
+        }
+        .category-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .features-list {
+            margin: 1.5rem 0;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
+            color: #555;
+        }
+        .feature i {
+            color: #3498db;
+            width: 16px;
+        }
+        .benefit-note {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 3px solid #3498db;
+            font-size: 0.9rem;
+        }
+        .btn { 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem; 
+            background: #3498db; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            margin-top: 1rem; 
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn:hover { 
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn.demo-ready {
+            background: #27ae60;
+        }
+        .btn.demo-ready:hover {
+            background: #219a52;
+        }
+        .btn.coming-soon {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        .btn.coming-soon:hover {
+            background: #7f8c8d;
+            transform: none;
+        }
+
+        /* Colores solo para las imágenes de categoría */
+        .category-card.peluqueria .category-image { background: #8B4513; }
+        .category-card.gimnasio .category-image { background: #2E8B57; }
+        .category-card.restaurante .category-image { background: #DC143C; }
+        .category-card.tienda .category-image { background: #f39c12; }
+        .category-card.servicios .category-image { background: #9b59b6; }
+        .category-card.consultorio .category-image { background: #3498db; }
+        .category-card.hotel .category-image { background: #1abc9c; }
+        .category-card.escuela .category-image { background: #e74c3c; }
+        .category-card.transporte .category-image { background: #34495e; }
+
+        /* Navegación entre demos */
+        .demos-navigation {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .nav-menu {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            min-width: 220px;
+            margin-bottom: 10px;
+            border: 1px solid #f0f0f0;
+        }
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .nav-menu a:hover {
+            background: #f8f9fa;
+        }
+        .nav-menu a:last-child {
+            border-bottom: none;
+            border-top: 1px solid #3498db;
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header { padding: 1rem 0; }
+            .header h1 { font-size: 2.2rem; }
+            .categories-grid { grid-template-columns: 1fr; }
+            .nav-btn { padding: 10px 16px; }
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>AppLocalPro - Demos Interactivos</h1>
-        <p>Descubre nuestras soluciones para diferentes tipos de negocios</p>
+    <div class="container">
+        <!-- Header Principal -->
+        <div class="header">
+            <h1>AppLocalPro - Apps para Negocios Locales</h1>
+            <p>Soluciones móviles personalizadas para impulsar tu negocio. Prueba nuestros demos interactivos.</p>
+        </div>
+
+        <!-- Grid de Categorías -->
+        <div class="categories-grid">
+            
+            <!-- Peluquerías -->
+            <div class="category-card peluqueria">
+                <div class="category-image">
+                    <i class="fas fa-scissors"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Peluquerías & Barberías</h3>
+                    <p class="category-description">Sistema completo de gestión para salones de belleza con citas online y fidelización de clientes.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Citas online automáticas</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de clientes VIP</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Recordatorios automáticos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Portfolio de trabajos</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Sistema de fidelización con tokens personalizados para recompensas exclusivas.
+                    </div>
+
+                    <a href="demo-peluqueria/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gimnasios -->
+            <div class="category-card gimnasio">
+                <div class="category-image">
+                    <i class="fas fa-dumbbell"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Gimnasios & Wellness</h3>
+                    <p class="category-description">Plataforma fitness integral para reserva de clases y seguimiento de progreso.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Reserva de clases grupales</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Seguimiento de entrenamientos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Comunidad fitness integrada</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Planes personalizados</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Programa de recompensas con tokens por logros y asistencia.
+                    </div>
+
+                    <a href="demo-gimnasio/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Restaurantes -->
+            <div class="category-card restaurante">
+                <div class="category-image">
+                    <i class="fas fa-utensils"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Restaurantes & Cafés</h3>
+                    <p class="category-description">Ecosistema gastronómico con menú digital, pedidos online y sistema de reservas.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Menú digital interactivo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Pedidos y reservas online</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de delivery</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Programa de fidelidad</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Fidelización tokenizada para experiencias VIP y eventos exclusivos.
+                    </div>
+
+                    <a href="demo-restaurante/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tiendas Minoristas -->
+            <div class="category-card tienda">
+                <div class="category-image">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Tiendas Minoristas</h3>
+                    <p class="category-description">App de e-commerce para tiendas con catálogo digital y gestión de inventario.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Catálogo digital completo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Carrito de compras</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de inventario</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Ofertas y promociones</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Programa de recompensas con tokens canjeables en toda la red.
+                    </div>
+
+                    <a href="#" class="btn coming-soon">
+                        <i class="fas fa-clock"></i> Próximamente
+                    </a>
+                </div>
+            </div>
+
+            <!-- Servicios a Domicilio -->
+            <div class="category-card servicios">
+                <div class="category-image">
+                    <i class="fas fa-tools"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Servicios a Domicilio</h3>
+                    <p class="category-description">Plataforma para técnicos y servicios profesionales con gestión de citas.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Solicitud de servicios</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de técnicos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Seguimiento GPS</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Sistema de valoraciones</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Tokens de reputación para técnicos y recompensas para clientes.
+                    </div>
+
+                    <a href="#" class="btn coming-soon">
+                        <i class="fas fa-clock"></i> Próximamente
+                    </a>
+                </div>
+            </div>
+
+            <!-- Consultorios Médicos -->
+            <div class="category-card consultorio">
+                <div class="category-image">
+                    <i class="fas fa-stethoscope"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Consultorios Médicos</h3>
+                    <p class="category-description">Sistema de salud digital para gestión de pacientes y telemedicina.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Citas médicas online</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Historial médico seguro</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Recordatorios automáticos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Teleconsulta integrada</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Programa de wellness con tokens por seguimiento de tratamientos.
+                    </div>
+
+                    <a href="#" class="btn coming-soon">
+                        <i class="fas fa-clock"></i> Próximamente
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="demos-grid">
-        <div class="demo-card peluqueria">
-            <div class="demo-image">
-                <i class="fas fa-scissors"></i>
-            </div>
-            <div class="demo-content">
-                <h3>Peluquerías & Barberías</h3>
-                <p>Sistema completo de citas online, gestión de clientes y fidelización</p>
-                <a href="demo-peluqueria/index.html" class="btn">Ver Demo</a>
-            </div>
-        </div>
-        <div class="demo-card gimnasio">
-            <div class="demo-image">
-                <i class="fas fa-dumbbell"></i>
-            </div>
-            <div class="demo-content">
-                <h3>Gimnasios & Wellness</h3>
-                <p>Reserva de clases, seguimiento de progreso y comunidad fitness</p>
-                <a href="demo-gimnasio/index.html" class="btn">Ver Demo</a>
-            </div>
-        </div>
-        <div class="demo-card restaurante">
-            <div class="demo-image">
-                <i class="fas fa-utensils"></i>
-            </div>
-            <div class="demo-content">
-                <h3>Restaurantes & Cafés</h3>
-                <p>Menú digital, pedidos online, reservas y programa de fidelidad</p>
-                <a href="demo-restaurante/index.html" class="btn">Ver Demo</a>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
     <!-- Navegación entre demos -->
-<div class="demos-navigation" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-    <div class="nav-dropdown">
-        <button class="nav-btn" style="background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 25px; cursor: pointer;">
-            <i class="fas fa-th"></i> Ver Otros Demos
-        </button>
-        <div class="nav-menu" style="display: none; position: absolute; bottom: 100%; right: 0; background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); min-width: 200px;">
-            <a href="../demo-peluqueria/index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">
-                <i class="fas fa-scissors"></i> Peluquerías
-            </a>
-            <a href="../demo-gimnasio/index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">
-                <i class="fas fa-dumbbell"></i> Gimnasios
-            </a>
-            <a href="../demo-restaurante/index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">
-                <i class="fas fa-utensils"></i> Restaurantes
-            </a>
-            <a href="../index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #007bff; border-top: 1px solid #eee;">
-                <i class="fas fa-home"></i> Inicio
-            </a>
+    <div class="demos-navigation">
+        <div class="nav-dropdown">
+            <button class="nav-btn">
+                <i class="fas fa-th"></i> Navegar Demos
+            </button>
+            <div class="nav-menu">
+                <a href="demo-peluqueria/index.html">
+                    <i class="fas fa-scissors"></i> Peluquerías
+                </a>
+                <a href="demo-gimnasio/index.html">
+                    <i class="fas fa-dumbbell"></i> Gimnasios
+                </a>
+                <a href="demo-restaurante/index.html">
+                    <i class="fas fa-utensils"></i> Restaurantes
+                </a>
+                <a href="index.html">
+                    <i class="fas fa-home"></i> Volver al Inicio
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-// Mostrar/ocultar menú de demos
-document.querySelector('.nav-btn').addEventListener('click', function() {
-    const menu = document.querySelector('.nav-menu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-});
+    <script>
+        // Navegación entre demos
+        document.querySelector('.nav-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const menu = document.querySelector('.nav-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
 
-// Cerrar menú al hacer click fuera
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.nav-dropdown')) {
-        document.querySelector('.nav-menu').style.display = 'none';
-    }
-});
-</script>
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function() {
+            document.querySelector('.nav-menu').style.display = 'none';
+        });
+
+        // Prevenir clic en botones "Próximamente"
+        document.querySelectorAll('.btn.coming-soon').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('¡Esta categoría estará disponible pronto!');
+            });
+        });
+    </script>
 </body>
 </html>
+'@
+
+# Guardar la página home limpia
+[System.IO.File]::WriteAllText("C:\Users\saido\Desktop\AppLocalPro-main\index.html", $cleanHomeContent, [System.Text.Encoding]::UTF8)
+
+Write-Host "✅ Home LIMPIA creada con:" -ForegroundColor Green
+Write-Host "   🎯 Fondo blanco y diseño limpio" -ForegroundColor Cyan
+Write-Host "   📱 Enfoque principal en las apps" -ForegroundColor Cyan
+Write-Host "   🎨 Colores solo en imágenes de categorías" -ForegroundColor Cyan
+Write-Host "   ✅ Sin colores rojos/verdes innecesarios" -ForegroundColor Cyan
+Write-Host "   💡 Tokens mencionados como 'Plus' no como foco principal" -ForegroundColor Cyan
+Write-Host "   📋 Listas de features claras y organizadas" -ForegroundColor Cyan
+
+# Subir los cambios a GitHub
+Write-Host "`n🔄 Subiendo cambios a GitHub..." -ForegroundColor Yellow
+
+cd "C:\Users\saido\Desktop\AppLocalPro-main"
+git add .
+git commit -m "FEAT: Home limpia con fondo blanco, enfoque en apps y diseño minimalista"
+git push origin main
+
+Write-Host "✅ ¡Home limpia subida a GitHub!" -ForegroundColor Green
+Write-Host "🌐 Ver en: https://free-toolkit.github.io/AppLocalPro" -ForegroundColor Cyan
