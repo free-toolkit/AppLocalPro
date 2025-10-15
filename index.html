@@ -57,5 +57,42 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <!-- Navegación entre demos -->
+<div class="demos-navigation" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <div class="nav-dropdown">
+        <button class="nav-btn" style="background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 25px; cursor: pointer;">
+            <i class="fas fa-th"></i> Ver Otros Demos
+        </button>
+        <div class="nav-menu" style="display: none; position: absolute; bottom: 100%; right: 0; background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); min-width: 200px;">
+            <a href="../demo-peluqueria/index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">
+                <i class="fas fa-scissors"></i> Peluquerías
+            </a>
+            <a href="../demo-gimnasio/index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #eee;">
+                <i class="fas fa-dumbbell"></i> Gimnasios
+            </a>
+            <a href="../demo-restaurante/index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">
+                <i class="fas fa-utensils"></i> Restaurantes
+            </a>
+            <a href="../index.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #007bff; border-top: 1px solid #eee;">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Mostrar/ocultar menú de demos
+document.querySelector('.nav-btn').addEventListener('click', function() {
+    const menu = document.querySelector('.nav-menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+});
+
+// Cerrar menú al hacer click fuera
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.nav-dropdown')) {
+        document.querySelector('.nav-menu').style.display = 'none';
+    }
+});
+</script>
 </body>
 </html>
