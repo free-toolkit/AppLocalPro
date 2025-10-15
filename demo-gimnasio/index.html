@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitPro Gym - Demo Gimnasio & Wellness</title>
+    <meta name="description" content="Sistema de reservas y gestión para gimnasios y centros wellness">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                <span>FitPro Gym</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#clases">Clases</a></li>
+                <li><a href="#entrenadores">Entrenadores</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button class="btn btn-primary" onclick="openApp()">
+                    <i class="fas fa-mobile-alt"></i>
+                    Abrir App
+                </button>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero hero-gimnasio">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <strong class="text-kicker">DEMO INTERACTIVO</strong>
+                <h1>FitPro Gym App</h1>
+                <p>Sistema completo de gestión para gimnasios. Reserva de clases, seguimiento de progreso y comunidad fitness en una sola app.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="openApp()">
+                        <i class="fas fa-play"></i>
+                        Probar Demo
+                    </button>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-chart-bar"></i>
+                        Ver Dashboard
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup demo-phone">
+                    <div class="phone-screen" id="phoneScreen">
+                        <!-- Contenido dinámico de la app -->
+                        <div class="app-screen home-screen">
+                            <div class="app-header">
+                                <div class="app-logo">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <span>FitPro Gym</span>
+                                </div>
+                                <div class="app-notification">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                            </div>
+                            <div class="app-welcome">
+                                <h3>¡Bienvenido!</h3>
+                                <p>Tu camino fitness comienza aquí</p>
+                            </div>
+                            <div class="app-buttons">
+                                <button class="app-btn primary" onclick="showClasses()">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Reservar Clase
+                                </button>
+                                <button class="app-btn secondary" onclick="showProgress()">
+                                    <i class="fas fa-chart-line"></i>
+                                    Mi Progreso
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal de la App -->
+    <div id="appModal" class="modal">
+        <div class="modal-content app-modal">
+            <span class="close" onclick="closeApp()">&times;</span>
+            <div class="app-container">
+                <div class="app-header-modal">
+                    <div class="app-nav">
+                        <button class="nav-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                        <h3 id="appTitle">FitPro Gym App</h3>
+                        <button class="nav-btn" onclick="closeApp()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="app-content" id="appContent">
+                    <!-- Contenido dinámico de la app -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal del Dashboard -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content dashboard-modal">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-chart-bar"></i> Dashboard FitPro Gym</h2>
+                    <p>Panel de control del gimnasio</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>Miembros Activos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-info">
+                            <h3>42</h3>
+                            <p>Clases Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-euro-sign"></i>
+                        <div class="stat-info">
+                            <h3>€3,850</h3>
+                            <p>Ingresos Mensuales</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <h3>Próximas Clases</h3>
+                        <div class="clases-list">
+                            <div class="clase-item">
+                                <div class="clase-info">
+                                    <strong>Yoga Matutino</strong>
+                                    <span>08:00 AM - 20/25 plazas</span>
+                                </div>
+                                <div class="clase-status full">Llena</div>
+                            </div>
+                            <div class="clase-item">
+                                <div class="clase-info">
+                                    <strong>CrossFit Avanzado</strong>
+                                    <span>10:00 AM - 15/15 plazas</span>
+                                </div>
+                                <div class="clase-status available">Disponible</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-section">
+                        <h3>Nuevos Miembros</h3>
+                        <div class="miembros-list">
+                            <div class="miembro-item">
+                                <div class="miembro-avatar">AG</div>
+                                <div class="miembro-info">
+                                    <strong>Ana García</strong>
+                                    <span>Plan Premium</span>
+                                </div>
+                                <div class="miembro-fecha">Hoy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

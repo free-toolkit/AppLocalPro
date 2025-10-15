@@ -1,0 +1,2356 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo App Restaurante - AppLocalPro</title>
+    <meta name="description" content="Demo profesional de aplicación móvil para restaurantes">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo/favicon.ico" type="image/x-icon">
+    <style>
+        /* Variables modernas */
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #0052a3;
+            --accent: #00c853;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --text: #333333;
+            --border: #e0e0e0;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #0066cc 0%, #00c853 100%);
+            --gradient-reverse: linear-gradient(135deg, #00c853 0%, #0066cc 100%);
+        }
+
+        /* Demo Hero Moderno */
+        .demo-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .demo-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .demo-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* Features Grid Moderno */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card-modern {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card-modern:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+            border-color: var(--primary);
+        }
+
+        .feature-icon-modern {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-title-modern {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-desc {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+        }
+
+        /* App Showcase Moderno */
+        .app-showcase {
+            background: var(--light);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .app-screens-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .phone-mockup-modern {
+            width: 100%;
+            max-width: 320px;
+            height: 650px;
+            background: var(--dark);
+            border-radius: 40px;
+            padding: 25px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .phone-screen-modern {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screen-content-modern {
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header-modern {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .app-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: var(--text);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            background-color: rgba(0, 102, 204, 0.1);
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            padding-bottom: 80px; /* Espacio para la navegación */
+        }
+
+        /* Pantalla de Bienvenida */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .restaurant-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 80%;
+            max-width: 200px;
+        }
+
+        .welcome-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Pantalla de Inicio/Home */
+        .home-screen .hero-banner {
+            height: 180px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .hero-banner h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .hero-banner p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .action-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .action-title {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .featured-dishes {
+            margin-top: 1.5rem;
+        }
+
+        .section-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .dish-card {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .dish-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .dish-details {
+            flex: 1;
+        }
+
+        .dish-details h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .dish-details p {
+            margin: 0.3rem 0 0;
+            font-size: 0.8rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .dish-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        /* Pantalla de Menús */
+        .menu-categories {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-btn {
+            background: var(--light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-items {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .menu-item-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .menu-item-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-item-content {
+            padding: 1rem;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .menu-item-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .menu-item-desc {
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .menu-item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .quantity {
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Pantalla de Carrito */
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin: 0 0 0.3rem 0;
+            color: var(--dark);
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-summary {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-top: 1px solid var(--border);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkout-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Pantalla de Pago */
+        .payment-methods {
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background: rgba(0, 102, 204, 0.05);
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .payment-details {
+            flex: 1;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            margin: 0 0 0.2rem 0;
+            color: var(--dark);
+        }
+
+        .payment-desc {
+            font-size: 0.8rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Pantalla de Reservas */
+        .reservation-form {
+            padding: 1rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .deposit-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .deposit-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: #856404;
+            font-size: 1rem;
+        }
+
+        .deposit-info p {
+            margin: 0;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        .reservation-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .reservation-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Dashboard Propietario */
+        .dashboard-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+
+        .dashboard-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title-small {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .reservation-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .reservation-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .reservation-row:last-child {
+            border-bottom: none;
+        }
+
+        .reservation-info h4 {
+            margin: 0 0 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        .reservation-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .reservation-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Pantalla de Perfil */
+        .profile-section {
+            padding: 1.5rem;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label-small {
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+
+        .points-display {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .points-count {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pantalla de Recompensas */
+        .rewards-list {
+            margin-top: 1rem;
+        }
+
+        .reward-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .reward-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .reward-details {
+            flex: 1;
+        }
+
+        .reward-details h4 {
+            margin: 0 0 0.3rem 0;
+            color: var(--dark);
+        }
+
+        .reward-details p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .reward-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* App Screens */
+        .app-screen {
+            display: none;
+            height: 100%;
+        }
+
+        .app-screen.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-modern {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item-modern:hover {
+            background: var(--light);
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            background: var(--light);
+            border-radius: 10px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-details h4 {
+            margin: 0;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .item-details p {
+            margin: 0.3rem 0 0;
+            color: var(--text);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .order-details {
+            flex: 1;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .order-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Modernos */
+        .stats-modern {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .stats-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item-modern {
+            text-align: center;
+        }
+
+        .stat-number-modern {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Moderno */
+        .cta-modern {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-modern {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary-modern {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-modern {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-modern:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Puntos y Recompensas */
+        .rewards-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .reward-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .reward-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .reward-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .reward-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .reward-desc {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .points-display {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .points-count {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Token Section */
+        .token-section {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .token-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-desc {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-title {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-screens-modern {
+                grid-template-columns: 1fr;
+            }
+            
+            .phone-mockup-modern {
+                height: 600px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .rewards-grid, .token-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>AppLocalPro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="demos.html">Demos</a></li>
+                <li><a href="services.html">Servicios</a></li>
+                <li><a href="pricing.html">Precios</a></li>
+                <li><a href="contact.html">Contacto</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="contact.html" class="btn btn-primary">Comenzar Ahora</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Moderno -->
+    <section class="demo-hero">
+        <div class="demo-container">
+            <div class="demo-badge">
+                <i class="fas fa-star"></i>
+                Demo Profesional
+            </div>
+            <h1 class="demo-title">App Restaurante Premium</h1>
+            <p class="demo-subtitle">Experiencia móvil de última generación para restaurantes de alto nivel. Diseño elegante, funcionalidades avanzadas y resultados medibles.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card-modern">
+                    <div class="feature-icon-modern">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title-modern">Diseño Premium</h3>
+                    <p class="feature-desc">Interfaz moderna y elegante que refleja la identidad de tu restaurante y mejora la experiencia del cliente.</p>
+                </div>
+                
+                <div class="feature-card-modern">
+                    <div class="feature-icon-modern">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="feature-title-modern">Sistema de Recompensas</h3>
+                    <p class="feature-desc">Programa de fidelización con puntos canjeables que aumenta la recurrencia de clientes.</p>
+                </div>
+                
+                <div class="feature-card-modern">
+                    <div class="feature-icon-modern">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="feature-title-modern">Tokenización</h3>
+                    <p class="feature-desc">Transforma tu negocio con tokens descentralizados que abren nuevas oportunidades de negocio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Showcase -->
+    <section class="app-showcase">
+        <div class="demo-container">
+            <h2 class="section-title">Interfaz Profesional</h2>
+            <p class="section-subtitle">Diseño intuitivo y elegante que potencia la experiencia del usuario y aumenta las conversiones</p>
+            
+            <div class="app-screens-modern">
+                <!-- Pantalla 1: App Cliente -->
+                <div class="phone-mockup-modern">
+                    <div class="phone-screen-modern">
+                        <div class="screen-content-modern">
+                            <!-- Pantalla de Bienvenida -->
+                            <div class="app-screen active" id="welcome-screen">
+                                <div class="welcome-screen">
+                                    <div class="restaurant-logo">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <h2 class="welcome-title">BISTRÓ MODERNO</h2>
+                                    <p class="welcome-subtitle">Experiencia gastronómica única en el corazón de la ciudad</p>
+                                    <button class="welcome-btn" id="enter-app">Acceder</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla Principal/Home -->
+                            <div class="app-screen" id="home-screen">
+                                <div class="home-screen">
+                                    <div class="hero-banner">
+                                        <h2>Bienvenido a Bistró Moderno</h2>
+                                        <p>Descubre nuestra cocina de autor</p>
+                                    </div>
+                                    <div class="content-area">
+                                        <div class="quick-actions">
+                                            <div class="action-card" data-screen="menu">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-utensils"></i>
+                                                </div>
+                                                <div class="action-title">Ver Menú</div>
+                                            </div>
+                                            <div class="action-card" data-screen="reservations">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </div>
+                                                <div class="action-title">Reservar Mesa</div>
+                                            </div>
+                                            <div class="action-card" data-screen="rewards">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-gift"></i>
+                                                </div>
+                                                <div class="action-title">Recompensas</div>
+                                            </div>
+                                            <div class="action-card" data-screen="profile">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div class="action-title">Mi Cuenta</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="featured-dishes">
+                                            <h3 class="section-heading">Platos Destacados</h3>
+                                            <div class="dish-card" data-item="1">
+                                                <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');"></div>
+                                                <div class="dish-details">
+                                                    <h4>Ensalada Mediterránea</h4>
+                                                    <p>Tomate, mozzarella, albahaca, aceite de oliva</p>
+                                                </div>
+                                                <div class="dish-price">€14.50</div>
+                                            </div>
+                                            <div class="dish-card" data-item="2">
+                                                <div class="dish-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2081&q=80');"></div>
+                                                <div class="dish-details">
+                                                    <h4>Salmón a la Plancha</h4>
+                                                    <p>Con verduras asadas y salsa de eneldo</p>
+                                                </div>
+                                                <div class="dish-price">€22.90</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item active" data-screen="home">
+                                        <i class="fas fa-home"></i>
+                                        <span>Inicio</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="menu">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Menú</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="reservations">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Reservas</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="profile">
+                                        <i class="fas fa-user"></i>
+                                        <span>Cuenta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla de Menú -->
+                            <div class="app-screen" id="menu-screen">
+                                <div class="app-header-modern">
+                                    <h3 style="margin: 0; font-weight: 600;">NUESTRO MENÚ</h3>
+                                </div>
+                                <div class="content-area">
+                                    <div class="menu-categories">
+                                        <button class="category-btn active" data-category="entrantes">Entrantes</button>
+                                        <button class="category-btn" data-category="principales">Platos Principales</button>
+                                        <button class="category-btn" data-category="postres">Postres</button>
+                                        <button class="category-btn" data-category="bebidas">Bebidas</button>
+                                    </div>
+                                    
+                                    <div class="menu-items">
+                                        <!-- Entrantes -->
+                                        <div class="menu-item-card" data-category="entrantes">
+                                            <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');"></div>
+                                            <div class="menu-item-content">
+                                                <div class="menu-item-header">
+                                                    <h4 class="menu-item-name">Ensalada Mediterránea</h4>
+                                                    <div class="menu-item-price">€14.50</div>
+                                                </div>
+                                                <p class="menu-item-desc">Tomate fresco, mozzarella de búfala, albahaca y aceite de oliva virgen extra</p>
+                                                <div class="menu-item-actions">
+                                                    <div class="quantity-selector">
+                                                        <button class="quantity-btn minus">-</button>
+                                                        <span class="quantity">1</span>
+                                                        <button class="quantity-btn plus">+</button>
+                                                    </div>
+                                                    <button class="add-to-cart">Añadir</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="menu-item-card" data-category="entrantes">
+                                            <div class="menu-item-image" style="background-image: url('https://images.unsplash.com/photo-1565299585323-38174c13fae8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                                            <div class="menu-item-content">
+                                                <div class="menu-item-header">
+                                                    <h4 class="menu-item-name">Tabla de Quesos</h4>
+                                                    <div class="menu-item-price">€16.20</div>
+                                                </div>
+                                                <p class="menu-item-desc">Selección de quesos artesanales con miel, nueces y pan de masa madre</p>
+                                                <div class="menu-item-actions">
+                                                    <div class="quantity-selector">
+                                                        <button class="quantity-btn minus">-</button>
+                                                        <span class="quantity">1</span>
+                                                        <button class="quantity-btn plus">+</button>
+                                                    </div>
+                                                    <button class="add-to-cart">Añadir</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item" data-screen="home">
+                                        <i class="fas fa-home"></i>
+                                        <span>Inicio</span>
+                                    </div>
+                                    <div class="nav-item active" data-screen="menu">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Menú</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="reservations">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Reservas</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="profile">
+                                        <i class="fas fa-user"></i>
+                                        <span>Cuenta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla de Carrito -->
+                            <div class="app-screen" id="cart-screen">
+                                <div class="app-header-modern">
+                                    <h3 style="margin: 0; font-weight: 600;">TU PEDIDO</h3>
+                                </div>
+                                <div class="content-area">
+                                    <div class="cart-items">
+                                        <div class="cart-item">
+                                            <div class="cart-item-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');"></div>
+                                            <div class="cart-item-details">
+                                                <h4 class="cart-item-name">Ensalada Mediterránea</h4>
+                                                <div class="cart-item-price">€14.50</div>
+                                            </div>
+                                            <div class="cart-item-actions">
+                                                <button class="quantity-btn minus">-</button>
+                                                <span class="quantity">1</span>
+                                                <button class="quantity-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cart-item">
+                                            <div class="cart-item-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2081&q=80');"></div>
+                                            <div class="cart-item-details">
+                                                <h4 class="cart-item-name">Salmón a la Plancha</h4>
+                                                <div class="cart-item-price">€22.90</div>
+                                            </div>
+                                            <div class="cart-item-actions">
+                                                <button class="quantity-btn minus">-</button>
+                                                <span class="quantity">1</span>
+                                                <button class="quantity-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="cart-summary">
+                                        <div class="summary-row">
+                                            <span>Subtotal</span>
+                                            <span>€37.40</span>
+                                        </div>
+                                        <div class="summary-row">
+                                            <span>Servicio</span>
+                                            <span>€3.50</span>
+                                        </div>
+                                        <div class="summary-row summary-total">
+                                            <span>Total</span>
+                                            <span>€40.90</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="checkout-btn" data-screen="payment">Pagar Ahora</button>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item" data-screen="home">
+                                        <i class="fas fa-home"></i>
+                                        <span>Inicio</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="menu">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Menú</span>
+                                    </div>
+                                    <div class="nav-item active" data-screen="cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span>Carrito</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="profile">
+                                        <i class="fas fa-user"></i>
+                                        <span>Cuenta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla de Pago -->
+                            <div class="app-screen" id="payment-screen">
+                                <div class="app-header-modern">
+                                    <h3 style="margin: 0; font-weight: 600;">MÉTODO DE PAGO</h3>
+                                </div>
+                                <div class="content-area">
+                                    <div class="payment-methods">
+                                        <div class="payment-method active">
+                                            <div class="payment-icon">
+                                                <i class="fab fa-cc-visa"></i>
+                                            </div>
+                                            <div class="payment-details">
+                                                <h4 class="payment-name">Tarjeta de Crédito</h4>
+                                                <p class="payment-desc">Pago seguro con tarjeta Visa o Mastercard</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="payment-method">
+                                            <div class="payment-icon">
+                                                <i class="fab fa-paypal"></i>
+                                            </div>
+                                            <div class="payment-details">
+                                                <h4 class="payment-name">PayPal</h4>
+                                                <p class="payment-desc">Pago rápido y seguro con PayPal</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="payment-method">
+                                            <div class="payment-icon">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </div>
+                                            <div class="payment-details">
+                                                <h4 class="payment-name">Bizum</h4>
+                                                <p class="payment-desc">Pago instantáneo con tu móvil</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Número de Tarjeta</label>
+                                        <input type="text" class="form-input" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                    
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                                        <div class="form-group">
+                                            <label class="form-label">Fecha de Caducidad</label>
+                                            <input type="text" class="form-input" placeholder="MM/AA">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">CVV</label>
+                                            <input type="text" class="form-input" placeholder="123">
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="checkout-btn">Pagar €40.90</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla de Reservas -->
+                            <div class="app-screen" id="reservations-screen">
+                                <div class="app-header-modern">
+                                    <h3 style="margin: 0; font-weight: 600;">RESERVAR MESA</h3>
+                                </div>
+                                <div class="content-area">
+                                    <div class="reservation-form">
+                                        <div class="form-group">
+                                            <label class="form-label">Fecha</label>
+                                            <input type="date" class="form-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Hora</label>
+                                            <select class="form-select">
+                                                <option>19:00</option>
+                                                <option>19:30</option>
+                                                <option>20:00</option>
+                                                <option>20:30</option>
+                                                <option>21:00</option>
+                                                <option>21:30</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Número de Personas</label>
+                                            <select class="form-select">
+                                                <option>1 persona</option>
+                                                <option>2 personas</option>
+                                                <option>3 personas</option>
+                                                <option>4 personas</option>
+                                                <option>5 personas</option>
+                                                <option>6 personas</option>
+                                                <option>Más de 6 personas</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="deposit-info">
+                                            <h4>Depósito de Garantía</h4>
+                                            <p>Se requiere un depósito del 20% (€10) para confirmar tu reserva. Será reembolsado si cancelas con 24h de antelación.</p>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Notas Especiales</label>
+                                            <textarea class="form-input" rows="3" placeholder="Alergias, celebración especial..."></textarea>
+                                        </div>
+                                        <button class="reservation-btn">Confirmar Reserva</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item" data-screen="home">
+                                        <i class="fas fa-home"></i>
+                                        <span>Inicio</span>
+                                    </div>
+                                    <div class="nav-item active" data-screen="reservations">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Reservas</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="rewards">
+                                        <i class="fas fa-gift"></i>
+                                        <span>Recompensas</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="profile">
+                                        <i class="fas fa-user"></i>
+                                        <span>Cuenta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla de Recompensas -->
+                            <div class="app-screen" id="rewards-screen">
+                                <div class="app-header-modern">
+                                    <h3 style="margin: 0; font-weight: 600;">RECOMPENSAS</h3>
+                                </div>
+                                <div class="content-area">
+                                    <div class="points-display">
+                                        <div class="points-count">850 pts</div>
+                                        <p>Tus puntos disponibles</p>
+                                    </div>
+                                    
+                                    <div class="rewards-list">
+                                        <div class="reward-item">
+                                            <div class="reward-icon">
+                                                <i class="fas fa-coffee"></i>
+                                            </div>
+                                            <div class="reward-details">
+                                                <h4>Café Gratis</h4>
+                                                <p>Canjea 200 puntos por un café premium</p>
+                                            </div>
+                                            <button class="reward-action">Canjear</button>
+                                        </div>
+                                        
+                                        <div class="reward-item">
+                                            <div class="reward-icon" style="background: #ff6b6b;">
+                                                <i class="fas fa-wine-bottle"></i>
+                                            </div>
+                                            <div class="reward-details">
+                                                <h4>Vino de la Casa</h4>
+                                                <p>Canjea 500 puntos por una botella</p>
+                                            </div>
+                                            <button class="reward-action">Canjear</button>
+                                        </div>
+                                        
+                                        <div class="reward-item">
+                                            <div class="reward-icon" style="background: #9c27b0;">
+                                                <i class="fas fa-utensils"></i>
+                                            </div>
+                                            <div class="reward-details">
+                                                <h4>Cena para 2</h4>
+                                                <p>Canjea 1500 puntos por menú especial</p>
+                                            </div>
+                                            <button class="reward-action">Canjear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item" data-screen="home">
+                                        <i class="fas fa-home"></i>
+                                        <span>Inicio</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="reservations">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Reservas</span>
+                                    </div>
+                                    <div class="nav-item active" data-screen="rewards">
+                                        <i class="fas fa-gift"></i>
+                                        <span>Recompensas</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="profile">
+                                        <i class="fas fa-user"></i>
+                                        <span>Cuenta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pantalla de Perfil/Cuenta -->
+                            <div class="app-screen" id="profile-screen">
+                                <div class="app-header-modern">
+                                    <h3 style="margin: 0; font-weight: 600;">MI CUENTA</h3>
+                                </div>
+                                <div class="profile-section">
+                                    <div class="profile-header">
+                                        <div class="profile-avatar">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <h3>María González</h3>
+                                        <p style="color: var(--text); opacity: 0.8;">Cliente Premium</p>
+                                    </div>
+                                    
+                                    <div class="profile-stats">
+                                        <div class="stat-box">
+                                            <span class="stat-value">12</span>
+                                            <span class="stat-label-small">Visitas</span>
+                                        </div>
+                                        <div class="stat-box">
+                                            <span class="stat-value">850</span>
+                                            <span class="stat-label-small">Puntos</span>
+                                        </div>
+                                        <div class="stat-box">
+                                            <span class="stat-value">4.8</span>
+                                            <span class="stat-label-small">Valoración</span>
+                                        </div>
+                                        <div class="stat-box">
+                                            <span class="stat-value">3</span>
+                                            <span class="stat-label-small">Recompensas</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 style="margin-bottom: 1rem; color: var(--dark);">Tus Tokens</h4>
+                                    <div class="points-display" style="background: var(--gradient-reverse);">
+                                        <div class="points-count">25 BIST</div>
+                                        <p>Tokens Bistró Moderno</p>
+                                    </div>
+                                    
+                                    <div style="margin-top: 2rem;">
+                                        <h4 style="margin-bottom: 1rem; color: var(--dark);">Mis Reservas</h4>
+                                        <div class="menu-item-modern">
+                                            <div class="item-image" style="background: var(--primary);">
+                                                <i class="fas fa-calendar"></i>
+                                            </div>
+                                            <div class="item-details">
+                                                <h4>Viernes, 15 Dic</h4>
+                                                <p>20:00 · 2 personas · Confirmada</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item" data-screen="home">
+                                        <i class="fas fa-home"></i>
+                                        <span>Inicio</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="reservations">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Reservas</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="rewards">
+                                        <i class="fas fa-gift"></i>
+                                        <span>Recompensas</span>
+                                    </div>
+                                    <div class="nav-item active" data-screen="profile">
+                                        <i class="fas fa-user"></i>
+                                        <span>Cuenta</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pantalla 2: Dashboard Propietario -->
+                <div class="phone-mockup-modern">
+                    <div class="phone-screen-modern">
+                        <div class="screen-content-modern">
+                            <!-- Dashboard Propietario -->
+                            <div class="app-screen active" id="dashboard-screen">
+                                <div class="dashboard-header">
+                                    <h3 style="margin: 0; font-weight: 600;">DASHBOARD</h3>
+                                    <p style="margin: 0.5rem 0 0; opacity: 0.9;">Bistró Moderno</p>
+                                </div>
+                                <div class="content-area">
+                                    <div class="stats-grid">
+                                        <div class="stat-card">
+                                            <span class="stat-value">€2,845</span>
+                                            <span class="stat-label">Ventas Hoy</span>
+                                        </div>
+                                        <div class="stat-card">
+                                            <span class="stat-value">42</span>
+                                            <span class="stat-label">Clientes Hoy</span>
+                                        </div>
+                                        <div class="stat-card">
+                                            <span class="stat-value">18</span>
+                                            <span class="stat-label">Reservas Hoy</span>
+                                        </div>
+                                        <div class="stat-card">
+                                            <span class="stat-value">4.8★</span>
+                                            <span class="stat-label">Valoración</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="dashboard-section">
+                                        <h4 class="section-title-small">Reservas de Hoy</h4>
+                                        <div class="reservation-list">
+                                            <div class="reservation-row">
+                                                <div class="reservation-info">
+                                                    <h4>Mesa 4 - 20:00</h4>
+                                                    <p>Familia López · 4 personas</p>
+                                                </div>
+                                                <div class="reservation-status status-confirmed">Confirmada</div>
+                                            </div>
+                                            <div class="reservation-row">
+                                                <div class="reservation-info">
+                                                    <h4>Mesa 2 - 21:30</h4>
+                                                    <p>Ana Martínez · 2 personas</p>
+                                                </div>
+                                                <div class="reservation-status status-confirmed">Confirmada</div>
+                                            </div>
+                                            <div class="reservation-row">
+                                                <div class="reservation-info">
+                                                    <h4>Mesa 5 - 19:00</h4>
+                                                    <p>Carlos Ruiz · 6 personas</p>
+                                                </div>
+                                                <div class="reservation-status status-pending">Pendiente</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="dashboard-section">
+                                        <h4 class="section-title-small">Pedidos Activos</h4>
+                                        <div class="reservation-list">
+                                            <div class="reservation-row">
+                                                <div class="reservation-info">
+                                                    <h4>#ORD-1245</h4>
+                                                    <p>Mesa 3 · €86.50 · 15 min</p>
+                                                </div>
+                                                <div class="reservation-status status-confirmed">En Cocina</div>
+                                            </div>
+                                            <div class="reservation-row">
+                                                <div class="reservation-info">
+                                                    <h4>#ORD-1246</h4>
+                                                    <p>Mesa 7 · €45.20 · 5 min</p>
+                                                </div>
+                                                <div class="reservation-status status-pending">Pendiente</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="dashboard-section">
+                                        <h4 class="section-title-small">Acciones Rápidas</h4>
+                                        <div class="quick-actions">
+                                            <div class="action-card">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-plus"></i>
+                                                </div>
+                                                <div class="action-title">Nuevo Plato</div>
+                                            </div>
+                                            <div class="action-card">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-chart-line"></i>
+                                                </div>
+                                                <div class="action-title">Estadísticas</div>
+                                            </div>
+                                            <div class="action-card">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                                <div class="action-title">Clientes</div>
+                                            </div>
+                                            <div class="action-card">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-cog"></i>
+                                                </div>
+                                                <div class="action-title">Ajustes</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="app-nav">
+                                    <div class="nav-item active" data-screen="dashboard">
+                                        <i class="fas fa-chart-bar"></i>
+                                        <span>Dashboard</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="orders">
+                                        <i class="fas fa-clipboard-list"></i>
+                                        <span>Pedidos</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="menu-manager">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Menú</span>
+                                    </div>
+                                    <div class="nav-item" data-screen="settings">
+                                        <i class="fas fa-cog"></i>
+                                        <span>Ajustes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resto del contenido se mantiene igual -->
+    <!-- Sistema de Recompensas -->
+    <section class="rewards-section">
+        <div class="demo-container">
+            <h2 class="section-title">Sistema de Recompensas Inteligente</h2>
+            <p class="section-subtitle">Fideliza a tus clientes con un programa de puntos moderno y atractivo</p>
+            
+            <div class="rewards-grid">
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="reward-title">Gana Puntos</h3>
+                    <p class="reward-desc">Los clientes acumulan puntos por cada compra, visita y acción en la app. 1€ = 10 puntos.</p>
+                </div>
+                
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="reward-title">Canjea Recompensas</h3>
+                    <p class="reward-desc">Ofrece recompensas atractivas que incentiven las visitas recurrentes y el mayor gasto.</p>
+                </div>
+                
+                <div class="reward-card">
+                    <div class="reward-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="reward-title">Analítica Avanzada</h3>
+                    <p class="reward-desc">Monitoriza el comportamiento de tus clientes y optimiza tu programa de fidelización.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Token Descentralizado -->
+    <section class="token-section">
+        <div class="demo-container">
+            <h2 class="section-title" style="color: white;">Tokenización del Restaurante</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Lleva tu negocio al siguiente nivel con tokens descentralizados</p>
+            
+            <div class="token-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="benefit-title">Financiación Colectiva</h3>
+                    <p class="benefit-desc">Emite tokens para financiar expansiones, renovaciones o nuevos proyectos mediante crowdfunding.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">Comunidad Global</h3>
+                    <p class="benefit-desc">Crea una comunidad de seguidores globales que puedan invertir en y apoyar tu restaurante.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3 class="benefit-title">Beneficios Exclusivos</h3>
+                    <p class="benefit-desc">Los poseedores de tokens obtienen descuentos, acceso prioritario y participación en beneficios.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="benefit-title">Valorización</h3>
+                    <p class="benefit-desc">El valor del token aumenta con el éxito del restaurante, creando oportunidades de inversión.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">¿Qué puedes hacer con el token BIST?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                        <i class="fas fa-utensils" style="color: var(--accent); margin-bottom: 0.5rem; display: block; font-size: 1.5rem;"></i>
+                        <p>Pagar consumiciones</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                        <i class="fas fa-ticket-alt" style="color: var(--accent); margin-bottom: 0.5rem; display: block; font-size: 1.5rem;"></i>
+                        <p>Acceso a eventos</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                        <i class="fas fa-gem" style="color: var(--accent); margin-bottom: 0.5rem; display: block; font-size: 1.5rem;"></i>
+                        <p>Experiencias VIP</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
+                        <i class="fas fa-hand-holding-usd" style="color: var(--accent); margin-bottom: 0.5rem; display: block; font-size: 1.5rem;"></i>
+                        <p>Invertir en crecimiento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Modernos -->
+    <section class="stats-modern">
+        <div class="demo-container">
+            <h2 class="section-title" style="color: white;">Resultados Comprobados</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Estadísticas reales de restaurantes que implementaron nuestra solución</p>
+            
+            <div class="stats-grid-modern">
+                <div class="stat-item-modern">
+                    <span class="stat-number-modern">+62%</span>
+                    <p class="stat-label">Reservas Online</p>
+                </div>
+                <div class="stat-item-modern">
+                    <span class="stat-number-modern">-45%</span>
+                    <p class="stat-label">Tiempo de Espera</p>
+                </div>
+                <div class="stat-item-modern">
+                    <span class="stat-number-modern">+35%</span>
+                    <p class="stat-label">Ticket Promedio</p>
+                </div>
+                <div class="stat-item-modern">
+                    <span class="stat-number-modern">4.9★</span>
+                    <p class="stat-label">Valoración Media</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Moderno -->
+    <section class="cta-modern">
+        <div class="demo-container">
+            <h2 class="cta-title">Transforma Tu Restaurante</h2>
+            <p class="cta-subtitle">Implementa una aplicación móvil profesional que impulse tus reservas, optimice operaciones y fidelice clientes</p>
+            
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn-modern btn-primary-modern">
+                    <i class="fas fa-rocket"></i>
+                    Solicitar Demo Personalizada
+                </a>
+                <a href="pricing.html" class="btn-modern btn-outline-modern">
+                    <i class="fas fa-euro-sign"></i>
+                    Ver Planes Premium
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>AppLocalPro</span>
+                    </div>
+                    <p>Soluciones móviles profesionales para negocios de alto rendimiento.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> info@applocalpro.com</p>
+                        <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Madrid, España</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Demos</h4>
+                    <a href="demo-restaurante.html">Restaurantes</a>
+                    <a href="demo-peluqueria.html">Peluquerías</a>
+                    <a href="demo-gimnasio.html">Gimnasios</a>
+                    <a href="demo-tienda.html">Tiendas</a>
+                    <a href="demo-servicios.html">Servicios</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">Aviso Legal</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AppLocalPro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navegación entre pantallas de la app
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const appScreens = document.querySelectorAll('.app-screen');
+            const actionCards = document.querySelectorAll('.action-card');
+            const enterAppBtn = document.getElementById('enter-app');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const menuItems = document.querySelectorAll('.menu-item-card');
+            const quantityBtns = document.querySelectorAll('.quantity-btn');
+            const addToCartBtns = document.querySelectorAll('.add-to-cart');
+            const checkoutBtn = document.querySelector('.checkout-btn[data-screen="payment"]');
+            
+            // Función para cambiar de pantalla
+            function switchScreen(targetScreen) {
+                // Ocultar todas las pantallas
+                appScreens.forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                
+                // Mostrar la pantalla objetivo
+                const targetScreenElement = document.getElementById(`${targetScreen}-screen`);
+                if (targetScreenElement) {
+                    targetScreenElement.classList.add('active');
+                }
+                
+                // Actualizar navegación activa
+                navItems.forEach(nav => {
+                    nav.classList.remove('active');
+                    if (nav.getAttribute('data-screen') === targetScreen) {
+                        nav.classList.add('active');
+                    }
+                });
+            }
+            
+            // Navegación por items del menú
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetScreen = this.getAttribute('data-screen');
+                    switchScreen(targetScreen);
+                });
+            });
+            
+            // Navegación por action cards
+            actionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const targetScreen = this.getAttribute('data-screen');
+                    switchScreen(targetScreen);
+                });
+            });
+            
+            // Botón de entrar a la app
+            enterAppBtn.addEventListener('click', function() {
+                switchScreen('home');
+            });
+            
+            // Navegación por categorías del menú
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remover active de todos los botones
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // Añadir active al botón clickeado
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // Mostrar/ocultar items del menú según categoría
+                    menuItems.forEach(item => {
+                        if (item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Control de cantidad en items del menú
+            quantityBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const container = this.closest('.quantity-selector');
+                    const quantityElement = container.querySelector('.quantity');
+                    let quantity = parseInt(quantityElement.textContent);
+                    
+                    if (this.classList.contains('plus')) {
+                        quantity++;
+                    } else if (this.classList.contains('minus') && quantity > 1) {
+                        quantity--;
+                    }
+                    
+                    quantityElement.textContent = quantity;
+                });
+            });
+            
+            // Añadir al carrito
+            addToCartBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.menu-item-card');
+                    const name = card.querySelector('.menu-item-name').textContent;
+                    const price = card.querySelector('.menu-item-price').textContent;
+                    const quantity = card.querySelector('.quantity').textContent;
+                    
+                    showNotification(`Añadido al carrito: ${quantity}x ${name}`);
+                    
+                    // Cambiar texto del botón temporalmente
+                    const originalText = this.textContent;
+                    this.textContent = '✓ Añadido';
+                    this.style.background = 'var(--accent)';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.background = '';
+                    }, 2000);
+                });
+            });
+            
+            // Ir a pantalla de pago desde carrito
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    switchScreen('payment');
+                });
+            }
+            
+            // Interacción con elementos del menú en home
+            const dishCards = document.querySelectorAll('.dish-card[data-item]');
+            dishCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    switchScreen('menu');
+                });
+            });
+            
+            // Función para mostrar notificaciones
+            function showNotification(message) {
+                // Crear elemento de notificación
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: var(--primary);
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 10px;
+                    box-shadow: var(--shadow);
+                    z-index: 10000;
+                    animation: slideInUp 0.3s ease;
+                    max-width: 300px;
+                    text-align: center;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Eliminar notificación después de 3 segundos
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutDown 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Añadir estilos de animación para notificaciones
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInUp {
+                    from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+                    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+                }
+                @keyframes slideOutDown {
+                    from { transform: translateX(-50%) translateY(0); opacity: 1; }
+                    to { transform: translateX(-50%) translateY(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GustoApp - Demo Restaurante & Café</title>
+    <meta name="description" content="Sistema de reservas y pedidos online para restaurantes y cafés">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>GustoApp</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#pedidos">Pedidos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button class="btn btn-primary" onclick="openApp()">
+                    <i class="fas fa-mobile-alt"></i>
+                    Abrir App
+                </button>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero hero-restaurante">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <strong class="text-kicker">DEMO INTERACTIVO</strong>
+                <h1>GustoApp Restaurante</h1>
+                <p>Sistema completo de gestión para restaurantes. Reservas de mesa, pedidos online y fidelización de clientes en una sola app.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="openApp()">
+                        <i class="fas fa-play"></i>
+                        Probar Demo
+                    </button>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-chart-bar"></i>
+                        Ver Dashboard
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup demo-phone">
+                    <div class="phone-screen" id="phoneScreen">
+                        <!-- Contenido dinámico de la app -->
+                        <div class="app-screen home-screen">
+                            <div class="app-header">
+                                <div class="app-logo">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>GustoApp</span>
+                                </div>
+                                <div class="app-notification">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                            </div>
+                            <div class="app-welcome">
+                                <h3>¡Bienvenido!</h3>
+                                <p>Disfruta de nuestra experiencia gastronómica</p>
+                            </div>
+                            <div class="app-buttons">
+                                <button class="app-btn primary" onclick="showMenu()">
+                                    <i class="fas fa-book"></i>
+                                    Ver Menú
+                                </button>
+                                <button class="app-btn secondary" onclick="showReservations()">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Reservar Mesa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal de la App -->
+    <div id="appModal" class="modal">
+        <div class="modal-content app-modal">
+            <span class="close" onclick="closeApp()">&times;</span>
+            <div class="app-container">
+                <div class="app-header-modal">
+                    <div class="app-nav">
+                        <button class="nav-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                        <h3 id="appTitle">GustoApp</h3>
+                        <button class="nav-btn" onclick="closeApp()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="app-content" id="appContent">
+                    <!-- Contenido dinámico de la app -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal del Dashboard -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content dashboard-modal">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-chart-bar"></i> Dashboard GustoApp</h2>
+                    <p>Panel de control del restaurante</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-utensils"></i>
+                        <div class="stat-info">
+                            <h3>€2,850</h3>
+                            <p>Ventas Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-info">
+                            <h3>18</h3>
+                            <p>Reservas Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>4.7</h3>
+                            <p>Valoración</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <h3>Próximas Reservas</h3>
+                        <div class="reservas-list">
+                            <div class="reserva-item">
+                                <div class="reserva-info">
+                                    <strong>Familia González</strong>
+                                    <span>4 personas - 20:00 PM</span>
+                                </div>
+                                <div class="reserva-status confirmed">Confirmada</div>
+                            </div>
+                            <div class="reserva-item">
+                                <div class="reserva-info">
+                                    <strong>Cena Empresarial</strong>
+                                    <span>8 personas - 21:30 PM</span>
+                                </div>
+                                <div class="reserva-status pending">Pendiente</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-section">
+                        <h3>Pedidos Activos</h3>
+                        <div class="pedidos-list">
+                            <div class="pedido-item">
+                                <div class="pedido-info">
+                                    <strong>Mesa #5</strong>
+                                    <span>2x Pizza Margarita</span>
+                                </div>
+                                <div class="pedido-status preparing">Preparando</div>
+                            </div>
+                            <div class="pedido-item">
+                                <div class="pedido-info">
+                                    <strong>Delivery #42</strong>
+                                    <span>En camino</span>
+                                </div>
+                                <div class="pedido-status delivery">En reparto</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

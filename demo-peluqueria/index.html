@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleCorte Pro - Demo Peluquería & Barbería</title>
+    <meta name="description" content="Sistema de reservas online y gestión para peluquerías y barberías">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/images/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-scissors"></i>
+                <span>StyleCorte Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#estilistas">Estilistas</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button class="btn btn-primary" onclick="openApp()">
+                    <i class="fas fa-mobile-alt"></i>
+                    Abrir App
+                </button>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero hero-peluqueria">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <strong class="text-kicker">DEMO INTERACTIVO</strong>
+                <h1>StyleCorte Pro App</h1>
+                <p>Sistema completo de gestión para peluquerías y barberías. Reservas online, fidelización de clientes y control de negocio en una sola app.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="openApp()">
+                        <i class="fas fa-play"></i>
+                        Probar Demo
+                    </button>
+                    <button class="btn btn-secondary" onclick="showDashboard()">
+                        <i class="fas fa-chart-bar"></i>
+                        Ver Dashboard
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup demo-phone">
+                    <div class="phone-screen" id="phoneScreen">
+                        <!-- Contenido dinámico de la app -->
+                        <div class="app-screen home-screen">
+                            <div class="app-header">
+                                <div class="app-logo">
+                                    <i class="fas fa-scissors"></i>
+                                    <span>StyleCorte</span>
+                                </div>
+                                <div class="app-notification">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                            </div>
+                            <div class="app-welcome">
+                                <h3>¡Bienvenido!</h3>
+                                <p>Reserva tu cita fácilmente</p>
+                            </div>
+                            <div class="app-buttons">
+                                <button class="app-btn primary" onclick="showServices()">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Reservar Cita
+                                </button>
+                                <button class="app-btn secondary" onclick="showFidelizacion()">
+                                    <i class="fas fa-crown"></i>
+                                    Programa Fidelidad
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal de la App -->
+    <div id="appModal" class="modal">
+        <div class="modal-content app-modal">
+            <span class="close" onclick="closeApp()">&times;</span>
+            <div class="app-container">
+                <div class="app-header-modal">
+                    <div class="app-nav">
+                        <button class="nav-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                        <h3 id="appTitle">StyleCorte App</h3>
+                        <button class="nav-btn" onclick="closeApp()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="app-content" id="appContent">
+                    <!-- Contenido dinámico de la app -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal del Dashboard -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content dashboard-modal">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-chart-bar"></i> Dashboard StyleCorte Pro</h2>
+                    <p>Panel de control del negocio</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>Citas Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>€1,240</h3>
+                            <p>Ingresos Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <div class="stat-info">
+                            <h3>4.8</h3>
+                            <p>Valoración</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <h3>Próximas Citas</h3>
+                        <div class="citas-list">
+                            <div class="cita-item">
+                                <div class="cita-info">
+                                    <strong>María González</strong>
+                                    <span>Corte y Peinado - 10:00 AM</span>
+                                </div>
+                                <div class="cita-status confirmed">Confirmada</div>
+                            </div>
+                            <div class="cita-item">
+                                <div class="cita-info">
+                                    <strong>Carlos Ruiz</strong>
+                                    <span>Barba y Bigote - 11:30 AM</span>
+                                </div>
+                                <div class="cita-status pending">Pendiente</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-section">
+                        <h3>Clientes Frecuentes</h3>
+                        <div class="clientes-list">
+                            <div class="cliente-item">
+                                <div class="cliente-avatar">JG</div>
+                                <div class="cliente-info">
+                                    <strong>Juan García</strong>
+                                    <span>12 visitas</span>
+                                </div>
+                                <div class="cliente-puntos">450 pts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

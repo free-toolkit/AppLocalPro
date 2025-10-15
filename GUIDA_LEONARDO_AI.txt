@@ -1,0 +1,46 @@
+GUÍA PARA GENERAR IMÁGENES EN LEONARDO AI
+=========================================
+PROYECTO: AppLocalPro - Aplicaciones Móviles para Negocios Locales
+PALETA DE COLORES PRINCIPAL:
+- Azul Primario: #0066cc
+- Azul Oscuro: #0052a3  
+- Cian: #4fc3f7
+- Naranja: #ff6b35 (acentos)
+ESTILO GENERAL:
+- Profesional y moderno
+- Limpio y minimalista
+- Enfocado en tecnología y negocios
+- Colores coherentes con la marca
+IMÁGENES NECESARIAS:
+1. LOGO (512x512 PNG)
+   - Combinar: móvil + tienda + conexión
+   - Colores: azul y cian
+   - Estilo: flat design, minimalista
+2. FONDO HERO (1920x1080 JPG)
+   - Empresarios usando apps en negocios
+   - Ambiente profesional y moderno
+   - Diversidad de negocios locales
+3. ICONOS CATEGORÍAS (256x256 PNG)
+   - Restaurante: plato y cubiertos digital
+   - Peluquería: tijeras y peine moderno
+   - Gimnasio: mancuerna con sensor
+   - Tienda: bolsa de compras digital
+   - Servicios: herramientas y calendario
+4. MOCKUPS APPS (1200x800 JPG)
+   - Interfaces realistas de apps
+   - En dispositivos móviles
+   - Mostrando funcionalidades clave
+5. FOTOS CLIENTES (1200x800 JPG)
+   - Dueños de negocios usando las apps
+   - Ambientes reales de trabajo
+   - Expresiones positivas y profesionales
+CONSEJOS PARA LEONARDO AI:
+- Usar modo "Alchemy" para mejor calidad
+- Configurar calidad alta (768px+)
+- Probar diferentes estilos: "Photorealistic", "Illustration"
+- Ajustar prompt strength según necesidad
+- Generar múltiples variantes y elegir la mejor
+ENLACES ÚTILES:
+- Leonardo AI: https://leonardo.ai/
+- Paleta de colores: Azul #0066cc, Cian #4fc3f7
+- Estilo: Profesional, Tecnológico, Moderno

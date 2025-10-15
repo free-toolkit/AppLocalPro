@@ -1,0 +1,2 @@
+﻿<!-- Este archivo sirve como marcador para las imágenes -->
+<!-- En un entorno real, aquí estarían las imágenes reales -->
