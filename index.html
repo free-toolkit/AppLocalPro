@@ -522,26 +522,3 @@ $cleanHomeContent = @'
     </script>
 </body>
 </html>
-'@
-
-# Guardar la página home limpia
-[System.IO.File]::WriteAllText("C:\Users\saido\Desktop\AppLocalPro-main\index.html", $cleanHomeContent, [System.Text.Encoding]::UTF8)
-
-Write-Host "✅ Home LIMPIA creada con:" -ForegroundColor Green
-Write-Host "   🎯 Fondo blanco y diseño limpio" -ForegroundColor Cyan
-Write-Host "   📱 Enfoque principal en las apps" -ForegroundColor Cyan
-Write-Host "   🎨 Colores solo en imágenes de categorías" -ForegroundColor Cyan
-Write-Host "   ✅ Sin colores rojos/verdes innecesarios" -ForegroundColor Cyan
-Write-Host "   💡 Tokens mencionados como 'Plus' no como foco principal" -ForegroundColor Cyan
-Write-Host "   📋 Listas de features claras y organizadas" -ForegroundColor Cyan
-
-# Subir los cambios a GitHub
-Write-Host "`n🔄 Subiendo cambios a GitHub..." -ForegroundColor Yellow
-
-cd "C:\Users\saido\Desktop\AppLocalPro-main"
-git add .
-git commit -m "FEAT: Home limpia con fondo blanco, enfoque en apps y diseño minimalista"
-git push origin main
-
-Write-Host "✅ ¡Home limpia subida a GitHub!" -ForegroundColor Green
-Write-Host "🌐 Ver en: https://free-toolkit.github.io/AppLocalPro" -ForegroundColor Cyan
