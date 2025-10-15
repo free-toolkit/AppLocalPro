@@ -1,0 +1,70 @@
+# Crear el archivo principal que muestre todos los demos
+$mainIndexContent = @'
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppLocalPro - Demos de Apps para Negocios</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .header { background: white; padding: 2rem; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .demos-grid { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .demo-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .demo-card:hover { transform: translateY(-5px); }
+        .demo-image { height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #666; }
+        .demo-content { padding: 1.5rem; }
+        .demo-card.peluqueria .demo-image { background: #8B4513; color: white; }
+        .demo-card.gimnasio .demo-image { background: #2E8B57; color: white; }
+        .demo-card.restaurante .demo-image { background: #DC143C; color: white; }
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #007bff; color: white; text-decoration: none; border-radius: 6px; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AppLocalPro - Demos Interactivos</h1>
+        <p>Descubre nuestras soluciones para diferentes tipos de negocios</p>
+    </div>
+    
+    <div class="demos-grid">
+        <div class="demo-card peluqueria">
+            <div class="demo-image">
+                <i class="fas fa-scissors"></i>
+            </div>
+            <div class="demo-content">
+                <h3>Peluquerías & Barberías</h3>
+                <p>Sistema completo de citas online, gestión de clientes y fidelización</p>
+                <a href="demo-peluqueria/index.html" class="btn">Ver Demo</a>
+            </div>
+        </div>
+        
+        <div class="demo-card gimnasio">
+            <div class="demo-image">
+                <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="demo-content">
+                <h3>Gimnasios & Wellness</h3>
+                <p>Reserva de clases, seguimiento de progreso y comunidad fitness</p>
+                <a href="demo-gimnasio/index.html" class="btn">Ver Demo</a>
+            </div>
+        </div>
+        
+        <div class="demo-card restaurante">
+            <div class="demo-image">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <div class="demo-content">
+                <h3>Restaurantes & Cafés</h3>
+                <p>Menú digital, pedidos online, reservas y programa de fidelidad</p>
+                <a href="demo-restaurante/index.html" class="btn">Ver Demo</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>
+'@
+
+[System.IO.File]::WriteAllText("C:\Users\saido\Desktop\AppLocalPro-main\index.html", $mainIndexContent, [System.Text.Encoding]::UTF8)
