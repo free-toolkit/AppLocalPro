@@ -1,242 +1,1136 @@
-// magic-modules/payment-handler.js
-window.paymentHandler = {
-    currentStyle: null,
-    
-    showPaymentModal: function(style) {
-        this.currentStyle = style;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppLocalPro - Apps Móviles para Negocios Locales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: white;
+            color: #333;
+            line-height: 1.6;
+        }
         
-        // Crear modal de pago
-        const modalHTML = `
-            <div class="payment-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:flex; align-items:center; justify-content:center; z-index:3000; font-family: 'Segoe UI', sans-serif;">
-                <div style="background:linear-gradient(135deg, #fff, #f8f9fa); padding:2rem; border-radius:20px; text-align:center; max-width:450px; width:90%; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 2px solid #8B4513;">
-                    <!-- Header -->
-                    <div style="margin-bottom:1.5rem;">
-                        <div style="font-size:3rem; margin-bottom:0.5rem;">💎</div>
-                        <h3 style="color:#8B4513; margin-bottom:0.5rem; font-size:1.5rem;">Confirmar Compra</h3>
-                        <p style="color:#666; font-size:0.9rem;">Estilo premium para tu próxima visita</p>
-                    </div>
+        /* Header con Logo */
+        .main-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: #3498db;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .whatsapp-float {
+            background: #25D366;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-float:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Banner Hero */
+        .hero-banner {
+            margin-top: 80px;
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header Simple */
+        .section-header { 
+            text-align: center; 
+            margin-bottom: 3rem;
+        }
+        .section-header h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid de Categorías */
+        .categories-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+            gap: 2rem; 
+        }
+        .category-card { 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .category-card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .category-image { 
+            height: 160px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 3.5rem; 
+            color: white;
+            position: relative;
+        }
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .category-content { 
+            padding: 2rem; 
+        }
+        .category-content h3 { 
+            font-size: 1.4rem; 
+            margin-bottom: 1rem; 
+            color: #2c3e50;
+        }
+        .category-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .features-list {
+            margin: 1.5rem 0;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
+            color: #555;
+        }
+        .feature i {
+            color: #3498db;
+            width: 16px;
+        }
+        .benefit-note {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 3px solid #3498db;
+            font-size: 0.9rem;
+        }
+        .btn { 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem; 
+            background: #3498db; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            margin-top: 1rem; 
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn:hover { 
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn.demo-ready {
+            background: #27ae60;
+        }
+        .btn.demo-ready:hover {
+            background: #219a52;
+        }
+        .btn.coming-soon {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        .btn.coming-soon:hover {
+            background: #7f8c8d;
+            transform: none;
+        }
+
+        /* Colores solo para las imágenes de categoría */
+        .category-card.peluqueria .category-image { background: #8B4513; }
+        .category-card.gimnasio .category-image { background: #2E8B57; }
+        .category-card.restaurante .category-image { background: #DC143C; }
+        .category-card.tienda .category-image { background: #f39c12; }
+        .category-card.servicios .category-image { background: #9b59b6; }
+        .category-card.consultorio .category-image { background: #3498db; }
+        .category-card.hotel .category-image { background: #1abc9c; }
+        .category-card.escuela .category-image { background: #e74c3c; }
+        .category-card.transporte .category-image { background: #34495e; }
+
+        /* Navegación entre demos */
+        .demos-navigation {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .nav-menu {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            min-width: 220px;
+            margin-bottom: 10px;
+            border: 1px solid #f0f0f0;
+        }
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .nav-menu a:hover {
+            background: #f8f9fa;
+        }
+        .nav-menu a:last-child {
+            border-bottom: none;
+            border-top: 1px solid #3498db;
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        /* ESTILOS PARA MODALES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            border-radius: 20px;
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 90vh;
+            max-height: 800px;
+        }
+        
+        .dashboard-modal {
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+        }
+        
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            z-index: 10;
+        }
+        
+        .app-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-header-modal {
+            background: #8B4513;
+            color: white;
+            padding: 1rem;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .app-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-btn-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .app-content {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .app-screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-welcome {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .app-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .app-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .app-btn.primary {
+            background: #8B4513;
+            color: white;
+        }
+        
+        .app-btn.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ESTILOS PARA DASHBOARD */
+        .dashboard-container {
+            padding: 2rem;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #8B4513;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid #8B4513;
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            color: #8B4513;
+        }
+        
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .dashboard-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        
+        .dashboard-section h3 {
+            margin-bottom: 1rem;
+            color: #8B4513;
+        }
+        
+        .cita-item, .cliente-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #8B4513;
+        }
+        
+        .cita-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .cita-status.confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .cita-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .cliente-avatar {
+            width: 40px;
+            height: 40px;
+            background: #8B4513;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .cliente-puntos {
+            background: #8B4513;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .whatsapp-float {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container { 
+                padding: 2rem 1rem; 
+            }
+            
+            .section-header h2 { 
+                font-size: 2rem; 
+            }
+            
+            .categories-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .nav-btn { 
+                padding: 10px 16px; 
+            }
+            
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-modal {
+                width: 95%;
+                height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con Logo y WhatsApp -->
+    <header class="main-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-mobile-alt logo-icon"></i>
+                <span class="logo-text">AppLocalPro</span>
+            </a>
+            
+            <a href="https://wa.me/34631102324?text=¡Hola!%20Estoy%20interesado%20en%20una%20app%20para%20mi%20negocio" 
+               target="_blank" 
+               class="whatsapp-float">
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp Business
+            </a>
+        </div>
+    </header>
+
+    <!-- Banner Hero -->
+    <section class="hero-banner">
+        <img src="https://cdn.pixabay.com/photo/2014/03/22/22/17/phone-292994_1280.jpg" 
+             alt="Apps móviles para negocios" 
+             class="hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Impulsa Tu Negocio Con Una App Móvil</h1>
+                <p>Soluciones personalizadas para peluquerías, gimnasios, restaurantes y más. Digitaliza tu negocio hoy.</p>
+                <div class="hero-buttons">
+                    <button class="btn-hero btn-primary" onclick="openApp()">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </button>
+                    <a href="https://wa.me/34631102324?text=¡Hola!%20Quiero%20saber%20más%20sobre%20las%20apps%20para%20mi%20negocio" 
+                       target="_blank" 
+                       class="btn-hero btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Sección Demos -->
+        <div class="section-header" id="demos">
+            <h2>Nuestras Soluciones por Sector</h2>
+            <p>Descubre aplicaciones móviles personalizadas para diferentes tipos de negocios locales</p>
+        </div>
+
+        <!-- Grid de Categorías -->
+        <div class="categories-grid">
+            
+            <!-- Peluquerías -->
+            <div class="category-card peluqueria">
+                <div class="category-image">
+                    <i class="fas fa-scissors"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Peluquerías & Barberías</h3>
+                    <p class="category-description">Sistema completo de gestión para salones de belleza con citas online y fidelización de clientes.</p>
                     
-                    <!-- Style Info -->
-                    <div style="background:rgba(139, 69, 19, 0.1); padding:1.5rem; border-radius:15px; margin:1rem 0; border-left:4px solid #8B4513;">
-                        <h4 style="color:#333; margin-bottom:0.5rem; font-size:1.2rem;">${style.name}</h4>
-                        <p style="color:#666; margin-bottom:1rem; line-height:1.4;">${style.description}</p>
-                        
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
-                            <span class="confidence-badge" style="background:linear-gradient(135deg, #FFD700, #FFA500); color:#8B4513; padding:8px 15px; border-radius:20px; font-size:0.8em; font-weight:bold; box-shadow:0 3px 10px rgba(0,0,0,0.2);">
-                                🎯 ${style.confidence}% compatible
-                            </span>
-                            <div style="font-size:1.8rem; font-weight:bold; color:#8B4513; text-shadow:1px 1px 2px rgba(0,0,0,0.1);">
-                                €${style.price}
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Citas online automáticas</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de clientes VIP</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Recordatorios automáticos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Portfolio de trabajos</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Sistema de fidelización con tokens personalizados para recompensas exclusivas.
+                    </div>
+
+                    <a href="demo-peluqueria/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gimnasios -->
+            <div class="category-card gimnasio">
+                <div class="category-image">
+                    <i class="fas fa-dumbbell"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Gimnasios & Wellness</h3>
+                    <p class="category-description">Plataforma fitness integral para reserva de clases y seguimiento de progreso.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Reserva de clases grupales</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Seguimiento de entrenamientos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Comunidad fitness integrada</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Planes personalizados</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Programa de recompensas con tokens por logros y asistencia.
+                    </div>
+
+                    <a href="demo-gimnasio/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Restaurantes -->
+            <div class="category-card restaurante">
+                <div class="category-image">
+                    <i class="fas fa-utensils"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Restaurantes & Cafés</h3>
+                    <p class="category-description">Ecosistema gastronómico con menú digital, pedidos online y sistema de reservas.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Menú digital interactivo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Pedidos y reservas online</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de delivery</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Programa de fidelidad</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Fidelización tokenizada para experiencias VIP y eventos exclusivos.
+                    </div>
+
+                    <a href="demo-restaurante/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tiendas Minoristas -->
+            <div class="category-card tienda">
+                <div class="category-image">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Tiendas Minoristas</h3>
+                    <p class="category-description">App de e-commerce para tiendas con catálogo digital y gestión de inventario.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Catálogo digital completo</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Carrito de compras</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de inventario</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Ofertas y promociones</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Programa de recompensas con tokens canjeables en toda la red.
+                    </div>
+
+                    <a href="#" class="btn coming-soon">
+                        <i class="fas fa-clock"></i> Próximamente
+                    </a>
+                </div>
+            </div>
+
+            <!-- Servicios a Domicilio -->
+            <div class="category-card servicios">
+                <div class="category-image">
+                    <i class="fas fa-tools"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Servicios a Domicilio</h3>
+                    <p class="category-description">Plataforma para técnicos y servicios profesionales con gestión de citas.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Solicitud de servicios</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Gestión de técnicos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Seguimiento GPS</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Sistema de valoraciones</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Tokens de reputación para técnicos y recompensas para clientes.
+                    </div>
+
+                    <a href="#" class="btn coming-soon">
+                        <i class="fas fa-clock"></i> Próximamente
+                    </a>
+                </div>
+            </div>
+
+            <!-- Consultorios Médicos -->
+            <div class="category-card consultorio">
+                <div class="category-image">
+                    <i class="fas fa-stethoscope"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Consultorios Médicos</h3>
+                    <p class="category-description">Sistema de salud digital para gestión de pacientes y telemedicina.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Citas médicas online</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Historial médico seguro</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Recordatorios automáticos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check"></i>
+                            <span>Teleconsulta integrada</span>
+                        </div>
+                    </div>
+
+                    <div class="benefit-note">
+                        <strong>Plus:</strong> Programa de wellness con tokens por seguimiento de tratamientos.
+                    </div>
+
+                    <a href="#" class="btn coming-soon">
+                        <i class="fas fa-clock"></i> Próximamente
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navegación entre demos -->
+    <div class="demos-navigation">
+        <div class="nav-dropdown">
+            <button class="nav-btn">
+                <i class="fas fa-th"></i> Navegar Demos
+            </button>
+            <div class="nav-menu">
+                <a href="demo-peluqueria/index.html">
+                    <i class="fas fa-scissors"></i> Peluquerías
+                </a>
+                <a href="demo-gimnasio/index.html">
+                    <i class="fas fa-dumbbell"></i> Gimnasios
+                </a>
+                <a href="demo-restaurante/index.html">
+                    <i class="fas fa-utensils"></i> Restaurantes
+                </a>
+                <a href="index.html">
+                    <i class="fas fa-home"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES AÑADIDOS -->
+    <!-- Modal de la App -->
+    <div id="appModal" class="modal">
+        <div class="modal-content app-modal">
+            <span class="close" onclick="closeApp()">&times;</span>
+            <div class="app-container">
+                <div class="app-header-modal">
+                    <div class="app-nav">
+                        <button class="nav-btn-modal" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                        <h3 id="appTitle">StyleCorte App</h3>
+                        <button class="nav-btn-modal" onclick="closeApp()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="app-content" id="appContent">
+                    <div class="app-screen">
+                        <div class="app-welcome">
+                            <h3>¡Bienvenido a StyleCorte!</h3>
+                            <p>Tu peluquería de confianza</p>
+                        </div>
+                        <div class="app-buttons">
+                            <button class="app-btn primary" onclick="showServices()">
+                                <i class="fas fa-calendar-check"></i>
+                                Reservar Cita
+                            </button>
+                            <button class="app-btn secondary" onclick="showFidelizacion()">
+                                <i class="fas fa-crown"></i>
+                                Programa Fidelidad
+                            </button>
+                            <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
+                                <i class="fas fa-magic"></i>
+                                Espejo Mágico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Dashboard -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content dashboard-modal">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-chart-bar"></i> Dashboard StyleCorte Pro</h2>
+                    <p>Panel de control del negocio</p>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>Citas Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3>€1,240</h3>
+                            <p>Ingresos Hoy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <div class="stat-info">
+                            <h3>4.8</h3>
+                            <p>Valoración</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <h3>Próximas Citas</h3>
+                        <div class="citas-list">
+                            <div class="cita-item">
+                                <div class="cita-info">
+                                    <strong>María González</strong>
+                                    <span>Corte y Peinado - 10:00 AM</span>
+                                </div>
+                                <div class="cita-status confirmed">Confirmada</div>
+                            </div>
+                            <div class="cita-item">
+                                <div class="cita-info">
+                                    <strong>Carlos Ruiz</strong>
+                                    <span>Barba y Bigote - 11:30 AM</span>
+                                </div>
+                                <div class="cita-status pending">Pendiente</div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Benefits -->
-                    <div style="margin:1.5rem 0; text-align:left;">
-                        <div style="display:flex; align-items:center; margin-bottom:0.8rem; padding:0.5rem; background:rgba(255,215,0,0.1); border-radius:8px;">
-                            <span style="font-size:1.2rem; margin-right:10px;">✅</span>
-                            <span style="color:#333; font-size:0.9rem;">Vista previa aplicada con éxito</span>
+                    <div class="dashboard-section">
+                        <h3>Clientes Frecuentes</h3>
+                        <div class="clientes-list">
+                            <div class="cliente-item">
+                                <div class="cliente-avatar">JG</div>
+                                <div class="cliente-info">
+                                    <strong>Juan García</strong>
+                                    <span>12 visitas</span>
+                                </div>
+                                <div class="cliente-puntos">450 pts</div>
+                            </div>
                         </div>
-                        <div style="display:flex; align-items:center; margin-bottom:0.8rem; padding:0.5rem; background:rgba(139,69,19,0.1); border-radius:8px;">
-                            <span style="font-size:1.2rem; margin-right:10px;">💳</span>
-                            <span style="color:#333; font-size:0.9rem;">Pago seguro procesado por StyleCorte Pro</span>
-                        </div>
-                        <div style="display:flex; align-items:center; padding:0.5rem; background:rgba(0,128,0,0.1); border-radius:8px;">
-                            <span style="font-size:1.2rem; margin-right:10px;">📱</span>
-                            <span style="color:#333; font-size:0.9rem;">Disponible en tu app para mostrar al estilista</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Payment Buttons -->
-                    <div style="display:flex; gap:1rem; justify-content:center; margin-top:2rem;">
-                        <button onclick="window.paymentHandler.closePaymentModal()" style="flex:1; padding:1rem 1.5rem; border:2px solid #8B4513; background:transparent; color:#8B4513; border-radius:12px; cursor:pointer; font-weight:bold; font-size:1rem; transition:all 0.3s;">
-                            Cancelar
-                        </button>
-                        <button onclick="window.paymentHandler.completePurchase('${style.id}')" style="flex:1; padding:1rem 1.5rem; background:linear-gradient(135deg, #8B4513, #D2691E); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:bold; font-size:1rem; transition:all 0.3s; box-shadow:0 5px 15px rgba(139,69,19,0.3);">
-                            🛒 Comprar Ahora
-                        </button>
-                    </div>
-                    
-                    <!-- Security Notice -->
-                    <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid #eee;">
-                        <p style="color:#666; font-size:0.7rem; display:flex; align-items:center; justify-content:center; gap:5px;">
-                            <span>🔒</span>
-                            Transacción 100% segura · SSL Encriptado
-                        </p>
                     </div>
                 </div>
             </div>
-        `;
-        
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
-        
-        // Añadir efectos de hover a los botones
-        this.addButtonEffects();
-    },
-    
-    addButtonEffects: function() {
-        setTimeout(() => {
-            const buttons = document.querySelectorAll('.payment-modal button');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-2px)';
-                    this.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
-                });
-                
-                button.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = '';
-                });
+        </div>
+    </div>
+
+    <script>
+        // Navegación entre demos
+        document.querySelector('.nav-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const menu = document.querySelector('.nav-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function() {
+            document.querySelector('.nav-menu').style.display = 'none';
+        });
+
+        // Prevenir clic en botones "Próximamente"
+        document.querySelectorAll('.btn.coming-soon').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('¡Esta categoría estará disponible pronto!');
             });
-        }, 100);
-    },
-    
-    closePaymentModal: function() {
-        const modal = document.querySelector('.payment-modal');
-        if (modal) {
-            modal.style.animation = 'fadeOut 0.3s ease';
-            setTimeout(() => {
-                if (modal.parentNode) {
-                    modal.parentNode.removeChild(modal);
+        });
+
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
-            }, 300);
-        }
-        this.currentStyle = null;
-    },
-    
-    completePurchase: function(styleId) {
-        console.log('🛒 Procesando compra del estilo:', styleId);
-        
-        // Mostrar loader
-        this.showPurchaseLoader();
-        
-        // Simular procesamiento de pago (2 segundos)
-        setTimeout(() => {
-            this.hidePurchaseLoader();
-            this.showSuccessMessage(styleId);
-        }, 2000);
-    },
-    
-    showPurchaseLoader: function() {
-        const modal = document.querySelector('.payment-modal');
-        if (modal) {
-            modal.innerHTML = `
-                <div style="text-align:center; padding:3rem 2rem;">
-                    <div style="font-size:4rem; margin-bottom:1rem;">⏳</div>
-                    <h3 style="color:#8B4513; margin-bottom:1rem;">Procesando Pago</h3>
-                    <p style="color:#666; margin-bottom:2rem;">Estamos confirmando tu compra...</p>
-                    <div style="display:inline-block; width:50px; height:50px; border:4px solid #f3f3f3; border-top:4px solid #8B4513; border-radius:50%; animation:spin 1s linear infinite;"></div>
-                </div>
-                <style>
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            `;
-        }
-    },
-    
-    hidePurchaseLoader: function() {
-        const modal = document.querySelector('.payment-modal');
-        if (modal) {
-            modal.style.animation = 'fadeOut 0.3s ease';
-            setTimeout(() => {
-                if (modal.parentNode) {
-                    modal.parentNode.removeChild(modal);
-                }
-            }, 300);
-        }
-    },
-    
-    showSuccessMessage: function(styleId) {
-        const successHTML = `
-            <div class="success-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:flex; align-items:center; justify-content:center; z-index:3000;">
-                <div style="background:linear-gradient(135deg, #fff, #f8f9fa); padding:3rem 2rem; border-radius:20px; text-align:center; max-width:400px; width:90%; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                    <div style="font-size:4rem; margin-bottom:1rem;">🎉</div>
-                    <h3 style="color:#28a745; margin-bottom:1rem; font-size:1.5rem;">¡Compra Exitosa!</h3>
-                    <p style="color:#333; margin-bottom:1rem; font-size:1.1rem; font-weight:bold;">${this.currentStyle.name}</p>
-                    <p style="color:#666; margin-bottom:2rem; line-height:1.4;">
-                        Tu estilo ha sido aplicado y guardado en tu perfil.<br>
-                        Puedes mostrarlo a tu estilista en tu próxima visita.
-                    </p>
-                    
-                    <div style="background:rgba(40, 167, 69, 0.1); padding:1rem; border-radius:10px; margin:1.5rem 0; border-left:4px solid #28a745;">
-                        <p style="color:#333; margin:0; font-size:0.9rem;">
-                            <strong>📱 Disponible en:</strong> Mi Perfil → Mis Estilos Guardados
-                        </p>
-                    </div>
-                    
-                    <button onclick="window.paymentHandler.finalizePurchase()" style="padding:1rem 2rem; background:linear-gradient(135deg, #28a745, #20c997); color:white; border:none; border-radius:12px; cursor:pointer; font-weight:bold; font-size:1rem; transition:all 0.3s;">
-                        ✅ Continuar
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        document.body.insertAdjacentHTML('beforeend', successHTML);
-    },
-    
-    finalizePurchase: function() {
-        const successModal = document.querySelector('.success-modal');
-        if (successModal) {
-            successModal.remove();
+            });
+        });
+
+        // FUNCIONES PARA MODALES
+        function openApp() {
+            console.log('✅ Abriendo app...');
+            document.getElementById('appModal').style.display = 'block';
         }
         
-        // Redirigir a home después de compra
-        setTimeout(() => {
-            if (typeof showHomeScreen === 'function') {
-                showHomeScreen();
+        function closeApp() {
+            console.log('✅ Cerrando app...');
+            document.getElementById('appModal').style.display = 'none';
+        }
+        
+        function showDashboard() {
+            console.log('✅ Abriendo dashboard...');
+            document.getElementById('dashboardModal').style.display = 'block';
+        }
+        
+        function closeDashboard() {
+            console.log('✅ Cerrando dashboard...');
+            document.getElementById('dashboardModal').style.display = 'none';
+        }
+        
+        function goBack() {
+            console.log('↩️ Volviendo atrás...');
+        }
+        
+        function showServices() {
+            alert('📅 Servicios - Funciona!');
+        }
+        
+        function showFidelizacion() {
+            alert('👑 Programa Fidelidad - Funciona!');
+        }
+        
+        function showMagicMirror() {
+            alert('🔮 Espejo Mágico - Funciona!');
+        }
+        
+        // Cerrar modales al hacer click fuera
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('appModal')) {
+                closeApp();
             }
-        }, 500);
-        
-        // Resetear estilo actual
-        this.currentStyle = null;
-        
-        console.log('✅ Compra finalizada exitosamente');
-    },
-    
-    // Métodos adicionales para gestión de pagos
-    validatePayment: function(cardInfo) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    valid: true,
-                    transactionId: 'TXN_' + Math.random().toString(36).substr(2, 9),
-                    timestamp: new Date().toISOString()
-                });
-            }, 1000);
-        });
-    },
-    
-    getPurchaseHistory: function() {
-        return JSON.parse(localStorage.getItem('styleCortePurchases') || '[]');
-    },
-    
-    savePurchase: function(style) {
-        const purchases = this.getPurchaseHistory();
-        purchases.push({
-            style: style,
-            purchaseDate: new Date().toISOString(),
-            transactionId: 'TXN_' + Math.random().toString(36).substr(2, 9)
-        });
-        
-        localStorage.setItem('styleCortePurchases', JSON.stringify(purchases));
-    }
-};
-
-// Añadir estilos CSS para animaciones
-const paymentStyles = document.createElement('style');
-paymentStyles.textContent = `
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-    }
-    
-    .payment-modal button:hover {
-        transform: translateY(-2px) !important;
-    }
-`;
-document.head.appendChild(paymentStyles);
-
-console.log('💳 Payment Handler module loaded successfully');
+            if (event.target === document.getElementById('dashboardModal')) {
+                closeDashboard();
+            }
+        }
+    </script>
+</body>
+</html>
