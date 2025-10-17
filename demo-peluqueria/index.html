@@ -189,14 +189,100 @@
 
     <!-- 📍 AÑADIR: Integración del Espejo Mágico -->
     <script>
-    // Función para mostrar el Espejo Mágico
-    function showMagicMirror() {
-        // Verificar que appState existe
-        if (typeof appState === 'undefined') {
-            appState = {
-                currentScreen: 'home',
-                previousScreens: []
-            };
+    // 📍 CORREGIDO: Cargar recomendaciones de estilos
+function loadStyleRecommendations() {
+    console.log('🔄 Cargando recomendaciones...');
+    
+    if (!window.magicMirror) {
+        console.error('❌ Magic Mirror no está cargado');
+        // Mostrar recomendaciones de prueba
+        showFallbackRecommendations();
+        return;
+    }
+    
+    try {
+        const recommendations = window.magicMirror.generateStyleRecommendations();
+        console.log('✅ Recomendaciones generadas:', recommendations);
+        
+        const container = document.getElementById('style-recommendations-list');
+        if (container) {
+            if (recommendations.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: white; padding: 2rem;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>No se pudieron cargar las recomendaciones</p>
+                        <button class="btn-magic secondary" onclick="loadStyleRecommendations()">
+                            Reintentar
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = recommendations.map(style => `
+                <div class="style-card" onclick="selectMagicStyle('${style.id}')">
+                    <h4>${style.name}</h4>
+                    <p>${style.description}</p>
+                    <div class="style-meta">
+                        <span class="confidence-badge">${style.confidence}% compatible</span>
+                        <span class="price-tag">€${style.price}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            console.log('🎯 Recomendaciones mostradas en la interfaz');
+        } else {
+            console.error('❌ Contenedor de recomendaciones no encontrado');
+            showFallbackRecommendations();
+        }
+    } catch (error) {
+        console.error('❌ Error cargando recomendaciones:', error);
+        showFallbackRecommendations();
+    }
+}
+
+// 📍 NUEVO: Mostrar recomendaciones de respaldo
+function showFallbackRecommendations() {
+    const container = document.getElementById('style-recommendations-list');
+    if (!container) return;
+    
+    const fallbackStyles = [
+        {
+            id: 'fallback-1',
+            name: '🔥 Corte Moderno Premium',
+            description: 'Estilo vanguardista que combina técnicas modernas con elegancia atemporal.',
+            confidence: 92,
+            price: 9.99
+        },
+        {
+            id: 'fallback-2', 
+            name: '💎 Elegancia Clásica',
+            description: 'Corte tradicional con un toque de sofisticación moderna que nunca pasa de moda.',
+            confidence: 85,
+            price: 7.99
+        },
+        {
+            id: 'fallback-3',
+            name: '🏙 Estilo Urbano',
+            description: 'Look contemporáneo perfecto para el día a día en la ciudad.',
+            confidence: 78,
+            price: 6.99
+        }
+    ];
+    
+    container.innerHTML = fallbackStyles.map(style => `
+        <div class="style-card" onclick="selectMagicStyle('${style.id}')">
+            <h4>${style.name}</h4>
+            <p>${style.description}</p>
+            <div class="style-meta">
+                <span class="confidence-badge">${style.confidence}% compatible</span>
+                <span class="price-tag">€${style.price}</span>
+            </div>
+        </div>
+    `).join('');
+    
+    console.log('🔄 Mostrando recomendaciones de respaldo');
+}
         }
         appState.previousScreens.push(appState.currentScreen);
         appState.currentScreen = 'magic-mirror';
