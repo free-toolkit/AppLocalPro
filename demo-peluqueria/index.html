@@ -72,15 +72,15 @@
                                 <p>Reserva tu cita fácilmente</p>
                             </div>
                             <div class="app-buttons">
-                                <button class="app-btn primary" onclick="showServices()">
+                                <button class="app-btn primary" onclick="openApp()">
                                     <i class="fas fa-calendar-check"></i>
                                     Reservar Cita
                                 </button>
-                                <button class="app-btn secondary" onclick="showFidelizacion()">
+                                <button class="app-btn secondary" onclick="openApp()">
                                     <i class="fas fa-crown"></i>
                                     Programa Fidelidad
                                 </button>
-                                <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
+                                <button class="app-btn secondary" onclick="openApp()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
                                     <i class="fas fa-magic"></i>
                                     Espejo Mágico
                                 </button>
@@ -397,9 +397,54 @@
         }
     }
 
+    // Funciones básicas para asegurar que todo funcione
+    function openApp() {
+        if (typeof window.openApp === 'function') {
+            window.openApp();
+        } else {
+            document.getElementById('appModal').style.display = 'block';
+            showHomeScreen();
+        }
+    }
+
+    function showDashboard() {
+        if (typeof window.showDashboard === 'function') {
+            window.showDashboard();
+        } else {
+            document.getElementById('dashboardModal').style.display = 'block';
+        }
+    }
+
+    function showHomeScreen() {
+        document.getElementById('appTitle').textContent = 'StyleCorte';
+        document.getElementById('appContent').innerHTML = `
+            <div class="app-screen">
+                <div class="app-welcome">
+                    <h3>¡Bienvenido a StyleCorte!</h3>
+                    <p>Tu peluquería de confianza</p>
+                </div>
+                <div class="app-buttons">
+                    <button class="app-btn primary" onclick="showServices()">
+                        <i class="fas fa-calendar-check"></i>
+                        Reservar Cita
+                    </button>
+                    <button class="app-btn secondary" onclick="showFidelizacion()">
+                        <i class="fas fa-crown"></i>
+                        Programa Fidelidad
+                    </button>
+                    <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
+                        <i class="fas fa-magic"></i>
+                        Espejo Mágico
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
     // Asegurar que la cámara se detenga al cerrar la app
     document.addEventListener('DOMContentLoaded', function() {
         console.log('StyleCorte Pro con Espejo Mágico cargado');
+        
         // Sobrescribir closeApp si existe
         if (typeof closeApp !== 'undefined') {
             const originalCloseApp = closeApp;
