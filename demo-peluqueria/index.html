@@ -9,6 +9,74 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="magic-styles/magic-features.css">
     <link rel="icon" href="assets/images/logo.ico" type="image/x-icon">
+    
+    <!-- Scripts básicos primero -->
+    <script>
+    // Funciones básicas que deben estar disponibles inmediatamente
+    function openApp() {
+        console.log('📱 Abriendo app...');
+        document.getElementById('appModal').style.display = 'block';
+        showHomeScreen();
+    }
+    
+    function showDashboard() {
+        console.log('📊 Abriendo dashboard...');
+        document.getElementById('dashboardModal').style.display = 'block';
+    }
+    
+    function closeApp() {
+        console.log('❌ Cerrando app...');
+        document.getElementById('appModal').style.display = 'none';
+    }
+    
+    function closeDashboard() {
+        console.log('❌ Cerrando dashboard...');
+        document.getElementById('dashboardModal').style.display = 'none';
+    }
+    
+    function showHomeScreen() {
+        document.getElementById('appTitle').textContent = 'StyleCorte';
+        document.getElementById('appContent').innerHTML = `
+            <div class="app-screen">
+                <div class="app-welcome">
+                    <h3>¡Bienvenido a StyleCorte!</h3>
+                    <p>Tu peluquería de confianza</p>
+                </div>
+                <div class="app-buttons">
+                    <button class="app-btn primary" onclick="showServices()">
+                        <i class="fas fa-calendar-check"></i>
+                        Reservar Cita
+                    </button>
+                    <button class="app-btn secondary" onclick="showFidelizacion()">
+                        <i class="fas fa-crown"></i>
+                        Programa Fidelidad
+                    </button>
+                    <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
+                        <i class="fas fa-magic"></i>
+                        Espejo Mágico
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Funciones placeholder para evitar errores
+    function showServices() {
+        alert('Función showServices cargada desde app.js');
+    }
+    
+    function showFidelizacion() {
+        alert('Función showFidelizacion cargada desde app.js');
+    }
+    
+    function showMagicMirror() {
+        alert('Función showMagicMirror cargada desde magic-modules');
+    }
+    
+    function goBack() {
+        alert('Función goBack cargada desde app.js');
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -181,15 +249,15 @@
         </div>
     </div>
 
-    <!-- Scripts del Espejo Mágico -->
+    <!-- Scripts externos -->
     <script src="magic-modules/magic-mirror.js"></script>
     <script src="magic-modules/face-analysis.js"></script>
     <script src="magic-modules/payment-handler.js"></script>
     <script src="js/app.js"></script>
 
-    <!-- Integración del Espejo Mágico -->
+    <!-- Integración del Espejo Mágico - Sobrescribe las funciones placeholder -->
     <script>
-    // Función para mostrar el Espejo Mágico
+    // Sobrescribir showMagicMirror con la versión completa
     function showMagicMirror() {
         console.log('🎭 Abriendo Espejo Mágico...');
         
@@ -397,53 +465,9 @@
         }
     }
 
-    // Funciones básicas para asegurar que todo funcione
-    function openApp() {
-        if (typeof window.openApp === 'function') {
-            window.openApp();
-        } else {
-            document.getElementById('appModal').style.display = 'block';
-            showHomeScreen();
-        }
-    }
-
-    function showDashboard() {
-        if (typeof window.showDashboard === 'function') {
-            window.showDashboard();
-        } else {
-            document.getElementById('dashboardModal').style.display = 'block';
-        }
-    }
-
-    function showHomeScreen() {
-        document.getElementById('appTitle').textContent = 'StyleCorte';
-        document.getElementById('appContent').innerHTML = `
-            <div class="app-screen">
-                <div class="app-welcome">
-                    <h3>¡Bienvenido a StyleCorte!</h3>
-                    <p>Tu peluquería de confianza</p>
-                </div>
-                <div class="app-buttons">
-                    <button class="app-btn primary" onclick="showServices()">
-                        <i class="fas fa-calendar-check"></i>
-                        Reservar Cita
-                    </button>
-                    <button class="app-btn secondary" onclick="showFidelizacion()">
-                        <i class="fas fa-crown"></i>
-                        Programa Fidelidad
-                    </button>
-                    <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
-                        <i class="fas fa-magic"></i>
-                        Espejo Mágico
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
     // Asegurar que la cámara se detenga al cerrar la app
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('StyleCorte Pro con Espejo Mágico cargado');
+        console.log('✅ StyleCorte Pro completamente cargado');
         
         // Sobrescribir closeApp si existe
         if (typeof closeApp !== 'undefined') {
