@@ -399,6 +399,115 @@
                 padding: 10px 16px; 
             }
         }
+
+        /* ESTILOS PARA MODALES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            border-radius: 20px;
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: 90vh;
+            max-height: 800px;
+        }
+        
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            z-index: 10;
+        }
+        
+        .app-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-header-modal {
+            background: #8B4513;
+            color: white;
+            padding: 1rem;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .app-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-btn-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .app-content {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .app-screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-welcome {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .app-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .app-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .app-btn.primary {
+            background: #8B4513;
+            color: white;
+        }
+        
+        .app-btn.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -429,9 +538,9 @@
                 <h1>Impulsa Tu Negocio Con Una App Móvil</h1>
                 <p>Soluciones personalizadas para peluquerías, gimnasios, restaurantes y más. Digitaliza tu negocio hoy.</p>
                 <div class="hero-buttons">
-                    <a href="#demos" class="btn-hero btn-primary">
-                        <i class="fas fa-play"></i> Ver Demos
-                    </a>
+                    <button class="btn-hero btn-primary" onclick="openApp()">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </button>
                     <a href="https://wa.me/34631102324?text=¡Hola!%20Quiero%20saber%20más%20sobre%20las%20apps%20para%20mi%20negocio" 
                        target="_blank" 
                        class="btn-hero btn-whatsapp">
@@ -712,6 +821,56 @@
         </div>
     </div>
 
+    <!-- MODALES AÑADIDOS -->
+    <!-- Modal de la App -->
+    <div id="appModal" class="modal">
+        <div class="modal-content app-modal">
+            <span class="close" onclick="closeApp()">&times;</span>
+            <div class="app-container">
+                <div class="app-header-modal">
+                    <div class="app-nav">
+                        <button class="nav-btn-modal" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                        <h3 id="appTitle">StyleCorte App</h3>
+                        <button class="nav-btn-modal" onclick="closeApp()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="app-content" id="appContent">
+                    <div class="app-screen">
+                        <div class="app-welcome">
+                            <h3>¡Bienvenido a StyleCorte!</h3>
+                            <p>Tu peluquería de confianza</p>
+                        </div>
+                        <div class="app-buttons">
+                            <button class="app-btn primary" onclick="showServices()">
+                                <i class="fas fa-calendar-check"></i>
+                                Reservar Cita
+                            </button>
+                            <button class="app-btn secondary" onclick="showFidelizacion()">
+                                <i class="fas fa-crown"></i>
+                                Programa Fidelidad
+                            </button>
+                            <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
+                                <i class="fas fa-magic"></i>
+                                Espejo Mágico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Dashboard -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDashboard()">&times;</span>
+            <div style="padding: 2rem;">
+                <h2><i class="fas fa-chart-bar"></i> Dashboard StyleCorte Pro</h2>
+                <p>Panel de control del negocio</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Navegación entre demos
         document.querySelector('.nav-btn').addEventListener('click', function(e) {
@@ -746,107 +905,53 @@
                 }
             });
         });
-    </script>
-        <!-- MODALES AÑADIDOS - Pega esto antes del </body> -->
-    
-    <!-- Modal de la App -->
-    <div id="appModal" class="modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);">
-        <div class="modal-content" style="background: white; margin: 5% auto; border-radius: 15px; width: 90%; max-width: 400px; height: 80vh; position: relative;">
-            <span class="close" onclick="closeApp()" style="position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #666;">&times;</span>
-            <div class="app-container" style="height: 100%; display: flex; flex-direction: column;">
-                <div class="app-header-modal" style="background: #8B4513; color: white; padding: 15px; border-radius: 15px 15px 0 0;">
-                    <div class="app-nav" style="display: flex; justify-content: space-between; align-items: center;">
-                        <button class="nav-btn" onclick="goBack()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;">
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <h3 id="appTitle" style="margin: 0;">StyleCorte App</h3>
-                        <button class="nav-btn" onclick="closeApp()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="app-content" id="appContent" style="flex: 1; padding: 20px; overflow-y: auto;">
-                    <div class="app-screen" style="height: 100%; display: flex; flex-direction: column;">
-                        <div class="app-welcome" style="text-align: center; margin-bottom: 30px;">
-                            <h3>¡Bienvenido a StyleCorte!</h3>
-                            <p>Tu peluquería de confianza</p>
-                        </div>
-                        <div class="app-buttons" style="display: flex; flex-direction: column; gap: 15px;">
-                            <button class="app-btn primary" onclick="showServices()" style="padding: 15px; border: none; border-radius: 10px; background: #8B4513; color: white; font-weight: 600; display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                                <i class="fas fa-calendar-check"></i>
-                                Reservar Cita
-                            </button>
-                            <button class="app-btn secondary" onclick="showFidelizacion()" style="padding: 15px; border: none; border-radius: 10px; background: #f0f0f0; color: #333; font-weight: 600; display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                                <i class="fas fa-crown"></i>
-                                Programa Fidelidad
-                            </button>
-                            <button class="app-btn secondary" onclick="showMagicMirror()" style="padding: 15px; border: none; border-radius: 10px; background: linear-gradient(135deg, #8B4513, #D2691E); color: white; font-weight: 600; display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                                <i class="fas fa-magic"></i>
-                                Espejo Mágico
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal del Dashboard -->
-    <div id="dashboardModal" class="modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);">
-        <div class="modal-content" style="background: white; margin: 10% auto; border-radius: 15px; width: 90%; max-width: 500px; padding: 20px; position: relative;">
-            <span class="close" onclick="closeDashboard()" style="position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #666;">&times;</span>
-            <h2>Dashboard StyleCorte Pro</h2>
-            <p>Panel de control del negocio</p>
-        </div>
-    </div>
-
-    <!-- SCRIPTS PARA LOS MODALES - Pega esto también -->
-    <script>
-    function openApp() {
-        console.log('✅ Abriendo app...');
-        document.getElementById('appModal').style.display = 'block';
-    }
-    
-    function closeApp() {
-        console.log('✅ Cerrando app...');
-        document.getElementById('appModal').style.display = 'none';
-    }
-    
-    function showDashboard() {
-        console.log('✅ Abriendo dashboard...');
-        document.getElementById('dashboardModal').style.display = 'block';
-    }
-    
-    function closeDashboard() {
-        console.log('✅ Cerrando dashboard...');
-        document.getElementById('dashboardModal').style.display = 'none';
-    }
-    
-    function goBack() {
-        console.log('↩️ Volviendo atrás...');
-    }
-    
-    function showServices() {
-        alert('📅 Servicios - Funciona!');
-    }
-    
-    function showFidelizacion() {
-        alert('👑 Programa Fidelidad - Funciona!');
-    }
-    
-    function showMagicMirror() {
-        alert('🔮 Espejo Mágico - Funciona!');
-    }
-    
-    // Cerrar modales al hacer click fuera
-    window.onclick = function(event) {
-        if (event.target === document.getElementById('appModal')) {
-            closeApp();
+        // FUNCIONES PARA MODALES
+        function openApp() {
+            console.log('✅ Abriendo app...');
+            document.getElementById('appModal').style.display = 'block';
         }
-        if (event.target === document.getElementById('dashboardModal')) {
-            closeDashboard();
+        
+        function closeApp() {
+            console.log('✅ Cerrando app...');
+            document.getElementById('appModal').style.display = 'none';
         }
-    }
+        
+        function showDashboard() {
+            console.log('✅ Abriendo dashboard...');
+            document.getElementById('dashboardModal').style.display = 'block';
+        }
+        
+        function closeDashboard() {
+            console.log('✅ Cerrando dashboard...');
+            document.getElementById('dashboardModal').style.display = 'none';
+        }
+        
+        function goBack() {
+            console.log('↩️ Volviendo atrás...');
+        }
+        
+        function showServices() {
+            alert('📅 Servicios - Funciona!');
+        }
+        
+        function showFidelizacion() {
+            alert('👑 Programa Fidelidad - Funciona!');
+        }
+        
+        function showMagicMirror() {
+            alert('🔮 Espejo Mágico - Funciona!');
+        }
+        
+        // Cerrar modales al hacer click fuera
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('appModal')) {
+                closeApp();
+            }
+            if (event.target === document.getElementById('dashboardModal')) {
+                closeDashboard();
+            }
+        }
     </script>
 </body>
 </html>
