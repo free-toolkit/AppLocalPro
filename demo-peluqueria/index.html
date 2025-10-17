@@ -16,7 +16,30 @@
     function openApp() {
         console.log('📱 Abriendo app...');
         document.getElementById('appModal').style.display = 'block';
-        showHomeScreen();
+        // MOSTRAR DIRECTAMENTE LA PANTALLA CON 3 BOTONES
+        document.getElementById('appTitle').textContent = 'StyleCorte';
+        document.getElementById('appContent').innerHTML = `
+            <div class="app-screen">
+                <div class="app-welcome">
+                    <h3>¡Bienvenido a StyleCorte!</h3>
+                    <p>Tu peluquería de confianza</p>
+                </div>
+                <div class="app-buttons">
+                    <button class="app-btn primary" onclick="showServices()">
+                        <i class="fas fa-calendar-check"></i>
+                        Reservar Cita
+                    </button>
+                    <button class="app-btn secondary" onclick="showFidelizacion()">
+                        <i class="fas fa-crown"></i>
+                        Programa Fidelidad
+                    </button>
+                    <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
+                        <i class="fas fa-magic"></i>
+                        Espejo Mágico
+                    </button>
+                </div>
+            </div>
+        `;
     }
     
     function showDashboard() {
@@ -35,6 +58,7 @@
     }
     
     function showHomeScreen() {
+        console.log('🏠 Mostrando pantalla principal...');
         document.getElementById('appTitle').textContent = 'StyleCorte';
         document.getElementById('appContent').innerHTML = `
             <div class="app-screen">
@@ -98,6 +122,7 @@
     }
 
     function showMagicMirror() {
+        console.log('🔮 Abriendo Espejo Mágico...');
         document.getElementById('appTitle').textContent = 'Espejo Mágico';
         document.getElementById('appContent').innerHTML = `
             <div class="magic-mirror-container">
