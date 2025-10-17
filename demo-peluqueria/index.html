@@ -3,308 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StyleCorte Pro - Demo Peluquería & Barbería</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="magic-styles/magic-features.css">
-    
-    <style>
-        /* ESTILOS BÁSICOS PARA LOS MODALS */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-        }
-        
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-        }
-        
-        .close {
-            position: absolute;
-            right: 15px;
-            top: 10px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .app-container {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .app-header-modal {
-            background: #8B4513;
-            color: white;
-            padding: 15px;
-            border-radius: 15px 15px 0 0;
-        }
-        
-        .app-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        
-        .app-content {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        
-        .app-screen {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .app-welcome {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .app-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .app-btn {
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .app-btn.primary {
-            background: #8B4513;
-            color: white;
-        }
-        
-        .app-btn.secondary {
-            background: #f0f0f0;
-            color: #333;
-        }
-        
-        .app-btn:hover {
-            transform: translateY(-2px);
-        }
-    </style>
+    <title>Peluquería StylePlus - Espejo Mágico AI</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header existente -->
     <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                <i class="fas fa-scissors"></i>
-                <span>StyleCorte Pro</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#estilistas">Estilistas</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#reservas">Reservas</a></li>
-            </ul>
-            <div class="nav-cta">
-                <button class="btn btn-primary" onclick="openApp()">
-                    <i class="fas fa-mobile-alt"></i>
-                    Abrir App
-                </button>
-            </div>
-        </nav>
+        <div class="container">
+            <h1>Peluquería StylePlus</h1>
+            <p>Transformamos tu look con la última tecnología</p>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero hero-peluqueria">
-        <div class="hero-background"></div>
-        <div class="hero-overlay"></div>
-        <div class="container hero-container">
-            <div class="hero-content">
-                <strong class="text-kicker">DEMO INTERACTIVO</strong>
-                <h1>StyleCorte Pro App</h1>
-                <p>Sistema completo de gestión para peluquerías y barberías. Reservas online, fidelización de clientes y control de negocio en una sola app.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="openApp()">
-                        <i class="fas fa-play"></i>
-                        Probar Demo
-                    </button>
-                    <button class="btn btn-secondary" onclick="showDashboard()">
-                        <i class="fas fa-chart-bar"></i>
-                        Ver Dashboard
-                    </button>
+    <!-- Sección de Servicios (existente) -->
+    <section class="services">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Cortes de Pelo</h3>
+                    <p>Estilos modernos y personalizados</p>
+                </div>
+                <div class="service-card">
+                    <h3>Coloración</h3>
+                    <p>Técnicas avanzadas de color</p>
+                </div>
+                <div class="service-card">
+                    <h3>Tratamientos</h3>
+                    <p>Cuidado especializado para tu cabello</p>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="phone-mockup demo-phone">
-                    <div class="phone-screen" id="phoneScreen">
-                        <div class="app-screen home-screen">
-                            <div class="app-header">
-                                <div class="app-logo">
-                                    <i class="fas fa-scissors"></i>
-                                    <span>StyleCorte</span>
-                                </div>
-                                <div class="app-notification">
-                                    <i class="fas fa-bell"></i>
-                                </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN ESPEJO MÁGICO CON AI - NUEVA -->
+    <section class="magic-mirror-section">
+        <div class="container">
+            <h2>✨ Espejo Mágico AI</h2>
+            <p class="section-subtitle">Descubre tu estilo ideal con inteligencia artificial y realidad aumentada</p>
+            
+            <button id="magicMirrorBtn" class="btn btn-primary magic-btn">
+                🪞 Abrir Espejo Mágico
+            </button>
+            
+            <!-- Contenedor de Cámara -->
+            <div id="cameraContainer" class="camera-container hidden">
+                <div class="camera-header">
+                    <h3>📷 Encuadra tu rostro</h3>
+                    <button id="closeCamera" class="btn btn-danger">✕ Cerrar</button>
+                </div>
+                
+                <div class="camera-preview">
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas"></canvas>
+                    <div id="faceOverlay" class="face-overlay"></div>
+                    <div class="camera-guide"></div>
+                </div>
+                
+                <div class="camera-controls">
+                    <button id="captureBtn" class="btn btn-capture">
+                        📸 Analizar con IA
+                    </button>
+                    <button id="retakeBtn" class="btn btn-outline">🔄 Retomar</button>
+                </div>
+
+                <div class="loading-container hidden" id="loadingAnalysis">
+                    <div class="loading-spinner"></div>
+                    <p>Analizando tu rostro con IA...</p>
+                </div>
+            </div>
+            
+            <!-- Resultados del Análisis -->
+            <div id="analysisResults" class="analysis-results hidden">
+                <div class="results-header">
+                    <h3>🎯 Análisis Completo</h3>
+                    <button id="backToCamera" class="btn btn-outline">← Nuevo Análisis</button>
+                </div>
+                
+                <div class="results-content">
+                    <div class="analysis-grid">
+                        <div class="face-analysis card">
+                            <h4>📊 Análisis Facial</h4>
+                            <div id="faceShape" class="analysis-item">
+                                <strong>Forma de rostro:</strong> <span class="result-value">Analizando...</span>
                             </div>
-                            <div class="app-welcome">
-                                <h3>¡Bienvenido!</h3>
-                                <p>Reserva tu cita fácilmente</p>
+                            <div id="facialFeatures" class="analysis-item">
+                                <strong>Características:</strong> <span class="result-value">Procesando...</span>
                             </div>
-                            <div class="app-buttons">
-                                <button class="app-btn primary" onclick="openApp()">
-                                    <i class="fas fa-calendar-check"></i>
-                                    Reservar Cita
-                                </button>
-                                <button class="app-btn secondary" onclick="openApp()">
-                                    <i class="fas fa-crown"></i>
-                                    Programa Fidelidad
-                                </button>
-                                <button class="app-btn secondary" onclick="openApp()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
-                                    <i class="fas fa-magic"></i>
-                                    Espejo Mágico
-                                </button>
+                            <div id="skinTone" class="analysis-item">
+                                <strong>Tono de piel:</strong> <span class="result-value">Calculando...</span>
                             </div>
                         </div>
+                        
+                        <div class="style-recommendations card">
+                            <h4>💇 Recomendaciones IA</h4>
+                            <div id="styleSuggestions" class="suggestions-list">
+                                <div class="suggestion-item">🏆 Cargando recomendaciones...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="style-simulator card">
+                        <h4>🎭 Simulador de Estilos</h4>
+                        <div class="simulator-container">
+                            <div class="preview-comparison">
+                                <div class="preview-item">
+                                    <div class="preview-label">Antes</div>
+                                    <div id="originalPreview" class="preview-box"></div>
+                                </div>
+                                <div class="preview-item">
+                                    <div class="preview-label">Después</div>
+                                    <div id="styledPreview" class="preview-box styled">
+                                        <div class="hairstyle-overlay"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="style-controls">
+                                <div class="control-group">
+                                    <label>Estilo de Corte:</label>
+                                    <div class="button-group">
+                                        <button class="style-btn active" data-style="short">✂️ Corto</button>
+                                        <button class="style-btn" data-style="medium">👩‍🦰 Medio</button>
+                                        <button class="style-btn" data-style="long">👸 Largo</button>
+                                        <button class="style-btn" data-style="layers">💃 Capas</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label>Color:</label>
+                                    <div class="button-group">
+                                        <button class="color-btn active" data-color="natural">🌰 Natural</button>
+                                        <button class="color-btn" data-color="blonde">🌟 Rubio</button>
+                                        <button class="color-btn" data-color="brunette">🍫 Moreno</button>
+                                        <button class="color-btn" data-color="red">🌹 Rojo</button>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label>Efectos:</label>
+                                    <div class="button-group">
+                                        <button class="effect-btn" data-effect="volume">💨 Volumen</button>
+                                        <button class="effect-btn" data-effect="curls">🌀 Ondas</button>
+                                        <button class="effect-btn" data-effect="straight">📏 Liso</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveStyle" class="btn btn-success">💾 Guardar Estilo</button>
+                        <button id="shareStyle" class="btn btn-info">📤 Compartir</button>
+                        <button id="bookAppointment" class="btn btn-primary">📅 Agendar Cita</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal de la App -->
-    <div id="appModal" class="modal">
-        <div class="modal-content app-modal">
-            <span class="close" onclick="closeApp()">&times;</span>
-            <div class="app-container">
-                <div class="app-header-modal">
-                    <div class="app-nav">
-                        <button class="nav-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-                        <h3 id="appTitle">StyleCorte App</h3>
-                        <button class="nav-btn" onclick="closeApp()"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="app-content" id="appContent">
-                    <!-- Aquí va el contenido dinámico -->
-                    <div class="app-screen">
-                        <div class="app-welcome">
-                            <h3>¡Bienvenido a StyleCorte!</h3>
-                            <p>Tu peluquería de confianza</p>
-                        </div>
-                        <div class="app-buttons">
-                            <button class="app-btn primary" onclick="showServices()">
-                                <i class="fas fa-calendar-check"></i>
-                                Reservar Cita
-                            </button>
-                            <button class="app-btn secondary" onclick="showFidelizacion()">
-                                <i class="fas fa-crown"></i>
-                                Programa Fidelidad
-                            </button>
-                            <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
-                                <i class="fas fa-magic"></i>
-                                Espejo Mágico
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Sección de Contacto (existente) -->
+    <section class="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p>Agenda tu cita hoy mismo</p>
         </div>
-    </div>
+    </section>
 
-    <!-- Modal del Dashboard -->
-    <div id="dashboardModal" class="modal">
-        <div class="modal-content dashboard-modal">
-            <span class="close" onclick="closeDashboard()">&times;</span>
-            <div class="dashboard-container">
-                <h2>Dashboard StyleCorte Pro</h2>
-                <p>Panel de control del negocio</p>
-            </div>
-        </div>
-    </div>
+    <!-- Elementos de Audio -->
+    <audio id="cameraSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-camera-shutter-click-1133.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="transitionSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-sound-3090.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="successSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chime-2017.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- SCRIPTS SIMPLES -->
-    <script>
-    // FUNCIONES BÁSICAS - ESTAS SIEMPRE FUNCIONAN
-    function openApp() {
-        console.log('ABRIENDO APP');
-        document.getElementById('appModal').style.display = 'block';
-    }
-    
-    function closeApp() {
-        console.log('CERRANDO APP');
-        document.getElementById('appModal').style.display = 'none';
-    }
-    
-    function showDashboard() {
-        console.log('ABRIENDO DASHBOARD');
-        document.getElementById('dashboardModal').style.display = 'block';
-    }
-    
-    function closeDashboard() {
-        console.log('CERRANDO DASHBOARD');
-        document.getElementById('dashboardModal').style.display = 'none';
-    }
-    
-    function goBack() {
-        console.log('VOLVIENDO ATRÁS');
-        // Por ahora solo cierra la app
-        closeApp();
-    }
-    
-    function showServices() {
-        alert('SERVICIOS - Esta función viene de app.js');
-    }
-    
-    function showFidelizacion() {
-        alert('FIDELIZACIÓN - Esta función viene de app.js');
-    }
-    
-    function showMagicMirror() {
-        alert('ESPEJO MÁGICO - Esta función viene de magic-modules');
-        // Aquí irá la funcionalidad completa del Espejo Mágico
-    }
-    
-    // Cerrar modales al hacer click fuera
-    window.onclick = function(event) {
-      if (event.target === document.getElementById('dashboardModal')) {
-        closeDashboard();
-        }
-        if (event.target === document.getElementById('dashboardModal')) {
-            closeDashboard();
-        }
-    }
-    </script>
-
-    <!-- Scripts externos (opcionales) -->
-    <script src="magic-modules/magic-mirror.js"></script>
-    <script src="magic-modules/face-analysis.js"></script>
-    <script src="magic-modules/payment-handler.js"></script>
-    <script src="js/app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
