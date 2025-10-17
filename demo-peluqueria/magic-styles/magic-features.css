@@ -1,0 +1,156 @@
+/* MAGIC FEATURES CSS - ESTILOS CORREGIDOS */
+/* Espejo Mágico Container */
+.magic-mirror-container {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* Sección de Cámara */
+.camera-section {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: #000000;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+#magic-camera {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#magic-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+/* Cards de Estilos - ESTILOS CORREGIDOS */
+.style-recommendations {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+.style-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+.style-card:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+.style-card h4 {
+    margin: 0 0 10px 0;
+    color: #FFFFFF;
+    font-size: 1.3em;
+    font-weight: 700;
+}
+.style-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95em;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+}
+.style-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+.confidence-badge {
+    background: rgba(255, 215, 0, 0.9);
+    color: #8B4513;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.price-tag {
+    background: #FFD700;
+    color: #8B4513;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9em;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+/* Botones Mágicos - ESTILOS CORREGIDOS */
+.magic-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+.btn-magic {
+    flex: 1;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+.btn-magic.primary {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #8B4513;
+}
+.btn-magic.secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+.btn-magic:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.btn-magic.primary:hover {
+    background: linear-gradient(135deg, #FFA500, #FF8C00);
+}
+.btn-magic.secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+/* Efectos de Animación */
+@keyframes pulse-gold {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+.pulse-animation {
+    animation: pulse-gold 2s infinite;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .camera-section {
+        height: 250px;
+    }
+    .magic-actions {
+        flex-direction: column;
+    }
+    .btn-magic {
+        padding: 15px 20px;
+    }
+}
