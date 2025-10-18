@@ -5,8 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Crea tu app móvil personalizada para peluquerías, gimnasios, restaurantes y más. Gestión de citas, fidelización y más. ¡Prueba la demo ahora!">
     <title>AppLocalPro - Apps Móviles para Negocios Locales</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="shared/shared.css">
+    <style>
+        /* Mejoras específicas para el home */
+        .hero-content {
+            max-width: 800px;
+            padding: 0 1.5rem;
+        }
+        .hero-content h1 {
+            font-size: 3.4rem;
+            line-height: 1.1;
+            margin-bottom: 1.4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+        .hero-content p {
+            font-size: 1.45rem;
+            margin-bottom: 2.2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 0.7s;
+        }
+
+        .section-header h2 {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards;
+        }
+        .section-header p {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards 0.2s;
+        }
+
+        /* Animación al hacer scroll (simulada con carga inicial) */
+        .category-card {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .category-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efecto de brillo en hover mejorado */
+        .category-card:hover {
+            border-color: #6E00FF;
+            box-shadow: 0 10px 40px rgba(110, 0, 255, 0.5);
+        }
+
+        /* Sección destacada: Demos en Vivo */
+        .live-demos {
+            text-align: center;
+            background: rgba(18, 13, 37, 0.4);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid #6E00FF;
+            backdrop-filter: blur(8px);
+        }
+        .live-demos h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+        }
+        .demo-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+        .demo-badge {
+            background: rgba(0, 240, 255, 0.15);
+            color: #00F0FF;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .demo-badge i { animation: pulseDot 2s infinite; }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive fino */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.4rem; }
+            .hero-content p { font-size: 1.2rem; }
+            .section-header h2 { font-size: 2.2rem; }
+        }
+    </style>
 </head>
 <body>
     <!-- Header con Logo y WhatsApp -->
@@ -49,12 +159,23 @@
     </section>
 
     <div class="container">
+        <!-- Sección destacada: Demos en Vivo -->
+        <div class="live-demos">
+            <h3><i class="fas fa-bolt"></i> Demos Funcionales y Listos</h3>
+            <p>Explora nuestras apps del futuro. Totalmente interactivas y sin backend.</p>
+            <div class="demo-badges">
+                <div class="demo-badge"><i class="fas fa-circle"></i> Peluquería</div>
+                <div class="demo-badge"><i class="fas fa-circle"></i> Gimnasio</div>
+                <div class="demo-badge"><i class="fas fa-circle"></i> Restaurante</div>
+            </div>
+        </div>
+
         <div class="section-header" id="demos">
             <h2>Nuestras Soluciones por Sector</h2>
             <p>Descubre aplicaciones móviles personalizadas para diferentes tipos de negocios locales</p>
         </div>
 
-        <div class="categories-grid">
+        <div class="categories-grid" id="categoriesGrid">
             <!-- Peluquerías -->
             <div class="category-card peluqueria">
                 <div class="category-image">
@@ -206,6 +327,16 @@
 
     <script src="shared/shared.js"></script>
     <script>
+        // Animación de tarjetas al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.category-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, 200 * index);
+            });
+        });
+
         // Comportamiento específico de la página principal
         document.querySelectorAll('.btn.coming-soon').forEach(btn => {
             btn.addEventListener('click', function(e) {
