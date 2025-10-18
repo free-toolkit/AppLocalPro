@@ -494,13 +494,59 @@
             }
         }
 
-        function generateHairstyle() {
-            document.getElementById('aiLoadingModal').style.display = 'flex';
-            setTimeout(() => {
-                document.getElementById('aiLoadingModal').style.display = 'none';
-                document.getElementById('stylePreviewModal').style.display = 'flex';
-            }, 2500);
+       function generateHairstyle() {
+    // 🔑 Tu API Key de OpenAI (¡NO subir a GitHub!)
+    const OPENAI_API_KEY = "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";
+
+    // 🎯 Prompt optimizado para peluquería futurista
+    const prompt = "Professional portrait of a person with a futuristic haircut, holographic color tones, sharp layers, salon lighting, photorealistic, 8k, clean background, beauty editorial style";
+
+    document.getElementById('aiLoadingModal').style.display = 'flex';
+    document.getElementById('generatedPrompt').textContent = prompt;
+
+    fetch("https://api.openai.com/v1/images/generations", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+            model: "dall-e-3",
+            prompt: prompt,
+            n: 1,
+            size: "1024x1024",
+            quality: "standard"
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => {
+                throw new Error(err.error?.message || "Error en la API de OpenAI");
+            });
         }
+        return response.json();
+    })
+    .then(data => {
+        const imageUrl = data.data[0].url;
+        document.querySelector('.style-preview').innerHTML = `
+            <img src="${imageUrl}" style="width:100%; height:auto; border-radius:12px; object-fit:contain;">
+        `;
+        document.getElementById('stylePreviewModal').style.display = 'flex';
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert(`❌ No se pudo generar la imagen:\n${err.message}\n\nVerifica tu saldo en OpenAI.`);
+        // Fallback visual
+        document.querySelector('.style-preview').innerHTML = `
+            <i class="fas fa-user" style="font-size:5rem;color:#6E00FF;opacity:0.3;"></i>
+        `;
+        document.getElementById('stylePreviewModal').style.display = 'flex';
+    })
+    .finally(() => {
+        document.getElementById('aiLoadingModal').style.display = 'none';
+    });
+}
+
 
         function openOwnerAccess() {
             const pin = prompt("Ingresa el PIN de acceso (demo: 1234):");
