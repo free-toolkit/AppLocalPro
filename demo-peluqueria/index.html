@@ -3,11 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="App de peluquería con Espejo Mágico AI, gestión de citas y programa de fidelización. Prueba la demo de StylePlus.">
     <title>Peluquería StylePlus - Espejo Mágico AI</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../shared/shared.css">
+    <style>
+        /* Estilos específicos de la demo */
+        .header {
+            background: #8B4513;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .magic-mirror-section {
+            padding: 3rem 0;
+        }
+        .camera-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .camera-preview {
+            position: relative;
+            margin: 1.5rem 0;
+            height: 300px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #video, #canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .face-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+        }
+        .analysis-results {
+            margin-top: 2rem;
+        }
+        .card {
+            background: #f9f9f9;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #8B4513;
+        }
+        .magic-btn {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+        .hidden { display: none !important; }
+        .loading-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #8B4513;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
-    <!-- Header existente -->
     <header class="header">
         <div class="container">
             <h1>Peluquería StylePlus</h1>
@@ -15,28 +84,6 @@
         </div>
     </header>
 
-    <!-- Sección de Servicios (existente) -->
-    <section class="services">
-        <div class="container">
-            <h2>Nuestros Servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Cortes de Pelo</h3>
-                    <p>Estilos modernos y personalizados</p>
-                </div>
-                <div class="service-card">
-                    <h3>Coloración</h3>
-                    <p>Técnicas avanzadas de color</p>
-                </div>
-                <div class="service-card">
-                    <h3>Tratamientos</h3>
-                    <p>Cuidado especializado para tu cabello</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN ESPEJO MÁGICO CON AI - NUEVA -->
     <section class="magic-mirror-section">
         <div class="container">
             <h2>✨ Espejo Mágico AI</h2>
@@ -46,113 +93,84 @@
                 🪞 Abrir Espejo Mágico
             </button>
             
-            <!-- Contenedor de Cámara -->
             <div id="cameraContainer" class="camera-container hidden">
                 <div class="camera-header">
                     <h3>📷 Encuadra tu rostro</h3>
                     <button id="closeCamera" class="btn btn-danger">✕ Cerrar</button>
                 </div>
-                
                 <div class="camera-preview">
-                    <video id="video" autoplay playsinline></video>
+                    <video id="video" autoplay playsinline muted></video>
                     <canvas id="canvas"></canvas>
                     <div id="faceOverlay" class="face-overlay"></div>
-                    <div class="camera-guide"></div>
                 </div>
-                
                 <div class="camera-controls">
-                    <button id="captureBtn" class="btn btn-capture">
-                        📸 Analizar con IA
-                    </button>
+                    <button id="captureBtn" class="btn btn-capture">📸 Analizar con IA</button>
                     <button id="retakeBtn" class="btn btn-outline">🔄 Retomar</button>
                 </div>
-
                 <div class="loading-container hidden" id="loadingAnalysis">
                     <div class="loading-spinner"></div>
                     <p>Analizando tu rostro con IA...</p>
                 </div>
             </div>
             
-            <!-- Resultados del Análisis -->
             <div id="analysisResults" class="analysis-results hidden">
                 <div class="results-header">
                     <h3>🎯 Análisis Completo</h3>
                     <button id="backToCamera" class="btn btn-outline">← Nuevo Análisis</button>
                 </div>
-                
                 <div class="results-content">
                     <div class="analysis-grid">
                         <div class="face-analysis card">
                             <h4>📊 Análisis Facial</h4>
-                            <div id="faceShape" class="analysis-item">
-                                <strong>Forma de rostro:</strong> <span class="result-value">Analizando...</span>
-                            </div>
-                            <div id="facialFeatures" class="analysis-item">
-                                <strong>Características:</strong> <span class="result-value">Procesando...</span>
-                            </div>
-                            <div id="skinTone" class="analysis-item">
-                                <strong>Tono de piel:</strong> <span class="result-value">Calculando...</span>
-                            </div>
+                            <div id="faceShape" class="analysis-item"><strong>Forma de rostro:</strong> <span class="result-value">Ovalado</span></div>
+                            <div id="facialFeatures" class="analysis-item"><strong>Características:</strong> <span class="result-value">Ojos almendrados, nariz recta</span></div>
+                            <div id="skinTone" class="analysis-item"><strong>Tono de piel:</strong> <span class="result-value">Medio cálido</span></div>
                         </div>
-                        
                         <div class="style-recommendations card">
                             <h4>💇 Recomendaciones IA</h4>
                             <div id="styleSuggestions" class="suggestions-list">
-                                <div class="suggestion-item">🏆 Cargando recomendaciones...</div>
+                                <div class="suggestion-item">• Corte en capas suaves</div>
+                                <div class="suggestion-item">• Flequillo lateral</div>
+                                <div class="suggestion-item">• Color miel con reflejos dorados</div>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="style-simulator card">
                         <h4>🎭 Simulador de Estilos</h4>
-                        <div class="simulator-container">
-                            <div class="preview-comparison">
-                                <div class="preview-item">
-                                    <div class="preview-label">Antes</div>
-                                    <div id="originalPreview" class="preview-box"></div>
-                                </div>
-                                <div class="preview-item">
-                                    <div class="preview-label">Después</div>
-                                    <div id="styledPreview" class="preview-box styled">
-                                        <div class="hairstyle-overlay"></div>
-                                    </div>
+                        <div class="preview-comparison">
+                            <div class="preview-item">
+                                <div class="preview-label">Antes</div>
+                                <div id="originalPreview" class="preview-box" style="background:#eee;"></div>
+                            </div>
+                            <div class="preview-item">
+                                <div class="preview-label">Después</div>
+                                <div id="styledPreview" class="preview-box styled" style="background:#eee;">
+                                    <div class="hairstyle-overlay" style="background:linear-gradient(to bottom, #D2691E, #8B4513); height:60%; border-radius:50% 50% 0 0;"></div>
                                 </div>
                             </div>
-                            
-                            <div class="style-controls">
-                                <div class="control-group">
-                                    <label>Estilo de Corte:</label>
-                                    <div class="button-group">
-                                        <button class="style-btn active" data-style="short">✂️ Corto</button>
-                                        <button class="style-btn" data-style="medium">👩‍🦰 Medio</button>
-                                        <button class="style-btn" data-style="long">👸 Largo</button>
-                                        <button class="style-btn" data-style="layers">💃 Capas</button>
-                                    </div>
+                        </div>
+                        <div class="style-controls">
+                            <div class="control-group">
+                                <label>Estilo de Corte:</label>
+                                <div class="button-group">
+                                    <button class="style-btn active" data-style="short">✂️ Corto</button>
+                                    <button class="style-btn" data-style="medium">👩‍🦰 Medio</button>
+                                    <button class="style-btn" data-style="long">👸 Largo</button>
+                                    <button class="style-btn" data-style="layers">💃 Capas</button>
                                 </div>
-                                
-                                <div class="control-group">
-                                    <label>Color:</label>
-                                    <div class="button-group">
-                                        <button class="color-btn active" data-color="natural">🌰 Natural</button>
-                                        <button class="color-btn" data-color="blonde">🌟 Rubio</button>
-                                        <button class="color-btn" data-color="brunette">🍫 Moreno</button>
-                                        <button class="color-btn" data-color="red">🌹 Rojo</button>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <label>Efectos:</label>
-                                    <div class="button-group">
-                                        <button class="effect-btn" data-effect="volume">💨 Volumen</button>
-                                        <button class="effect-btn" data-effect="curls">🌀 Ondas</button>
-                                        <button class="effect-btn" data-effect="straight">📏 Liso</button>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label>Color:</label>
+                                <div class="button-group">
+                                    <button class="color-btn active" data-color="natural">🌰 Natural</button>
+                                    <button class="color-btn" data-color="blonde">🌟 Rubio</button>
+                                    <button class="color-btn" data-color="brunette">🍫 Moreno</button>
+                                    <button class="color-btn" data-color="red">🌹 Rojo</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="action-buttons">
+                    <div class="action-buttons" style="text-align:center; margin-top:1.5rem;">
                         <button id="saveStyle" class="btn btn-success">💾 Guardar Estilo</button>
                         <button id="shareStyle" class="btn btn-info">📤 Compartir</button>
                         <button id="bookAppointment" class="btn btn-primary">📅 Agendar Cita</button>
@@ -162,7 +180,6 @@
         </div>
     </section>
 
-    <!-- Sección de Contacto (existente) -->
     <section class="contact">
         <div class="container">
             <h2>Contacto</h2>
@@ -170,7 +187,7 @@
         </div>
     </section>
 
-    <!-- Elementos de Audio -->
+    <!-- Sonidos -->
     <audio id="cameraSound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-camera-shutter-click-1133.mp3" type="audio/mpeg">
     </audio>
@@ -184,6 +201,43 @@
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="script.js"></script>
+    <script src="../shared/shared.js"></script>
+    <script>
+        // Lógica específica de la demo
+        document.getElementById('magicMirrorBtn').addEventListener('click', () => {
+            document.getElementById('cameraContainer').classList.remove('hidden');
+        });
+
+        document.getElementById('closeCamera').addEventListener('click', () => {
+            document.getElementById('cameraContainer').classList.add('hidden');
+        });
+
+        document.getElementById('bookAppointment').addEventListener('click', () => {
+            window.open('https://wa.me/34631102324?text=¡Hola!%20Quiero%20agendar%20una%20cita%20en%20StylePlus', '_blank');
+        });
+
+        // Simulación básica de análisis
+        document.getElementById('captureBtn').addEventListener('click', () => {
+            document.getElementById('loadingAnalysis').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('loadingAnalysis').classList.add('hidden');
+                document.getElementById('analysisResults').classList.remove('hidden');
+                playSound('successSound');
+            }, 2000);
+        });
+
+        document.getElementById('backToCamera').addEventListener('click', () => {
+            document.getElementById('analysisResults').classList.add('hidden');
+        });
+
+        // Cambio de estilo simulado
+        document.querySelectorAll('.style-btn, .color-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.style-btn, .color-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                playSound('clickSound');
+            });
+        });
+    </script>
 </body>
 </html>
