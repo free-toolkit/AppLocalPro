@@ -3,241 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="App de peluquería con Espejo Mágico AI, gestión de citas y programa de fidelización. Prueba la demo de StylePlus.">
-    <title>Peluquería StylePlus - Espejo Mágico AI</title>
+    <meta name="description" content="App de peluquería StylePlus: reserva citas, usa el Espejo Mágico AI, acumula recompensas y gestiona tu negocio.">
+    <title>StylePlus - App para Peluquerías</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../shared/shared.css">
     <style>
-        /* Estilos específicos de la demo */
-        .header {
+        /* Estilos específicos de la app */
+        body {
+            background: #f9f9f9;
+            overflow-x: hidden;
+        }
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background: white;
+            position: relative;
+        }
+        .app-header {
             background: #8B4513;
             color: white;
-            padding: 2rem 0;
+            padding: 1.2rem;
             text-align: center;
-        }
-        .magic-mirror-section {
-            padding: 3rem 0;
-        }
-        .camera-container {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .camera-preview {
             position: relative;
-            margin: 1.5rem 0;
-            height: 300px;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
         }
-        #video, #canvas {
+        .app-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .app-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        .app-nav {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 0.8rem 0;
+            position: sticky;
+            bottom: 0;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #777;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-item.active, .nav-item:hover {
+            color: #8B4513;
+        }
+        .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
+
+        /* Vistas */
+        .view { display: none; }
+        .view.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Formulario de reserva */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-control {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
         }
-        .face-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
         }
-        .analysis-results {
-            margin-top: 2rem;
+        .btn-primary { background: #8B4513; color: white; }
+        .btn-primary:hover { background: #7a3a0f; }
+
+        /* Recompensas */
+        .rewards-card {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
-        .card {
-            background: #f9f9f9;
+        .points { font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0; }
+        .benefits-list {
+            background: white;
             padding: 1.2rem;
             border-radius: 10px;
+            margin-top: 1rem;
+        }
+        .benefit-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .benefit-item:last-child { border-bottom: none; }
+
+        /* Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
             margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
             border-left: 3px solid #8B4513;
         }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: #8B4513; }
+        .stat-label { font-size: 0.9rem; color: #666; }
+
+        /* Modal de acceso */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .pin-input {
+            width: 80%;
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* Espejo mágico (resumido) */
         .magic-btn {
             background: linear-gradient(135deg, #8B4513, #D2691E);
             color: white;
+            padding: 1.2rem;
             font-size: 1.1rem;
-            padding: 1rem 2rem;
+            border-radius: 12px;
+            width: 100%;
+            margin: 1rem 0;
+            border: none;
+            cursor: pointer;
         }
         .hidden { display: none !important; }
-        .loading-container {
-            text-align: center;
-            padding: 2rem;
-        }
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #8B4513;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1>Peluquería StylePlus</h1>
-            <p>Transformamos tu look con la última tecnología</p>
+    <div class="app-container">
+        <!-- Header de la app -->
+        <div class="app-header">
+            <h1>StylePlus Peluquería</h1>
         </div>
-    </header>
 
-    <section class="magic-mirror-section">
-        <div class="container">
-            <h2>✨ Espejo Mágico AI</h2>
-            <p class="section-subtitle">Descubre tu estilo ideal con inteligencia artificial y realidad aumentada</p>
-            
-            <button id="magicMirrorBtn" class="btn btn-primary magic-btn">
-                🪞 Abrir Espejo Mágico
+        <!-- Contenido principal (vistas) -->
+        <div class="app-content">
+            <!-- Vista: Inicio -->
+            <div id="homeView" class="view active">
+                <h2>¡Bienvenido!</h2>
+                <p>Elige una opción para comenzar:</p>
+                <br>
+                <button class="btn btn-primary" onclick="showView('bookingView')">
+                    <i class="fas fa-calendar-check"></i> Reservar Cita
+                </button>
+                <button class="magic-btn" onclick="showView('magicMirrorView')">
+                    🪞 Espejo Mágico AI
+                </button>
+                <button class="btn btn-primary" onclick="showView('rewardsView')">
+                    <i class="fas fa-crown"></i> Mis Recompensas
+                </button>
+                <br><br>
+                <button class="btn" style="background:#3498db;color:white;" onclick="openOwnerAccess()">
+                    <i class="fas fa-lock"></i> Acceso Dueño
+                </button>
+            </div>
+
+            <!-- Vista: Reservas -->
+            <div id="bookingView" class="view">
+                <h2>📅 Reservar Cita</h2>
+                <div class="form-group">
+                    <label for="serviceName">Servicio</label>
+                    <select id="serviceName" class="form-control">
+                        <option>Corte de Pelo</option>
+                        <option>Coloración Completa</option>
+                        <option>Tratamiento Capilar</option>
+                        <option>Barba y Bigote</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bookingDate">Fecha</label>
+                    <input type="date" id="bookingDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="bookingTime">Hora</label>
+                    <select id="bookingTime" class="form-control">
+                        <option>10:00 AM</option>
+                        <option>11:00 AM</option>
+                        <option>12:00 PM</option>
+                        <option>02:00 PM</option>
+                        <option>03:00 PM</option>
+                        <option>04:00 PM</option>
+                        <option>05:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="clientName">Tu Nombre</label>
+                    <input type="text" id="clientName" class="form-control" placeholder="Ej: Ana López">
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Teléfono</label>
+                    <input type="tel" id="clientPhone" class="form-control" placeholder="Ej: 612345678">
+                </div>
+                <button class="btn btn-primary" onclick="confirmBooking()">
+                    Confirmar Reserva
+                </button>
+                <button class="btn" style="background:#95a5a6;color:white;margin-top:10px;" onclick="showView('homeView')">
+                    ← Volver
+                </button>
+            </div>
+
+            <!-- Vista: Recompensas -->
+            <div id="rewardsView" class="view">
+                <h2>👑 Programa de Fidelidad</h2>
+                <div class="rewards-card">
+                    <p>Tus puntos actuales</p>
+                    <div class="points">450 pts</div>
+                    <p>¡Falta poco para tu próxima recompensa!</p>
+                </div>
+                <div class="benefits-list">
+                    <h3>Canjea tus puntos:</h3>
+                    <div class="benefit-item">
+                        <span>100 pts</span>
+                        <span>10% de descuento</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span>250 pts</span>
+                        <span>Lavado gratis</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span>500 pts</span>
+                        <span>Tratamiento capilar premium</span>
+                    </div>
+                </div>
+                <button class="btn" style="background:#95a5a6;color:white;margin-top:20px;" onclick="showView('homeView')">
+                    ← Volver
+                </button>
+            </div>
+
+            <!-- Vista: Espejo Mágico (simplificada para demo) -->
+            <div id="magicMirrorView" class="view">
+                <h2>✨ Espejo Mágico AI</h2>
+                <p>Próximamente: simulación en tiempo real con tu cámara.</p>
+                <p>Mientras tanto, explora nuestros estilos populares:</p>
+                <br>
+                <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                    <div style="background:#eee;width:100px;height:120px;border-radius:8px;display:flex;align-items:center;justify-content:center;">✂️ Corto</div>
+                    <div style="background:#eee;width:100px;height:120px;border-radius:8px;display:flex;align-items:center;justify-content:center;">👩‍🦰 Medio</div>
+                    <div style="background:#eee;width:100px;height:120px;border-radius:8px;display:flex;align-items:center;justify-content:center;">👸 Largo</div>
+                </div>
+                <br>
+                <button class="btn" style="background:#27ae60;color:white;" onclick="alert('¡Funcionalidad en desarrollo! Pronto podrás usar tu cámara.')">
+                    Probar con tu cámara
+                </button>
+                <button class="btn" style="background:#95a5a6;color:white;margin-top:10px;" onclick="showView('homeView')">
+                    ← Volver
+                </button>
+            </div>
+
+            <!-- Vista: Dashboard (Dueño) -->
+            <div id="ownerDashboard" class="view">
+                <h2>📊 Panel del Dueño</h2>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Citas Hoy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">€1,240</div>
+                        <div class="stat-label">Ingresos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">Clientes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4.8★</div>
+                        <div class="stat-label">Valoración</div>
+                    </div>
+                </div>
+                <h3>Próximas Citas</h3>
+                <div style="background:#f8f9fa;padding:1rem;border-radius:10px;margin:1rem 0;">
+                    <div><strong>10:00 AM</strong> – María G. (Corte)</div>
+                    <div><strong>11:30 AM</strong> – Carlos R. (Barba)</div>
+                </div>
+                <button class="btn" style="background:#e74c3c;color:white;" onclick="logoutOwner()">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
+        <!-- Navegación inferior -->
+        <div class="app-nav">
+            <a href="#" class="nav-item active" onclick="showView('homeView'); return false;">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('bookingView'); return false;">
+                <i class="fas fa-calendar"></i>
+                <span>Reservas</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('rewardsView'); return false;">
+                <i class="fas fa-gift"></i>
+                <span>Recompensas</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal de acceso dueño -->
+    <div id="ownerModal" class="modal">
+        <div class="modal-content">
+            <h3>🔒 Acceso para Dueño</h3>
+            <p>Ingresa el PIN de demostración:</p>
+            <input type="password" id="pinInput" class="pin-input" placeholder="Ej: 1234">
+            <button class="btn btn-primary" onclick="validateOwnerAccess()">Ingresar</button>
+            <button class="btn" style="background:#95a5a6;color:white;margin-top:10px;" onclick="closeOwnerModal()">
+                Cancelar
             </button>
-            
-            <div id="cameraContainer" class="camera-container hidden">
-                <div class="camera-header">
-                    <h3>📷 Encuadra tu rostro</h3>
-                    <button id="closeCamera" class="btn btn-danger">✕ Cerrar</button>
-                </div>
-                <div class="camera-preview">
-                    <video id="video" autoplay playsinline muted></video>
-                    <canvas id="canvas"></canvas>
-                    <div id="faceOverlay" class="face-overlay"></div>
-                </div>
-                <div class="camera-controls">
-                    <button id="captureBtn" class="btn btn-capture">📸 Analizar con IA</button>
-                    <button id="retakeBtn" class="btn btn-outline">🔄 Retomar</button>
-                </div>
-                <div class="loading-container hidden" id="loadingAnalysis">
-                    <div class="loading-spinner"></div>
-                    <p>Analizando tu rostro con IA...</p>
-                </div>
-            </div>
-            
-            <div id="analysisResults" class="analysis-results hidden">
-                <div class="results-header">
-                    <h3>🎯 Análisis Completo</h3>
-                    <button id="backToCamera" class="btn btn-outline">← Nuevo Análisis</button>
-                </div>
-                <div class="results-content">
-                    <div class="analysis-grid">
-                        <div class="face-analysis card">
-                            <h4>📊 Análisis Facial</h4>
-                            <div id="faceShape" class="analysis-item"><strong>Forma de rostro:</strong> <span class="result-value">Ovalado</span></div>
-                            <div id="facialFeatures" class="analysis-item"><strong>Características:</strong> <span class="result-value">Ojos almendrados, nariz recta</span></div>
-                            <div id="skinTone" class="analysis-item"><strong>Tono de piel:</strong> <span class="result-value">Medio cálido</span></div>
-                        </div>
-                        <div class="style-recommendations card">
-                            <h4>💇 Recomendaciones IA</h4>
-                            <div id="styleSuggestions" class="suggestions-list">
-                                <div class="suggestion-item">• Corte en capas suaves</div>
-                                <div class="suggestion-item">• Flequillo lateral</div>
-                                <div class="suggestion-item">• Color miel con reflejos dorados</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="style-simulator card">
-                        <h4>🎭 Simulador de Estilos</h4>
-                        <div class="preview-comparison">
-                            <div class="preview-item">
-                                <div class="preview-label">Antes</div>
-                                <div id="originalPreview" class="preview-box" style="background:#eee;"></div>
-                            </div>
-                            <div class="preview-item">
-                                <div class="preview-label">Después</div>
-                                <div id="styledPreview" class="preview-box styled" style="background:#eee;">
-                                    <div class="hairstyle-overlay" style="background:linear-gradient(to bottom, #D2691E, #8B4513); height:60%; border-radius:50% 50% 0 0;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="style-controls">
-                            <div class="control-group">
-                                <label>Estilo de Corte:</label>
-                                <div class="button-group">
-                                    <button class="style-btn active" data-style="short">✂️ Corto</button>
-                                    <button class="style-btn" data-style="medium">👩‍🦰 Medio</button>
-                                    <button class="style-btn" data-style="long">👸 Largo</button>
-                                    <button class="style-btn" data-style="layers">💃 Capas</button>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label>Color:</label>
-                                <div class="button-group">
-                                    <button class="color-btn active" data-color="natural">🌰 Natural</button>
-                                    <button class="color-btn" data-color="blonde">🌟 Rubio</button>
-                                    <button class="color-btn" data-color="brunette">🍫 Moreno</button>
-                                    <button class="color-btn" data-color="red">🌹 Rojo</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="action-buttons" style="text-align:center; margin-top:1.5rem;">
-                        <button id="saveStyle" class="btn btn-success">💾 Guardar Estilo</button>
-                        <button id="shareStyle" class="btn btn-info">📤 Compartir</button>
-                        <button id="bookAppointment" class="btn btn-primary">📅 Agendar Cita</button>
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
-
-    <section class="contact">
-        <div class="container">
-            <h2>Contacto</h2>
-            <p>Agenda tu cita hoy mismo</p>
-        </div>
-    </section>
-
-    <!-- Sonidos -->
-    <audio id="cameraSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-camera-shutter-click-1133.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="transitionSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-sound-3090.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="successSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chime-2017.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="clickSound" preload="auto">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
-    </audio>
+    </div>
 
     <script src="../shared/shared.js"></script>
     <script>
-        // Lógica específica de la demo
-        document.getElementById('magicMirrorBtn').addEventListener('click', () => {
-            document.getElementById('cameraContainer').classList.remove('hidden');
-        });
+        // Navegación entre vistas
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            updateNav(viewId);
+        }
 
-        document.getElementById('closeCamera').addEventListener('click', () => {
-            document.getElementById('cameraContainer').classList.add('hidden');
-        });
-
-        document.getElementById('bookAppointment').addEventListener('click', () => {
-            window.open('https://wa.me/34631102324?text=¡Hola!%20Quiero%20agendar%20una%20cita%20en%20StylePlus', '_blank');
-        });
-
-        // Simulación básica de análisis
-        document.getElementById('captureBtn').addEventListener('click', () => {
-            document.getElementById('loadingAnalysis').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('loadingAnalysis').classList.add('hidden');
-                document.getElementById('analysisResults').classList.remove('hidden');
-                playSound('successSound');
-            }, 2000);
-        });
-
-        document.getElementById('backToCamera').addEventListener('click', () => {
-            document.getElementById('analysisResults').classList.add('hidden');
-        });
-
-        // Cambio de estilo simulado
-        document.querySelectorAll('.style-btn, .color-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.style-btn, .color-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                playSound('clickSound');
+        function updateNav(activeView) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (
+                    (activeView === 'homeView' && item.querySelector('i').classList.contains('fa-home')) ||
+                    (activeView === 'bookingView' && item.querySelector('i').classList.contains('fa-calendar')) ||
+                    (activeView === 'rewardsView' && item.querySelector('i').classList.contains('fa-gift'))
+                ) {
+                    item.classList.add('active');
+                }
             });
-        });
+        }
+
+        // Reservas
+        function confirmBooking() {
+            const name = document.getElementById('clientName').value;
+            if (!name) {
+                alert('Por favor ingresa tu nombre.');
+                return;
+            }
+            alert(`✅ ¡Cita reservada para ${name}!\nTe contactaremos para confirmar.`);
+            showView('homeView');
+        }
+
+        // Acceso dueño
+        function openOwnerAccess() {
+            document.getElementById('ownerModal').style.display = 'flex';
+        }
+
+        function closeOwnerModal() {
+            document.getElementById('ownerModal').style.display = 'none';
+        }
+
+        function validateOwnerAccess() {
+            const pin = document.getElementById('pinInput').value;
+            if (pin === '1234') { // PIN de demo
+                closeOwnerModal();
+                showView('ownerDashboard');
+            } else {
+                alert('PIN incorrecto. Usa "1234" para la demo.');
+            }
+        }
+
+        function logoutOwner() {
+            showView('homeView');
+        }
+
+        // Inicializar fecha actual en el campo de reserva
+        document.getElementById('bookingDate').valueAsDate = new Date();
     </script>
 </body>
 </html>
