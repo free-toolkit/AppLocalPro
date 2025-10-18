@@ -3,632 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crea tu app móvil personalizada para peluquerías, gimnasios, restaurantes y más. Gestión de citas, fidelización y más. ¡Prueba la demo ahora!">
     <title>AppLocalPro - Apps Móviles para Negocios Locales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: white;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Header con Logo */
-        .main-header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            font-size: 2rem;
-            color: #3498db;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #3498db;
-        }
-        
-        .whatsapp-float {
-            background: #25D366;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-        
-        .whatsapp-float:hover {
-            background: #20bd5a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        /* Banner Hero */
-        .hero-banner {
-            margin-top: 80px;
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-        }
-        
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-        }
-        
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn-hero {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .btn-whatsapp {
-            background: #25D366;
-            color: white;
-        }
-        
-        .btn-whatsapp:hover {
-            background: #20bd5a;
-            transform: translateY(-2px);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        /* Header Simple */
-        .section-header { 
-            text-align: center; 
-            margin-bottom: 3rem;
-        }
-        .section-header h2 { 
-            font-size: 2.5rem; 
-            margin-bottom: 1rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-        .section-header p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Grid de Categorías */
-        .categories-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
-            gap: 2rem; 
-        }
-        .category-card { 
-            background: white; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-            transition: all 0.3s ease;
-            border: 1px solid #f0f0f0;
-        }
-        .category-card:hover { 
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        .category-image { 
-            height: 160px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 3.5rem; 
-            color: white;
-            position: relative;
-        }
-        .category-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255,255,255,0.9);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #333;
-        }
-        .category-content { 
-            padding: 2rem; 
-        }
-        .category-content h3 { 
-            font-size: 1.4rem; 
-            margin-bottom: 1rem; 
-            color: #2c3e50;
-        }
-        .category-description {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-        .features-list {
-            margin: 1.5rem 0;
-        }
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            margin-bottom: 0.8rem;
-            color: #555;
-        }
-        .feature i {
-            color: #3498db;
-            width: 16px;
-        }
-        .benefit-note {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            border-left: 3px solid #3498db;
-            font-size: 0.9rem;
-        }
-        .btn { 
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.9rem 1.8rem; 
-            background: #3498db; 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 8px; 
-            margin-top: 1rem; 
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            justify-content: center;
-        }
-        .btn:hover { 
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        .btn.demo-ready {
-            background: #27ae60;
-        }
-        .btn.demo-ready:hover {
-            background: #219a52;
-        }
-        .btn.coming-soon {
-            background: #95a5a6;
-            cursor: not-allowed;
-        }
-        .btn.coming-soon:hover {
-            background: #7f8c8d;
-            transform: none;
-        }
-
-        /* Colores solo para las imágenes de categoría */
-        .category-card.peluqueria .category-image { background: #8B4513; }
-        .category-card.gimnasio .category-image { background: #2E8B57; }
-        .category-card.restaurante .category-image { background: #DC143C; }
-        .category-card.tienda .category-image { background: #f39c12; }
-        .category-card.servicios .category-image { background: #9b59b6; }
-        .category-card.consultorio .category-image { background: #3498db; }
-        .category-card.hotel .category-image { background: #1abc9c; }
-        .category-card.escuela .category-image { background: #e74c3c; }
-        .category-card.transporte .category-image { background: #34495e; }
-
-        /* Navegación entre demos */
-        .demos-navigation {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1000;
-        }
-        .nav-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .nav-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        .nav-menu {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            right: 0;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-            min-width: 220px;
-            margin-bottom: 10px;
-            border: 1px solid #f0f0f0;
-        }
-        .nav-menu a {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s;
-        }
-        .nav-menu a:hover {
-            background: #f8f9fa;
-        }
-        .nav-menu a:last-child {
-            border-bottom: none;
-            border-top: 1px solid #3498db;
-            color: #3498db;
-            font-weight: 600;
-        }
-
-        /* ESTILOS PARA MODALES */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-        }
-        
-        .modal-content {
-            background: white;
-            margin: 2% auto;
-            border-radius: 20px;
-            position: relative;
-            width: 90%;
-            max-width: 400px;
-            height: 90vh;
-            max-height: 800px;
-        }
-        
-        .dashboard-modal {
-            width: 95%;
-            max-width: 1200px;
-            height: 90vh;
-        }
-        
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-            z-index: 10;
-        }
-        
-        .app-container {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .app-header-modal {
-            background: #8B4513;
-            color: white;
-            padding: 1rem;
-            border-radius: 20px 20px 0 0;
-        }
-        
-        .app-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-btn-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        
-        .app-content {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-        
-        .app-screen {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .app-welcome {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .app-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .app-btn {
-            padding: 1rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .app-btn.primary {
-            background: #8B4513;
-            color: white;
-        }
-        
-        .app-btn.secondary {
-            background: #f0f0f0;
-            color: #333;
-        }
-        
-        .app-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* ESTILOS PARA DASHBOARD */
-        .dashboard-container {
-            padding: 2rem;
-            height: 100%;
-            overflow-y: auto;
-        }
-        
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #8B4513;
-        }
-        
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-left: 4px solid #8B4513;
-        }
-        
-        .stat-card i {
-            font-size: 2rem;
-            color: #8B4513;
-        }
-        
-        .stat-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.2rem;
-        }
-        
-        .dashboard-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        
-        .dashboard-section {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-        
-        .dashboard-section h3 {
-            margin-bottom: 1rem;
-            color: #8B4513;
-        }
-        
-        .cita-item, .cliente-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: white;
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #8B4513;
-        }
-        
-        .cita-status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        
-        .cita-status.confirmed {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .cita-status.pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .cliente-avatar {
-            width: 40px;
-            height: 40px;
-            background: #8B4513;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .cliente-puntos {
-            background: #8B4513;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                padding: 1rem;
-            }
-            
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
-            .whatsapp-float {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-content p {
-                font-size: 1rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .container { 
-                padding: 2rem 1rem; 
-            }
-            
-            .section-header h2 { 
-                font-size: 2rem; 
-            }
-            
-            .categories-grid { 
-                grid-template-columns: 1fr; 
-            }
-            
-            .nav-btn { 
-                padding: 10px 16px; 
-            }
-            
-            .dashboard-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .dashboard-modal {
-                width: 95%;
-                height: 95vh;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="shared/shared.css">
 </head>
 <body>
     <!-- Header con Logo y WhatsApp -->
@@ -638,7 +16,6 @@
                 <i class="fas fa-mobile-alt logo-icon"></i>
                 <span class="logo-text">AppLocalPro</span>
             </a>
-            
             <a href="https://wa.me/34631102324?text=¡Hola!%20Estoy%20interesado%20en%20una%20app%20para%20mi%20negocio" 
                target="_blank" 
                class="whatsapp-float">
@@ -658,9 +35,9 @@
                 <h1>Impulsa Tu Negocio Con Una App Móvil</h1>
                 <p>Soluciones personalizadas para peluquerías, gimnasios, restaurantes y más. Digitaliza tu negocio hoy.</p>
                 <div class="hero-buttons">
-                    <button class="btn-hero btn-primary" onclick="openApp()">
+                    <a href="demo-peluqueria/index.html" class="btn-hero btn-primary">
                         <i class="fas fa-play"></i> Probar Demo
-                    </button>
+                    </a>
                     <a href="https://wa.me/34631102324?text=¡Hola!%20Quiero%20saber%20más%20sobre%20las%20apps%20para%20mi%20negocio" 
                        target="_blank" 
                        class="btn-hero btn-whatsapp">
@@ -672,15 +49,12 @@
     </section>
 
     <div class="container">
-        <!-- Sección Demos -->
         <div class="section-header" id="demos">
             <h2>Nuestras Soluciones por Sector</h2>
             <p>Descubre aplicaciones móviles personalizadas para diferentes tipos de negocios locales</p>
         </div>
 
-        <!-- Grid de Categorías -->
         <div class="categories-grid">
-            
             <!-- Peluquerías -->
             <div class="category-card peluqueria">
                 <div class="category-image">
@@ -690,30 +64,13 @@
                 <div class="category-content">
                     <h3>Peluquerías & Barberías</h3>
                     <p class="category-description">Sistema completo de gestión para salones de belleza con citas online y fidelización de clientes.</p>
-                    
                     <div class="features-list">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Citas online automáticas</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Gestión de clientes VIP</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Recordatorios automáticos</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Portfolio de trabajos</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check"></i> Citas online automáticas</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de clientes VIP</div>
+                        <div class="feature"><i class="fas fa-check"></i> Recordatorios automáticos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Portfolio de trabajos</div>
                     </div>
-
-                    <div class="benefit-note">
-                        <strong>Plus:</strong> Sistema de fidelización con tokens personalizados para recompensas exclusivas.
-                    </div>
-
+                    <div class="benefit-note"><strong>Plus:</strong> Sistema de fidelización con tokens personalizados.</div>
                     <a href="demo-peluqueria/index.html" class="btn demo-ready">
                         <i class="fas fa-play"></i> Probar Demo
                     </a>
@@ -729,30 +86,13 @@
                 <div class="category-content">
                     <h3>Gimnasios & Wellness</h3>
                     <p class="category-description">Plataforma fitness integral para reserva de clases y seguimiento de progreso.</p>
-                    
                     <div class="features-list">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Reserva de clases grupales</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Seguimiento de entrenamientos</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Comunidad fitness integrada</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Planes personalizados</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check"></i> Reserva de clases grupales</div>
+                        <div class="feature"><i class="fas fa-check"></i> Seguimiento de entrenamientos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Comunidad fitness integrada</div>
+                        <div class="feature"><i class="fas fa-check"></i> Planes personalizados</div>
                     </div>
-
-                    <div class="benefit-note">
-                        <strong>Plus:</strong> Programa de recompensas con tokens por logros y asistencia.
-                    </div>
-
+                    <div class="benefit-note"><strong>Plus:</strong> Programa de recompensas con tokens por logros.</div>
                     <a href="demo-gimnasio/index.html" class="btn demo-ready">
                         <i class="fas fa-play"></i> Probar Demo
                     </a>
@@ -768,30 +108,13 @@
                 <div class="category-content">
                     <h3>Restaurantes & Cafés</h3>
                     <p class="category-description">Ecosistema gastronómico con menú digital, pedidos online y sistema de reservas.</p>
-                    
                     <div class="features-list">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Menú digital interactivo</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Pedidos y reservas online</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Gestión de delivery</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Programa de fidelidad</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check"></i> Menú digital interactivo</div>
+                        <div class="feature"><i class="fas fa-check"></i> Pedidos y reservas online</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de delivery</div>
+                        <div class="feature"><i class="fas fa-check"></i> Programa de fidelidad</div>
                     </div>
-
-                    <div class="benefit-note">
-                        <strong>Plus:</strong> Fidelización tokenizada para experiencias VIP y eventos exclusivos.
-                    </div>
-
+                    <div class="benefit-note"><strong>Plus:</strong> Fidelización tokenizada para experiencias VIP.</div>
                     <a href="demo-restaurante/index.html" class="btn demo-ready">
                         <i class="fas fa-play"></i> Probar Demo
                     </a>
@@ -807,33 +130,16 @@
                 <div class="category-content">
                     <h3>Tiendas Minoristas</h3>
                     <p class="category-description">App de e-commerce para tiendas con catálogo digital y gestión de inventario.</p>
-                    
                     <div class="features-list">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Catálogo digital completo</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Carrito de compras</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Gestión de inventario</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Ofertas y promociones</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check"></i> Catálogo digital completo</div>
+                        <div class="feature"><i class="fas fa-check"></i> Carrito de compras</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de inventario</div>
+                        <div class="feature"><i class="fas fa-check"></i> Ofertas y promociones</div>
                     </div>
-
-                    <div class="benefit-note">
-                        <strong>Plus:</strong> Programa de recompensas con tokens canjeables en toda la red.
-                    </div>
-
-                    <a href="#" class="btn coming-soon">
+                    <div class="benefit-note"><strong>Plus:</strong> Programa de recompensas con tokens canjeables.</div>
+                    <button class="btn coming-soon" disabled>
                         <i class="fas fa-clock"></i> Próximamente
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -846,33 +152,16 @@
                 <div class="category-content">
                     <h3>Servicios a Domicilio</h3>
                     <p class="category-description">Plataforma para técnicos y servicios profesionales con gestión de citas.</p>
-                    
                     <div class="features-list">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Solicitud de servicios</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Gestión de técnicos</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Seguimiento GPS</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Sistema de valoraciones</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check"></i> Solicitud de servicios</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de técnicos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Seguimiento GPS</div>
+                        <div class="feature"><i class="fas fa-check"></i> Sistema de valoraciones</div>
                     </div>
-
-                    <div class="benefit-note">
-                        <strong>Plus:</strong> Tokens de reputación para técnicos y recompensas para clientes.
-                    </div>
-
-                    <a href="#" class="btn coming-soon">
+                    <div class="benefit-note"><strong>Plus:</strong> Tokens de reputación para técnicos.</div>
+                    <button class="btn coming-soon" disabled>
                         <i class="fas fa-clock"></i> Próximamente
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -885,252 +174,45 @@
                 <div class="category-content">
                     <h3>Consultorios Médicos</h3>
                     <p class="category-description">Sistema de salud digital para gestión de pacientes y telemedicina.</p>
-                    
                     <div class="features-list">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Citas médicas online</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Historial médico seguro</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Recordatorios automáticos</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Teleconsulta integrada</span>
-                        </div>
+                        <div class="feature"><i class="fas fa-check"></i> Citas médicas online</div>
+                        <div class="feature"><i class="fas fa-check"></i> Historial médico seguro</div>
+                        <div class="feature"><i class="fas fa-check"></i> Recordatorios automáticos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Teleconsulta integrada</div>
                     </div>
-
-                    <div class="benefit-note">
-                        <strong>Plus:</strong> Programa de wellness con tokens por seguimiento de tratamientos.
-                    </div>
-
-                    <a href="#" class="btn coming-soon">
+                    <div class="benefit-note"><strong>Plus:</strong> Programa de wellness con tokens.</div>
+                    <button class="btn coming-soon" disabled>
                         <i class="fas fa-clock"></i> Próximamente
-                    </a>
+                    </button>
                 </div>
             </div>
-
         </div>
     </div>
 
     <!-- Navegación entre demos -->
     <div class="demos-navigation">
         <div class="nav-dropdown">
-            <button class="nav-btn">
+            <button class="nav-btn" id="navToggle">
                 <i class="fas fa-th"></i> Navegar Demos
             </button>
-            <div class="nav-menu">
-                <a href="demo-peluqueria/index.html">
-                    <i class="fas fa-scissors"></i> Peluquerías
-                </a>
-                <a href="demo-gimnasio/index.html">
-                    <i class="fas fa-dumbbell"></i> Gimnasios
-                </a>
-                <a href="demo-restaurante/index.html">
-                    <i class="fas fa-utensils"></i> Restaurantes
-                </a>
-                <a href="index.html">
-                    <i class="fas fa-home"></i> Volver al Inicio
-                </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="demo-peluqueria/index.html"><i class="fas fa-scissors"></i> Peluquerías</a>
+                <a href="demo-gimnasio/index.html"><i class="fas fa-dumbbell"></i> Gimnasios</a>
+                <a href="demo-restaurante/index.html"><i class="fas fa-utensils"></i> Restaurantes</a>
+                <a href="index.html"><i class="fas fa-home"></i> Volver al Inicio</a>
             </div>
         </div>
     </div>
 
-    <!-- MODALES AÑADIDOS -->
-    <!-- Modal de la App -->
-    <div id="appModal" class="modal">
-        <div class="modal-content app-modal">
-            <span class="close" onclick="closeApp()">&times;</span>
-            <div class="app-container">
-                <div class="app-header-modal">
-                    <div class="app-nav">
-                        <button class="nav-btn-modal" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-                        <h3 id="appTitle">StyleCorte App</h3>
-                        <button class="nav-btn-modal" onclick="closeApp()"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="app-content" id="appContent">
-                    <div class="app-screen">
-                        <div class="app-welcome">
-                            <h3>¡Bienvenido a StyleCorte!</h3>
-                            <p>Tu peluquería de confianza</p>
-                        </div>
-                        <div class="app-buttons">
-                            <button class="app-btn primary" onclick="showServices()">
-                                <i class="fas fa-calendar-check"></i>
-                                Reservar Cita
-                            </button>
-                            <button class="app-btn secondary" onclick="showFidelizacion()">
-                                <i class="fas fa-crown"></i>
-                                Programa Fidelidad
-                            </button>
-                            <button class="app-btn secondary" onclick="showMagicMirror()" style="background: linear-gradient(135deg, #8B4513, #D2691E); color: white; border: none;">
-                                <i class="fas fa-magic"></i>
-                                Espejo Mágico
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal del Dashboard -->
-    <div id="dashboardModal" class="modal">
-        <div class="modal-content dashboard-modal">
-            <span class="close" onclick="closeDashboard()">&times;</span>
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <h2><i class="fas fa-chart-bar"></i> Dashboard StyleCorte Pro</h2>
-                    <p>Panel de control del negocio</p>
-                </div>
-                <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <i class="fas fa-calendar-check"></i>
-                        <div class="stat-info">
-                            <h3>24</h3>
-                            <p>Citas Hoy</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-users"></i>
-                        <div class="stat-info">
-                            <h3>€1,240</h3>
-                            <p>Ingresos Hoy</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-star"></i>
-                        <div class="stat-info">
-                            <h3>4.8</h3>
-                            <p>Valoración</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashboard-content">
-                    <div class="dashboard-section">
-                        <h3>Próximas Citas</h3>
-                        <div class="citas-list">
-                            <div class="cita-item">
-                                <div class="cita-info">
-                                    <strong>María González</strong>
-                                    <span>Corte y Peinado - 10:00 AM</span>
-                                </div>
-                                <div class="cita-status confirmed">Confirmada</div>
-                            </div>
-                            <div class="cita-item">
-                                <div class="cita-info">
-                                    <strong>Carlos Ruiz</strong>
-                                    <span>Barba y Bigote - 11:30 AM</span>
-                                </div>
-                                <div class="cita-status pending">Pendiente</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-section">
-                        <h3>Clientes Frecuentes</h3>
-                        <div class="clientes-list">
-                            <div class="cliente-item">
-                                <div class="cliente-avatar">JG</div>
-                                <div class="cliente-info">
-                                    <strong>Juan García</strong>
-                                    <span>12 visitas</span>
-                                </div>
-                                <div class="cliente-puntos">450 pts</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <script src="shared/shared.js"></script>
     <script>
-        // Navegación entre demos
-        document.querySelector('.nav-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            const menu = document.querySelector('.nav-menu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Cerrar menú al hacer click fuera
-        document.addEventListener('click', function() {
-            document.querySelector('.nav-menu').style.display = 'none';
-        });
-
-        // Prevenir clic en botones "Próximamente"
+        // Comportamiento específico de la página principal
         document.querySelectorAll('.btn.coming-soon').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 alert('¡Esta categoría estará disponible pronto!');
             });
         });
-
-        // Smooth scroll para enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // FUNCIONES PARA MODALES
-        function openApp() {
-            console.log('✅ Abriendo app...');
-            document.getElementById('appModal').style.display = 'block';
-        }
-        
-        function closeApp() {
-            console.log('✅ Cerrando app...');
-            document.getElementById('appModal').style.display = 'none';
-        }
-        
-        function showDashboard() {
-            console.log('✅ Abriendo dashboard...');
-            document.getElementById('dashboardModal').style.display = 'block';
-        }
-        
-        function closeDashboard() {
-            console.log('✅ Cerrando dashboard...');
-            document.getElementById('dashboardModal').style.display = 'none';
-        }
-        
-        function goBack() {
-            console.log('↩️ Volviendo atrás...');
-        }
-        
-        function showServices() {
-            alert('📅 Servicios - Funciona!');
-        }
-        
-        function showFidelizacion() {
-            alert('👑 Programa Fidelidad - Funciona!');
-        }
-        
-        function showMagicMirror() {
-            alert('🔮 Espejo Mágico - Funciona!');
-        }
-        
-        // Cerrar modales al hacer click fuera
-        window.onclick = function(event) {
-            if (event.target === document.getElementById('appModal')) {
-                closeApp();
-            }
-            if (event.target === document.getElementById('dashboardModal')) {
-                closeDashboard();
-            }
-        }
     </script>
 </body>
 </html>
