@@ -1,7 +1,7 @@
-// shared/shared.js — Versión mejorada
+// shared/shared.js — Versión NEON
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Navegación del sitio principal (solo si existe)
+    // Navegación del sitio principal
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Función universal para reproducir sonidos (si están presentes)
+// Función para futuras integraciones de sonido (opcional)
 function playSound(soundId) {
     const sound = document.getElementById(soundId);
     if (sound) {
