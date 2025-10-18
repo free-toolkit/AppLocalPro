@@ -1,7 +1,7 @@
-// shared/shared.js
+// shared/shared.js — Versión mejorada
 
-// Navegación entre demos
 document.addEventListener('DOMContentLoaded', () => {
+    // Navegación del sitio principal (solo si existe)
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
@@ -11,15 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.style.display = navMenu.style.display === 'block' ? 'none' : 'block';
         });
 
-        document.addEventListener('click', () => {
-            if (navMenu.style.display === 'block') {
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.demos-navigation')) {
                 navMenu.style.display = 'none';
             }
         });
     }
 });
 
-// Función para reproducir sonidos
+// Función universal para reproducir sonidos (si están presentes)
 function playSound(soundId) {
     const sound = document.getElementById(soundId);
     if (sound) {
@@ -28,7 +28,7 @@ function playSound(soundId) {
     }
 }
 
-// Smooth scroll para enlaces internos (si los hay)
+// Smooth scroll (solo en sitio principal)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
