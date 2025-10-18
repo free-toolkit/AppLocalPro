@@ -9,129 +9,54 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="shared/shared.css">
     <style>
-        /* Mejoras específicas para el home */
-        .hero-content {
-            max-width: 800px;
-            padding: 0 1.5rem;
-        }
-        .hero-content h1 {
-            font-size: 3.4rem;
-            line-height: 1.1;
-            margin-bottom: 1.4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.3s;
-        }
-        .hero-content p {
-            font-size: 1.45rem;
-            margin-bottom: 2.2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.5s;
-        }
+        /* Ajustes específicos para el hero */
         .hero-buttons {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards 0.7s;
-        }
-
-        .section-header h2 {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s forwards;
-        }
-        .section-header p {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s forwards 0.2s;
-        }
-
-        /* Animación al hacer scroll (simulada con carga inicial) */
-        .category-card {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .category-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Efecto de brillo en hover mejorado */
-        .category-card:hover {
-            border-color: #6E00FF;
-            box-shadow: 0 10px 40px rgba(110, 0, 255, 0.5);
-        }
-
-        /* Sección destacada: Demos en Vivo */
-        .live-demos {
-            text-align: center;
-            background: rgba(18, 13, 37, 0.4);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 3rem 0;
-            border: 1px solid #6E00FF;
-            backdrop-filter: blur(8px);
-        }
-        .live-demos h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00F0FF;
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
-        }
-        .demo-badges {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.2rem;
-        }
-        .demo-badge {
-            background: rgba(0, 240, 255, 0.15);
-            color: #00F0FF;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            display: flex;
+            flex-direction: column;
+            gap: 1.2rem; /* Espacio entre botones */
             align-items: center;
-            gap: 0.5rem;
+            margin-top: 1.8rem;
         }
-        .demo-badge i { animation: pulseDot 2s infinite; }
-        @keyframes pulseDot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        .btn-hero {
+            width: 100%;
+            max-width: 320px;
+            padding: 1.2rem;
+            font-size: 1.15rem;
+            border-radius: 16px; /* Más redondeado */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-hero:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Sección futura de IA (oculta por ahora, pero con espacio reservado) */
+        .ai-preview-placeholder {
+            text-align: center;
+            margin-top: 2.5rem;
+            opacity: 0.7;
+            font-family: 'Rajdhani', sans-serif;
+            color: #A090C0;
+            font-size: 0.95rem;
         }
 
         /* Responsive fino */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.4rem; }
-            .hero-content p { font-size: 1.2rem; }
-            .section-header h2 { font-size: 2.2rem; }
+            .hero-content h1 { font-size: 2.3rem; }
+            .hero-content p { font-size: 1.15rem; }
+            .btn-hero { padding: 1.1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header con Logo y WhatsApp -->
+    <!-- Header SIN WhatsApp -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo">
                 <i class="fas fa-mobile-alt logo-icon"></i>
                 <span class="logo-text">AppLocalPro</span>
             </a>
-            <a href="https://wa.me/34631102324?text=¡Hola!%20Estoy%20interesado%20en%20una%20app%20para%20mi%20negocio" 
-               target="_blank" 
-               class="whatsapp-float">
-                <i class="fab fa-whatsapp"></i>
-                WhatsApp Business
-            </a>
+            <!-- ✅ WhatsApp REMOVIDO del header -->
         </div>
     </header>
 
@@ -154,28 +79,25 @@
                         <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
                     </a>
                 </div>
+
+                <!-- Espacio reservado para futuro widget de IA -->
+                <div class="ai-preview-placeholder">
+                    <i class="fas fa-robot"></i> Próximamente: Asistente IA para crear tu app en minutos
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Resto del contenido (demos, grid, etc.) -->
     <div class="container">
-        <!-- Sección destacada: Demos en Vivo -->
-        <div class="live-demos">
-            <h3><i class="fas fa-bolt"></i> Demos Funcionales y Listos</h3>
-            <p>Explora nuestras apps del futuro. Totalmente interactivas y sin backend.</p>
-            <div class="demo-badges">
-                <div class="demo-badge"><i class="fas fa-circle"></i> Peluquería</div>
-                <div class="demo-badge"><i class="fas fa-circle"></i> Gimnasio</div>
-                <div class="demo-badge"><i class="fas fa-circle"></i> Restaurante</div>
-            </div>
-        </div>
-
+        <!-- ... (mantén todo el resto igual: sección de demos, tarjetas, etc.) ... -->
+        <!-- Solo copia desde tu archivo original a partir de aquí -->
         <div class="section-header" id="demos">
             <h2>Nuestras Soluciones por Sector</h2>
             <p>Descubre aplicaciones móviles personalizadas para diferentes tipos de negocios locales</p>
         </div>
 
-        <div class="categories-grid" id="categoriesGrid">
+        <div class="categories-grid">
             <!-- Peluquerías -->
             <div class="category-card peluqueria">
                 <div class="category-image">
@@ -327,17 +249,6 @@
 
     <script src="shared/shared.js"></script>
     <script>
-        // Animación de tarjetas al cargar
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.category-card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, 200 * index);
-            });
-        });
-
-        // Comportamiento específico de la página principal
         document.querySelectorAll('.btn.coming-soon').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
