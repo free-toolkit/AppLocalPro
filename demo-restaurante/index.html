@@ -1,184 +1,544 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GustoApp - Demo Restaurante & Café</title>
-    <meta name="description" content="Sistema de reservas y pedidos online para restaurantes y cafés">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="assets/images/logo.ico" type="image/x-icon">
+    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital y recompensas tokenizadas.">
+    <title>GastroNeo – Restaurante del Futuro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/shared.css">
+    <style>
+        body {
+            background: #1A0A10;
+            color: #FFD6E0;
+            overflow-x: hidden;
+        }
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #220F18;
+            border: 1px solid #FF2A6D;
+            box-shadow: 0 0 30px rgba(255, 42, 109, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 42, 109, 0.1) 2px, transparent 3px),
+                radial-gradient(circle at 80% 70%, rgba(255, 211, 0, 0.1) 2px, transparent 3px),
+                radial-gradient(circle at 50% 10%, rgba(255, 105, 180, 0.05) 1px, transparent 2px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #FF2A6D, #FFD300);
+            padding: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .app-header::after {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.2), transparent 30%);
+            animation: rotate 10s linear infinite;
+            z-index: 0;
+        }
+        .app-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        }
+
+        .app-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: rgba(34, 15, 24, 0.7);
+        }
+
+        .app-nav {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(10, 7, 10, 0.9);
+            border-top: 1px solid #FF2A6D;
+            padding: 0.8rem 0;
+            backdrop-filter: blur(5px);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #E0C0D0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .nav-item.active, .nav-item:hover {
+            color: #FFD300;
+        }
+        .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
+
+        .view { display: none; }
+        .view.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes rotate { to { transform: rotate(360deg); } }
+
+        .btn-neo {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            margin: 0.8rem 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .btn-neo::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-neo:hover::before { left: 100%; }
+        .btn-primary { 
+            background: linear-gradient(135deg, #FF2A6D, #D10047); 
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+        }
+        .btn-primary:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
+        }
+        .btn-gold { 
+            background: linear-gradient(135deg, #FFD300, #FF9A00); 
+            color: #333;
+            box-shadow: 0 0 15px rgba(255, 211, 0, 0.5);
+        }
+        .btn-gold:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 211, 0, 0.8);
+        }
+
+        .ai-sommelier {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 42, 109, 0.15);
+            border: 1px solid #FF2A6D;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 42, 109, 0.4); } 50% { box-shadow: 0 0 0 8px rgba(255, 42, 109, 0); } }
+        .avatar-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FF2A6D, #FFD300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .token-card {
+            background: linear-gradient(135deg, #2A1018, #3A1525);
+            border: 1px solid #FF2A6D;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .token-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: #FFD300;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 10px rgba(255, 211, 0, 0.7);
+        }
+
+        .menu-section {
+            background: rgba(30, 10, 15, 0.6);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+        }
+        .menu-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #44202A;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .menu-item:last-child { border: none; }
+        .menu-item h4 { color: #FFD300; margin-bottom: 0.3rem; }
+        .menu-item p { color: #F0D0E0; font-size: 0.9rem; }
+
+        .stat-card-neo {
+            background: rgba(34, 15, 24, 0.6);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .stat-value-neo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            color: #FFD300;
+            margin: 0.3rem 0;
+        }
+
+        .reservation-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .tag-terrace { background: rgba(0, 240, 255, 0.2); color: #00F0FF; }
+        .tag-vip { background: rgba(255, 211, 0, 0.2); color: #FFD300; }
+        .tag-inside { background: rgba(255, 42, 109, 0.2); color: #FF2A6D; }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                <i class="fas fa-utensils"></i>
-                <span>GustoApp</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#menu">Menú</a></li>
-                <li><a href="#reservas">Reservas</a></li>
-                <li><a href="#pedidos">Pedidos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-            <div class="nav-cta">
-                <button class="btn btn-primary" onclick="openApp()">
-                    <i class="fas fa-mobile-alt"></i>
-                    Abrir App
+    <div class="app-container">
+        <div class="app-header">
+            <h1>GASTRONEO</h1>
+        </div>
+
+        <div class="app-content">
+            <!-- Inicio -->
+            <div id="homeView" class="view active">
+                <div class="ai-sommelier">
+                    <div class="avatar-icon">
+                        <i class="fas fa-wine-glass-alt"></i>
+                    </div>
+                    <div class="avatar-text" style="font-family:'Rajdhani';">
+                        <strong>IA Sommelier</strong><br>
+                        <span>Hoy recomiendo: Risotto de trufa con vino Barolo. ¿Reservamos mesa?</span>
+                    </div>
+                </div>
+
+                <button class="btn-neo btn-primary" onclick="showView('bookingView')">
+                    <i class="fas fa-utensils"></i> Reservar Mesa
+                </button>
+                <button class="btn-neo btn-gold" onclick="showView('menuView')">
+                    <i class="fas fa-book-open"></i> Menú Digital
+                </button>
+                <button class="btn-neo btn-primary" onclick="showView('rewardsView')">
+                    <i class="fas fa-coins"></i> Mis GastroTokens
+                </button>
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="openOwnerAccess()">
+                    <i class="fas fa-user-lock"></i> Acceso Dueño
                 </button>
             </div>
-        </nav>
-    </header>
-    <!-- Hero Section -->
-    <section id="inicio" class="hero hero-restaurante">
-        <div class="hero-background"></div>
-        <div class="hero-overlay"></div>
-        <div class="container hero-container">
-            <div class="hero-content">
-                <strong class="text-kicker">DEMO INTERACTIVO</strong>
-                <h1>GustoApp Restaurante</h1>
-                <p>Sistema completo de gestión para restaurantes. Reservas de mesa, pedidos online y fidelización de clientes en una sola app.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="openApp()">
-                        <i class="fas fa-play"></i>
-                        Probar Demo
-                    </button>
-                    <button class="btn btn-secondary" onclick="showDashboard()">
-                        <i class="fas fa-chart-bar"></i>
-                        Ver Dashboard
-                    </button>
+
+            <!-- Reservas -->
+            <div id="bookingView" class="view">
+                <h2 style="font-family:'Orbitron';color:#FF2A6D;">🍽️ Reservar Mesa</h2>
+
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="clientName" class="form-control" placeholder="Ej. Carlos Ruiz">
                 </div>
+
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="clientPhone" class="form-control" placeholder="+34 600 000 000">
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" id="bookingDate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Hora</label>
+                    <select id="bookingTime" class="form-control">
+                        <option value="">-- Selecciona hora --</option>
+                        <option value="13:00">13:00 (Almuerzo)</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="20:00">20:00 (Cena)</option>
+                        <option value="20:30">20:30</option>
+                        <option value="21:00">21:00</option>
+                        <option value="21:30">21:30</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Número de Comensales</label>
+                    <select id="guests" class="form-control">
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5">5 personas</option>
+                        <option value="6">6 personas</option>
+                        <option value="7+">7+ personas (contactar)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de Mesa</label>
+                    <select id="tableType" class="form-control">
+                        <option value="inside">Interior</option>
+                        <option value="terrace">Terraza</option>
+                        <option value="vip">VIP (privada)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Notas o Preferencias</label>
+                    <textarea id="notes" class="form-control" 
+                              style="height:80px;background:#1A1030;color:#FFD6E0;border:1px solid #FF2A6D;border-radius:8px;padding:0.8rem;font-family:'Rajdhani';"
+                              placeholder="Alergias, cumpleaños, etc."></textarea>
+                </div>
+
+                <button class="btn-neo btn-primary" onclick="confirmBooking()">Confirmar Reserva</button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
             </div>
-            <div class="hero-image">
-                <div class="phone-mockup demo-phone">
-                    <div class="phone-screen" id="phoneScreen">
-                        <!-- Contenido dinámico de la app -->
-                        <div class="app-screen home-screen">
-                            <div class="app-header">
-                                <div class="app-logo">
-                                    <i class="fas fa-utensils"></i>
-                                    <span>GustoApp</span>
-                                </div>
-                                <div class="app-notification">
-                                    <i class="fas fa-bell"></i>
-                                </div>
-                            </div>
-                            <div class="app-welcome">
-                                <h3>¡Bienvenido!</h3>
-                                <p>Disfruta de nuestra experiencia gastronómica</p>
-                            </div>
-                            <div class="app-buttons">
-                                <button class="app-btn primary" onclick="showMenu()">
-                                    <i class="fas fa-book"></i>
-                                    Ver Menú
-                                </button>
-                                <button class="app-btn secondary" onclick="showReservations()">
-                                    <i class="fas fa-calendar-check"></i>
-                                    Reservar Mesa
-                                </button>
-                            </div>
-                        </div>
+
+            <!-- Menú Digital -->
+            <div id="menuView" class="view">
+                <h2 style="font-family:'Orbitron';color:#FFD300;">📖 Menú Digital</h2>
+                
+                <div class="menu-section">
+                    <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Entrantes</h3>
+                    <div class="menu-item">
+                        <h4>Tartar de Atún con Wasabi</h4>
+                        <p>Fresco, picante y elegante • 14€</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Crema Trufada</h4>
+                        <p>Con espuma de parmesano • 12€</p>
                     </div>
                 </div>
+
+                <div class="menu-section">
+                    <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Platos Fuertes</h3>
+                    <div class="menu-item">
+                        <h4>Risotto de Trufa Negra</h4>
+                        <p>Con parmesano 24 meses • 24€</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Entrecot de Wagyu</h4>
+                        <p>Madurado 45 días • 48€</p>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Postres</h3>
+                    <div class="menu-item">
+                        <h4>Soufflé de Chocolate</h4>
+                        <p>Con helado de vainilla • 10€</p>
+                    </div>
+                </div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+            </div>
+
+            <!-- Recompensas -->
+            <div id="rewardsView" class="view">
+                <h2 style="font-family:'Orbitron';color:#FFD300;">🪙 GastroTokens</h2>
+                <div class="token-card">
+                    <div class="token-label" style="color:#E0C0D0;font-size:0.9rem;">Tokens acumulados</div>
+                    <div class="token-amount" id="tokenAmount">320</div>
+                    <div style="font-size:0.85rem;color:#D0B0C0;">Próximo: Cena para 2 (500 pts)</div>
+                </div>
+                <div style="background:rgba(34,15,24,0.6);padding:1.2rem;border-radius:12px;">
+                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;">Canjear</h3>
+                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #44202A;">100 pts → Café gourmet</div>
+                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #44202A;">250 pts → Entrante premium</div>
+                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;">500 pts → Cena completa para 2</div>
+                </div>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+            </div>
+
+            <!-- Panel Dueño -->
+            <div id="ownerDashboard" class="view">
+                <h2 style="font-family:'Orbitron';color:#FF2A6D;">📊 Panel Quantum</h2>
+                
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0;">
+                    <div class="stat-card-neo">
+                        <div class="stat-value-neo" id="todayGuests">0</div>
+                        <div>Comensales Hoy</div>
+                    </div>
+                    <div class="stat-card-neo">
+                        <div class="stat-value-neo" id="totalReservations">0</div>
+                        <div>Reservas Totales</div>
+                    </div>
+                </div>
+
+                <h3 style="font-family:'Orbitron';color:#FFD300;font-size:1.3rem;margin:1.5rem 0;">Reservas de Hoy</h3>
+                <div id="reservationsList" style="max-height:200px;overflow-y:auto;">
+                    <p style="color:#D0B0C0;font-style:italic;">No hay reservas hoy.</p>
+                </div>
+
+                <button class="btn-neo" style="background:#e74c3c;color:white;margin-top:1.5rem;" onclick="logoutOwner()">Cerrar Sesión</button>
             </div>
         </div>
-    </section>
-    <!-- Modal de la App -->
-    <div id="appModal" class="modal">
-        <div class="modal-content app-modal">
-            <span class="close" onclick="closeApp()">&times;</span>
-            <div class="app-container">
-                <div class="app-header-modal">
-                    <div class="app-nav">
-                        <button class="nav-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-                        <h3 id="appTitle">GustoApp</h3>
-                        <button class="nav-btn" onclick="closeApp()"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="app-content" id="appContent">
-                    <!-- Contenido dinámico de la app -->
-                </div>
-            </div>
+
+        <div class="app-nav">
+            <a href="#" class="nav-item active" onclick="showView('homeView'); return false;">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('bookingView'); return false;">
+                <i class="fas fa-calendar"></i>
+                <span>Reservas</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('menuView'); return false;">
+                <i class="fas fa-book"></i>
+                <span>Menú</span>
+            </a>
         </div>
     </div>
-    <!-- Modal del Dashboard -->
-    <div id="dashboardModal" class="modal">
-        <div class="modal-content dashboard-modal">
-            <span class="close" onclick="closeDashboard()">&times;</span>
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <h2><i class="fas fa-chart-bar"></i> Dashboard GustoApp</h2>
-                    <p>Panel de control del restaurante</p>
-                </div>
-                <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <i class="fas fa-utensils"></i>
-                        <div class="stat-info">
-                            <h3>€2,850</h3>
-                            <p>Ventas Hoy</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-calendar-check"></i>
-                        <div class="stat-info">
-                            <h3>18</h3>
-                            <p>Reservas Hoy</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-users"></i>
-                        <div class="stat-info">
-                            <h3>4.7</h3>
-                            <p>Valoración</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashboard-content">
-                    <div class="dashboard-section">
-                        <h3>Próximas Reservas</h3>
-                        <div class="reservas-list">
-                            <div class="reserva-item">
-                                <div class="reserva-info">
-                                    <strong>Familia González</strong>
-                                    <span>4 personas - 20:00 PM</span>
-                                </div>
-                                <div class="reserva-status confirmed">Confirmada</div>
-                            </div>
-                            <div class="reserva-item">
-                                <div class="reserva-info">
-                                    <strong>Cena Empresarial</strong>
-                                    <span>8 personas - 21:30 PM</span>
-                                </div>
-                                <div class="reserva-status pending">Pendiente</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-section">
-                        <h3>Pedidos Activos</h3>
-                        <div class="pedidos-list">
-                            <div class="pedido-item">
-                                <div class="pedido-info">
-                                    <strong>Mesa #5</strong>
-                                    <span>2x Pizza Margarita</span>
-                                </div>
-                                <div class="pedido-status preparing">Preparando</div>
-                            </div>
-                            <div class="pedido-item">
-                                <div class="pedido-info">
-                                    <strong>Delivery #42</strong>
-                                    <span>En camino</span>
-                                </div>
-                                <div class="pedido-status delivery">En reparto</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/app.js"></script>
+
+    <script src="../shared/shared.js"></script>
+    <script>
+        // === Navegación ===
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            updateNav(viewId);
+            if (viewId === 'ownerDashboard') loadOwnerDashboard();
+        }
+
+        function updateNav(activeView) {
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            if (activeView === 'homeView') items[0].classList.add('active');
+            if (activeView === 'bookingView') items[1].classList.add('active');
+            if (activeView === 'menuView') items[2].classList.add('active');
+        }
+
+        // === Reservas ===
+        function confirmBooking() {
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const guests = document.getElementById('guests').value;
+            const tableType = document.getElementById('tableType').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!name || !phone || !date || !time || !guests || !tableType) {
+                alert('⚠️ Completa todos los campos obligatorios.');
+                return;
+            }
+
+            const reservation = {
+                id: Date.now(),
+                name,
+                phone,
+                date,
+                time,
+                guests,
+                tableType,
+                notes,
+                timestamp: new Date().toISOString(),
+                attended: false
+            };
+
+            const reservations = JSON.parse(localStorage.getItem('gastroneo_reservations') || '[]');
+            reservations.push(reservation);
+            localStorage.setItem('gastroneo_reservations', JSON.stringify(reservations));
+
+            // Sumar tokens (10 por persona)
+            const tokens = JSON.parse(localStorage.getItem('gastroneo_tokens') || '0');
+            const newTokens = tokens + (parseInt(guests) || 1) * 10;
+            localStorage.setItem('gastroneo_tokens', newTokens);
+
+            const fullDate = new Date(`${date}T${time}`).toLocaleString('es-ES', {
+                weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit'
+            });
+
+            alert(`✅ ¡Reserva confirmada en GastroNeo!\n\n` +
+                  `Mesa para ${guests} persona(s)\n` +
+                  `Fecha: ${fullDate}\n` +
+                  `Tipo: ${tableType === 'terrace' ? 'Terraza' : tableType === 'vip' ? 'VIP' : 'Interior'}\n\n` +
+                  `¡Hemos añadido ${parseInt(guests)*10} GastroTokens a tu cuenta!`);
+
+            showView('homeView');
+        }
+
+        // === Panel Dueño ===
+        function loadOwnerDashboard() {
+            const reservations = JSON.parse(localStorage.getItem('gastroneo_reservations') || '[]');
+            const today = new Date().toISOString().split('T')[0];
+            const todayRes = reservations.filter(r => r.date === today);
+
+            let totalGuests = 0;
+            todayRes.forEach(r => {
+                if (r.guests === '7+') totalGuests += 7;
+                else totalGuests += parseInt(r.guests) || 1;
+            });
+
+            document.getElementById('todayGuests').textContent = totalGuests;
+            document.getElementById('totalReservations').textContent = reservations.length;
+
+            const listEl = document.getElementById('reservationsList');
+            if (todayRes.length === 0) {
+                listEl.innerHTML = '<p style="color:#D0B0C0;font-style:italic;">No hay reservas hoy.</p>';
+            } else {
+                listEl.innerHTML = todayRes.map(r => {
+                    let tagClass = 'inside';
+                    if (r.tableType === 'terrace') tagClass = 'terrace';
+                    else if (r.tableType === 'vip') tagClass = 'vip';
+
+                    return `<div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
+                        <strong>${r.name}</strong> • ${r.guests} comensales<br>
+                        <small>${r.time} • 
+                            <span class="reservation-tag tag-${tagClass}">
+                                ${r.tableType === 'terrace' ? 'Terraza' : r.tableType === 'vip' ? 'VIP' : 'Interior'}
+                            </span>
+                        </small>
+                        ${r.notes ? `<br><em>📝 ${r.notes}</em>` : ''}
+                    </div>`;
+                }).join('');
+            }
+        }
+
+        function openOwnerAccess() {
+            const pin = prompt("Ingresa el PIN de acceso (demo: 1234):");
+            if (pin === "1234") {
+                showView('ownerDashboard');
+            } else if (pin !== null) {
+                alert("PIN incorrecto. Usa 1234 para la demo.");
+            }
+        }
+
+        function logoutOwner() {
+            showView('homeView');
+        }
+
+        // Establecer fecha mínima en el input (opcional)
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('bookingDate').min = today;
+        });
+    </script>
 </body>
 </html>
