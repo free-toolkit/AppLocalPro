@@ -3,251 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Transforma tu negocio local con una app móvil inteligente. Citas, fidelización, IA y más. ¡100% personalizable!">
-    <title>AppLocalPro – Tu App Móvil con IA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap">
+    <meta name="description" content="Crea tu app móvil personalizada para peluquerías, gimnasios, restaurantes y más. Gestión de citas, fidelización y más. ¡Prueba la demo ahora!">
+    <title>AppLocalPro - Apps Móviles para Negocios Locales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="shared/shared.css">
     <style>
-        /* Ajuste de margen superior para evitar solapamiento con header fijo */
+        /* Corrección de espaciado para evitar solapamiento con header fijo */
         body {
-            padding-top: 80px;
+            padding-top: 80px; /* Igual al alto del header */
         }
 
-        /* Hero mejorado */
-        .hero-banner {
-            margin-top: 0;
-            height: auto;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .hero-overlay {
-            padding: 2rem 1.5rem;
+        /* Frases de neuromarketing */
+        .neuro-banner {
             text-align: center;
-        }
-        .hero-content h1 {
-            font-size: 3.2rem;
-            line-height: 1.15;
-            margin-bottom: 1.2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero-content p {
-            font-size: 1.35rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #D0C0FF;
-        }
-
-        /* Botones del hero */
-        .hero-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1.3rem;
-            align-items: center;
-            margin-top: 1.5rem;
-        }
-        .btn-hero {
-            width: 100%;
-            max-width: 340px;
-            padding: 1.25rem;
-            font-size: 1.15rem;
-            border-radius: 18px;
-            font-weight: 600;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            transition: all 0.3s ease;
-        }
-        .btn-hero:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Neuromarketing: frases destacadas */
-        .neuro-quotes {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin: 3.5rem 0 2.5rem;
-            padding: 0 1.5rem;
-        }
-        .neuro-card {
-            background: rgba(18, 13, 37, 0.5);
-            border: 1px solid #6E00FF;
+            background: rgba(18, 13, 37, 0.4);
             border-radius: 16px;
-            padding: 1.4rem 1.2rem;
-            max-width: 320px;
-            text-align: center;
-            backdrop-filter: blur(6px);
-        }
-        .neuro-card i {
-            font-size: 2rem;
-            color: #00F0FF;
-            margin-bottom: 1rem;
-        }
-        .neuro-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: #6E00FF;
-            margin-bottom: 0.8rem;
-        }
-        .neuro-card p {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-            color: #E0D6FF;
-            line-height: 1.5;
-        }
-
-        /* Widget de IA */
-        .ai-assistant {
-            background: linear-gradient(135deg, rgba(110, 0, 255, 0.15), rgba(0, 240, 255, 0.1));
+            padding: 1.4rem;
+            margin: 2.5rem 0;
             border: 1px solid #6E00FF;
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 3rem auto;
-            max-width: 800px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-        }
-        .ai-assistant h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00F0FF;
-            font-size: 2rem;
-            margin-bottom: 1.2rem;
-        }
-        .ai-assistant p {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
             color: #D0C0FF;
-            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
+            line-height: 1.5;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .ai-input-group {
-            display: flex;
-            gap: 0.8rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .ai-input {
-            flex: 1;
-            padding: 0.9rem 1.2rem;
-            border-radius: 14px;
-            border: 1px solid #6E00FF;
-            background: #1A1030;
-            color: white;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-        }
-        .ai-btn {
-            background: linear-gradient(135deg, #6E00FF, #00F0FF);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            padding: 0 1.5rem;
-            font-family: 'Rajdhani', sans-serif;
+        .neuro-banner strong {
+            color: #00F0FF;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .ai-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(110, 0, 255, 0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.4rem; }
-            .hero-content p { font-size: 1.15rem; }
-            .neuro-card { max-width: 100%; }
-            .ai-input-group { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <!-- Header sin WhatsApp -->
+    <!-- Header SIN WhatsApp (solo logo) -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo">
                 <i class="fas fa-mobile-alt logo-icon"></i>
                 <span class="logo-text">AppLocalPro</span>
             </a>
+            <!-- WhatsApp REMOVIDO del header -->
         </div>
     </header>
 
-    <!-- Hero mejorado -->
+    <!-- Banner Hero -->
     <section class="hero-banner">
+        <img src="https://cdn.pixabay.com/photo/2014/03/22/22/17/phone-292994_1280.jpg" 
+             alt="Apps móviles para negocios" 
+             class="hero-image">
         <div class="hero-overlay">
             <div class="hero-content">
-                <h1>Deja que la IA construya tu app mientras tú te enfocas en tu negocio</h1>
-                <p>Apps móviles listas en minutos. Sin código. Con fidelización, reservas y experiencia de usuario premium.</p>
+                <h1>Impulsa Tu Negocio Con Una App Móvil</h1>
+                <p>Soluciones personalizadas para peluquerías, gimnasios, restaurantes y más. Digitaliza tu negocio hoy.</p>
                 <div class="hero-buttons">
                     <a href="demo-peluqueria/index.html" class="btn-hero btn-primary">
-                        <i class="fas fa-play"></i> Probar Demo Gratis
+                        <i class="fas fa-play"></i> Probar Demo
                     </a>
-                    <a href="https://wa.me/34631102324?text=¡Hola!%20Quiero%20una%20app%20para%20mi%20negocio" 
+                    <a href="https://wa.me/34631102324?text=¡Hola!%20Quiero%20saber%20más%20sobre%20las%20apps%20para%20mi%20negocio" 
                        target="_blank" 
                        class="btn-hero btn-whatsapp">
-                        <i class="fab fa-whatsapp"></i> Hablar con un experto
+                        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Frases de neuromarketing -->
     <div class="container">
-        <div class="neuro-quotes">
-            <div class="neuro-card">
-                <i class="fas fa-brain"></i>
-                <h3>Decisión Emocional</h3>
-                <p>El 90% de las decisiones de compra se toman con el corazón, no con la lógica.</p>
-            </div>
-            <div class="neuro-card">
-                <i class="fas fa-bolt"></i>
-                <h3>Urgencia + Exclusividad</h3>
-                <p>Tu competencia ya tiene app. ¿Cuánto más vas a esperar?</p>
-            </div>
-            <div class="neuro-card">
-                <i class="fas fa-crown"></i>
-                <h3>Experiencia Premium</h3>
-                <p>Clientes que usan tu app gastan un 34% más y vuelven 3x más seguido.</p>
-            </div>
+        <!-- Frase de neuromarketing estratégica -->
+        <div class="neuro-banner">
+            <strong>El 78% de los clientes prefiere negocios con app propia.</strong>  
+            No es un lujo: es tu ventaja competitiva.
         </div>
 
-        <!-- Widget de IA (simulado, listo para conectar) -->
-        <div class="ai-assistant">
-            <h2><i class="fas fa-robot"></i> Asistente IA AppBuilder</h2>
-            <p>Describe tu negocio y genera tu app en segundos. Ej: “Quiero una app para mi peluquería con reservas y fidelización”</p>
-            <div class="ai-input-group">
-                <input type="text" class="ai-input" placeholder="Ej: App para restaurante con menú digital y reservas...">
-                <button class="ai-btn" onclick="simulateAIResponse()">
-                    <i class="fas fa-magic"></i> Generar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sección de demos (mantén tu contenido original aquí) -->
-    <div class="container">
         <div class="section-header" id="demos">
-            <h2>Soluciones por Sector</h2>
-            <p>Elige tu industria y descubre cómo AppLocalPro transforma tu negocio</p>
+            <h2>Nuestras Soluciones por Sector</h2>
+            <p>Descubre aplicaciones móviles personalizadas para diferentes tipos de negocios locales</p>
         </div>
 
-        <!-- Copia aquí tu grid de demos (peluquería, gimnasio, etc.) -->
-        <!-- Por brevedad, no lo repito, pero debes mantenerlo -->
-        <!-- Asegúrate de que esté dentro de <div class="container"> -->
         <div class="categories-grid">
-            <!-- Tus tarjetas de demos aquí -->
-            <!-- Puedes copiarlas de tu archivo anterior -->
+            <!-- Peluquerías -->
+            <div class="category-card peluqueria">
+                <div class="category-image">
+                    <i class="fas fa-scissors"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Peluquerías & Barberías</h3>
+                    <p class="category-description">Sistema completo de gestión para salones de belleza con citas online y fidelización de clientes.</p>
+                    <div class="features-list">
+                        <div class="feature"><i class="fas fa-check"></i> Citas online automáticas</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de clientes VIP</div>
+                        <div class="feature"><i class="fas fa-check"></i> Recordatorios automáticos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Portfolio de trabajos</div>
+                    </div>
+                    <div class="benefit-note"><strong>Plus:</strong> Sistema de fidelización con tokens personalizados.</div>
+                    <a href="demo-peluqueria/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gimnasios -->
+            <div class="category-card gimnasio">
+                <div class="category-image">
+                    <i class="fas fa-dumbbell"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Gimnasios & Wellness</h3>
+                    <p class="category-description">Plataforma fitness integral para reserva de clases y seguimiento de progreso.</p>
+                    <div class="features-list">
+                        <div class="feature"><i class="fas fa-check"></i> Reserva de clases grupales</div>
+                        <div class="feature"><i class="fas fa-check"></i> Seguimiento de entrenamientos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Comunidad fitness integrada</div>
+                        <div class="feature"><i class="fas fa-check"></i> Planes personalizados</div>
+                    </div>
+                    <div class="benefit-note"><strong>Plus:</strong> Programa de recompensas con tokens por logros.</div>
+                    <a href="demo-gimnasio/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Restaurantes -->
+            <div class="category-card restaurante">
+                <div class="category-image">
+                    <i class="fas fa-utensils"></i>
+                    <div class="category-badge">Demo Activo</div>
+                </div>
+                <div class="category-content">
+                    <h3>Restaurantes & Cafés</h3>
+                    <p class="category-description">Ecosistema gastronómico con menú digital, pedidos online y sistema de reservas.</p>
+                    <div class="features-list">
+                        <div class="feature"><i class="fas fa-check"></i> Menú digital interactivo</div>
+                        <div class="feature"><i class="fas fa-check"></i> Pedidos y reservas online</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de delivery</div>
+                        <div class="feature"><i class="fas fa-check"></i> Programa de fidelidad</div>
+                    </div>
+                    <div class="benefit-note"><strong>Plus:</strong> Fidelización tokenizada para experiencias VIP.</div>
+                    <a href="demo-restaurante/index.html" class="btn demo-ready">
+                        <i class="fas fa-play"></i> Probar Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tiendas Minoristas -->
+            <div class="category-card tienda">
+                <div class="category-image">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Tiendas Minoristas</h3>
+                    <p class="category-description">App de e-commerce para tiendas con catálogo digital y gestión de inventario.</p>
+                    <div class="features-list">
+                        <div class="feature"><i class="fas fa-check"></i> Catálogo digital completo</div>
+                        <div class="feature"><i class="fas fa-check"></i> Carrito de compras</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de inventario</div>
+                        <div class="feature"><i class="fas fa-check"></i> Ofertas y promociones</div>
+                    </div>
+                    <div class="benefit-note"><strong>Plus:</strong> Programa de recompensas con tokens canjeables.</div>
+                    <button class="btn coming-soon" disabled>
+                        <i class="fas fa-clock"></i> Próximamente
+                    </button>
+                </div>
+            </div>
+
+            <!-- Servicios a Domicilio -->
+            <div class="category-card servicios">
+                <div class="category-image">
+                    <i class="fas fa-tools"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Servicios a Domicilio</h3>
+                    <p class="category-description">Plataforma para técnicos y servicios profesionales con gestión de citas.</p>
+                    <div class="features-list">
+                        <div class="feature"><i class="fas fa-check"></i> Solicitud de servicios</div>
+                        <div class="feature"><i class="fas fa-check"></i> Gestión de técnicos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Seguimiento GPS</div>
+                        <div class="feature"><i class="fas fa-check"></i> Sistema de valoraciones</div>
+                    </div>
+                    <div class="benefit-note"><strong>Plus:</strong> Tokens de reputación para técnicos.</div>
+                    <button class="btn coming-soon" disabled>
+                        <i class="fas fa-clock"></i> Próximamente
+                    </button>
+                </div>
+            </div>
+
+            <!-- Consultorios Médicos -->
+            <div class="category-card consultorio">
+                <div class="category-image">
+                    <i class="fas fa-stethoscope"></i>
+                    <div class="category-badge">Próximamente</div>
+                </div>
+                <div class="category-content">
+                    <h3>Consultorios Médicos</h3>
+                    <p class="category-description">Sistema de salud digital para gestión de pacientes y telemedicina.</p>
+                    <div class="features-list">
+                        <div class="feature"><i class="fas fa-check"></i> Citas médicas online</div>
+                        <div class="feature"><i class="fas fa-check"></i> Historial médico seguro</div>
+                        <div class="feature"><i class="fas fa-check"></i> Recordatorios automáticos</div>
+                        <div class="feature"><i class="fas fa-check"></i> Teleconsulta integrada</div>
+                    </div>
+                    <div class="benefit-note"><strong>Plus:</strong> Programa de wellness con tokens.</div>
+                    <button class="btn coming-soon" disabled>
+                        <i class="fas fa-clock"></i> Próximamente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Segunda frase de neuromarketing -->
+        <div class="neuro-banner" style="margin-top: 3rem;">
+            <strong>Tus clientes ya usan apps. ¿Por qué no la tuya?</strong>  
+            La primera impresión digital dura para siempre.
         </div>
     </div>
 
-    <!-- Navegación demos -->
+    <!-- Navegación entre demos -->
     <div class="demos-navigation">
         <div class="nav-dropdown">
             <button class="nav-btn" id="navToggle">
@@ -257,28 +233,18 @@
                 <a href="demo-peluqueria/index.html"><i class="fas fa-scissors"></i> Peluquerías</a>
                 <a href="demo-gimnasio/index.html"><i class="fas fa-dumbbell"></i> Gimnasios</a>
                 <a href="demo-restaurante/index.html"><i class="fas fa-utensils"></i> Restaurantes</a>
-                <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                <a href="index.html"><i class="fas fa-home"></i> Volver al Inicio</a>
             </div>
         </div>
     </div>
 
     <script src="shared/shared.js"></script>
     <script>
-        // Simulación de respuesta de IA
-        function simulateAIResponse() {
-            const input = document.querySelector('.ai-input').value.trim();
-            if (!input) {
-                alert("Por favor, describe tu negocio.");
-                return;
-            }
-            alert(`✨ ¡Listo! Estamos generando tu app personalizada para:\n\n"${input}"\n\nEn unos segundos recibirás un enlace de vista previa.`);
-        }
-
-        // Comportamiento botones próximamente
+        // Comportamiento específico de la página principal
         document.querySelectorAll('.btn.coming-soon').forEach(btn => {
-            btn.addEventListener('click', e => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                alert('¡Próximamente disponible!');
+                alert('¡Esta categoría estará disponible pronto!');
             });
         });
     </script>
