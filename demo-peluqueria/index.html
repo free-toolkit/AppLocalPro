@@ -348,6 +348,81 @@
             font-size: 0.85rem;
         }
 
+        /* --- Nuevos estilos para el panel ampliado --- */
+        .collapsible {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid #00F0FF;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .collapsible-header {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF;
+        }
+        .collapsible-content {
+            padding: 0 1rem 1rem;
+            display: none;
+        }
+        .collapsible-content.active {
+            display: block;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .staff-card {
+            background: rgba(20, 12, 30, 0.5);
+            border: 1px solid #6E00FF;
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .staff-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #6E00FF;
+        }
+        .staff-info {
+            flex: 1;
+        }
+        .staff-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF;
+            margin-bottom: 0.3rem;
+        }
+        .staff-status {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .status-working { color: #00F0FF; }
+        .status-waiting { color: #FF2A6D; }
+
+        .waiting-list {
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .waiting-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #553040;
+        }
+        .waiting-item:last-child {
+            border: none;
+        }
+
         /* Navegación */
         .app-nav {
             display: flex;
@@ -506,13 +581,13 @@
                 <button class="btn-neo" style="background:#2A1545;color:#A090C0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Owner Dashboard: Control Total -->
+            <!-- Owner Dashboard: Control Total AMPLIADO -->
             <div id="ownerDashboard" class="view">
                 <div class="owner-header">
                     <h2>🔐 Panel de Control Total</h2>
                 </div>
 
-                <!-- Gestión de Citas Pendientes -->
+                <!-- Citas pendientes -->
                 <div class="control-section">
                     <div class="section-title">
                         <span>Citas Pendientes de Verificación</span>
@@ -523,31 +598,64 @@
                     </div>
                 </div>
 
-                <!-- Gestión de Tokens -->
+                <!-- Configuración avanzada (plegable) -->
                 <div class="control-section">
-                    <div class="section-title">
-                        <span>Configuración de Tokens</span>
-                    </div>
-                    <div class="token-rule">
-                        <span>Tokens por cita verificada:</span>
-                        <input type="number" id="tokensPerAppointment" class="token-input" value="50" min="1">
-                        <button class="save-btn" onclick="saveTokenSettings()">Guardar</button>
-                    </div>
-                    <div style="margin-top:1rem;color:#A0A0C0;font-size:0.85rem;">
-                        ⚠️ Los tokens solo se otorgan tras tu aprobación.
+                    <div class="collapsible">
+                        <div class="collapsible-header" onclick="toggleConfig()">
+                            <span>⚙️ Configuración Avanzada</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="collapsible-content" id="configContent">
+                            <div class="token-rule">
+                                <span>Tokens por cita verificada:</span>
+                                <input type="number" id="tokensPerAppointment" class="token-input" value="50" min="1">
+                            </div>
+                            <div class="token-rule">
+                                <span>Tokens por recomendar un amigo:</span>
+                                <input type="number" id="tokensPerReferral" class="token-input" value="100" min="1">
+                            </div>
+                            <div class="token-rule">
+                                <span>Tiempo máx. de espera (min):</span>
+                                <input type="number" id="maxWaitTime" class="token-input" value="15" min="1">
+                            </div>
+                            <button class="save-btn" onclick="saveAllSettings()" style="margin-top:1rem;">Guardar Configuración</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Métricas Resumen -->
+                <!-- Personal en tiempo real -->
                 <div class="control-section">
                     <div class="section-title">
-                        <span>Resumen del Día</span>
+                        <span>👥 Personal Activo</span>
+                    </div>
+                    <div class="staff-grid" id="staffGrid">
+                        <!-- Se llena dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Clientes en espera (simulados) -->
+                <div class="waiting-list">
+                    <div style="font-family:'Orbitron';color:#FF2A6D;margin-bottom:0.8rem;">⚠️ Clientes en Espera</div>
+                    <div class="waiting-item">
+                        <strong>María G.</strong><br>
+                        <small>Servicio: Corte Futurista • Asignado a: Nova</small>
+                    </div>
+                    <div class="waiting-item">
+                        <strong>Carlos R.</strong><br>
+                        <small>Servicio: Barba Quantum • Asignado a: Kairo Flux</small>
+                    </div>
+                </div>
+
+                <!-- Resumen del día -->
+                <div class="control-section">
+                    <div class="section-title">
+                        <span>📊 Resumen del Día</span>
                     </div>
                     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;">
                         <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
                         <div><strong>Citas verificadas:</strong> <span id="verifiedCount">0</span></div>
                         <div><strong>Clientes nuevos:</strong> <span id="newClients">0</span></div>
-                        <div><strong>Clientes recurrentes:</strong> <span id="returningClients">0</span></div>
+                        <div><strong>Recurrentes:</strong> <span id="returningClients">0</span></div>
                     </div>
                 </div>
 
@@ -596,13 +704,44 @@
             "Barba Quantum": 20
         };
         let TOKENS_PER_APPOINTMENT = 50;
+        let TOKENS_PER_REFERRAL = 100;
+        let MAX_WAIT_TIME = 15;
 
-        // === Splash ===
+        // === Datos del personal (simulados) ===
+        const STYLISTS_DATA = {
+            "Nova": {
+                photo: "https://bellezatotal.com.gt/wp-content/uploads/2017/08/cabello-1160x675-1160x675.png",
+                status: "working",
+                appointmentsToday: 5,
+                completed: 3,
+                revenue: 110
+            },
+            "Zayn Al-Qubit": {
+                photo: "https://media.istockphoto.com/id/1973194125/es/foto/peluquero-que-da-forma-a-las-cejas-del-cliente-del-hombre-usando-la-maquinilla-de-afeitar-en.jpg?s=612x612&w=0&k=20&c=il7pTFcu-UQektvG-TS-_VlKfniY_m4r9zcmIgjRq-U=",
+                status: "waiting",
+                appointmentsToday: 4,
+                completed: 4,
+                revenue: 100
+            },
+            "Kairo Flux": {
+                photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBsYTpIx1ifwsUiPxZau2ofiBvmdHpGOJvqbg7nd3wssuhC5NlsJfwa7i61fTyWxWFNjI&usqp=CAU",
+                status: "working",
+                appointmentsToday: 6,
+                completed: 4,
+                revenue: 140
+            }
+        };
+
+        // === Cargar configuración ===
         document.addEventListener('DOMContentLoaded', () => {
-            // Cargar configuración
-            const savedTokens = localStorage.getItem('styleplus_tokens_per_appointment');
-            if (savedTokens) TOKENS_PER_APPOINTMENT = parseInt(savedTokens);
+            const saved = JSON.parse(localStorage.getItem('styleplus_settings') || '{}');
+            TOKENS_PER_APPOINTMENT = saved.tokensPerAppointment || 50;
+            TOKENS_PER_REFERRAL = saved.tokensPerReferral || 100;
+            MAX_WAIT_TIME = saved.maxWaitTime || 15;
+
             document.getElementById('tokensPerAppointment').value = TOKENS_PER_APPOINTMENT;
+            document.getElementById('tokensPerReferral').value = TOKENS_PER_REFERRAL;
+            document.getElementById('maxWaitTime').value = MAX_WAIT_TIME;
 
             setTimeout(() => {
                 document.getElementById('splashScreen').style.display = 'none';
@@ -610,6 +749,43 @@
                 renderAuthOrProfile();
             }, 2000);
         });
+
+        function toggleConfig() {
+            const content = document.getElementById('configContent');
+            content.classList.toggle('active');
+        }
+
+        function saveAllSettings() {
+            const settings = {
+                tokensPerAppointment: parseInt(document.getElementById('tokensPerAppointment').value),
+                tokensPerReferral: parseInt(document.getElementById('tokensPerReferral').value),
+                maxWaitTime: parseInt(document.getElementById('maxWaitTime').value)
+            };
+            localStorage.setItem('styleplus_settings', JSON.stringify(settings));
+            alert("✅ Configuración guardada.");
+        }
+
+        // === Render personal en tiempo real ===
+        function renderStaff() {
+            const grid = document.getElementById('staffGrid');
+            let html = '';
+            Object.entries(STYLISTS_DATA).forEach(([name, data]) => {
+                const statusText = data.status === 'working' ? '🟢 Trabajando' : '⏳ En espera';
+                const statusClass = data.status === 'working' ? 'status-working' : 'status-waiting';
+                html += `
+                    <div class="staff-card">
+                        <img src="${data.photo}" class="staff-avatar" onerror="this.src='https://via.placeholder.com/60/6E00FF/FFFFFF?text=${name.charAt(0)}'">
+                        <div class="staff-info">
+                            <div class="staff-name">${name}</div>
+                            <div class="staff-status ${statusClass}">${statusText}</div>
+                            <div style="font-size:0.85rem;color:#A0A0C0;">
+                                Hoy: ${data.completed}/${data.appointmentsToday} citas • €${data.revenue}
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            grid.innerHTML = html;
+        }
 
         // === Autenticación ===
         function renderAuthOrProfile() {
@@ -674,8 +850,8 @@
                 time,
                 service,
                 stylist,
-                status: 'completed', // Simulamos que se completó
-                verifiedByOwner: false, // Clave: el dueño debe aprobar
+                status: 'completed',
+                verifiedByOwner: false,
                 clientRegistered: !!JSON.parse(localStorage.getItem('styleplus_user')),
                 createdAt: new Date().toISOString()
             };
@@ -688,13 +864,12 @@
             showView('homeView');
         }
 
-        // === Panel del Dueño: Control Total ===
+        // === Panel del Dueño ===
         function loadOwnerDashboard() {
             const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
             const today = new Date().toISOString().split('T')[0];
             const pending = appointments.filter(a => a.date === today && !a.verifiedByOwner);
 
-            // Citas pendientes
             const pendingList = document.getElementById('pendingAppointments');
             if (pending.length === 0) {
                 pendingList.innerHTML = '<p style="color:#A0A0C0;font-style:italic;">No hay citas pendientes.</p>';
@@ -713,7 +888,7 @@
                             </div>
                             <div class="action-buttons">
                                 <button class="small-btn btn-verify" onclick="approveAppointment(${a.id})">
-                                    ✅ Aprobar y otorgar ${TOKENS_PER_APPOINTMENT} tokens
+                                    ✅ Aprobar
                                 </button>
                                 <button class="small-btn btn-reject" onclick="rejectAppointment(${a.id})">
                                     ❌ Rechazar
@@ -739,6 +914,9 @@
             document.getElementById('verifiedCount').textContent = verified.length;
             document.getElementById('newClients').textContent = uniqueClients.length - returning;
             document.getElementById('returningClients').textContent = returning;
+
+            // Render personal
+            renderStaff();
         }
 
         function approveAppointment(appointmentId) {
@@ -746,7 +924,6 @@
             const apt = appointments.find(a => a.id == appointmentId);
             if (apt) {
                 apt.verifiedByOwner = true;
-                // Otorgar tokens al cliente si está registrado
                 if (apt.clientRegistered) {
                     const user = JSON.parse(localStorage.getItem('styleplus_user'));
                     if (user) {
@@ -756,7 +933,7 @@
                 }
                 localStorage.setItem('styleplus_appointments', JSON.stringify(appointments));
                 loadOwnerDashboard();
-                alert("✅ Tokens otorgados. Fraude prevenido.");
+                alert("✅ Tokens otorgados.");
             }
         }
 
@@ -766,15 +943,6 @@
             localStorage.setItem('styleplus_appointments', JSON.stringify(filtered));
             loadOwnerDashboard();
             alert("❌ Cita rechazada.");
-        }
-
-        function saveTokenSettings() {
-            const value = parseInt(document.getElementById('tokensPerAppointment').value);
-            if (value > 0) {
-                TOKENS_PER_APPOINTMENT = value;
-                localStorage.setItem('styleplus_tokens_per_appointment', value.toString());
-                alert("✅ Regla de tokens actualizada.");
-            }
         }
 
         // === Navegación ===
