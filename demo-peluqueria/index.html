@@ -14,6 +14,7 @@
             background: #0F0A1A;
             color: #E0D6FF;
             overflow-x: hidden;
+            padding-top: 0;
         }
         .app-container {
             max-width: 500px;
@@ -250,6 +251,91 @@
             color: #00F0FF;
             margin: 0.3rem 0;
         }
+
+        /* --- NUEVO: Estilo para el equipo --- */
+        .team-section {
+            margin: 2rem 0;
+        }
+        .team-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            color: #6E00FF;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.4rem;
+        }
+        .stylist-card {
+            background: rgba(26, 16, 48, 0.4);
+            border: 1px solid #6E00FF;
+            border-radius: 16px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        .stylist-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #6E00FF;
+            margin: 0 auto 1rem;
+            display: block;
+        }
+        .stylist-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #6E00FF;
+            margin: 0.3rem 0;
+        }
+        .stylist-specialty {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            color: #D0C0FF;
+            margin: 0.4rem 0;
+        }
+        .stylist-quote {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            color: #A090C0;
+            font-style: italic;
+            margin: 0.6rem 0;
+        }
+        .availability-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.15);
+            color: #00F0FF;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0.4rem 0;
+        }
+        .chat-btn {
+            background: rgba(110, 0, 255, 0.2);
+            color: #6E00FF;
+            border: 1px solid #6E00FF;
+            padding: 0.5rem;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+            transition: all 0.2s;
+        }
+        .chat-btn:hover {
+            background: rgba(110, 0, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .chat-btn i {
+            color: #00BA88;
+        }
     </style>
 </head>
 <body>
@@ -260,16 +346,65 @@
 
         <div class="app-content">
             <div id="homeView" class="view active">
-                <div class="ai-avatar">
-                    <div class="avatar-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="avatar-text">
-                        <strong>IA Estilista</strong><br>
-                        <span>Hola, soy Neo. Hoy te recomiendo un corte en capas para realzar tu rostro ovalado.</span>
+                <!-- Banner del salón -->
+                <div style="text-align:center;margin-bottom:1.5rem;">
+                    <img src="https://img.freepik.com/fotos-premium/banners-salones-belleza-salon-belleza-spa-salon-peluqueria-maquillaje-cuidado-personal-cuidado-personal_1028100-9.jpg?semt=ais_hybrid&w=740&q=80" 
+                         alt="Salón StylePlus Neo"
+                         style="width:100%;border-radius:12px;max-height:180px;object-fit:cover;">
+                </div>
+
+                <!-- Sección del equipo -->
+                <div class="team-section">
+                    <div class="team-title">Conoce a Nuestro Equipo</div>
+                    <div class="team-grid">
+                        <!-- Nova -->
+                        <div class="stylist-card">
+                            <img src="https://bellezatotal.com.gt/wp-content/uploads/2017/08/cabello-1160x675-1160x675.png" 
+                                 alt="Nova" class="stylist-avatar"
+                                 onerror="this.src='https://via.placeholder.com/80/6E00FF/FFFFFF?text=N'">
+                            <div class="stylist-name">Nova</div>
+                            <div class="stylist-specialty">Tratamientos Biométricos</div>
+                            <div class="stylist-quote">“Tu cabello, mi algoritmo de belleza.”</div>
+                            <div class="availability-badge">✅ Disponible hoy</div>
+                            <a href="https://wa.me/34631102324?text=¡Hola!%20Me%20gustaría%20reservar%20una%20cita%20contigo,%20Nova." 
+                               target="_blank" class="chat-btn">
+                                <i class="fab fa-whatsapp"></i> Chatear
+                            </a>
+                        </div>
+
+                        <!-- Zayn Al-Qubit -->
+                        <div class="stylist-card">
+                            <img src="https://media.istockphoto.com/id/1973194125/es/foto/peluquero-que-da-forma-a-las-cejas-del-cliente-del-hombre-usando-la-maquinilla-de-afeitar-en.jpg?s=612x612&w=0&k=20&c=il7pTFcu-UQektvG-TS-_VlKfniY_m4r9zcmIgjRq-U=" 
+                                 alt="Zayn Al-Qubit" class="stylist-avatar"
+                                 onerror="this.src='https://via.placeholder.com/80/6E00FF/FFFFFF?text=Z'">
+                            <div class="stylist-name">Zayn Al-Qubit</div>
+                            <div class="stylist-specialty">Barba Quantum</div>
+                            <div class="stylist-quote">“Geometría facial, ejecutada con qubits.”</div>
+                            <div class="availability-badge">✅ Disponible hoy</div>
+                            <a href="https://wa.me/34631102324?text=¡Hola!%20Me%20gustaría%20reservar%20una%20cita%20contigo,%20Zayn%20Al-Qubit." 
+                               target="_blank" class="chat-btn">
+                                <i class="fab fa-whatsapp"></i> Chatear
+                            </a>
+                        </div>
+
+                        <!-- Kairo Flux -->
+                        <div class="stylist-card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBsYTpIx1ifwsUiPxZau2ofiBvmdHpGOJvqbg7nd3wssuhC5NlsJfwa7i61fTyWxWFNjI&usqp=CAU" 
+                                 alt="Kairo Flux" class="stylist-avatar"
+                                 onerror="this.src='https://via.placeholder.com/80/6E00FF/FFFFFF?text=K'">
+                            <div class="stylist-name">Kairo Flux</div>
+                            <div class="stylist-specialty">Cortes Arquitectónicos</div>
+                            <div class="stylist-quote">“El corte que fluye con tu frecuencia.”</div>
+                            <div class="availability-badge">✅ Disponible hoy</div>
+                            <a href="https://wa.me/34631102324?text=¡Hola!%20Me%20gustaría%20reservar%20una%20cita%20contigo,%20Kairo%20Flux." 
+                               target="_blank" class="chat-btn">
+                                <i class="fab fa-whatsapp"></i> Chatear
+                            </a>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Botones originales -->
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-calendar-check"></i> Reservar Cita
                 </button>
@@ -323,10 +458,9 @@
                     <label>Peluquero/a</label>
                     <select id="stylistName" class="form-control">
                         <option value="">-- Elige un estilista --</option>
-                        <option>Neo (IA)</option>
-                        <option>Luna</option>
-                        <option>Kai</option>
-                        <option>Zara</option>
+                        <option>Nova</option>
+                        <option>Zayn Al-Qubit</option>
+                        <option>Kairo Flux</option>
                     </select>
                 </div>
 
@@ -494,59 +628,13 @@
             }
         }
 
-       function generateHairstyle() {
-    // 🔑 Tu API Key de OpenAI (¡NO subir a GitHub!)
-    const OPENAI_API_KEY = "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";
-
-    // 🎯 Prompt optimizado para peluquería futurista
-    const prompt = "Professional portrait of a person with a futuristic haircut, holographic color tones, sharp layers, salon lighting, photorealistic, 8k, clean background, beauty editorial style";
-
-    document.getElementById('aiLoadingModal').style.display = 'flex';
-    document.getElementById('generatedPrompt').textContent = prompt;
-
-    fetch("https://api.openai.com/v1/images/generations", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "dall-e-3",
-            prompt: prompt,
-            n: 1,
-            size: "1024x1024",
-            quality: "standard"
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => {
-                throw new Error(err.error?.message || "Error en la API de OpenAI");
-            });
+        function generateHairstyle() {
+            document.getElementById('aiLoadingModal').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('aiLoadingModal').style.display = 'none';
+                document.getElementById('stylePreviewModal').style.display = 'flex';
+            }, 2500);
         }
-        return response.json();
-    })
-    .then(data => {
-        const imageUrl = data.data[0].url;
-        document.querySelector('.style-preview').innerHTML = `
-            <img src="${imageUrl}" style="width:100%; height:auto; border-radius:12px; object-fit:contain;">
-        `;
-        document.getElementById('stylePreviewModal').style.display = 'flex';
-    })
-    .catch(err => {
-        console.error("Error:", err);
-        alert(`❌ No se pudo generar la imagen:\n${err.message}\n\nVerifica tu saldo en OpenAI.`);
-        // Fallback visual
-        document.querySelector('.style-preview').innerHTML = `
-            <i class="fas fa-user" style="font-size:5rem;color:#6E00FF;opacity:0.3;"></i>
-        `;
-        document.getElementById('stylePreviewModal').style.display = 'flex';
-    })
-    .finally(() => {
-        document.getElementById('aiLoadingModal').style.display = 'none';
-    });
-}
-
 
         function openOwnerAccess() {
             const pin = prompt("Ingresa el PIN de acceso (demo: 1234):");
