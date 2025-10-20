@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="StylePlus Neo: app de peluquería con control total para dueños, métricas en tiempo real y prevención de fraudes.">
+    <meta name="description" content="StylePlus Neo: sistema de control total para dueños de peluquerías. Prevención de fraudes, gestión de tokens y métricas en tiempo real.">
     <title>StylePlus Neo – Control Total para Dueños</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
@@ -261,57 +261,28 @@
             color: #B0A0D0;
         }
 
-        /* --- Panel del Dueño --- */
+        /* --- Panel del Dueño: Control Total --- */
         .owner-header h2 {
             font-family: 'Orbitron', sans-serif;
             color: #00F0FF;
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        .summary-cards {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-        .summary-card {
+        .control-section {
             background: rgba(20, 12, 30, 0.5);
-            border: 1px solid #00F0FF;
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            flex: 1;
-        }
-        .summary-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: #00F0FF;
-            margin: 0.3rem 0;
-        }
-        .summary-label {
-            font-size: 0.85rem;
-            color: #C0C0E0;
-        }
-
-        .stylist-section {
-            background: rgba(20, 12, 30, 0.4);
             border: 1px solid #6E00FF;
             border-radius: 16px;
             padding: 1.2rem;
             margin-bottom: 1.2rem;
         }
-        .stylist-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #3A2555;
-        }
-        .stylist-name-header {
+        .section-title {
             font-family: 'Orbitron', sans-serif;
             color: #00F0FF;
             font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .alert-badge {
             padding: 0.2rem 0.6rem;
@@ -322,42 +293,59 @@
         .alert-warning { background: rgba(255, 42, 109, 0.3); color: #FF2A6D; }
         .alert-success { background: rgba(0, 240, 255, 0.2); color: #00F0FF; }
 
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
-        }
-        .metric-item {
+        .appointment-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #3A2555;
             font-size: 0.9rem;
         }
-        .metric-label {
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            color: #00F0FF;
+        }
+        .appointment-detail {
             color: #A0A0C0;
             font-size: 0.85rem;
         }
-        .metric-value {
-            font-family: 'Orbitron', sans-serif;
-            color: #F0F0FF;
-            font-size: 1rem;
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
-
-        .next-appointment {
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px dashed #3A2555;
-            font-size: 0.85rem;
-            color: #A0F0A0;
-        }
-
-        .action-btn {
-            background: rgba(0, 240, 255, 0.1);
-            color: #00F0FF;
-            border: 1px solid #00F0FF;
+        .small-btn {
             padding: 0.3rem 0.6rem;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 0.8rem;
             cursor: pointer;
-            margin-top: 0.5rem;
             font-family: 'Rajdhani', sans-serif;
+        }
+        .btn-verify { background: rgba(0, 240, 255, 0.2); color: #00F0FF; border: 1px solid #00F0FF; }
+        .btn-reject { background: rgba(255, 42, 109, 0.2); color: #FF2A6D; border: 1px solid #FF2A6D; }
+
+        .token-rule {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        .token-input {
+            width: 60px;
+            padding: 0.4rem;
+            background: #1A1030;
+            color: #F0F0FF;
+            border: 1px solid #6E00FF;
+            border-radius: 6px;
+        }
+        .save-btn {
+            background: rgba(0, 240, 255, 0.2);
+            color: #00F0FF;
+            border: 1px solid #00F0FF;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
         }
 
         /* Navegación */
@@ -518,24 +506,50 @@
                 <button class="btn-neo" style="background:#2A1545;color:#A090C0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Owner Dashboard -->
+            <!-- Owner Dashboard: Control Total -->
             <div id="ownerDashboard" class="view">
                 <div class="owner-header">
-                    <h2>📊 Panel Quantum Avanzado</h2>
+                    <h2>🔐 Panel de Control Total</h2>
                 </div>
 
-                <div class="summary-cards">
-                    <div class="summary-card">
-                        <div class="summary-label">Clientes en Espera</div>
-                        <div class="summary-value" id="waitingClients">0</div>
+                <!-- Gestión de Citas Pendientes -->
+                <div class="control-section">
+                    <div class="section-title">
+                        <span>Citas Pendientes de Verificación</span>
+                        <span class="alert-badge alert-warning" id="pendingCount">0</span>
                     </div>
-                    <div class="summary-card">
-                        <div class="summary-label">Ingresos Hoy</div>
-                        <div class="summary-value" id="totalRevenue">€0</div>
+                    <div id="pendingAppointments">
+                        <p style="color:#A0A0C0;font-style:italic;">No hay citas pendientes.</p>
                     </div>
                 </div>
 
-                <div id="stylistReports"></div>
+                <!-- Gestión de Tokens -->
+                <div class="control-section">
+                    <div class="section-title">
+                        <span>Configuración de Tokens</span>
+                    </div>
+                    <div class="token-rule">
+                        <span>Tokens por cita verificada:</span>
+                        <input type="number" id="tokensPerAppointment" class="token-input" value="50" min="1">
+                        <button class="save-btn" onclick="saveTokenSettings()">Guardar</button>
+                    </div>
+                    <div style="margin-top:1rem;color:#A0A0C0;font-size:0.85rem;">
+                        ⚠️ Los tokens solo se otorgan tras tu aprobación.
+                    </div>
+                </div>
+
+                <!-- Métricas Resumen -->
+                <div class="control-section">
+                    <div class="section-title">
+                        <span>Resumen del Día</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;">
+                        <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
+                        <div><strong>Citas verificadas:</strong> <span id="verifiedCount">0</span></div>
+                        <div><strong>Clientes nuevos:</strong> <span id="newClients">0</span></div>
+                        <div><strong>Clientes recurrentes:</strong> <span id="returningClients">0</span></div>
+                    </div>
+                </div>
 
                 <button class="btn-neo" style="background:#e74c3c;color:white;margin-top:1.5rem;" onclick="logoutOwner()">Cerrar Sesión</button>
             </div>
@@ -574,15 +588,22 @@
 
     <script src="../shared/shared.js"></script>
     <script>
+        // === Configuración del negocio ===
         const SERVICE_PRICES = {
             "Corte Futurista": 25,
             "Coloración Holográfica": 45,
             "Tratamiento Biométrico": 60,
             "Barba Quantum": 20
         };
-        const STYLISTS = ["Nova", "Zayn Al-Qubit", "Kairo Flux"];
+        let TOKENS_PER_APPOINTMENT = 50;
 
+        // === Splash ===
         document.addEventListener('DOMContentLoaded', () => {
+            // Cargar configuración
+            const savedTokens = localStorage.getItem('styleplus_tokens_per_appointment');
+            if (savedTokens) TOKENS_PER_APPOINTMENT = parseInt(savedTokens);
+            document.getElementById('tokensPerAppointment').value = TOKENS_PER_APPOINTMENT;
+
             setTimeout(() => {
                 document.getElementById('splashScreen').style.display = 'none';
                 document.querySelector('.app-container').style.display = 'flex';
@@ -590,6 +611,7 @@
             }, 2000);
         });
 
+        // === Autenticación ===
         function renderAuthOrProfile() {
             const user = JSON.parse(localStorage.getItem('styleplus_user'));
             const container = document.getElementById('authOrProfile');
@@ -611,8 +633,8 @@
         function showSignupModal() {
             const name = prompt("¿Cuál es tu nombre?");
             if (name && name.trim()) {
-                localStorage.setItem('styleplus_user', JSON.stringify({name: name.trim(), tokens: 100}));
-                alert("¡Bienvenido! 🎁 100 Beauty Tokens de bienvenida.");
+                localStorage.setItem('styleplus_user', JSON.stringify({name: name.trim(), tokens: 0}));
+                alert("¡Bienvenido! Los tokens se otorgan tras la verificación del dueño.");
                 renderAuthOrProfile();
             }
         }
@@ -630,6 +652,7 @@
             }
         }
 
+        // === Reservas ===
         function confirmBooking() {
             const name = document.getElementById('clientName').value.trim();
             const phone = document.getElementById('clientPhone').value.trim();
@@ -643,10 +666,6 @@
                 return;
             }
 
-            const now = new Date();
-            const aptTime = new Date(`${date}T${time}`);
-            const status = aptTime > now ? 'scheduled' : 'pending';
-
             const appointment = {
                 id: Date.now(),
                 name,
@@ -655,117 +674,110 @@
                 time,
                 service,
                 stylist,
-                status,
-                verified: false,
-                createdAt: now.toISOString()
+                status: 'completed', // Simulamos que se completó
+                verifiedByOwner: false, // Clave: el dueño debe aprobar
+                clientRegistered: !!JSON.parse(localStorage.getItem('styleplus_user')),
+                createdAt: new Date().toISOString()
             };
 
             const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
             appointments.push(appointment);
             localStorage.setItem('styleplus_appointments', JSON.stringify(appointments));
 
-            const user = JSON.parse(localStorage.getItem('styleplus_user'));
-            if (user) {
-                user.tokens = (user.tokens || 0) + 50;
-                localStorage.setItem('styleplus_user', JSON.stringify(user));
-                document.getElementById('tokenAmount').textContent = user.tokens;
-            }
-
-            alert(`✅ ¡Cita reservada!\nPronto recibirás confirmación.`);
+            alert(`✅ ¡Cita registrada!\nEl dueño verificará el servicio para otorgar tokens.`);
             showView('homeView');
-            renderAuthOrProfile();
         }
 
+        // === Panel del Dueño: Control Total ===
         function loadOwnerDashboard() {
             const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
             const today = new Date().toISOString().split('T')[0];
-            const now = new Date();
+            const pending = appointments.filter(a => a.date === today && !a.verifiedByOwner);
 
+            // Citas pendientes
+            const pendingList = document.getElementById('pendingAppointments');
+            if (pending.length === 0) {
+                pendingList.innerHTML = '<p style="color:#A0A0C0;font-style:italic;">No hay citas pendientes.</p>';
+            } else {
+                let html = '';
+                pending.forEach(a => {
+                    const revenue = SERVICE_PRICES[a.service] || 0;
+                    html += `
+                        <div class="appointment-item">
+                            <div class="appointment-header">
+                                <span>${a.name}</span>
+                                <span>€${revenue}</span>
+                            </div>
+                            <div class="appointment-detail">
+                                ${a.service} • ${a.stylist} • ${a.time}
+                            </div>
+                            <div class="action-buttons">
+                                <button class="small-btn btn-verify" onclick="approveAppointment(${a.id})">
+                                    ✅ Aprobar y otorgar ${TOKENS_PER_APPOINTMENT} tokens
+                                </button>
+                                <button class="small-btn btn-reject" onclick="rejectAppointment(${a.id})">
+                                    ❌ Rechazar
+                                </button>
+                            </div>
+                        </div>`;
+                });
+                pendingList.innerHTML = html;
+            }
+            document.getElementById('pendingCount').textContent = pending.length;
+
+            // Métricas del día
             const todayApps = appointments.filter(a => a.date === today);
-            let totalRevenue = 0;
-            let waitingCount = 0;
-            todayApps.forEach(a => {
-                totalRevenue += SERVICE_PRICES[a.service] || 0;
-                const aptTime = new Date(`${a.date}T${a.time}`);
-                if (aptTime <= now && a.status !== 'completed') {
-                    waitingCount++;
-                }
-            });
+            const verified = todayApps.filter(a => a.verifiedByOwner);
+            const revenue = verified.reduce((sum, a) => sum + (SERVICE_PRICES[a.service] || 0), 0);
+            const clients = verified.map(a => a.name);
+            const uniqueClients = [...new Set(clients)];
+            const returning = uniqueClients.filter(name => 
+                appointments.filter(a => a.name === name).length > 1
+            ).length;
 
-            document.getElementById('waitingClients').textContent = waitingCount;
-            document.getElementById('totalRevenue').textContent = `€${totalRevenue}`;
-
-            let html = '';
-            STYLISTS.forEach(stylist => {
-                const apps = todayApps.filter(a => a.stylist === stylist);
-                if (apps.length === 0) return;
-
-                const completed = apps.filter(a => a.status === 'completed').length;
-                const pending = apps.filter(a => a.status === 'pending').length;
-                const scheduled = apps.filter(a => a.status === 'scheduled').length;
-                const revenue = apps.reduce((sum, a) => sum + (SERVICE_PRICES[a.service] || 0), 0);
-                const unverified = apps.filter(a => !a.verified).length;
-
-                const futureApps = apps.filter(a => new Date(`${a.date}T${a.time}`) > now)
-                    .sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
-                const nextApt = futureApps[0];
-
-                let alertClass = 'alert-success';
-                let alertText = 'Todo en orden';
-                if (pending > 2) {
-                    alertClass = 'alert-warning';
-                    alertText = `${pending} en espera`;
-                } else if (unverified > 1) {
-                    alertClass = 'alert-warning';
-                    alertText = `${unverified} no verif.`;
-                }
-
-                html += `
-                    <div class="stylist-section">
-                        <div class="stylist-header">
-                            <div class="stylist-name-header">${stylist}</div>
-                            <span class="alert-badge ${alertClass}">${alertText}</span>
-                        </div>
-                        <div class="metrics-grid">
-                            <div class="metric-item">
-                                <div class="metric-label">Completadas</div>
-                                <div class="metric-value">${completed}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">En espera</div>
-                                <div class="metric-value">${pending}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">Programadas</div>
-                                <div class="metric-value">${scheduled}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-label">Ingresos</div>
-                                <div class="metric-value">€${revenue}</div>
-                            </div>
-                        </div>
-                        ${nextApt ? `<div class="next-appointment">🔔 Próxima: ${nextApt.time} (${nextApt.name})</div>` : ''}
-                        <button class="action-btn" onclick="markAllAsCompleted('${stylist}')">Marcar completadas</button>
-                    </div>`;
-            });
-
-            document.getElementById('stylistReports').innerHTML = html || '<p style="color:#C0C0E0;text-align:center;">No hay actividades hoy.</p>';
+            document.getElementById('dailyRevenue').textContent = `€${revenue}`;
+            document.getElementById('verifiedCount').textContent = verified.length;
+            document.getElementById('newClients').textContent = uniqueClients.length - returning;
+            document.getElementById('returningClients').textContent = returning;
         }
 
-        function markAllAsCompleted(stylistName) {
-            const apps = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
-            const today = new Date().toISOString().split('T')[0];
-            apps.forEach(a => {
-                if (a.date === today && a.stylist === stylistName) {
-                    a.status = 'completed';
-                    a.verified = true;
+        function approveAppointment(appointmentId) {
+            const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
+            const apt = appointments.find(a => a.id == appointmentId);
+            if (apt) {
+                apt.verifiedByOwner = true;
+                // Otorgar tokens al cliente si está registrado
+                if (apt.clientRegistered) {
+                    const user = JSON.parse(localStorage.getItem('styleplus_user'));
+                    if (user) {
+                        user.tokens = (user.tokens || 0) + TOKENS_PER_APPOINTMENT;
+                        localStorage.setItem('styleplus_user', JSON.stringify(user));
+                    }
                 }
-            });
-            localStorage.setItem('styleplus_appointments', JSON.stringify(apps));
+                localStorage.setItem('styleplus_appointments', JSON.stringify(appointments));
+                loadOwnerDashboard();
+                alert("✅ Tokens otorgados. Fraude prevenido.");
+            }
+        }
+
+        function rejectAppointment(appointmentId) {
+            const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
+            const filtered = appointments.filter(a => a.id != appointmentId);
+            localStorage.setItem('styleplus_appointments', JSON.stringify(filtered));
             loadOwnerDashboard();
-            alert(`✅ Citas de ${stylistName} completadas.`);
+            alert("❌ Cita rechazada.");
         }
 
+        function saveTokenSettings() {
+            const value = parseInt(document.getElementById('tokensPerAppointment').value);
+            if (value > 0) {
+                TOKENS_PER_APPOINTMENT = value;
+                localStorage.setItem('styleplus_tokens_per_appointment', value.toString());
+                alert("✅ Regla de tokens actualizada.");
+            }
+        }
+
+        // === Navegación ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
