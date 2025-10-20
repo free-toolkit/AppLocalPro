@@ -9,6 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared/shared.css">
     <style>
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0F0A1A;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+        }
+        .splash-logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #6E00FF, #00F0FF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(110, 0, 255, 0.6);
+        }
+        .splash-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #00F0FF;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+        }
+
         /* Estilos específicos de StylePlus Neo */
         body {
             background: #0F0A1A;
@@ -27,8 +58,82 @@
             box-shadow: 0 0 30px rgba(110, 0, 255, 0.4);
             position: relative;
             overflow: hidden;
+            display: none; /* Oculto hasta que pase el splash */
         }
 
+        /* ... (todos tus estilos anteriores) ... */
+
+        /* --- NUEVO: Estilo para autenticación --- */
+        .auth-section {
+            text-align: center;
+            margin: 1.8rem 0;
+            padding: 1.5rem;
+            background: rgba(26, 16, 48, 0.3);
+            border-radius: 16px;
+            border: 1px solid #6E00FF;
+        }
+        .auth-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #6E00FF;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .auth-btn {
+            padding: 0.8rem 1.4rem;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #6E00FF, #8A2BE2);
+            color: white;
+        }
+        .btn-signup {
+            background: linear-gradient(135deg, #00F0FF, #00BA88);
+            color: #0D1A1C;
+        }
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(110, 0, 255, 0.5);
+        }
+        .neuro-note {
+            margin-top: 1.2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            color: #A0D0FF;
+            line-height: 1.5;
+        }
+
+        /* Perfil de usuario (cuando está logeado) */
+        .user-profile {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(0, 240, 255, 0.08);
+            border-radius: 12px;
+            border: 1px solid #00F0FF;
+        }
+        .user-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF;
+            font-size: 1.2rem;
+        }
+        .user-tokens {
+            font-family: 'Rajdhani', sans-serif;
+            color: #D0C0FF;
+            font-size: 0.95rem;
+        }
+
+        /* --- Mantén todos tus estilos anteriores aquí --- */
         .app-container::before {
             content: "";
             position: absolute;
@@ -339,6 +444,14 @@
     </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div id="splashScreen">
+        <div class="splash-logo">
+            <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="splash-text">StylePlus Neo</div>
+    </div>
+
     <div class="app-container">
         <div class="app-header">
             <h1>STYLEPLUS NEO</h1>
@@ -352,6 +465,9 @@
                          alt="Salón StylePlus Neo"
                          style="width:100%;border-radius:12px;max-height:180px;object-fit:cover;">
                 </div>
+
+                <!-- Perfil o autenticación -->
+                <div id="authOrProfile"></div>
 
                 <!-- Sección del equipo -->
                 <div class="team-section">
@@ -419,7 +535,9 @@
                 </button>
             </div>
 
-            <!-- Reservas -->
+            <!-- ... (el resto de tus vistas: bookingView, rewardsView, ownerDashboard) ... -->
+            <!-- Las dejo igual, solo añado el cierre de app-content y app-container -->
+
             <div id="bookingView" class="view">
                 <h2 style="font-family:'Orbitron';color:#6E00FF;">📅 Reservar Cita</h2>
 
@@ -472,7 +590,7 @@
                 <h2 style="font-family:'Orbitron';color:#00F0FF;">💎 Beauty Tokens</h2>
                 <div class="token-card">
                     <div class="token-label">Tokens acumulados</div>
-                    <div class="token-amount">450</div>
+                    <div class="token-amount" id="tokenAmount">450</div>
                     <div style="font-size:0.85rem;color:#B0A0D0;">Próximo logro: Tratamiento Premium (500 pts)</div>
                 </div>
                 <div style="background:rgba(18,13,37,0.6);padding:1.2rem;border-radius:12px;">
@@ -544,6 +662,71 @@
 
     <script src="../shared/shared.js"></script>
     <script>
+        // === Splash Screen ===
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('splashScreen').style.display = 'none';
+                document.querySelector('.app-container').style.display = 'flex';
+                renderAuthOrProfile();
+            }, 2000);
+        });
+
+        // === Sistema de Cuenta Simulado ===
+        function renderAuthOrProfile() {
+            const user = JSON.parse(localStorage.getItem('styleplus_user'));
+            const container = document.getElementById('authOrProfile');
+            
+            if (user) {
+                container.innerHTML = `
+                    <div class="user-profile">
+                        <div class="user-name">Hola, ${user.name} ✨</div>
+                        <div class="user-tokens">Tus Beauty Tokens: ${user.tokens || 0}</div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="auth-section">
+                        <div class="auth-title">¿Nuevo aquí?</div>
+                        <div class="neuro-note">
+                            Los clientes registrados acumulan <strong>Beauty Tokens</strong> en cada cita y desbloquean beneficios exclusivos.
+                        </div>
+                        <div class="auth-buttons">
+                            <button class="auth-btn btn-signup" onclick="showSignupModal()">Crear Cuenta</button>
+                            <button class="auth-btn btn-login" onclick="showLoginModal()">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function showSignupModal() {
+            const name = prompt("¿Cuál es tu nombre?");
+            if (name && name.trim()) {
+                const user = {
+                    name: name.trim(),
+                    tokens: 100, // Bonus de bienvenida
+                    createdAt: new Date().toISOString()
+                };
+                localStorage.setItem('styleplus_user', JSON.stringify(user));
+                alert("¡Bienvenido! 🎁 Has recibido 100 Beauty Tokens de bienvenida.");
+                renderAuthOrProfile();
+            }
+        }
+
+        function showLoginModal() {
+            const name = prompt("Ingresa tu nombre:");
+            if (name && name.trim()) {
+                const existing = JSON.parse(localStorage.getItem('styleplus_user'));
+                if (existing && existing.name === name.trim()) {
+                    alert("¡Bienvenido de nuevo!");
+                    renderAuthOrProfile();
+                } else {
+                    alert("Usuario no encontrado. Por favor, créate una cuenta.");
+                }
+            }
+        }
+
+        // === Funciones existentes (sin cambios) ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
@@ -590,6 +773,14 @@
             appointments.push(appointment);
             localStorage.setItem('styleplus_appointments', JSON.stringify(appointments));
 
+            // Sumar tokens al usuario
+            const user = JSON.parse(localStorage.getItem('styleplus_user'));
+            if (user) {
+                user.tokens = (user.tokens || 0) + 50;
+                localStorage.setItem('styleplus_user', JSON.stringify(user));
+                document.getElementById('tokenAmount').textContent = user.tokens;
+            }
+
             const fullDate = new Date(`${date}T${time}`).toLocaleString('es-ES', {
                 weekday: 'long',
                 day: 'numeric',
@@ -599,8 +790,9 @@
                 minute: '2-digit'
             });
 
-            alert(`✅ ¡Cita reservada!\n\nSe ha guardado localmente y puedes consultarla desde el Panel del Dueño.\n\nPronto recibirás confirmación.`);
+            alert(`✅ ¡Cita reservada!\n\nSe ha guardado localmente.\nPronto recibirás confirmación.`);
             showView('homeView');
+            renderAuthOrProfile(); // Actualiza tokens
         }
 
         function loadOwnerDashboard() {
