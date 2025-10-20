@@ -73,7 +73,11 @@
             background: rgba(15, 10, 24, 0.7) !important;
         }
 
-        /* --- Equipo estilista (CORREGIDO) --- */
+        /* Vistas */
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* --- Equipo estilista --- */
         .team-section {
             margin: 2rem 0;
         }
@@ -154,15 +158,115 @@
             color: #00BA88;
         }
 
-        /* --- Panel del Dueño Avanzado --- */
-        .owner-header {
+        /* --- Autenticación --- */
+        .auth-section {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin: 1.8rem 0;
+            padding: 1.5rem;
+            background: rgba(20, 12, 30, 0.4);
+            border-radius: 16px;
+            border: 1px solid #6E00FF;
         }
+        .auth-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF !important;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .neuro-note {
+            margin-top: 1.2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            color: #D0D0FF;
+            line-height: 1.5;
+        }
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .auth-btn {
+            padding: 0.8rem 1.4rem;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #6E00FF, #8A2BE2);
+            color: white;
+        }
+        .btn-signup {
+            background: linear-gradient(135deg, #00F0FF, #00BA88);
+            color: #0D0916;
+        }
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(110, 0, 255, 0.5);
+        }
+
+        .user-profile {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid #00F0FF;
+        }
+        .user-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #00F0FF;
+            font-size: 1.2rem;
+        }
+        .user-tokens {
+            font-family: 'Rajdhani', sans-serif;
+            color: #D0D0FF;
+            font-size: 0.95rem;
+        }
+
+        /* Botones y formularios */
+        .btn-neo {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            margin: 0.8rem 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-primary { background: linear-gradient(135deg, #6E00FF, #8A2BE2); }
+        .btn-magic { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1A1030;
+            color: #F0F0FF;
+            border: 1px solid #6E00FF;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #B0A0D0;
+        }
+
+        /* --- Panel del Dueño --- */
         .owner-header h2 {
             font-family: 'Orbitron', sans-serif;
             color: #00F0FF;
-            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
         .summary-cards {
             display: flex;
@@ -256,42 +360,28 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
-        /* Botones y formularios */
-        .btn-neo {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-family: 'Rajdhani', sans-serif;
-            cursor: pointer;
-            margin: 0.8rem 0;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            color: white;
+        /* Navegación */
+        .app-nav {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(10, 7, 15, 0.9);
+            border-top: 1px solid #6E00FF;
+            padding: 0.8rem 0;
+            backdrop-filter: blur(5px);
         }
-        .btn-primary { background: linear-gradient(135deg, #6E00FF, #8A2BE2); }
-        .btn-magic { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            background: #1A1030;
-            color: #F0F0FF;
-            border: 1px solid #6E00FF;
-            border-radius: 8px;
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #C0B0E0;
+            text-decoration: none;
+            font-size: 0.8rem;
             font-family: 'Rajdhani', sans-serif;
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #B0A0D0;
+        .nav-item.active, .nav-item:hover {
+            color: #00F0FF;
         }
-
-        /* Autenticación */
-        .auth-title { color: #00F0FF !important; }
-        .user-name { color: #00F0FF !important; }
+        .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
     </style>
 </head>
 <body>
@@ -309,6 +399,7 @@
         </div>
 
         <div class="app-content">
+            <!-- Home View -->
             <div id="homeView" class="view active">
                 <div style="text-align:center;margin-bottom:1.5rem;">
                     <img src="https://img.freepik.com/fotos-premium/banners-salones-belleza-salon-belleza-spa-salon-peluqueria-maquillaje-cuidado-personal-cuidado-personal_1028100-9.jpg?semt=ais_hybrid&w=740&q=80" 
@@ -427,11 +518,10 @@
                 <button class="btn-neo" style="background:#2A1545;color:#A090C0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Owner Dashboard Avanzado -->
+            <!-- Owner Dashboard -->
             <div id="ownerDashboard" class="view">
                 <div class="owner-header">
                     <h2>📊 Panel Quantum Avanzado</h2>
-                    <p style="color:#A0A0C0;font-size:0.9rem;">Métricas en tiempo real por estilista</p>
                 </div>
 
                 <div class="summary-cards">
@@ -484,7 +574,6 @@
 
     <script src="../shared/shared.js"></script>
     <script>
-        // === Configuración ===
         const SERVICE_PRICES = {
             "Corte Futurista": 25,
             "Coloración Holográfica": 45,
@@ -493,7 +582,6 @@
         };
         const STYLISTS = ["Nova", "Zayn Al-Qubit", "Kairo Flux"];
 
-        // === Splash ===
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('splashScreen').style.display = 'none';
@@ -502,7 +590,6 @@
             }, 2000);
         });
 
-        // === Autenticación ===
         function renderAuthOrProfile() {
             const user = JSON.parse(localStorage.getItem('styleplus_user'));
             const container = document.getElementById('authOrProfile');
@@ -543,7 +630,6 @@
             }
         }
 
-        // === Reservas ===
         function confirmBooking() {
             const name = document.getElementById('clientName').value.trim();
             const phone = document.getElementById('clientPhone').value.trim();
@@ -558,8 +644,8 @@
             }
 
             const now = new Date();
-            const appointmentTime = new Date(`${date}T${time}`);
-            const status = appointmentTime > now ? 'scheduled' : 'pending';
+            const aptTime = new Date(`${date}T${time}`);
+            const status = aptTime > now ? 'scheduled' : 'pending';
 
             const appointment = {
                 id: Date.now(),
@@ -569,7 +655,7 @@
                 time,
                 service,
                 stylist,
-                status, // 'scheduled', 'pending', 'completed'
+                status,
                 verified: false,
                 createdAt: now.toISOString()
             };
@@ -590,19 +676,15 @@
             renderAuthOrProfile();
         }
 
-        // === Panel del Dueño Avanzado ===
         function loadOwnerDashboard() {
             const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
             const today = new Date().toISOString().split('T')[0];
             const now = new Date();
 
-            // Filtrar citas de hoy
-            const todayAppointments = appointments.filter(a => a.date === today);
-
-            // Métricas generales
+            const todayApps = appointments.filter(a => a.date === today);
             let totalRevenue = 0;
             let waitingCount = 0;
-            todayAppointments.forEach(a => {
+            todayApps.forEach(a => {
                 totalRevenue += SERVICE_PRICES[a.service] || 0;
                 const aptTime = new Date(`${a.date}T${a.time}`);
                 if (aptTime <= now && a.status !== 'completed') {
@@ -613,10 +695,9 @@
             document.getElementById('waitingClients').textContent = waitingCount;
             document.getElementById('totalRevenue').textContent = `€${totalRevenue}`;
 
-            // Reporte por estilista
             let html = '';
             STYLISTS.forEach(stylist => {
-                const apps = todayAppointments.filter(a => a.stylist === stylist);
+                const apps = todayApps.filter(a => a.stylist === stylist);
                 if (apps.length === 0) return;
 
                 const completed = apps.filter(a => a.status === 'completed').length;
@@ -625,14 +706,10 @@
                 const revenue = apps.reduce((sum, a) => sum + (SERVICE_PRICES[a.service] || 0), 0);
                 const unverified = apps.filter(a => !a.verified).length;
 
-                // Próxima cita
-                const futureApps = apps.filter(a => {
-                    const aptTime = new Date(`${a.date}T${a.time}`);
-                    return aptTime > now;
-                }).sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
-                const nextAppointment = futureApps[0];
+                const futureApps = apps.filter(a => new Date(`${a.date}T${a.time}`) > now)
+                    .sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
+                const nextApt = futureApps[0];
 
-                // Alerta
                 let alertClass = 'alert-success';
                 let alertText = 'Todo en orden';
                 if (pending > 2) {
@@ -667,14 +744,8 @@
                                 <div class="metric-value">€${revenue}</div>
                             </div>
                         </div>
-                        ${nextAppointment ? `
-                            <div class="next-appointment">
-                                🔔 Próxima: ${nextAppointment.time} (${nextAppointment.name})
-                            </div>
-                        ` : ''}
-                        <button class="action-btn" onclick="markAllAsCompleted('${stylist}')">
-                            Marcar todas como completadas
-                        </button>
+                        ${nextApt ? `<div class="next-appointment">🔔 Próxima: ${nextApt.time} (${nextApt.name})</div>` : ''}
+                        <button class="action-btn" onclick="markAllAsCompleted('${stylist}')">Marcar completadas</button>
                     </div>`;
             });
 
@@ -682,20 +753,19 @@
         }
 
         function markAllAsCompleted(stylistName) {
-            const appointments = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
+            const apps = JSON.parse(localStorage.getItem('styleplus_appointments') || '[]');
             const today = new Date().toISOString().split('T')[0];
-            appointments.forEach(a => {
-                if (a.date === today && a.stylist === stylistName && a.status !== 'completed') {
+            apps.forEach(a => {
+                if (a.date === today && a.stylist === stylistName) {
                     a.status = 'completed';
                     a.verified = true;
                 }
             });
-            localStorage.setItem('styleplus_appointments', JSON.stringify(appointments));
+            localStorage.setItem('styleplus_appointments', JSON.stringify(apps));
             loadOwnerDashboard();
-            alert(`✅ Citas de ${stylistName} marcadas como completadas.`);
+            alert(`✅ Citas de ${stylistName} completadas.`);
         }
 
-        // === Navegación ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
