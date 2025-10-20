@@ -565,20 +565,63 @@
             </div>
 
             <!-- Rewards View -->
-            <div id="rewardsView" class="view">
-                <h2 style="font-family:'Orbitron';color:#00F0FF;">💎 Beauty Tokens</h2>
-                <div class="token-card">
-                    <div class="token-label">Tokens acumulados</div>
-                    <div class="token-amount" id="tokenAmount">450</div>
-                    <div style="font-size:0.85rem;color:#B0A0D0;">Próximo logro: Tratamiento Premium (500 pts)</div>
-                </div>
-                <div style="background:rgba(18,13,37,0.6);padding:1.2rem;border-radius:12px;">
-                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;">Canjear</h3>
-                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #3A2555;">100 pts → 10% descuento</div>
-                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #3A2555;">250 pts → Lavado Quantum</div>
-                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;">500 pts → Tratamiento Biométrico</div>
-                </div>
-                <button class="btn-neo" style="background:#2A1545;color:#A090C0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+          <!-- Rewards View: Sistema de Fidelización Avanzado -->
+<div id="rewardsView" class="view">
+    <h2 style="font-family:'Orbitron';color:#00F0FF;text-align:center;margin-bottom:1.5rem;">💎 Beauty Tokens</h2>
+
+    <!-- Nivel y Progreso -->
+    <div class="token-card" style="background:linear-gradient(135deg, #1A1030, #2A1545);border:1px solid #00F0FF;border-radius:16px;padding:1.5rem;text-align:center;margin:0 0 1.5rem;">
+        <div id="userLevel" style="font-family:'Orbitron';font-size:1.4rem;color:#00F0FF;margin-bottom:0.5rem;">🌱 Novato</div>
+        <div style="font-size:0.9rem;color:#B0A0D0;margin-bottom:1rem;">Progreso hacia el siguiente nivel</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;height:12px;overflow:hidden;margin:0 0.5rem;">
+            <div id="progressBar" style="height:100%;background:linear-gradient(90deg, #6E00FF, #00F0FF);width:30%;transition:width 0.5s;"></div>
+        </div>
+        <div id="progressText" style="font-size:0.85rem;color:#A0D0FF;margin-top:0.5rem;">580 / 1000 pts → 🌟 Embajador</div>
+    </div>
+
+    <!-- Beneficios por Nivel -->
+    <div style="background:rgba(18,13,37,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+        <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#00F0FF;">🎁 Tus Beneficios</h3>
+        <div id="benefitsList" style="font-size:0.95rem;line-height:1.6;color:#E0D6FF;">
+            <!-- Se llena dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Misiones Semanales -->
+    <div style="background:rgba(0,240,255,0.08);border:1px solid #00F0FF;border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+        <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#00F0FF;">🎯 Misiones Semanales</h3>
+        <div id="missionsList" style="font-size:0.95rem;line-height:1.6;">
+            <!-- Se llena dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Canjear Recompensas -->
+    <div style="background:rgba(18,13,37,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+        <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#00F0FF;">🛒 Canjear Recompensas</h3>
+        <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #3A2555;">
+            <span>100 pts → Café gourmet</span>
+            <button class="small-btn btn-verify" onclick="redeemReward(100, 'Café gourmet')">Canjear</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #3A2555;">
+            <span>250 pts → Lavado Quantum</span>
+            <button class="small-btn btn-verify" onclick="redeemReward(250, 'Lavado Quantum')">Canjear</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:0.6rem 0;">
+            <span>500 pts → Tratamiento Biométrico</span>
+            <button class="small-btn btn-verify" onclick="redeemReward(500, 'Tratamiento Biométrico')">Canjear</button>
+        </div>
+    </div>
+
+    <!-- Historial de Canjes -->
+    <div style="background:rgba(18,13,37,0.6);border-radius:12px;padding:1.2rem;">
+        <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#00F0FF;">📜 Historial</h3>
+        <div id="historyList" style="font-size:0.9rem;color:#C0B0E0;">
+            <!-- Se llena dinámicamente -->
+        </div>
+    </div>
+
+    <button class="btn-neo" style="background:#2A1545;color:#A090C0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+</div>ground:#2A1545;color:#A090C0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
             <!-- Owner Dashboard: Control Total AMPLIADO -->
