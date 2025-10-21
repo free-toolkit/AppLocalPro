@@ -12,9 +12,337 @@
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FF2A6D">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GastroNeo">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="icon" href="icon-192.png">
+
+    <style>
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #1A0A10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+            overflow: hidden;
+        }
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #FF2A6D, #FFD300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 30px rgba(255, 42, 109, 0.6);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .splash-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #00F0FF;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body {
+            background: #1A0A10;
+            color: #FFD6E0;
+            overflow-x: hidden;
+        }
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #220F18;
+            border: 1px solid #FF2A6D;
+            box-shadow: 0 0 30px rgba(255, 42, 109, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #FF2A6D, #FFD300);
+            padding: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .app-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        }
+
+        .app-content {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: rgba(34, 15, 24, 0.7);
+        }
+
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* --- Menú Digital --- */
+        .menu-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.4rem;
+        }
+        .category-section {
+            margin-bottom: 2rem;
+        }
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FF2A6D;
+            font-size: 1.2rem;
+            margin: 1.2rem 0 0.8rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #FF2A6D;
+        }
+        .menu-item {
+            background: rgba(30, 10, 15, 0.6);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-item-content {
+            padding: 0.9rem;
+        }
+        .menu-item-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        .menu-item-desc {
+            font-family: 'Rajdhani', sans-serif;
+            color: #F0D0E0;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .menu-item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            color: #D0B0C0;
+            margin-bottom: 0.6rem;
+        }
+        .add-btn {
+            background: linear-gradient(135deg, #FF2A6D, #D10047);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* --- GastroPass --- */
+        .rewards-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.4rem;
+        }
+        .gastropass-card {
+            text-align: center;
+            background: linear-gradient(135deg, #2A1018, #3A1525);
+            border: 1px solid #FF2A6D;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .level-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: #FFD300;
+            margin-bottom: 0.5rem;
+        }
+        .progress-bar {
+            background: rgba(0,0,0,0.3);
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 0.5rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF2A6D, #FFD300);
+            width: 56%;
+        }
+        .benefits-section, .rewards-section {
+            background: rgba(30,10,15,0.6);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .reward-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #44202A;
+        }
+        .reward-item:last-child {
+            border: none;
+        }
+
+        /* --- Panel del Dueño --- */
+        .owner-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #FF2A6D;
+            font-size: 1.4rem;
+        }
+        .summary-card {
+            background: rgba(30,10,15,0.5);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .alerts-section {
+            background: rgba(255,42,109,0.1);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        .waiting-section {
+            background: rgba(30,10,15,0.5);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        /* Botones y formularios */
+        .btn-neo {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            margin: 0.8rem 0;
+        }
+        .btn-primary { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
+        .btn-gold { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
+        .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1A1030;
+            color: #FFD6E0;
+            border: 1px solid #FF2A6D;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #D0B0C0;
+        }
+
+        /* Navegación inferior */
+        .app-nav {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(10, 7, 10, 0.9);
+            border-top: 1px solid #FF2A6D;
+            padding: 0.8rem 0;
+            backdrop-filter: blur(5px);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #E0C0D0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .nav-item.active, .nav-item:hover {
+            color: #FFD300;
+        }
+        .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
+
+        /* Botón Descarga App */
+        .download-btn {
+            position: fixed;
+            bottom: 60px;
+            right: 10px;
+            background: linear-gradient(135deg, #FF2A6D, #D10047);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div id="splashScreen">
+        <div class="splash-logo">
+            <img src="Logo GASTRONEO - Opción 3.jpg" alt="GastroNeo" style="width:100%;height:100%;border-radius:50%;">
+        </div>
+        <div class="splash-text">GASTRONEO</div>
+    </div>
+
     <div class="app-container">
         <div class="app-header">
             <h1>GASTRONEO</h1>
@@ -263,18 +591,39 @@
         </div>
     </div>
 
+    <!-- Botón Descarga App -->
+    <button class="download-btn" onclick="installApp()">
+        <i class="fas fa-download"></i>
+    </button>
+
     <!-- Service Worker -->
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW registrado'))
-                    .catch(err => console.log('Error SW:', err));
-            });
-        }
-    </script>
+        // === Mostrar Splash y luego ocultarlo ===
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('splashScreen').style.display = 'none';
+                document.querySelector('.app-container').style.display = 'flex';
+                renderAuthOrProfile();
+            }, 2000);
+        });
 
-    <script>
+        // === Funciones ===
+        function installApp() {
+            if (window.deferredPrompt) {
+                window.deferredPrompt.prompt();
+                window.deferredPrompt.userChoice.then(choiceResult => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    window.deferredPrompt = null;
+                });
+            } else {
+                alert("Para instalar la app, abre este sitio en Chrome para Android o Safari para iOS.");
+            }
+        }
+
         // === Simulación de datos ===
         function getBusinessData() {
             return {
@@ -381,6 +730,65 @@
             }
             alert("✅ ¡Reserva confirmada en GastroNeo!\nHemos añadido 100 GastroTokens a tu cuenta.");
             showView('homeView');
+        }
+
+        // === Autenticación ===
+        function renderAuthOrProfile() {
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            const container = document.getElementById('authOrProfile');
+            if (user) {
+                container.innerHTML = `<div class="user-profile"><div class="user-name">Hola, ${user.name} ✨</div><div class="user-tokens">GastroTokens: ${user.tokens || 0}</div></div>`;
+            } else {
+                container.innerHTML = `
+                    <div class="auth-section">
+                        <div class="auth-title">¿Nuevo aquí?</div>
+                        <div class="neuro-note">Crea tu GastroPass y empieza a ganar recompensas exclusivas.</div>
+                        <div class="auth-buttons">
+                            <button class="auth-btn btn-signup" onclick="showSignupModal()">Crear Cuenta</button>
+                            <button class="auth-btn btn-login" onclick="showLoginModal()">Iniciar Sesión</button>
+                        </div>
+                    </div>`;
+            }
+        }
+
+        function showSignupModal() {
+            const name = prompt("¿Cuál es tu nombre?");
+            if (name && name.trim()) {
+                localStorage.setItem('gastroneo_user', JSON.stringify({name: name.trim(), tokens: 50}));
+                alert("¡Bienvenido! 🎁 50 GastroTokens de bienvenida.");
+                renderAuthOrProfile();
+            }
+        }
+
+        function showLoginModal() {
+            const name = prompt("Ingresa tu nombre:");
+            if (name && name.trim()) {
+                const existing = JSON.parse(localStorage.getItem('gastroneo_user'));
+                if (existing && existing.name === name.trim()) {
+                    alert("¡Bienvenido de nuevo!");
+                    renderAuthOrProfile();
+                } else {
+                    alert("Usuario no encontrado. Créate una cuenta.");
+                }
+            }
+        }
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => {
+                        console.log('SW registrado');
+                        // Detectar si se puede instalar
+                        window.addEventListener('beforeinstallprompt', (e) => {
+                            e.preventDefault();
+                            window.deferredPrompt = e;
+                        });
+                    })
+                    .catch(err => console.log('Error SW:', err));
+            });
         }
     </script>
 </body>
