@@ -122,7 +122,57 @@
             cursor: pointer;
         }
 
-        /* --- Panel del Dueño Avanzado --- */
+        /* --- GastroPass --- */
+        .rewards-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.4rem;
+        }
+        .gastropass-card {
+            text-align: center;
+            background: linear-gradient(135deg, #2A1018, #3A1525);
+            border: 1px solid #FF2A6D;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .level-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: #FFD300;
+            margin-bottom: 0.5rem;
+        }
+        .progress-bar {
+            background: rgba(0,0,0,0.3);
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 0.5rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF2A6D, #FFD300);
+            width: 56%;
+        }
+        .benefits-section, .rewards-section {
+            background: rgba(30,10,15,0.6);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .reward-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #44202A;
+        }
+        .reward-item:last-child {
+            border: none;
+        }
+
+        /* --- Panel del Dueño --- */
         .owner-header {
             text-align: center;
             margin-bottom: 1.2rem;
@@ -166,6 +216,7 @@
             margin: 0.8rem 0;
         }
         .btn-primary { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
+        .btn-gold { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
         .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
 
         .form-control {
@@ -228,7 +279,7 @@
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-utensils"></i> Reservar Mesa
                 </button>
-                <button class="btn-neo btn-primary" style="background:linear-gradient(135deg, #FFD300, #FF9A00);color:#333;" onclick="showView('menuView')">
+                <button class="btn-neo btn-gold" onclick="showView('menuView')">
                     <i class="fas fa-book-open"></i> Menú Digital
                 </button>
                 <button class="btn-neo btn-primary" onclick="showView('rewardsView')">
@@ -354,16 +405,52 @@
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Rewards View -->
+            <!-- Mi GastroPass -->
             <div id="rewardsView" class="view">
-                <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1.5rem;">🪙 Mi GastroPass</h2>
-                <div style="text-align:center;background:rgba(30,10,15,0.6);padding:1.2rem;border-radius:12px;">
-                    <div style="font-family:'Orbitron';color:#FFD300;font-size:1.2rem;">🥉 Bronce</div>
-                    <div style="margin:0.8rem 0;">Progreso: 280 / 500 pts</div>
-                    <div style="background:rgba(0,0,0,0.3);height:10px;border-radius:5px;overflow:hidden;">
-                        <div style="height:100%;width:56%;background:linear-gradient(90deg, #FF2A6D, #FFD300);"></div>
+                <div class="rewards-header">🪙 Mi GastroPass</div>
+
+                <div class="gastropass-card">
+                    <div class="level-badge">🥉 Bronce</div>
+                    <div style="font-size:0.9rem;color:#D0B0C0;margin-bottom:0.8rem;">Progreso hacia Plata</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div id="progressText" style="font-size:0.85rem;color:#F0D0E0;margin-top:0.5rem;">280 / 500 pts</div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin-bottom:1rem;">🎁 Tus Beneficios</h3>
+                    <div id="benefitsList" style="font-size:0.95rem;line-height:1.6;color:#FFD6E0;">
+                        <div>• Menú digital exclusivo</div>
+                        <div>• Cumpleaños gratis</div>
+                        <div>• Acceso a eventos del chef</div>
                     </div>
                 </div>
+
+                <div class="rewards-section">
+                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin-bottom:1rem;">🛒 Canjear Recompensas</h3>
+                    <div class="reward-item">
+                        <div><strong>Café Gourmet</strong><br><small>100 pts</small></div>
+                        <button class="add-btn" style="padding:0.4rem 0.8rem;font-size:0.85rem;" onclick="redeemReward(100, 'Café Gourmet')">Canjear</button>
+                    </div>
+                    <div class="reward-item">
+                        <div><strong>Postre del Chef</strong><br><small>250 pts</small></div>
+                        <button class="add-btn" style="padding:0.4rem 0.8rem;font-size:0.85rem;" onclick="redeemReward(250, 'Postre del Chef')">Canjear</button>
+                    </div>
+                    <div class="reward-item">
+                        <div><strong>Copa de Vino</strong><br><small>300 pts</small></div>
+                        <button class="add-btn" style="padding:0.4rem 0.8rem;font-size:0.85rem;" onclick="redeemReward(300, 'Copa de Vino')">Canjear</button>
+                    </div>
+                    <div class="reward-item">
+                        <div><strong>Menú Degustación</strong><br><small>800 pts</small></div>
+                        <button class="add-btn" style="padding:0.4rem 0.8rem;font-size:0.85rem;" onclick="redeemReward(800, 'Menú Degustación')">Canjear</button>
+                    </div>
+                    <div class="reward-item">
+                        <div><strong>Cena con el Chef</strong><br><small>1500 pts</small></div>
+                        <button class="add-btn" style="padding:0.4rem 0.8rem;font-size:0.85rem;" onclick="redeemReward(1500, 'Cena con el Chef')">Canjear</button>
+                    </div>
+                </div>
+
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
@@ -421,7 +508,7 @@
     </div>
 
     <script>
-        // === Simulación de datos del negocio ===
+        // === Simulación de datos ===
         function getBusinessData() {
             return {
                 dailyRevenue: 420,
@@ -444,10 +531,25 @@
             };
         }
 
+        // === GastroPass ===
+        function redeemReward(cost, item) {
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            if (!user) {
+                alert("Debes crear una cuenta para canjear recompensas.");
+                return;
+            }
+            if (user.tokens < cost) {
+                alert(`⚠️ Necesitas ${cost} tokens. Tienes ${user.tokens}.`);
+                return;
+            }
+            user.tokens -= cost;
+            localStorage.setItem('gastroneo_user', JSON.stringify(user));
+            alert(`✅ ¡Canjeado! ${item}\nDisfrútalo en tu próxima visita.`);
+        }
+
         // === Panel del Dueño ===
         function loadOwnerDashboard() {
             const data = getBusinessData();
-            
             document.getElementById('dailyRevenue').textContent = `€${data.dailyRevenue}`;
             document.getElementById('occupiedTables').textContent = data.occupiedTables;
             document.getElementById('pendingOrders').textContent = data.pendingOrders;
@@ -508,7 +610,12 @@
         }
 
         function confirmBooking() {
-            alert("✅ ¡Reserva confirmada en GastroNeo!");
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            if (user) {
+                user.tokens = (user.tokens || 0) + 100;
+                localStorage.setItem('gastroneo_user', JSON.stringify(user));
+            }
+            alert("✅ ¡Reserva confirmada en GastroNeo!\nHemos añadido 100 GastroTokens a tu cuenta.");
             showView('homeView');
         }
     </script>
