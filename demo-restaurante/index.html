@@ -666,53 +666,45 @@
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Panel Dueño -->
-            <div id="ownerDashboard" class="view">
-                <h2 style="font-family:'Orbitron';color:#FF2A6D;">📊 Panel Quantum</h2>
-                
-                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0;">
-                    <div class="stat-card-neo">
-                        <div class="stat-value-neo" id="todayGuests">0</div>
-                        <div>Comensales Hoy</div>
-                    </div>
-                    <div class="stat-card-neo">
-                        <div class="stat-value-neo" id="totalReservations">0</div>
-                        <div>Reservas Totales</div>
-                    </div>
-                </div>
+            <!-- Panel Dueño Avanzado -->
+<div id="ownerDashboard" class="view">
+    <h2 style="font-family:'Orbitron';color:#FF2A6D;text-align:center;margin-bottom:1.2rem;">🔐 Panel Quantum Avanzado</h2>
 
-                <h3 style="font-family:'Orbitron';color:#FFD300;font-size:1.3rem;margin:1.5rem 0;">Reservas de Hoy</h3>
-                <div id="reservationsList" style="max-height:200px;overflow-y:auto;">
-                    <p style="color:#D0B0C0;font-style:italic;">No hay reservas hoy.</p>
-                </div>
-
-                <button class="btn-neo" style="background:#e74c3c;color:white;margin-top:1.5rem;" onclick="logoutOwner()">Cerrar Sesión</button>
-            </div>
-        </div>
-
-        <div class="app-nav">
-            <a href="#" class="nav-item active" onclick="showView('homeView'); return false;">
-                <i class="fas fa-home"></i>
-                <span>Inicio</span>
-            </a>
-            <a href="#" class="nav-item" onclick="showView('bookingView'); return false;">
-                <i class="fas fa-calendar"></i>
-                <span>Reservas</span>
-            </a>
-            <a href="#" class="nav-item" onclick="showView('menuView'); return false;">
-                <i class="fas fa-book"></i>
-                <span>Menú</span>
-            </a>
+    <!-- Resumen del Día -->
+    <div style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
+        <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📊 Resumen del Día</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;font-size:0.9rem;">
+            <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
+            <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">0/12</span></div>
+            <div><strong>Pedidos pendientes:</strong> <span id="pendingOrders">0</span></div>
+            <div><strong>Clientes en espera:</strong> <span id="waitingClients">0</span></div>
         </div>
     </div>
 
-    <div id="cartBar">
-        🛒 Carrito: <span id="cartCount">0</span> platos • <span id="cartTotal">€0.00</span>
-        <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.85rem;margin-left:1rem;" onclick="checkout()">Pagar</button>
+    <!-- Alertas Inteligentes -->
+    <div id="alertsSection" style="background:rgba(255,42,109,0.1);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:none;">
+        <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.1rem;margin-bottom:0.8rem;">⚠️ Alertas</div>
+        <div id="alertsList" style="font-size:0.9rem;color:#FFD300;line-height:1.5;"></div>
     </div>
 
-    <script src="../shared/shared.js"></script>
-    <script>
+    <!-- Clientes en Espera -->
+    <div id="waitingSection" style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:none;">
+        <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">👥 Clientes en Espera</div>
+        <div id="waitingList" style="font-size:0.9rem;color:#F0D0E0;"></div>
+    </div>
+
+    <!-- Platos Más Vendidos -->
+    <div style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
+        <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📈 Platos Más Vendidos</div>
+        <div id="topDishes" style="font-size:0.9rem;color:#F0D0E0;"></div>
+    </div>
+
+    <!-- Acciones -->
+    <button class="btn-neo" style="background:linear-gradient(135deg, #00F0FF, #6E00FF);color:#0D0916;margin-bottom:0.8rem;" onclick="verifyAllOrders()">
+        ✅ Verificar Todos los Pedidos
+    </button>
+    <button class="btn-neo" style="background:#e74c3c;color:white;" onclick="logoutOwner()">Cerrar Sesión</button>
+</div>
         // === Datos del Menú ===
         const MENU_DATA = [
             {
@@ -992,34 +984,74 @@
             showView('homeView');
         }
 
-        // === Panel Dueño ===
-        function loadOwnerDashboard() {
-            const reservations = JSON.parse(localStorage.getItem('gastroneo_reservations') || '[]');
-            const today = new Date().toISOString().split('T')[0];
-            const todayRes = reservations.filter(r => r.date === today);
+       // === Datos simulados para el demo ===
+function getSimulatedData() {
+    return {
+        dailyRevenue: 420,
+        occupiedTables: "8/12",
+        pendingOrders: 3,
+        waitingClients: 2,
+        alerts: [
+            "Mesa 3: 18 min sin postre",
+            "Zayn: 2 pedidos sin verificar"
+        ],
+        waitingList: [
+            { name: "María G.", waitTime: "12 min" },
+            { name: "Luis T.", waitTime: "8 min" }
+        ],
+        topDishes: [
+            { name: "Risotto de Trufa", count: 6 },
+            { name: "Pasta Carbonara", count: 4 },
+            { name: "Tartar de Atún", count: 3 }
+        ]
+    };
+}
 
-            let totalGuests = 0;
-            todayRes.forEach(r => {
-                if (r.guests === '7+') totalGuests += 7;
-                else totalGuests += parseInt(r.guests) || 1;
-            });
+function loadOwnerDashboard() {
+    const data = getSimulatedData();
+    
+    // Resumen
+    document.getElementById('dailyRevenue').textContent = `€${data.dailyRevenue}`;
+    document.getElementById('occupiedTables').textContent = data.occupiedTables;
+    document.getElementById('pendingOrders').textContent = data.pendingOrders;
+    document.getElementById('waitingClients').textContent = data.waitingClients;
 
-            document.getElementById('todayGuests').textContent = totalGuests;
-            document.getElementById('totalReservations').textContent = reservations.length;
+    // Alertas
+    const alertsSection = document.getElementById('alertsSection');
+    const alertsList = document.getElementById('alertsList');
+    if (data.alerts.length > 0) {
+        alertsList.innerHTML = data.alerts.map(a => `• ${a}`).join('<br>');
+        alertsSection.style.display = 'block';
+    } else {
+        alertsSection.style.display = 'none';
+    }
 
-            const listEl = document.getElementById('reservationsList');
-            if (todayRes.length === 0) {
-                listEl.innerHTML = '<p style="color:#D0B0C0;font-style:italic;">No hay reservas hoy.</p>';
-            } else {
-                listEl.innerHTML = todayRes.map(r => {
-                    let zoneText = r.zone === 'terrace' ? 'Terraza' : r.zone === 'private' ? 'Privado' : r.zone === 'bar' ? 'Barra' : 'Interior';
-                    return `<div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
-                        <strong>${r.name}</strong> • ${r.guests} comensales<br>
-                        <small>${r.time} • ${zoneText}</small>
-                    </div>`;
-                }).join('');
-            }
-        }
+    // Clientes en espera
+    const waitingSection = document.getElementById('waitingSection');
+    const waitingList = document.getElementById('waitingList');
+    if (data.waitingList.length > 0) {
+        waitingList.innerHTML = data.waitingList.map(w => 
+            `• ${w.name} (${w.waitTime})`
+        ).join('<br>');
+        waitingSection.style.display = 'block';
+    } else {
+        waitingSection.style.display = 'none';
+    }
+
+    // Platos más vendidos
+    document.getElementById('topDishes').innerHTML = data.topDishes.map(d => 
+        `• ${d.name} (${d.count})`
+    ).join('<br>');
+}
+
+function verifyAllOrders() {
+    alert("✅ Todos los pedidos verificados. Ingresos asegurados.");
+    loadOwnerDashboard();
+}
+
+function logoutOwner() {
+    showView('homeView');
+}
 
         // === Navegación ===
         function showView(viewId) {
