@@ -478,28 +478,45 @@
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Menú Digital -->
-            <div id="menuView" class="view">
-                <h2 style="font-family:'Orbitron';color:#FFD300;">📖 Menú Digital</h2>
-                
-                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin:1rem 0;">
-                    <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Entrantes</h3>
-                    <div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
-                        <strong>Tartar de Atún con Wasabi</strong><br>
-                        <small>Fresco, picante y elegante • 14€</small>
-                    </div>
-                </div>
+           <!-- Menú Digital - Versión Visual y Efectiva -->
+<div id="menuView" class="view">
+    <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1rem;">📖 Menú Digital</h2>
 
-                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin:1rem 0;">
-                    <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Platos Fuertes</h3>
-                    <div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
-                        <strong>Risotto de Trufa Negra</strong><br>
-                        <small>Con parmesano 24 meses • 24€</small>
-                    </div>
-                </div>
+    <!-- Barra de Búsqueda -->
+    <div style="padding:0 0.5rem;margin-bottom:1rem;">
+        <input type="text" id="menuSearch" class="form-control" placeholder="Busca un plato..." onkeyup="filterMenu()">
+    </div>
 
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
-            </div>
+    <!-- Categorías -->
+    <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1rem;scrollbar-width:none;">
+        <button class="category-btn active" onclick="filterByCategory('all')">Todo</button>
+        <button class="category-btn" onclick="filterByCategory('entradas')">Entradas</button>
+        <button class="category-btn" onclick="filterByCategory('fuertes')">Platos Fuertes</button>
+        <button class="category-btn" onclick="filterByCategory('postres')">Postres</button>
+        <button class="category-btn" onclick="filterByCategory('bebidas')">Bebidas</button>
+    </div>
+
+    <!-- Filtros -->
+    <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1.5rem;scrollbar-width:none;">
+        <button class="filter-btn" onclick="filterByTag('populares')">Populares</button>
+        <button class="filter-btn" onclick="filterByTag('recomendados')">Recomendados</button>
+        <button class="filter-btn" onclick="filterByTag('ofertas')">Ofertas</button>
+        <button class="filter-btn" onclick="filterByTag('vegano')">Vegano</button>
+    </div>
+
+    <!-- Lista de Platos -->
+    <div id="menuItems" style="padding:0 0.5rem;">
+        <!-- Se llena dinámicamente -->
+    </div>
+
+    <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin:1.5rem 0.5rem;" onclick="showView('homeView')">← Volver</button>
+</div>
+
+<!-- Carrito Fijo -->
+<div id="cartBar" style="position:fixed;bottom:60px;left:0;width:100%;background:rgba(255,42,109,0.9);color:white;text-align:center;padding:0.8rem;font-family:'Rajdhani';font-weight:600;display:none;z-index:1000;">
+    🛒 Carrito: <span id="cartCount">0</span> platos • <span id="cartTotal">€0.00</span>
+    <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.85rem;margin-left:1rem;" onclick="checkout()">Pagar</button>
+</div>
 
             <!-- GastroPass: Sistema de Fidelización Avanzado -->
             <div id="rewardsView" class="view">
