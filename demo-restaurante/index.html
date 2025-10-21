@@ -27,32 +27,12 @@
             overflow: hidden;
         }
 
-        .app-container::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 42, 109, 0.1) 2px, transparent 3px),
-                radial-gradient(circle at 80% 70%, rgba(255, 211, 0, 0.1) 2px, transparent 3px),
-                radial-gradient(circle at 50% 10%, rgba(255, 105, 180, 0.05) 1px, transparent 2px);
-            pointer-events: none;
-            z-index: -1;
-        }
-
         .app-header {
             background: linear-gradient(135deg, #FF2A6D, #FFD300);
             padding: 1.2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-        .app-header::after {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.2), transparent 30%);
-            animation: rotate 10s linear infinite;
-            z-index: 0;
         }
         .app-header h1 {
             font-family: 'Orbitron', sans-serif;
@@ -66,11 +46,144 @@
 
         .app-content {
             flex: 1;
-            padding: 1.5rem;
+            padding: 1rem;
             overflow-y: auto;
             background: rgba(34, 15, 24, 0.7);
         }
 
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* --- Menú Digital --- */
+        .menu-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.4rem;
+        }
+        .category-section {
+            margin-bottom: 2rem;
+        }
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FF2A6D;
+            font-size: 1.2rem;
+            margin: 1.2rem 0 0.8rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #FF2A6D;
+        }
+        .menu-item {
+            background: rgba(30, 10, 15, 0.6);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-item-content {
+            padding: 0.9rem;
+        }
+        .menu-item-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        .menu-item-desc {
+            font-family: 'Rajdhani', sans-serif;
+            color: #F0D0E0;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .menu-item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            color: #D0B0C0;
+            margin-bottom: 0.6rem;
+        }
+        .add-btn {
+            background: linear-gradient(135deg, #FF2A6D, #D10047);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* --- Panel del Dueño Avanzado --- */
+        .owner-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #FF2A6D;
+            font-size: 1.4rem;
+        }
+        .summary-card {
+            background: rgba(30,10,15,0.5);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .alerts-section {
+            background: rgba(255,42,109,0.1);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        .waiting-section {
+            background: rgba(30,10,15,0.5);
+            border: 1px solid #FF2A6D;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        /* Botones y formularios */
+        .btn-neo {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            margin: 0.8rem 0;
+        }
+        .btn-primary { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
+        .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1A1030;
+            color: #FFD6E0;
+            border: 1px solid #FF2A6D;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #D0B0C0;
+        }
+
+        /* Navegación inferior */
         .app-nav {
             display: flex;
             justify-content: space-around;
@@ -92,377 +205,9 @@
             color: #FFD300;
         }
         .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
-
-        .view { display: none; }
-        .view.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes rotate { to { transform: rotate(360deg); } }
-
-        .btn-neo {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-family: 'Rajdhani', sans-serif;
-            cursor: pointer;
-            margin: 0.8rem 0;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .btn-neo::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-        .btn-neo:hover::before { left: 100%; }
-        .btn-primary { 
-            background: linear-gradient(135deg, #FF2A6D, #D10047); 
-            color: white;
-            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
-        }
-        .btn-primary:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
-        }
-        .btn-gold { 
-            background: linear-gradient(135deg, #FFD300, #FF9A00); 
-            color: #333;
-            box-shadow: 0 0 15px rgba(255, 211, 0, 0.5);
-        }
-        .btn-gold:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(255, 211, 0, 0.8);
-        }
-
-        /* --- Splash Screen --- */
-        #splashScreen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #1A0A10;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            color: white;
-        }
-        .splash-logo {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #FF2A6D, #FFD300);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 20px rgba(255, 42, 109, 0.4);
-        }
-        .splash-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: #FFD300;
-            text-shadow: 0 0 10px rgba(255, 42, 109, 0.7);
-        }
-
-        /* --- Equipo Personal --- */
-        .team-section {
-            margin: 2rem 0;
-        }
-        .team-title {
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            color: #FF2A6D;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-        }
-        .team-image {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin: 0 auto 1rem;
-            display: block;
-        }
-        .neuro-note {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
-            color: #FFD300;
-            text-align: center;
-            line-height: 1.6;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        /* --- Autenticación --- */
-        .auth-section {
-            text-align: center;
-            margin: 1.8rem 0;
-            padding: 1.5rem;
-            background: rgba(30, 10, 15, 0.4);
-            border-radius: 16px;
-            border: 1px solid #FF2A6D;
-        }
-        .auth-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #FFD300;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        .neuro-note {
-            margin-top: 1.2rem;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95rem;
-            color: #F0D0E0;
-            line-height: 1.5;
-        }
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        .auth-btn {
-            padding: 0.8rem 1.4rem;
-            border-radius: 12px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-        }
-        .btn-login { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
-        .btn-signup { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
-        .auth-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
-        }
-
-        .user-profile {
-            text-align: center;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: rgba(255, 211, 0, 0.1);
-            border-radius: 12px;
-            border: 1px solid #FFD300;
-        }
-        .user-name {
-            font-family: 'Orbitron', sans-serif;
-            color: #FFD300;
-            font-size: 1.2rem;
-        }
-        .user-tokens {
-            font-family: 'Rajdhani', sans-serif;
-            color: #F0D0E0;
-            font-size: 0.95rem;
-        }
-
-        /* --- GastroPass --- */
-        .gastropass-card {
-            background: linear-gradient(135deg, #2A1018, #3A1525);
-            border: 1px solid #FF2A6D;
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            margin: 0 0 1.5rem;
-        }
-        .level-badge {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .bronze { color: #CD7F32; }
-        .silver { color: #C0C0C0; }
-        .gold { color: #FFD700; }
-
-        .progress-bar {
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            height: 12px;
-            margin: 0.8rem 0;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #FF2A6D, #FFD300);
-            width: 0%;
-            transition: width 0.5s;
-        }
-
-        .rewards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .reward-card {
-            background: rgba(30, 10, 15, 0.6);
-            border: 1px solid #FF2A6D;
-            border-radius: 12px;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .reward-info span:first-child {
-            font-weight: 600;
-            color: #FFD300;
-        }
-
-        .referral-section {
-            background: rgba(255, 211, 0, 0.08);
-            border: 1px solid #FFD300;
-            border-radius: 12px;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-        }
-        .referral-code {
-            background: rgba(0,0,0,0.3);
-            padding: 0.6rem;
-            border-radius: 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            margin: 0.8rem 0;
-            word-break: break-all;
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            margin: 1rem 0;
-        }
-        .achievement-badge {
-            background: rgba(255, 42, 109, 0.2);
-            border: 1px solid #FF2A6D;
-            border-radius: 8px;
-            padding: 0.6rem 0.3rem;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-        .badge-unlocked { color: #FFD300; }
-        .badge-locked { color: #555; }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            background: #1A1030;
-            color: #FFD6E0;
-            border: 1px solid #FF2A6D;
-            border-radius: 8px;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #D0B0C0;
-        }
-
-        /* --- Menú Digital Mejorado --- */
-        .category-btn, .filter-btn {
-            background: rgba(255, 42, 109, 0.2);
-            border: 1px solid #FF2A6D;
-            color: #FFD300;
-            padding: 0.5rem 0.8rem;
-            border-radius: 20px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .category-btn.active, .category-btn:hover, .filter-btn:hover {
-            background: rgba(255, 211, 0, 0.3);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .menu-item {
-            background: rgba(30, 10, 15, 0.6);
-            border: 1px solid #FF2A6D;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 1.2rem;
-        }
-        .menu-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-        .menu-item-content {
-            padding: 1rem;
-        }
-        .menu-item-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #FFD300;
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
-        }
-        .menu-item-desc {
-            font-family: 'Rajdhani', sans-serif;
-            color: #F0D0E0;
-            font-size: 0.95rem;
-            margin-bottom: 0.6rem;
-            line-height: 1.4;
-        }
-        .menu-item-meta {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.85rem;
-            color: #D0B0C0;
-            margin-bottom: 0.8rem;
-        }
-        .add-btn {
-            background: linear-gradient(135deg, #FF2A6D, #D10047);
-            color: white;
-            border: none;
-            padding: 0.6rem;
-            border-radius: 10px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .add-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
-        }
-
-        /* Carrito */
-        #cartBar {
-            position: fixed;
-            bottom: 60px;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 42, 109, 0.9);
-            color: white;
-            text-align: center;
-            padding: 0.8rem;
-            font-family: 'Rajdhani';
-            font-weight: 600;
-            display: none;
-            z-index: 1000;
-        }
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div id="splashScreen">
-        <div class="splash-logo">
-            <img src="Logo GASTRONEO - Opción 3.jpg" alt="GastroNeo" style="width:100%;height:100%;border-radius:50%;">
-        </div>
-        <div class="splash-text">GASTRONEO</div>
-    </div>
-
     <div class="app-container">
         <div class="app-header">
             <h1>GASTRONEO</h1>
@@ -474,18 +219,16 @@
                 <div style="text-align:center;margin-bottom:1.5rem;">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGwjDuHhDnYwyI7QyXJn0e1rPwH3aWt6PkRw&s" 
                          alt="Equipo GastroNeo"
-                         class="team-image">
-                    <div class="neuro-note">
+                         style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;">
+                    <div style="font-family:'Rajdhani';font-size:1.1rem;color:#FFD300;text-align:center;margin:1rem 0;font-style:italic;">
                         “Más del 70% de los clientes eligen restaurantes con equipo visible y cercano.”
                     </div>
                 </div>
 
-                <div id="authOrProfile"></div>
-
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-utensils"></i> Reservar Mesa
                 </button>
-                <button class="btn-neo btn-gold" onclick="showView('menuView')">
+                <button class="btn-neo btn-primary" style="background:linear-gradient(135deg, #FFD300, #FF9A00);color:#333;" onclick="showView('menuView')">
                     <i class="fas fa-book-open"></i> Menú Digital
                 </button>
                 <button class="btn-neo btn-primary" onclick="showView('rewardsView')">
@@ -498,571 +241,256 @@
 
             <!-- Booking View -->
             <div id="bookingView" class="view">
-                <h2 style="font-family:'Orbitron';color:#FF2A6D;">🍽️ Reservar Mesa</h2>
-
+                <h2 style="font-family:'Orbitron';color:#FF2A6D;text-align:center;margin-bottom:1.2rem;">🍽️ Reservar Mesa</h2>
                 <div class="form-group">
                     <label>Nombre Completo</label>
                     <input type="text" id="clientName" class="form-control" placeholder="Ej. Carlos Ruiz">
                 </div>
-
                 <div class="form-group">
                     <label>Teléfono</label>
                     <input type="tel" id="clientPhone" class="form-control" placeholder="+34 600 000 000">
                 </div>
-
                 <div class="form-group">
                     <label>Fecha</label>
                     <input type="date" id="bookingDate" class="form-control">
                 </div>
-
                 <div class="form-group">
                     <label>Hora</label>
                     <select id="bookingTime" class="form-control">
-                        <option value="">-- Selecciona hora --</option>
-                        <option value="13:00">13:00 (Almuerzo)</option>
+                        <option value="13:00">13:00</option>
                         <option value="13:30">13:30</option>
                         <option value="14:00">14:00</option>
-                        <option value="14:30">14:30</option>
-                        <option value="20:00">20:00 (Cena)</option>
+                        <option value="20:00">20:00</option>
                         <option value="20:30">20:30</option>
                         <option value="21:00">21:00</option>
-                        <option value="21:30">21:30</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label>Número de Comensales</label>
+                    <label>Comensales</label>
                     <select id="guests" class="form-control">
-                        <option value="1">1 persona</option>
-                        <option value="2">2 personas</option>
-                        <option value="3">3 personas</option>
-                        <option value="4">4 personas</option>
-                        <option value="5">5 personas</option>
-                        <option value="6">6 personas</option>
-                        <option value="7+">7+ personas (contactar)</option>
+                        <option>1</option><option>2</option><option>3</option><option>4</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label>Zona</label>
-                    <select id="tableZone" class="form-control">
-                        <option value="inside">Interior</option>
-                        <option value="terrace">Terraza</option>
-                        <option value="bar">Barra</option>
-                        <option value="private">Privado</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Ocasión</label>
-                    <select id="occasion" class="form-control">
-                        <option value="regular">Regular</option>
-                        <option value="birthday">Cumpleaños</option>
-                        <option value="anniversary">Aniversario</option>
-                        <option value="business">Negocios</option>
-                    </select>
-                </div>
-
                 <button class="btn-neo btn-primary" onclick="confirmBooking()">Confirmar Reserva</button>
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
             </div>
 
             <!-- Menú Digital -->
             <div id="menuView" class="view">
-                <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1rem;">📖 Menú Digital</h2>
+                <div class="menu-header">📖 Menú Digital</div>
 
-                <div style="padding:0 0.5rem;margin-bottom:1rem;">
-                    <input type="text" id="menuSearch" class="form-control" placeholder="Busca un plato..." onkeyup="filterMenu()">
-                </div>
-
-                <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1rem;scrollbar-width:none;">
-                    <button class="category-btn active" onclick="filterByCategory('all')">Todo</button>
-                    <button class="category-btn" onclick="filterByCategory('entradas')">Entradas</button>
-                    <button class="category-btn" onclick="filterByCategory('fuertes')">Platos Fuertes</button>
-                    <button class="category-btn" onclick="filterByCategory('postres')">Postres</button>
-                    <button class="category-btn" onclick="filterByCategory('bebidas')">Bebidas</button>
-                </div>
-
-                <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1.5rem;scrollbar-width:none;">
-                    <button class="filter-btn" onclick="filterByTag('populares')">Populares</button>
-                    <button class="filter-btn" onclick="filterByTag('recomendados')">Recomendados</button>
-                    <button class="filter-btn" onclick="filterByTag('ofertas')">Ofertas</button>
-                    <button class="filter-btn" onclick="filterByTag('vegano')">Vegano</button>
-                </div>
-
-                <div id="menuItems" style="padding:0 0.5rem;">
-                    <!-- Se llena dinámicamente -->
-                </div>
-
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin:1.5rem 0.5rem;" onclick="showView('homeView')">← Volver</button>
-            </div>
-
-            <!-- GastroPass -->
-            <div id="rewardsView" class="view">
-                <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1.5rem;">🪙 Mi GastroPass</h2>
-
-                <div class="gastropass-card">
-                    <div id="userLevel" class="level-badge bronze">🥉 Bronce</div>
-                    <div style="font-size:0.9rem;color:#D0B0C0;margin-bottom:0.8rem;">Progreso hacia Plata</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
-                    </div>
-                    <div id="progressText" style="font-size:0.85rem;color:#F0D0E0;">280 / 500 pts</div>
-                </div>
-
-                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
-                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">✨ Cómo Ganar Tokens</h3>
-                    <div style="font-size:0.95rem;line-height:1.6;color:#FFD6E0;">
-                        <div>• Registro completo: <strong>+50</strong></div>
-                        <div>• Primera reserva: <strong>+100</strong></div>
-                        <div>• Reseña verificada: <strong>+30</strong></div>
-                        <div>• Reserva en horario no-pico: <strong>+20</strong></div>
-                        <div>• Referir a un amigo: <strong>+150</strong></div>
-                    </div>
-                </div>
-
-                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
-                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🎁 Canjear Recompensas</h3>
-                    <div class="rewards-grid">
-                        <div class="reward-card">
-                            <div class="reward-info">
-                                <span>Copa de vino</span><br>
-                                <small>100 pts</small>
+                <div class="category-section">
+                    <div class="category-title">ENTRADAS</div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Tartar de Atún</div>
+                            <div class="menu-item-desc">Atún fresco con wasabi y aguacate</div>
+                            <div class="menu-item-meta">
+                                <span>💰 €16.50</span>
+                                <span>❤️ 4.9</span>
                             </div>
-                            <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="redeemReward(100, 'Copa de vino')">Canjear</button>
+                            <button class="add-btn">[ + ] AGREGAR</button>
                         </div>
-                        <div class="reward-card">
-                            <div class="reward-info">
-                                <span>Postre del chef</span><br>
-                                <small>250 pts</small>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Bruschetta</div>
+                            <div class="menu-item-desc">Pan tostado con tomate y albahaca</div>
+                            <div class="menu-item-meta">
+                                <span>💰 €9.90</span>
+                                <span>❤️ 4.7</span>
                             </div>
-                            <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="redeemReward(250, 'Postre del chef')">Canjear</button>
-                        </div>
-                        <div class="reward-card">
-                            <div class="reward-info">
-                                <span>Cena con el chef</span><br>
-                                <small>5000 pts</small>
-                            </div>
-                            <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="redeemReward(5000, 'Cena con el chef')">Canjear</button>
+                            <button class="add-btn">[ + ] AGREGAR</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="referral-section">
-                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🤝 Referidos</h3>
-                    <p style="font-size:0.9rem;color:#F0D0E0;">Comparte tu código y gana tokens cuando tus amigos reservan.</p>
-                    <div class="referral-code" id="referralCode">Cargando...</div>
-                    <p style="font-size:0.85rem;color:#D0B0C0;margin-top:0.5rem;">
-                        +100 pts al registrarse • +50 pts en su primera reserva
-                    </p>
+                <div class="category-section">
+                    <div class="category-title">PLATOS FUERTES</div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Pasta Carbonara</div>
+                            <div class="menu-item-desc">Pasta cremosa con panceta y huevo</div>
+                            <div class="menu-item-meta">
+                                <span>💰 €18.99</span>
+                                <span>❤️ 4.8</span>
+                            </div>
+                            <button class="add-btn">[ + ] AGREGAR</button>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Risotto de Trufa</div>
+                            <div class="menu-item-desc">Arroz cremoso con trufa negra</div>
+                            <div class="menu-item-meta">
+                                <span>💰 €24.00</span>
+                                <span>❤️ 5.0</span>
+                            </div>
+                            <button class="add-btn">[ + ] AGREGAR</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;">
-                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🏆 Logros</h3>
-                    <div class="achievements-grid" id="achievementsGrid">
+                <div class="category-section">
+                    <div class="category-title">POSTRES</div>
+                    <div class="menu-item">
+                        <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Tiramisú</div>
+                            <div class="menu-item-desc">Capas de bizcocho y crema de mascarpone</div>
+                            <div class="menu-item-meta">
+                                <span>💰 €8.99</span>
+                                <span>❤️ 4.7</span>
+                            </div>
+                            <button class="add-btn">[ + ] AGREGAR</button>
+                        </div>
                     </div>
                 </div>
 
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Panel Dueño Avanzado -->
-<div id="ownerDashboard" class="view">
-    <h2 style="font-family:'Orbitron';color:#FF2A6D;text-align:center;margin-bottom:1.2rem;">🔐 Panel Quantum Avanzado</h2>
+            <!-- Rewards View -->
+            <div id="rewardsView" class="view">
+                <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1.5rem;">🪙 Mi GastroPass</h2>
+                <div style="text-align:center;background:rgba(30,10,15,0.6);padding:1.2rem;border-radius:12px;">
+                    <div style="font-family:'Orbitron';color:#FFD300;font-size:1.2rem;">🥉 Bronce</div>
+                    <div style="margin:0.8rem 0;">Progreso: 280 / 500 pts</div>
+                    <div style="background:rgba(0,0,0,0.3);height:10px;border-radius:5px;overflow:hidden;">
+                        <div style="height:100%;width:56%;background:linear-gradient(90deg, #FF2A6D, #FFD300);"></div>
+                    </div>
+                </div>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+            </div>
 
-    <!-- Resumen del Día -->
-    <div style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
-        <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📊 Resumen del Día</div>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;font-size:0.9rem;">
-            <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
-            <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">0/12</span></div>
-            <div><strong>Pedidos pendientes:</strong> <span id="pendingOrders">0</span></div>
-            <div><strong>Clientes en espera:</strong> <span id="waitingClients">0</span></div>
+            <!-- Panel Dueño Avanzado -->
+            <div id="ownerDashboard" class="view">
+                <div class="owner-header">🔐 Panel Quantum Avanzado</div>
+
+                <div class="summary-card">
+                    <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📊 Resumen del Día</div>
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;font-size:0.9rem;">
+                        <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
+                        <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">0/12</span></div>
+                        <div><strong>Pedidos pendientes:</strong> <span id="pendingOrders">0</span></div>
+                        <div><strong>Clientes en espera:</strong> <span id="waitingClients">0</span></div>
+                    </div>
+                </div>
+
+                <div id="alertsSection" class="alerts-section">
+                    <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.1rem;margin-bottom:0.8rem;">⚠️ Alertas</div>
+                    <div id="alertsList" style="font-size:0.9rem;color:#FFD300;line-height:1.5;"></div>
+                </div>
+
+                <div id="waitingSection" class="waiting-section">
+                    <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">👥 Clientes en Espera</div>
+                    <div id="waitingList" style="font-size:0.9rem;color:#F0D0E0;"></div>
+                </div>
+
+                <div class="summary-card">
+                    <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📈 Platos Más Vendidos</div>
+                    <div id="topDishes" style="font-size:0.9rem;color:#F0D0E0;"></div>
+                </div>
+
+                <button class="btn-neo btn-verify" onclick="verifyAllOrders()">
+                    ✅ Verificar Todos los Pedidos
+                </button>
+                <button class="btn-neo" style="background:#e74c3c;color:white;" onclick="logoutOwner()">Cerrar Sesión</button>
+            </div>
+        </div>
+
+        <!-- Navegación inferior SIEMPRE VISIBLE -->
+        <div class="app-nav">
+            <a href="#" class="nav-item active" onclick="showView('homeView'); return false;">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('bookingView'); return false;">
+                <i class="fas fa-calendar"></i>
+                <span>Reservas</span>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('menuView'); return false;">
+                <i class="fas fa-book"></i>
+                <span>Menú</span>
+            </a>
         </div>
     </div>
 
-    <!-- Alertas Inteligentes -->
-    <div id="alertsSection" style="background:rgba(255,42,109,0.1);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:none;">
-        <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.1rem;margin-bottom:0.8rem;">⚠️ Alertas</div>
-        <div id="alertsList" style="font-size:0.9rem;color:#FFD300;line-height:1.5;"></div>
-    </div>
-
-    <!-- Clientes en Espera -->
-    <div id="waitingSection" style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:none;">
-        <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">👥 Clientes en Espera</div>
-        <div id="waitingList" style="font-size:0.9rem;color:#F0D0E0;"></div>
-    </div>
-
-    <!-- Platos Más Vendidos -->
-    <div style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
-        <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📈 Platos Más Vendidos</div>
-        <div id="topDishes" style="font-size:0.9rem;color:#F0D0E0;"></div>
-    </div>
-
-    <!-- Acciones -->
-    <button class="btn-neo" style="background:linear-gradient(135deg, #00F0FF, #6E00FF);color:#0D0916;margin-bottom:0.8rem;" onclick="verifyAllOrders()">
-        ✅ Verificar Todos los Pedidos
-    </button>
-    <button class="btn-neo" style="background:#e74c3c;color:white;" onclick="logoutOwner()">Cerrar Sesión</button>
-</div>
-        // === Datos del Menú ===
-        const MENU_DATA = [
-            {
-                id: 1,
-                name: "Pasta Carbonara",
-                desc: "Pasta cremosa con huevo, queso y panceta artesanal",
-                price: 18.99,
-                time: "15 min",
-                rating: "4.8 (124)",
-                category: "fuertes",
-                tags: ["populares", "recomendados"],
-                image: "https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600"
-            },
-            {
-                id: 2,
-                name: "Tartar de Atún",
-                desc: "Atún fresco con wasabi, aguacate y toque cítrico",
-                price: 16.50,
-                time: "10 min",
-                rating: "4.9 (89)",
-                category: "entradas",
-                tags: ["recomendados", "vegano"],
-                image: "https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600"
-            },
-            {
-                id: 3,
-                name: "Tiramisú Clásico",
-                desc: "Capas de bizcocho bañadas en café y crema de mascarpone",
-                price: 8.99,
-                time: "5 min",
-                rating: "4.7 (203)",
-                category: "postres",
-                tags: ["populares"],
-                image: "https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600"
-            },
-            {
-                id: 4,
-                name: "Risotto de Trufa",
-                desc: "Arroz cremoso con trufa negra y parmesano 24 meses",
-                price: 24.00,
-                time: "20 min",
-                rating: "5.0 (67)",
-                category: "fuertes",
-                tags: ["recomendados", "ofertas"],
-                image: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600"
-            }
-        ];
-
-        let currentCart = JSON.parse(localStorage.getItem('gastroneo_cart') || '[]');
-
-        // === Render Menú ===
-        function renderMenu(items = MENU_DATA) {
-            const container = document.getElementById('menuItems');
-            container.innerHTML = items.map(item => `
-                <div class="menu-item">
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="menu-item-content">
-                        <div class="menu-item-title">🥘 ${item.name}</div>
-                        <div class="menu-item-desc">${item.desc}</div>
-                        <div class="menu-item-meta">
-                            <span>💰 €${item.price.toFixed(2)}</span>
-                            <span>🕒 ${item.time}</span>
-                            <span>❤️ ${item.rating}</span>
-                        </div>
-                        <button class="add-btn" onclick="addToCart(${item.id})">[ + ] AGREGAR</button>
-                    </div>
-                </div>
-            `).join('');
-            updateCartUI();
-        }
-
-        function filterMenu() {
-            const query = document.getElementById('menuSearch').value.toLowerCase();
-            const filtered = MENU_DATA.filter(item => 
-                item.name.toLowerCase().includes(query) ||
-                item.desc.toLowerCase().includes(query)
-            );
-            renderMenu(filtered);
-        }
-
-        function filterByCategory(category) {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            const filtered = category === 'all' ? MENU_DATA : MENU_DATA.filter(item => item.category === category);
-            renderMenu(filtered);
-        }
-
-        function filterByTag(tag) {
-            const filtered = MENU_DATA.filter(item => item.tags.includes(tag));
-            renderMenu(filtered);
-        }
-
-        function addToCart(itemId) {
-            const item = MENU_DATA.find(i => i.id === itemId);
-            if (item) {
-                currentCart.push(item);
-                localStorage.setItem('gastroneo_cart', JSON.stringify(currentCart));
-                updateCartUI();
-                const btn = event.target;
-                btn.textContent = "✅ AÑADIDO";
-                setTimeout(() => btn.textContent = "[ + ] AGREGAR", 1000);
-            }
-        }
-
-        function updateCartUI() {
-            const count = currentCart.length;
-            const total = currentCart.reduce((sum, item) => sum + item.price, 0);
-            const cartBar = document.getElementById('cartBar');
-            if (count > 0) {
-                cartBar.style.display = 'block';
-                document.getElementById('cartCount').textContent = count;
-                document.getElementById('cartTotal').textContent = `€${total.toFixed(2)}`;
-            } else {
-                cartBar.style.display = 'none';
-            }
-        }
-
-        function checkout() {
-            if (currentCart.length === 0) return;
-            alert(`✅ Pedido listo:\n${currentCart.length} platos • €${currentCart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}\n\nEl camarero lo procesará.`);
-            currentCart = [];
-            localStorage.setItem('gastroneo_cart', JSON.stringify(currentCart));
-            updateCartUI();
-        }
-
-        // === GastroPass ===
-        function generateReferralCode(name) {
-            const random = Math.random().toString(36).substr(2, 5).toUpperCase();
-            return `GASTRO-${name.substring(0,4).toUpperCase()}${random}`;
-        }
-
-        function getUserLevel(tokens) {
-            if (tokens >= 1500) return { name: "🥇 Oro", class: "gold", next: 0 };
-            if (tokens >= 500) return { name: "🥈 Plata", class: "silver", next: 1500 };
-            return { name: "🥉 Bronce", class: "bronze", next: 500 };
-        }
-
-        function updateGastroPass() {
-            const user = JSON.parse(localStorage.getItem('gastroneo_user')) || { tokens: 0, referralCode: '', achievements: [] };
-            const level = getUserLevel(user.tokens);
-            const progress = level.next > 0 ? Math.min(100, Math.round((user.tokens / level.next) * 100)) : 100;
-
-            const levelEl = document.getElementById('userLevel');
-            levelEl.textContent = level.name;
-            levelEl.className = `level-badge ${level.class}`;
-            document.getElementById('progressFill').style.width = `${progress}%`;
-            document.getElementById('progressText').textContent = level.next > 0 ? 
-                `${user.tokens} / ${level.next} pts` : "¡Nivel máximo!";
-
-            if (!user.referralCode) {
-                user.referralCode = generateReferralCode(user.name || 'USER');
-                localStorage.setItem('gastroneo_user', JSON.stringify(user));
-            }
-            document.getElementById('referralCode').textContent = user.referralCode;
-
-            const achievements = [
-                { name: "Registro", unlocked: true },
-                { name: "1ª Reserva", unlocked: user.tokens >= 100 },
-                { name: "Referidor", unlocked: false },
-                { name: "Foodie", unlocked: user.tokens >= 300 },
-                { name: "Embajador", unlocked: user.tokens >= 1000 }
-            ];
-            const grid = document.getElementById('achievementsGrid');
-            grid.innerHTML = achievements.map(a => 
-                `<div class="achievement-badge ${a.unlocked ? 'badge-unlocked' : 'badge-locked'}">
-                    ${a.unlocked ? '✅' : '🔒'}<br>${a.name}
-                </div>`
-            ).join('');
-        }
-
-        function redeemReward(cost, item) {
-            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
-            if (!user) {
-                alert("Debes crear una cuenta para canjear.");
-                return;
-            }
-            if (user.tokens < cost) {
-                alert(`Necesitas ${cost} tokens. Tienes ${user.tokens}.`);
-                return;
-            }
-            user.tokens -= cost;
-            localStorage.setItem('gastroneo_user', JSON.stringify(user));
-            alert(`¡Canjeado! ${item}`);
-            updateGastroPass();
-        }
-
-        // === Autenticación ===
-        function renderAuthOrProfile() {
-            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
-            const container = document.getElementById('authOrProfile');
-            if (user) {
-                container.innerHTML = `<div class="user-profile"><div class="user-name">Hola, ${user.name} ✨</div><div class="user-tokens">GastroTokens: ${user.tokens || 0}</div></div>`;
-            } else {
-                container.innerHTML = `
-                    <div class="auth-section">
-                        <div class="auth-title">¿Nuevo aquí?</div>
-                        <div class="neuro-note">Crea tu GastroPass y empieza a ganar recompensas exclusivas.</div>
-                        <div class="auth-buttons">
-                            <button class="auth-btn btn-signup" onclick="showSignupModal()">Crear Cuenta</button>
-                            <button class="auth-btn btn-login" onclick="showLoginModal()">Iniciar Sesión</button>
-                        </div>
-                    </div>`;
-            }
-        }
-
-        function showSignupModal() {
-            const name = prompt("¿Cuál es tu nombre?");
-            if (name && name.trim()) {
-                const user = {
-                    name: name.trim(),
-                    tokens: 50,
-                    referralCode: '',
-                    referredBy: '',
-                    achievements: ['Registro']
-                };
-                localStorage.setItem('gastroneo_user', JSON.stringify(user));
-                alert("¡Bienvenido! 🎁 50 GastroTokens de bienvenida.");
-                renderAuthOrProfile();
-                updateGastroPass();
-            }
-        }
-
-        function showLoginModal() {
-            const name = prompt("Ingresa tu nombre:");
-            if (name && name.trim()) {
-                const existing = JSON.parse(localStorage.getItem('gastroneo_user'));
-                if (existing && existing.name === name.trim()) {
-                    alert("¡Bienvenido de nuevo!");
-                    renderAuthOrProfile();
-                    updateGastroPass();
-                } else {
-                    alert("Usuario no encontrado. Créate una cuenta.");
-                }
-            }
-        }
-
-        // === Reservas ===
-        function confirmBooking() {
-            const name = document.getElementById('clientName').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
-            const date = document.getElementById('bookingDate').value;
-            const time = document.getElementById('bookingTime').value;
-            const guests = document.getElementById('guests').value;
-            const zone = document.getElementById('tableZone').value;
-            const occasion = document.getElementById('occasion').value;
-
-            if (!name || !phone || !date || !time || !guests) {
-                alert('⚠️ Completa todos los campos.');
-                return;
-            }
-
-            const reservation = {
-                id: Date.now(),
-                name,
-                phone,
-                date,
-                time,
-                guests,
-                zone,
-                occasion,
-                timestamp: new Date().toISOString()
+    <script>
+        // === Simulación de datos del negocio ===
+        function getBusinessData() {
+            return {
+                dailyRevenue: 420,
+                occupiedTables: "8/12",
+                pendingOrders: 3,
+                waitingClients: 2,
+                alerts: [
+                    "Mesa 3: 18 min sin postre",
+                    "Zayn: 2 pedidos sin verificar"
+                ],
+                waitingList: [
+                    { name: "María G.", waitTime: "12 min" },
+                    { name: "Luis T.", waitTime: "8 min" }
+                ],
+                topDishes: [
+                    { name: "Risotto de Trufa", count: 6 },
+                    { name: "Pasta Carbonara", count: 4 },
+                    { name: "Tartar de Atún", count: 3 }
+                ]
             };
-
-            const reservations = JSON.parse(localStorage.getItem('gastroneo_reservations') || '[]');
-            reservations.push(reservation);
-            localStorage.setItem('gastroneo_reservations', JSON.stringify(reservations));
-
-            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
-            if (user) {
-                user.tokens = (user.tokens || 0) + 100;
-                localStorage.setItem('gastroneo_user', JSON.stringify(user));
-                renderAuthOrProfile();
-                updateGastroPass();
-            }
-
-            alert(`✅ ¡Reserva confirmada en GastroNeo!\nHemos añadido 100 GastroTokens a tu cuenta.`);
-            showView('homeView');
         }
 
-       // === Datos simulados para el demo ===
-function getSimulatedData() {
-    return {
-        dailyRevenue: 420,
-        occupiedTables: "8/12",
-        pendingOrders: 3,
-        waitingClients: 2,
-        alerts: [
-            "Mesa 3: 18 min sin postre",
-            "Zayn: 2 pedidos sin verificar"
-        ],
-        waitingList: [
-            { name: "María G.", waitTime: "12 min" },
-            { name: "Luis T.", waitTime: "8 min" }
-        ],
-        topDishes: [
-            { name: "Risotto de Trufa", count: 6 },
-            { name: "Pasta Carbonara", count: 4 },
-            { name: "Tartar de Atún", count: 3 }
-        ]
-    };
-}
+        // === Panel del Dueño ===
+        function loadOwnerDashboard() {
+            const data = getBusinessData();
+            
+            document.getElementById('dailyRevenue').textContent = `€${data.dailyRevenue}`;
+            document.getElementById('occupiedTables').textContent = data.occupiedTables;
+            document.getElementById('pendingOrders').textContent = data.pendingOrders;
+            document.getElementById('waitingClients').textContent = data.waitingClients;
 
-function loadOwnerDashboard() {
-    const data = getSimulatedData();
-    
-    // Resumen
-    document.getElementById('dailyRevenue').textContent = `€${data.dailyRevenue}`;
-    document.getElementById('occupiedTables').textContent = data.occupiedTables;
-    document.getElementById('pendingOrders').textContent = data.pendingOrders;
-    document.getElementById('waitingClients').textContent = data.waitingClients;
+            const alertsSection = document.getElementById('alertsSection');
+            const alertsList = document.getElementById('alertsList');
+            if (data.alerts.length > 0) {
+                alertsList.innerHTML = data.alerts.map(a => `• ${a}`).join('<br>');
+                alertsSection.style.display = 'block';
+            } else {
+                alertsSection.style.display = 'none';
+            }
 
-    // Alertas
-    const alertsSection = document.getElementById('alertsSection');
-    const alertsList = document.getElementById('alertsList');
-    if (data.alerts.length > 0) {
-        alertsList.innerHTML = data.alerts.map(a => `• ${a}`).join('<br>');
-        alertsSection.style.display = 'block';
-    } else {
-        alertsSection.style.display = 'none';
-    }
+            const waitingSection = document.getElementById('waitingSection');
+            const waitingList = document.getElementById('waitingList');
+            if (data.waitingList.length > 0) {
+                waitingList.innerHTML = data.waitingList.map(w => `• ${w.name} (${w.waitTime})`).join('<br>');
+                waitingSection.style.display = 'block';
+            } else {
+                waitingSection.style.display = 'none';
+            }
 
-    // Clientes en espera
-    const waitingSection = document.getElementById('waitingSection');
-    const waitingList = document.getElementById('waitingList');
-    if (data.waitingList.length > 0) {
-        waitingList.innerHTML = data.waitingList.map(w => 
-            `• ${w.name} (${w.waitTime})`
-        ).join('<br>');
-        waitingSection.style.display = 'block';
-    } else {
-        waitingSection.style.display = 'none';
-    }
+            document.getElementById('topDishes').innerHTML = data.topDishes.map(d => `• ${d.name} (${d.count})`).join('<br>');
+        }
 
-    // Platos más vendidos
-    document.getElementById('topDishes').innerHTML = data.topDishes.map(d => 
-        `• ${d.name} (${d.count})`
-    ).join('<br>');
-}
-
-function verifyAllOrders() {
-    alert("✅ Todos los pedidos verificados. Ingresos asegurados.");
-    loadOwnerDashboard();
-}
-
-function logoutOwner() {
-    showView('homeView');
-}
+        function verifyAllOrders() {
+            alert("✅ Todos los pedidos verificados. Ingresos asegurados.");
+            loadOwnerDashboard();
+        }
 
         // === Navegación ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (viewId === 'homeView') document.querySelectorAll('.nav-item')[0].classList.add('active');
+            if (viewId === 'bookingView') document.querySelectorAll('.nav-item')[1].classList.add('active');
+            if (viewId === 'menuView') document.querySelectorAll('.nav-item')[2].classList.add('active');
+            
             if (viewId === 'ownerDashboard') {
                 loadOwnerDashboard();
-            } else if (viewId === 'rewardsView') {
-                updateGastroPass();
-            } else if (viewId === 'menuView') {
-                renderMenu();
             }
         }
 
@@ -1070,8 +498,8 @@ function logoutOwner() {
             const pin = prompt("PIN de acceso (demo: 1234):");
             if (pin === "1234") {
                 showView('ownerDashboard');
-            } else if (pin !== null) {
-                alert("PIN incorrecto. Usa 1234 para la demo.");
+            } else if (pin) {
+                alert("PIN incorrecto.");
             }
         }
 
@@ -1079,14 +507,10 @@ function logoutOwner() {
             showView('homeView');
         }
 
-        // === Inicialización ===
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.getElementById('splashScreen').style.display = 'none';
-                document.querySelector('.app-container').style.display = 'flex';
-                renderAuthOrProfile();
-            }, 2000);
-        });
+        function confirmBooking() {
+            alert("✅ ¡Reserva confirmada en GastroNeo!");
+            showView('homeView');
+        }
     </script>
 </body>
 </html>
