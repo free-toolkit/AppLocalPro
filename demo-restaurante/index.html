@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital y recompensas tokenizadas.">
+    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital y sistema de fidelización GastroPass.">
     <title>GastroNeo – Restaurante del Futuro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
@@ -139,85 +139,170 @@
             box-shadow: 0 0 20px rgba(255, 211, 0, 0.8);
         }
 
-        .ai-sommelier {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(255, 42, 109, 0.15);
-            border: 1px solid #FF2A6D;
+        /* --- Autenticación --- */
+        .auth-section {
+            text-align: center;
+            margin: 1.8rem 0;
+            padding: 1.5rem;
+            background: rgba(30, 10, 15, 0.4);
             border-radius: 16px;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            animation: pulse 2s infinite;
+            border: 1px solid #FF2A6D;
         }
-        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 42, 109, 0.4); } 50% { box-shadow: 0 0 0 8px rgba(255, 42, 109, 0); } }
-        .avatar-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #FF2A6D, #FFD300);
-            border-radius: 50%;
+        .auth-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .neuro-note {
+            margin-top: 1.2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            color: #F0D0E0;
+            line-height: 1.5;
+        }
+        .auth-buttons {
             display: flex;
-            align-items: center;
+            gap: 1rem;
             justify-content: center;
-            font-size: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .auth-btn {
+            padding: 0.8rem 1.4rem;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-login { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
+        .btn-signup { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
         }
 
-        .token-card {
+        .user-profile {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255, 211, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid #FFD300;
+        }
+        .user-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.2rem;
+        }
+        .user-tokens {
+            font-family: 'Rajdhani', sans-serif;
+            color: #F0D0E0;
+            font-size: 0.95rem;
+        }
+
+        /* --- GastroPass --- */
+        .gastropass-card {
             background: linear-gradient(135deg, #2A1018, #3A1525);
             border: 1px solid #FF2A6D;
             border-radius: 16px;
             padding: 1.5rem;
             text-align: center;
-            margin: 1.5rem 0;
+            margin: 0 0 1.5rem;
         }
-        .token-amount {
+        .level-badge {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            color: #FFD300;
-            margin: 0.5rem 0;
-            text-shadow: 0 0 10px rgba(255, 211, 0, 0.7);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .bronze { color: #CD7F32; }
+        .silver { color: #C0C0C0; }
+        .gold { color: #FFD700; }
+
+        .progress-bar {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            height: 12px;
+            margin: 0.8rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF2A6D, #FFD300);
+            width: 0%;
+            transition: width 0.5s;
         }
 
-        .menu-section {
-            background: rgba(30, 10, 15, 0.6);
-            border-radius: 12px;
-            padding: 1.2rem;
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
             margin: 1rem 0;
         }
-        .menu-item {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #44202A;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        .menu-item:last-child { border: none; }
-        .menu-item h4 { color: #FFD300; margin-bottom: 0.3rem; }
-        .menu-item p { color: #F0D0E0; font-size: 0.9rem; }
-
-        .stat-card-neo {
-            background: rgba(34, 15, 24, 0.6);
+        .reward-card {
+            background: rgba(30, 10, 15, 0.6);
             border: 1px solid #FF2A6D;
             border-radius: 12px;
             padding: 1rem;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .stat-value-neo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+        .reward-info span:first-child {
+            font-weight: 600;
             color: #FFD300;
-            margin: 0.3rem 0;
         }
 
-        .reservation-tag {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .referral-section {
+            background: rgba(255, 211, 0, 0.08);
+            border: 1px solid #FFD300;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .referral-code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin: 0.8rem 0;
+            word-break: break-all;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .achievement-badge {
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid #FF2A6D;
+            border-radius: 8px;
+            padding: 0.6rem 0.3rem;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .badge-unlocked { color: #FFD300; }
+        .badge-locked { color: #555; }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1A1030;
+            color: #FFD6E0;
+            border: 1px solid #FF2A6D;
+            border-radius: 8px;
             font-family: 'Rajdhani', sans-serif;
         }
-        .tag-terrace { background: rgba(0, 240, 255, 0.2); color: #00F0FF; }
-        .tag-vip { background: rgba(255, 211, 0, 0.2); color: #FFD300; }
-        .tag-inside { background: rgba(255, 42, 109, 0.2); color: #FF2A6D; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #D0B0C0;
+        }
     </style>
 </head>
 <body>
@@ -227,17 +312,15 @@
         </div>
 
         <div class="app-content">
-            <!-- Inicio -->
+            <!-- Home View -->
             <div id="homeView" class="view active">
-                <div class="ai-sommelier">
-                    <div class="avatar-icon">
-                        <i class="fas fa-wine-glass-alt"></i>
-                    </div>
-                    <div class="avatar-text" style="font-family:'Rajdhani';">
-                        <strong>IA Sommelier</strong><br>
-                        <span>Hoy recomiendo: Risotto de trufa con vino Barolo. ¿Reservamos mesa?</span>
-                    </div>
+                <div style="text-align:center;margin-bottom:1.5rem;">
+                    <img src="https://images.pexels.com/photos/1689061/pexels-photo-1689061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                         alt="Restaurante GastroNeo"
+                         style="width:100%;border-radius:12px;max-height:180px;object-fit:cover;">
                 </div>
+
+                <div id="authOrProfile"></div>
 
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-utensils"></i> Reservar Mesa
@@ -246,14 +329,14 @@
                     <i class="fas fa-book-open"></i> Menú Digital
                 </button>
                 <button class="btn-neo btn-primary" onclick="showView('rewardsView')">
-                    <i class="fas fa-coins"></i> Mis GastroTokens
+                    <i class="fas fa-coins"></i> Mi GastroPass
                 </button>
                 <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="openOwnerAccess()">
                     <i class="fas fa-user-lock"></i> Acceso Dueño
                 </button>
             </div>
 
-            <!-- Reservas -->
+            <!-- Booking View -->
             <div id="bookingView" class="view">
                 <h2 style="font-family:'Orbitron';color:#FF2A6D;">🍽️ Reservar Mesa</h2>
 
@@ -301,19 +384,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Tipo de Mesa</label>
-                    <select id="tableType" class="form-control">
+                    <label>Zona</label>
+                    <select id="tableZone" class="form-control">
                         <option value="inside">Interior</option>
                         <option value="terrace">Terraza</option>
-                        <option value="vip">VIP (privada)</option>
+                        <option value="bar">Barra</option>
+                        <option value="private">Privado</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Notas o Preferencias</label>
-                    <textarea id="notes" class="form-control" 
-                              style="height:80px;background:#1A1030;color:#FFD6E0;border:1px solid #FF2A6D;border-radius:8px;padding:0.8rem;font-family:'Rajdhani';"
-                              placeholder="Alergias, cumpleaños, etc."></textarea>
+                    <label>Ocasión</label>
+                    <select id="occasion" class="form-control">
+                        <option value="regular">Regular</option>
+                        <option value="birthday">Cumpleaños</option>
+                        <option value="anniversary">Aniversario</option>
+                        <option value="business">Negocios</option>
+                    </select>
                 </div>
 
                 <button class="btn-neo btn-primary" onclick="confirmBooking()">Confirmar Reserva</button>
@@ -324,55 +411,97 @@
             <div id="menuView" class="view">
                 <h2 style="font-family:'Orbitron';color:#FFD300;">📖 Menú Digital</h2>
                 
-                <div class="menu-section">
+                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin:1rem 0;">
                     <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Entrantes</h3>
-                    <div class="menu-item">
-                        <h4>Tartar de Atún con Wasabi</h4>
-                        <p>Fresco, picante y elegante • 14€</p>
-                    </div>
-                    <div class="menu-item">
-                        <h4>Crema Trufada</h4>
-                        <p>Con espuma de parmesano • 12€</p>
+                    <div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
+                        <strong>Tartar de Atún con Wasabi</strong><br>
+                        <small>Fresco, picante y elegante • 14€</small>
                     </div>
                 </div>
 
-                <div class="menu-section">
+                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin:1rem 0;">
                     <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Platos Fuertes</h3>
-                    <div class="menu-item">
-                        <h4>Risotto de Trufa Negra</h4>
-                        <p>Con parmesano 24 meses • 24€</p>
-                    </div>
-                    <div class="menu-item">
-                        <h4>Entrecot de Wagyu</h4>
-                        <p>Madurado 45 días • 48€</p>
-                    </div>
-                </div>
-
-                <div class="menu-section">
-                    <h3 style="color:#FF2A6D;font-family:'Orbitron';font-size:1.3rem;margin-bottom:1rem;">Postres</h3>
-                    <div class="menu-item">
-                        <h4>Soufflé de Chocolate</h4>
-                        <p>Con helado de vainilla • 10€</p>
+                    <div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
+                        <strong>Risotto de Trufa Negra</strong><br>
+                        <small>Con parmesano 24 meses • 24€</small>
                     </div>
                 </div>
 
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-            <!-- Recompensas -->
+            <!-- GastroPass: Sistema de Fidelización Avanzado -->
             <div id="rewardsView" class="view">
-                <h2 style="font-family:'Orbitron';color:#FFD300;">🪙 GastroTokens</h2>
-                <div class="token-card">
-                    <div class="token-label" style="color:#E0C0D0;font-size:0.9rem;">Tokens acumulados</div>
-                    <div class="token-amount" id="tokenAmount">320</div>
-                    <div style="font-size:0.85rem;color:#D0B0C0;">Próximo: Cena para 2 (500 pts)</div>
+                <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1.5rem;">🪙 Mi GastroPass</h2>
+
+                <!-- Nivel y Progreso -->
+                <div class="gastropass-card">
+                    <div id="userLevel" class="level-badge bronze">🥉 Bronce</div>
+                    <div style="font-size:0.9rem;color:#D0B0C0;margin-bottom:0.8rem;">Progreso hacia Plata</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div id="progressText" style="font-size:0.85rem;color:#F0D0E0;">280 / 500 pts</div>
                 </div>
-                <div style="background:rgba(34,15,24,0.6);padding:1.2rem;border-radius:12px;">
-                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;">Canjear</h3>
-                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #44202A;">100 pts → Café gourmet</div>
-                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid #44202A;">250 pts → Entrante premium</div>
-                    <div style="display:flex;justify-content:space-between;padding:0.6rem 0;">500 pts → Cena completa para 2</div>
+
+                <!-- Cómo ganar tokens -->
+                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">✨ Cómo Ganar Tokens</h3>
+                    <div style="font-size:0.95rem;line-height:1.6;color:#FFD6E0;">
+                        <div>• Registro completo: <strong>+50</strong></div>
+                        <div>• Primera reserva: <strong>+100</strong></div>
+                        <div>• Reseña verificada: <strong>+30</strong></div>
+                        <div>• Reserva en horario no-pico: <strong>+20</strong></div>
+                        <div>• Referir a un amigo: <strong>+150</strong></div>
+                    </div>
                 </div>
+
+                <!-- Canjear Recompensas -->
+                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🎁 Canjear Recompensas</h3>
+                    <div class="rewards-grid">
+                        <div class="reward-card">
+                            <div class="reward-info">
+                                <span>Copa de vino</span><br>
+                                <small>100 pts</small>
+                            </div>
+                            <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="redeemReward(100, 'Copa de vino')">Canjear</button>
+                        </div>
+                        <div class="reward-card">
+                            <div class="reward-info">
+                                <span>Postre del chef</span><br>
+                                <small>250 pts</small>
+                            </div>
+                            <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="redeemReward(250, 'Postre del chef')">Canjear</button>
+                        </div>
+                        <div class="reward-card">
+                            <div class="reward-info">
+                                <span>Cena con el chef</span><br>
+                                <small>5000 pts</small>
+                            </div>
+                            <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="redeemReward(5000, 'Cena con el chef')">Canjear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sistema de Referidos -->
+                <div class="referral-section">
+                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🤝 Referidos</h3>
+                    <p style="font-size:0.9rem;color:#F0D0E0;">Comparte tu código y gana tokens cuando tus amigos reservan.</p>
+                    <div class="referral-code" id="referralCode">Cargando...</div>
+                    <p style="font-size:0.85rem;color:#D0B0C0;margin-top:0.5rem;">
+                        +100 pts al registrarse • +50 pts en su primera reserva
+                    </p>
+                </div>
+
+                <!-- Logros -->
+                <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;">
+                    <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🏆 Logros</h3>
+                    <div class="achievements-grid" id="achievementsGrid">
+                        <!-- Se llena dinámicamente -->
+                    </div>
+                </div>
+
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
 
@@ -418,20 +547,122 @@
 
     <script src="../shared/shared.js"></script>
     <script>
-        // === Navegación ===
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-            updateNav(viewId);
-            if (viewId === 'ownerDashboard') loadOwnerDashboard();
+        // === Generar código de referido único ===
+        function generateReferralCode(name) {
+            const random = Math.random().toString(36).substr(2, 5).toUpperCase();
+            return `GASTRO-${name.substring(0,4).toUpperCase()}${random}`;
         }
 
-        function updateNav(activeView) {
-            const items = document.querySelectorAll('.nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            if (activeView === 'homeView') items[0].classList.add('active');
-            if (activeView === 'bookingView') items[1].classList.add('active');
-            if (activeView === 'menuView') items[2].classList.add('active');
+        // === Sistema de Niveles ===
+        function getUserLevel(tokens) {
+            if (tokens >= 1500) return { name: "🥇 Oro", class: "gold", next: 0 };
+            if (tokens >= 500) return { name: "🥈 Plata", class: "silver", next: 1500 };
+            return { name: "🥉 Bronce", class: "bronze", next: 500 };
+        }
+
+        // === Actualizar GastroPass ===
+        function updateGastroPass() {
+            const user = JSON.parse(localStorage.getItem('gastroneo_user')) || { tokens: 0, referralCode: '', achievements: [] };
+            const level = getUserLevel(user.tokens);
+            const progress = level.next > 0 ? Math.min(100, Math.round((user.tokens / level.next) * 100)) : 100;
+
+            // Nivel
+            const levelEl = document.getElementById('userLevel');
+            levelEl.textContent = level.name;
+            levelEl.className = `level-badge ${level.class}`;
+
+            // Progreso
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = level.next > 0 ? 
+                `${user.tokens} / ${level.next} pts` : "¡Nivel máximo!";
+
+            // Código de referido
+            if (!user.referralCode) {
+                user.referralCode = generateReferralCode(user.name || 'USER');
+                localStorage.setItem('gastroneo_user', JSON.stringify(user));
+            }
+            document.getElementById('referralCode').textContent = user.referralCode;
+
+            // Logros (simulados)
+            const achievements = [
+                { name: "Registro", unlocked: true },
+                { name: "1ª Reserva", unlocked: user.tokens >= 100 },
+                { name: "Referidor", unlocked: false },
+                { name: "Foodie", unlocked: user.tokens >= 300 },
+                { name: "Embajador", unlocked: user.tokens >= 1000 }
+            ];
+            const grid = document.getElementById('achievementsGrid');
+            grid.innerHTML = achievements.map(a => 
+                `<div class="achievement-badge ${a.unlocked ? 'badge-unlocked' : 'badge-locked'}">
+                    ${a.unlocked ? '✅' : '🔒'}<br>${a.name}
+                </div>`
+            ).join('');
+        }
+
+        function redeemReward(cost, item) {
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            if (!user) {
+                alert("Debes crear una cuenta para canjear.");
+                return;
+            }
+            if (user.tokens < cost) {
+                alert(`Necesitas ${cost} tokens. Tienes ${user.tokens}.`);
+                return;
+            }
+            user.tokens -= cost;
+            localStorage.setItem('gastroneo_user', JSON.stringify(user));
+            alert(`¡Canjeado! ${item}`);
+            updateGastroPass();
+        }
+
+        // === Autenticación ===
+        function renderAuthOrProfile() {
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            const container = document.getElementById('authOrProfile');
+            if (user) {
+                container.innerHTML = `<div class="user-profile"><div class="user-name">Hola, ${user.name} ✨</div><div class="user-tokens">GastroTokens: ${user.tokens || 0}</div></div>`;
+            } else {
+                container.innerHTML = `
+                    <div class="auth-section">
+                        <div class="auth-title">¿Nuevo aquí?</div>
+                        <div class="neuro-note">Crea tu GastroPass y empieza a ganar recompensas exclusivas.</div>
+                        <div class="auth-buttons">
+                            <button class="auth-btn btn-signup" onclick="showSignupModal()">Crear Cuenta</button>
+                            <button class="auth-btn btn-login" onclick="showLoginModal()">Iniciar Sesión</button>
+                        </div>
+                    </div>`;
+            }
+        }
+
+        function showSignupModal() {
+            const name = prompt("¿Cuál es tu nombre?");
+            if (name && name.trim()) {
+                const user = {
+                    name: name.trim(),
+                    tokens: 50, // Bonus por registro
+                    referralCode: '',
+                    referredBy: '',
+                    achievements: ['Registro']
+                };
+                localStorage.setItem('gastroneo_user', JSON.stringify(user));
+                alert("¡Bienvenido! 🎁 50 GastroTokens de bienvenida.");
+                renderAuthOrProfile();
+                updateGastroPass();
+            }
+        }
+
+        function showLoginModal() {
+            const name = prompt("Ingresa tu nombre:");
+            if (name && name.trim()) {
+                const existing = JSON.parse(localStorage.getItem('gastroneo_user'));
+                if (existing && existing.name === name.trim()) {
+                    alert("¡Bienvenido de nuevo!");
+                    renderAuthOrProfile();
+                    updateGastroPass();
+                } else {
+                    alert("Usuario no encontrado. Créate una cuenta.");
+                }
+            }
         }
 
         // === Reservas ===
@@ -441,11 +672,11 @@
             const date = document.getElementById('bookingDate').value;
             const time = document.getElementById('bookingTime').value;
             const guests = document.getElementById('guests').value;
-            const tableType = document.getElementById('tableType').value;
-            const notes = document.getElementById('notes').value.trim();
+            const zone = document.getElementById('tableZone').value;
+            const occasion = document.getElementById('occasion').value;
 
-            if (!name || !phone || !date || !time || !guests || !tableType) {
-                alert('⚠️ Completa todos los campos obligatorios.');
+            if (!name || !phone || !date || !time || !guests) {
+                alert('⚠️ Completa todos los campos.');
                 return;
             }
 
@@ -456,31 +687,25 @@
                 date,
                 time,
                 guests,
-                tableType,
-                notes,
-                timestamp: new Date().toISOString(),
-                attended: false
+                zone,
+                occasion,
+                timestamp: new Date().toISOString()
             };
 
             const reservations = JSON.parse(localStorage.getItem('gastroneo_reservations') || '[]');
             reservations.push(reservation);
             localStorage.setItem('gastroneo_reservations', JSON.stringify(reservations));
 
-            // Sumar tokens (10 por persona)
-            const tokens = JSON.parse(localStorage.getItem('gastroneo_tokens') || '0');
-            const newTokens = tokens + (parseInt(guests) || 1) * 10;
-            localStorage.setItem('gastroneo_tokens', newTokens);
+            // Sumar tokens al usuario
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            if (user) {
+                user.tokens = (user.tokens || 0) + 100;
+                localStorage.setItem('gastroneo_user', JSON.stringify(user));
+                renderAuthOrProfile();
+                updateGastroPass();
+            }
 
-            const fullDate = new Date(`${date}T${time}`).toLocaleString('es-ES', {
-                weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit'
-            });
-
-            alert(`✅ ¡Reserva confirmada en GastroNeo!\n\n` +
-                  `Mesa para ${guests} persona(s)\n` +
-                  `Fecha: ${fullDate}\n` +
-                  `Tipo: ${tableType === 'terrace' ? 'Terraza' : tableType === 'vip' ? 'VIP' : 'Interior'}\n\n` +
-                  `¡Hemos añadido ${parseInt(guests)*10} GastroTokens a tu cuenta!`);
-
+            alert(`✅ ¡Reserva confirmada en GastroNeo!\nHemos añadido 100 GastroTokens a tu cuenta.`);
             showView('homeView');
         }
 
@@ -504,25 +729,28 @@
                 listEl.innerHTML = '<p style="color:#D0B0C0;font-style:italic;">No hay reservas hoy.</p>';
             } else {
                 listEl.innerHTML = todayRes.map(r => {
-                    let tagClass = 'inside';
-                    if (r.tableType === 'terrace') tagClass = 'terrace';
-                    else if (r.tableType === 'vip') tagClass = 'vip';
-
+                    let zoneText = r.zone === 'terrace' ? 'Terraza' : r.zone === 'private' ? 'Privado' : r.zone === 'bar' ? 'Barra' : 'Interior';
                     return `<div style="padding:0.8rem 0;border-bottom:1px solid #44202A;font-family:'Rajdhani';">
                         <strong>${r.name}</strong> • ${r.guests} comensales<br>
-                        <small>${r.time} • 
-                            <span class="reservation-tag tag-${tagClass}">
-                                ${r.tableType === 'terrace' ? 'Terraza' : r.tableType === 'vip' ? 'VIP' : 'Interior'}
-                            </span>
-                        </small>
-                        ${r.notes ? `<br><em>📝 ${r.notes}</em>` : ''}
+                        <small>${r.time} • ${zoneText}</small>
                     </div>`;
                 }).join('');
             }
         }
 
+        // === Navegación ===
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            if (viewId === 'ownerDashboard') {
+                loadOwnerDashboard();
+            } else if (viewId === 'rewardsView') {
+                updateGastroPass();
+            }
+        }
+
         function openOwnerAccess() {
-            const pin = prompt("Ingresa el PIN de acceso (demo: 1234):");
+            const pin = prompt("PIN de acceso (demo: 1234):");
             if (pin === "1234") {
                 showView('ownerDashboard');
             } else if (pin !== null) {
@@ -534,8 +762,9 @@
             showView('homeView');
         }
 
-        // Establecer fecha mínima en el input (opcional)
+        // === Inicialización ===
         document.addEventListener('DOMContentLoaded', () => {
+            renderAuthOrProfile();
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('bookingDate').min = today;
         });
