@@ -363,13 +363,102 @@
             margin-bottom: 0.5rem;
             color: #D0B0C0;
         }
+
+        /* --- Menú Digital Mejorado --- */
+        .category-btn, .filter-btn {
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid #FF2A6D;
+            color: #FFD300;
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .category-btn.active, .category-btn:hover, .filter-btn:hover {
+            background: rgba(255, 211, 0, 0.3);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .menu-item {
+            background: rgba(30, 10, 15, 0.6);
+            border: 1px solid #FF2A6D;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-item-content {
+            padding: 1rem;
+        }
+        .menu-item-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+        .menu-item-desc {
+            font-family: 'Rajdhani', sans-serif;
+            color: #F0D0E0;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+        }
+        .menu-item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            color: #D0B0C0;
+            margin-bottom: 0.8rem;
+        }
+        .add-btn {
+            background: linear-gradient(135deg, #FF2A6D, #D10047);
+            color: white;
+            border: none;
+            padding: 0.6rem;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .add-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+        }
+
+        /* Carrito */
+        #cartBar {
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 42, 109, 0.9);
+            color: white;
+            text-align: center;
+            padding: 0.8rem;
+            font-family: 'Rajdhani';
+            font-weight: 600;
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
     <!-- Splash Screen -->
     <div id="splashScreen">
         <div class="splash-logo">
-            <img src="https://i.ibb.co/0jvKmTz/gastroneo-logo.png" alt="GastroNeo" style="width:100%;height:100%;border-radius:50%;">
+            <img src="Logo GASTRONEO - Opción 3.jpg" alt="GastroNeo" style="width:100%;height:100%;border-radius:50%;">
         </div>
         <div class="splash-text">GASTRONEO</div>
     </div>
@@ -478,51 +567,40 @@
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
             </div>
 
-           <!-- Menú Digital - Versión Visual y Efectiva -->
-<div id="menuView" class="view">
-    <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1rem;">📖 Menú Digital</h2>
+            <!-- Menú Digital -->
+            <div id="menuView" class="view">
+                <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1rem;">📖 Menú Digital</h2>
 
-    <!-- Barra de Búsqueda -->
-    <div style="padding:0 0.5rem;margin-bottom:1rem;">
-        <input type="text" id="menuSearch" class="form-control" placeholder="Busca un plato..." onkeyup="filterMenu()">
-    </div>
+                <div style="padding:0 0.5rem;margin-bottom:1rem;">
+                    <input type="text" id="menuSearch" class="form-control" placeholder="Busca un plato..." onkeyup="filterMenu()">
+                </div>
 
-    <!-- Categorías -->
-    <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1rem;scrollbar-width:none;">
-        <button class="category-btn active" onclick="filterByCategory('all')">Todo</button>
-        <button class="category-btn" onclick="filterByCategory('entradas')">Entradas</button>
-        <button class="category-btn" onclick="filterByCategory('fuertes')">Platos Fuertes</button>
-        <button class="category-btn" onclick="filterByCategory('postres')">Postres</button>
-        <button class="category-btn" onclick="filterByCategory('bebidas')">Bebidas</button>
-    </div>
+                <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1rem;scrollbar-width:none;">
+                    <button class="category-btn active" onclick="filterByCategory('all')">Todo</button>
+                    <button class="category-btn" onclick="filterByCategory('entradas')">Entradas</button>
+                    <button class="category-btn" onclick="filterByCategory('fuertes')">Platos Fuertes</button>
+                    <button class="category-btn" onclick="filterByCategory('postres')">Postres</button>
+                    <button class="category-btn" onclick="filterByCategory('bebidas')">Bebidas</button>
+                </div>
 
-    <!-- Filtros -->
-    <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1.5rem;scrollbar-width:none;">
-        <button class="filter-btn" onclick="filterByTag('populares')">Populares</button>
-        <button class="filter-btn" onclick="filterByTag('recomendados')">Recomendados</button>
-        <button class="filter-btn" onclick="filterByTag('ofertas')">Ofertas</button>
-        <button class="filter-btn" onclick="filterByTag('vegano')">Vegano</button>
-    </div>
+                <div style="display:flex;gap:0.6rem;overflow-x:auto;padding:0 0.5rem;margin-bottom:1.5rem;scrollbar-width:none;">
+                    <button class="filter-btn" onclick="filterByTag('populares')">Populares</button>
+                    <button class="filter-btn" onclick="filterByTag('recomendados')">Recomendados</button>
+                    <button class="filter-btn" onclick="filterByTag('ofertas')">Ofertas</button>
+                    <button class="filter-btn" onclick="filterByTag('vegano')">Vegano</button>
+                </div>
 
-    <!-- Lista de Platos -->
-    <div id="menuItems" style="padding:0 0.5rem;">
-        <!-- Se llena dinámicamente -->
-    </div>
+                <div id="menuItems" style="padding:0 0.5rem;">
+                    <!-- Se llena dinámicamente -->
+                </div>
 
-    <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin:1.5rem 0.5rem;" onclick="showView('homeView')">← Volver</button>
-</div>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin:1.5rem 0.5rem;" onclick="showView('homeView')">← Volver</button>
+            </div>
 
-<!-- Carrito Fijo -->
-<div id="cartBar" style="position:fixed;bottom:60px;left:0;width:100%;background:rgba(255,42,109,0.9);color:white;text-align:center;padding:0.8rem;font-family:'Rajdhani';font-weight:600;display:none;z-index:1000;">
-    🛒 Carrito: <span id="cartCount">0</span> platos • <span id="cartTotal">€0.00</span>
-    <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.85rem;margin-left:1rem;" onclick="checkout()">Pagar</button>
-</div>
-
-            <!-- GastroPass: Sistema de Fidelización Avanzado -->
+            <!-- GastroPass -->
             <div id="rewardsView" class="view">
                 <h2 style="font-family:'Orbitron';color:#FFD300;text-align:center;margin-bottom:1.5rem;">🪙 Mi GastroPass</h2>
 
-                <!-- Nivel y Progreso -->
                 <div class="gastropass-card">
                     <div id="userLevel" class="level-badge bronze">🥉 Bronce</div>
                     <div style="font-size:0.9rem;color:#D0B0C0;margin-bottom:0.8rem;">Progreso hacia Plata</div>
@@ -532,7 +610,6 @@
                     <div id="progressText" style="font-size:0.85rem;color:#F0D0E0;">280 / 500 pts</div>
                 </div>
 
-                <!-- Cómo ganar tokens -->
                 <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
                     <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">✨ Cómo Ganar Tokens</h3>
                     <div style="font-size:0.95rem;line-height:1.6;color:#FFD6E0;">
@@ -544,7 +621,6 @@
                     </div>
                 </div>
 
-                <!-- Canjear Recompensas -->
                 <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
                     <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🎁 Canjear Recompensas</h3>
                     <div class="rewards-grid">
@@ -572,7 +648,6 @@
                     </div>
                 </div>
 
-                <!-- Sistema de Referidos -->
                 <div class="referral-section">
                     <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🤝 Referidos</h3>
                     <p style="font-size:0.9rem;color:#F0D0E0;">Comparte tu código y gana tokens cuando tus amigos reservan.</p>
@@ -582,11 +657,9 @@
                     </p>
                 </div>
 
-                <!-- Logros -->
                 <div style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;">
                     <h3 style="font-family:'Rajdhani';margin-bottom:1rem;color:#FFD300;">🏆 Logros</h3>
                     <div class="achievements-grid" id="achievementsGrid">
-                        <!-- Se llena dinámicamente -->
                     </div>
                 </div>
 
@@ -633,45 +706,168 @@
         </div>
     </div>
 
+    <div id="cartBar">
+        🛒 Carrito: <span id="cartCount">0</span> platos • <span id="cartTotal">€0.00</span>
+        <button class="btn-gold" style="padding:0.4rem 0.8rem;font-size:0.85rem;margin-left:1rem;" onclick="checkout()">Pagar</button>
+    </div>
+
     <script src="../shared/shared.js"></script>
     <script>
-        // === Generar código de referido único ===
+        // === Datos del Menú ===
+        const MENU_DATA = [
+            {
+                id: 1,
+                name: "Pasta Carbonara",
+                desc: "Pasta cremosa con huevo, queso y panceta artesanal",
+                price: 18.99,
+                time: "15 min",
+                rating: "4.8 (124)",
+                category: "fuertes",
+                tags: ["populares", "recomendados"],
+                image: "https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600"
+            },
+            {
+                id: 2,
+                name: "Tartar de Atún",
+                desc: "Atún fresco con wasabi, aguacate y toque cítrico",
+                price: 16.50,
+                time: "10 min",
+                rating: "4.9 (89)",
+                category: "entradas",
+                tags: ["recomendados", "vegano"],
+                image: "https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600"
+            },
+            {
+                id: 3,
+                name: "Tiramisú Clásico",
+                desc: "Capas de bizcocho bañadas en café y crema de mascarpone",
+                price: 8.99,
+                time: "5 min",
+                rating: "4.7 (203)",
+                category: "postres",
+                tags: ["populares"],
+                image: "https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600"
+            },
+            {
+                id: 4,
+                name: "Risotto de Trufa",
+                desc: "Arroz cremoso con trufa negra y parmesano 24 meses",
+                price: 24.00,
+                time: "20 min",
+                rating: "5.0 (67)",
+                category: "fuertes",
+                tags: ["recomendados", "ofertas"],
+                image: "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600"
+            }
+        ];
+
+        let currentCart = JSON.parse(localStorage.getItem('gastroneo_cart') || '[]');
+
+        // === Render Menú ===
+        function renderMenu(items = MENU_DATA) {
+            const container = document.getElementById('menuItems');
+            container.innerHTML = items.map(item => `
+                <div class="menu-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">🥘 ${item.name}</div>
+                        <div class="menu-item-desc">${item.desc}</div>
+                        <div class="menu-item-meta">
+                            <span>💰 €${item.price.toFixed(2)}</span>
+                            <span>🕒 ${item.time}</span>
+                            <span>❤️ ${item.rating}</span>
+                        </div>
+                        <button class="add-btn" onclick="addToCart(${item.id})">[ + ] AGREGAR</button>
+                    </div>
+                </div>
+            `).join('');
+            updateCartUI();
+        }
+
+        function filterMenu() {
+            const query = document.getElementById('menuSearch').value.toLowerCase();
+            const filtered = MENU_DATA.filter(item => 
+                item.name.toLowerCase().includes(query) ||
+                item.desc.toLowerCase().includes(query)
+            );
+            renderMenu(filtered);
+        }
+
+        function filterByCategory(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            const filtered = category === 'all' ? MENU_DATA : MENU_DATA.filter(item => item.category === category);
+            renderMenu(filtered);
+        }
+
+        function filterByTag(tag) {
+            const filtered = MENU_DATA.filter(item => item.tags.includes(tag));
+            renderMenu(filtered);
+        }
+
+        function addToCart(itemId) {
+            const item = MENU_DATA.find(i => i.id === itemId);
+            if (item) {
+                currentCart.push(item);
+                localStorage.setItem('gastroneo_cart', JSON.stringify(currentCart));
+                updateCartUI();
+                const btn = event.target;
+                btn.textContent = "✅ AÑADIDO";
+                setTimeout(() => btn.textContent = "[ + ] AGREGAR", 1000);
+            }
+        }
+
+        function updateCartUI() {
+            const count = currentCart.length;
+            const total = currentCart.reduce((sum, item) => sum + item.price, 0);
+            const cartBar = document.getElementById('cartBar');
+            if (count > 0) {
+                cartBar.style.display = 'block';
+                document.getElementById('cartCount').textContent = count;
+                document.getElementById('cartTotal').textContent = `€${total.toFixed(2)}`;
+            } else {
+                cartBar.style.display = 'none';
+            }
+        }
+
+        function checkout() {
+            if (currentCart.length === 0) return;
+            alert(`✅ Pedido listo:\n${currentCart.length} platos • €${currentCart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}\n\nEl camarero lo procesará.`);
+            currentCart = [];
+            localStorage.setItem('gastroneo_cart', JSON.stringify(currentCart));
+            updateCartUI();
+        }
+
+        // === GastroPass ===
         function generateReferralCode(name) {
             const random = Math.random().toString(36).substr(2, 5).toUpperCase();
             return `GASTRO-${name.substring(0,4).toUpperCase()}${random}`;
         }
 
-        // === Sistema de Niveles ===
         function getUserLevel(tokens) {
             if (tokens >= 1500) return { name: "🥇 Oro", class: "gold", next: 0 };
             if (tokens >= 500) return { name: "🥈 Plata", class: "silver", next: 1500 };
             return { name: "🥉 Bronce", class: "bronze", next: 500 };
         }
 
-        // === Actualizar GastroPass ===
         function updateGastroPass() {
             const user = JSON.parse(localStorage.getItem('gastroneo_user')) || { tokens: 0, referralCode: '', achievements: [] };
             const level = getUserLevel(user.tokens);
             const progress = level.next > 0 ? Math.min(100, Math.round((user.tokens / level.next) * 100)) : 100;
 
-            // Nivel
             const levelEl = document.getElementById('userLevel');
             levelEl.textContent = level.name;
             levelEl.className = `level-badge ${level.class}`;
-
-            // Progreso
             document.getElementById('progressFill').style.width = `${progress}%`;
             document.getElementById('progressText').textContent = level.next > 0 ? 
                 `${user.tokens} / ${level.next} pts` : "¡Nivel máximo!";
 
-            // Código de referido
             if (!user.referralCode) {
                 user.referralCode = generateReferralCode(user.name || 'USER');
                 localStorage.setItem('gastroneo_user', JSON.stringify(user));
             }
             document.getElementById('referralCode').textContent = user.referralCode;
 
-            // Logros (simulados)
             const achievements = [
                 { name: "Registro", unlocked: true },
                 { name: "1ª Reserva", unlocked: user.tokens >= 100 },
@@ -784,7 +980,6 @@
             reservations.push(reservation);
             localStorage.setItem('gastroneo_reservations', JSON.stringify(reservations));
 
-            // Sumar tokens al usuario
             const user = JSON.parse(localStorage.getItem('gastroneo_user'));
             if (user) {
                 user.tokens = (user.tokens || 0) + 100;
@@ -834,6 +1029,8 @@
                 loadOwnerDashboard();
             } else if (viewId === 'rewardsView') {
                 updateGastroPass();
+            } else if (viewId === 'menuView') {
+                renderMenu();
             }
         }
 
