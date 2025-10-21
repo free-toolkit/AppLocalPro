@@ -107,6 +107,70 @@
         .view { display: none; }
         .view.active { display: block; }
 
+        /* --- Autenticación --- */
+        .auth-section {
+            text-align: center;
+            margin: 1.8rem 0;
+            padding: 1.5rem;
+            background: rgba(30, 10, 15, 0.4);
+            border-radius: 16px;
+            border: 1px solid #FF2A6D;
+        }
+        .auth-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .neuro-note {
+            margin-top: 1.2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            color: #F0D0E0;
+            line-height: 1.5;
+        }
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .auth-btn {
+            padding: 0.8rem 1.4rem;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-login { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
+        .btn-signup { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+        }
+
+        .user-profile {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255, 211, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid #FFD300;
+        }
+        .user-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #FFD300;
+            font-size: 1.2rem;
+        }
+        .user-tokens {
+            font-family: 'Rajdhani', sans-serif;
+            color: #F0D0E0;
+            font-size: 0.95rem;
+        }
+
         /* --- Menú Digital --- */
         .menu-header {
             text-align: center;
@@ -116,7 +180,7 @@
             font-size: 1.4rem;
         }
         .category-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .category-title {
             font-family: 'Orbitron', sans-serif;
@@ -135,12 +199,12 @@
         }
         .menu-item img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
             display: block;
         }
         .menu-item-content {
-            padding: 0.9rem;
+            padding: 0.8rem;
         }
         .menu-item-title {
             font-family: 'Orbitron', sans-serif;
@@ -173,6 +237,7 @@
             font-weight: 600;
             width: 100%;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         /* --- GastroPass --- */
@@ -218,8 +283,9 @@
         .reward-item {
             display: flex;
             justify-content: space-between;
-            padding: 0.8rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px solid #44202A;
+            font-size: 0.9rem;
         }
         .reward-item:last-child {
             border: none;
@@ -359,6 +425,8 @@
                         “Más del 70% de los clientes eligen restaurantes con equipo visible y cercano.”
                     </div>
                 </div>
+
+                <div id="authOrProfile"></div>
 
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-utensils"></i> Reservar Mesa
