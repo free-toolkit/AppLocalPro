@@ -29,14 +29,13 @@
         .app-container {
             max-width: 500px;
             margin: 0 auto;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             background: #220F18;
             border: 1px solid #FF2A6D;
             box-shadow: 0 0 30px rgba(255, 42, 109, 0.4);
             position: relative;
-            overflow: hidden;
         }
         .app-header {
             background: linear-gradient(135deg, #FF2A6D, #FFD300);
@@ -44,6 +43,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
         .app-header h1 {
             font-family: 'Orbitron', sans-serif;
@@ -117,10 +117,12 @@
             cursor: pointer;
             margin: 0.8rem 0;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
         .btn-primary { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
         .btn-gold { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
         .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
+        .btn-success { background: linear-gradient(135deg, #00D100, #009900); color: white; }
 
         .form-control {
             width: 100%;
@@ -145,6 +147,7 @@
             border-top: 1px solid #FF2A6D;
             padding: 0.8rem 0;
             backdrop-filter: blur(5px);
+            flex-shrink: 0;
         }
         .nav-item {
             display: flex;
@@ -154,6 +157,7 @@
             text-decoration: none;
             font-size: 0.8rem;
             font-family: 'Rajdhani', sans-serif;
+            transition: color 0.3s ease;
         }
         .nav-item.active, .nav-item:hover {
             color: #FFD300;
@@ -163,7 +167,7 @@
         /* === Botón de descarga === */
         .download-btn {
             position: fixed;
-            bottom: 60px;
+            bottom: 70px;
             right: 10px;
             background: linear-gradient(135deg, #FF2A6D, #D10047);
             color: white;
@@ -178,14 +182,15 @@
             box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
             z-index: 1000;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
         .download-btn:hover {
             transform: scale(1.1);
         }
 
-        /* === Menú Digital – Tarjetas Profesionales === */
+        /* === Menú Digital – Tarjetas Optimizadas === */
         .menu-category {
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         .menu-category-title {
             font-family: 'Orbitron', sans-serif;
@@ -198,22 +203,26 @@
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.3rem;
+            gap: 1rem;
         }
         .menu-card {
             background: rgba(25, 10, 15, 0.65);
-            border-radius: 18px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid #3A1525;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: auto;
         }
         .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 42, 109, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.25);
         }
         .menu-card-img {
-            height: 150px;
+            height: 120px;
             overflow: hidden;
+            position: relative;
         }
         .menu-card-img img {
             width: 100%;
@@ -222,38 +231,44 @@
             transition: transform 0.4s ease;
         }
         .menu-card:hover .menu-card-img img {
-            transform: scale(1.06);
+            transform: scale(1.05);
         }
         .menu-card-body {
-            padding: 1.1rem;
+            padding: 0.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .menu-card-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #FFD300;
             margin: 0 0 0.4rem;
+            line-height: 1.2;
         }
         .menu-card-desc {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #F0D0E0;
             margin: 0 0 0.8rem;
-            line-height: 1.5;
+            line-height: 1.4;
+            flex: 1;
         }
         .menu-card-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: auto;
         }
         .menu-card-price {
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
             color: #FF2A6D;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         .menu-card-btn {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: linear-gradient(135deg, #FF2A6D, #D10047);
             color: white;
@@ -262,11 +277,105 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-            transition: transform 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
         }
         .menu-card-btn:hover {
-            transform: scale(1.15) rotate(90deg);
+            transform: scale(1.1);
+        }
+
+        /* === Carrito de Compras === */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(30, 10, 15, 0.6);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid #3A1525;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-name {
+            font-weight: 600;
+            color: #FFD300;
+            font-size: 0.95rem;
+        }
+        .cart-item-price {
+            color: #FF2A6D;
+            font-size: 0.9rem;
+        }
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #FF2A6D;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .cart-total {
+            background: linear-gradient(135deg, #2A1018, #3A1525);
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px solid #FF2A6D;
+        }
+        .cart-total-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #FFD300;
+            margin: 0.5rem 0;
+        }
+
+        /* === Checkout y Pagos === */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        .payment-btn {
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .btn-cash { 
+            background: linear-gradient(135deg, #00F0FF, #00B8FF); 
+            color: #0D0916; 
+        }
+        .btn-card { 
+            background: linear-gradient(135deg, #6E00FF, #3A00B8); 
+            color: white; 
+        }
+        .btn-paypal { 
+            background: linear-gradient(135deg, #0070BA, #009CDE); 
+            color: white; 
+        }
+        .payment-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         /* === GastroPass – Botones de canjeo pequeños y elegantes === */
@@ -302,7 +411,7 @@
 
         /* === Camarero === */
         .table-card {
-            height: 100px;
+            height: 80px;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
@@ -312,6 +421,7 @@
             position: relative;
             font-family: 'Orbitron', sans-serif;
             border: 2px solid;
+            transition: all 0.3s ease;
         }
         .table-card.free {
             background: rgba(40, 20, 30, 0.6);
@@ -324,11 +434,11 @@
             color: #FFD300;
         }
         .table-number {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
         .table-status {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             margin-top: 0.2rem;
         }
         .table-badge {
@@ -342,23 +452,34 @@
             border-radius: 10px;
         }
 
-        .payment-methods {
+        /* === Badge del Carrito === */
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF2A6D;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
             display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            align-items: center;
+            justify-content: center;
         }
-        .payment-btn {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1.1rem;
+
+        /* === Estados vacíos === */
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #D0B0C0;
         }
-        .btn-cash { background: linear-gradient(135deg, #00F0FF, #00B8FF); color: #0D0916; }
-        .btn-card { background: linear-gradient(135deg, #6E00FF, #3A00B8); color: white; }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #FF2A6D;
+        }
     </style>
 </head>
 <body>
@@ -380,9 +501,9 @@
                 <div style="text-align:center;margin-bottom:1.5rem;">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGwjDuHhDnYwyI7QyXJn0e1rPwH3aWt6PkRw&s" 
                          alt="Equipo GastroNeo"
-                         style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;">
-                    <div style="font-family:'Rajdhani';font-size:1.1rem;color:#FFD300;text-align:center;margin:1rem 0;font-style:italic;">
-                        “Más del 70% de los clientes eligen restaurantes con equipo visible y cercano.”
+                         style="width:100%;max-height:180px;object-fit:cover;border-radius:12px;">
+                    <div style="font-family:'Rajdhani';font-size:1rem;color:#FFD300;text-align:center;margin:1rem 0;font-style:italic;">
+                        "Más del 70% de los clientes eligen restaurantes con equipo visible y cercano."
                     </div>
                 </div>
 
@@ -446,7 +567,7 @@
             </div>
         </div>
 
-        <!-- Menú Digital – CORREGIDO Y PROFESIONAL -->
+        <!-- Menú Digital – OPTIMIZADO -->
         <div id="menuView" class="view">
             <div class="app-header">
                 <h1>📖 Menú Digital</h1>
@@ -457,14 +578,14 @@
                     <div class="menu-grid">
                         <div class="menu-card">
                             <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún">
+                                <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Tartar de Atún</h3>
-                                <p class="menu-card-desc">Atún fresco con wasabi y aguacate</p>
+                                <p class="menu-card-desc">Atún fresco con wasabi y aguacate, marinado en salsa de soja y aceite de sésamo</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€16.50</span>
-                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                    <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50, 'https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -472,14 +593,14 @@
                         </div>
                         <div class="menu-card">
                             <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta">
+                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Bruschetta</h3>
-                                <p class="menu-card-desc">Pan tostado con tomate y albahaca</p>
+                                <p class="menu-card-desc">Pan tostado artesanal con tomate fresco, albahaca y aceite de oliva virgen extra</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€9.90</span>
-                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                    <button class="menu-card-btn" onclick="addToCart('Bruschetta', 9.90, 'https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -493,14 +614,14 @@
                     <div class="menu-grid">
                         <div class="menu-card">
                             <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara">
+                                <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Pasta Carbonara</h3>
-                                <p class="menu-card-desc">Pasta cremosa con panceta y huevo</p>
+                                <p class="menu-card-desc">Pasta fresca con salsa cremosa de panceta, huevo y queso pecorino</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€18.99</span>
-                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                    <button class="menu-card-btn" onclick="addToCart('Pasta Carbonara', 18.99, 'https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -508,14 +629,14 @@
                         </div>
                         <div class="menu-card">
                             <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa">
+                                <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Risotto de Trufa</h3>
-                                <p class="menu-card-desc">Arroz cremoso con trufa negra</p>
+                                <p class="menu-card-desc">Arroz arbóreo cremoso con trufa negra fresca y queso parmesano</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€24.00</span>
-                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                    <button class="menu-card-btn" onclick="addToCart('Risotto de Trufa', 24.00, 'https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -529,14 +650,14 @@
                     <div class="menu-grid">
                         <div class="menu-card">
                             <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tiramisú">
+                                <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tiramisú" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Tiramisú</h3>
-                                <p class="menu-card-desc">Capas de bizcocho y crema de mascarpone</p>
+                                <p class="menu-card-desc">Capas de bizcocho de soletilla empapado en café y crema de mascarpone</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€8.99</span>
-                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                    <button class="menu-card-btn" onclick="addToCart('Tiramisú', 8.99, 'https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -546,6 +667,91 @@
                 </div>
 
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+            </div>
+        </div>
+
+        <!-- Vista del Carrito -->
+        <div id="cartView" class="view">
+            <div class="app-header">
+                <h1>🛒 Mi Carrito</h1>
+            </div>
+            <div class="app-content">
+                <div id="cartItemsContainer">
+                    <!-- Los items del carrito se cargan dinámicamente -->
+                </div>
+                
+                <div id="emptyCart" class="empty-state" style="display: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Tu carrito está vacío</h3>
+                    <p>¡Añade algunos productos deliciosos!</p>
+                </div>
+
+                <div id="cartSummary" style="display: none;">
+                    <div class="cart-total">
+                        <div>Total del Pedido</div>
+                        <div class="cart-total-amount" id="cartTotalAmount">€0.00</div>
+                    </div>
+                    
+                    <button class="btn-neo btn-success" onclick="showView('checkoutView')">
+                        <i class="fas fa-credit-card"></i> Proceder al Pago
+                    </button>
+                </div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('menuView')">
+                    ← Seguir Comprando
+                </button>
+            </div>
+        </div>
+
+        <!-- Vista de Checkout -->
+        <div id="checkoutView" class="view">
+            <div class="app-header">
+                <h1>💳 Checkout</h1>
+            </div>
+            <div class="app-content">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="checkoutName" class="form-control" placeholder="Como aparece en la tarjeta">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="checkoutEmail" class="form-control" placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="checkoutPhone" class="form-control" placeholder="+34 600 000 000">
+                </div>
+
+                <div style="background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; margin:1.5rem 0;">
+                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin:0 0 0.8rem;">Resumen del Pedido</h3>
+                    <div id="checkoutOrderItems"></div>
+                    <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.3rem;margin-top:0.8rem;">
+                        Total: €<span id="checkoutTotal">0.00</span>
+                    </div>
+                </div>
+
+                <h3 style="font-family:'Rajdhani';color:#FFD300;margin:1.5rem 0 1rem;">Método de Pago</h3>
+                <div class="payment-methods">
+                    <button class="payment-btn btn-card" onclick="selectPaymentMethod('card')">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Tarjeta de Crédito</span>
+                    </button>
+                    <button class="payment-btn btn-paypal" onclick="selectPaymentMethod('paypal')">
+                        <i class="fab fa-paypal"></i>
+                        <span>PayPal</span>
+                    </button>
+                    <button class="payment-btn btn-cash" onclick="selectPaymentMethod('cash')">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Efectivo</span>
+                    </button>
+                </div>
+
+                <button class="btn-neo btn-success" onclick="processCheckout()" id="checkoutBtn">
+                    <i class="fas fa-lock"></i> Pagar Ahora
+                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('cartView')">
+                    ← Volver al Carrito
+                </button>
             </div>
         </div>
 
@@ -715,10 +921,10 @@
 
                 <div class="payment-methods">
                     <button class="payment-btn btn-cash" onclick="processPayment('cash')">
-                        <i class="fas fa-money-bill-wave"></i><br>Efectivo
+                        <i class="fas fa-money-bill-wave"></i> Efectivo
                     </button>
                     <button class="payment-btn btn-card" onclick="processPayment('card')">
-                        <i class="fas fa-credit-card"></i><br>Tarjeta
+                        <i class="fas fa-credit-card"></i> Tarjeta
                     </button>
                 </div>
 
@@ -743,6 +949,11 @@
             <i class="fas fa-book"></i>
             <span>Menú</span>
         </a>
+        <a href="#" class="nav-item" onclick="showView('cartView'); return false;" id="cartNavItem">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrito</span>
+            <div class="cart-badge" id="cartBadge" style="display: none;">0</div>
+        </a>
     </div>
 
     <!-- Botón Descarga App -->
@@ -754,12 +965,15 @@
         // === Estado global ===
         let currentOrder = null;
         let currentPaymentOrder = null;
+        let selectedPaymentMethod = null;
+        let cart = JSON.parse(localStorage.getItem('gastroneo_cart')) || [];
 
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('splashScreen').style.display = 'none';
                 renderAuthOrProfile();
                 renderTablesGrid();
+                updateCartBadge();
             }, 2000);
         });
 
@@ -775,11 +989,203 @@
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            if (['homeView','bookingView','menuView'].includes(viewId)) {
-                const idx = ['homeView','bookingView','menuView'].indexOf(viewId);
+            
+            if (['homeView','bookingView','menuView','cartView'].includes(viewId)) {
+                const idx = ['homeView','bookingView','menuView','cartView'].indexOf(viewId);
                 document.querySelectorAll('.nav-item')[idx].classList.add('active');
             }
+            
             if (viewId === 'ownerDashboard') loadOwnerDashboard();
+            if (viewId === 'cartView') renderCart();
+            if (viewId === 'checkoutView') renderCheckout();
+        }
+
+        // === Sistema de Carrito ===
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('gastroneo_cart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            // Mostrar feedback visual
+            const btn = event.target.closest('.menu-card-btn');
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = 'linear-gradient(135deg, #00D100, #009900)';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-plus"></i>';
+                btn.style.background = 'linear-gradient(135deg, #FF2A6D, #D10047)';
+            }, 1000);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const emptyCart = document.getElementById('emptyCart');
+            const cartSummary = document.getElementById('cartSummary');
+            const totalAmount = document.getElementById('cartTotalAmount');
+            
+            if (cart.length === 0) {
+                emptyCart.style.display = 'block';
+                cartSummary.style.display = 'none';
+                container.innerHTML = '';
+                return;
+            }
+            
+            emptyCart.style.display = 'none';
+            cartSummary.style.display = 'block';
+            
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">€${item.price.toFixed(2)} c/u</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
+                            <span style="margin: 0 0.5rem; min-width: 20px; text-align: center;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                            <button class="quantity-btn" onclick="removeFromCart('${item.name}')" style="background: #e74c3c; margin-left: 0.5rem;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            totalAmount.textContent = `€${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(itemName, change) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemName);
+                } else {
+                    localStorage.setItem('gastroneo_cart', JSON.stringify(cart));
+                    updateCartBadge();
+                    renderCart();
+                }
+            }
+        }
+
+        function removeFromCart(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            localStorage.setItem('gastroneo_cart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            localStorage.setItem('gastroneo_cart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        // === Checkout y Pagos ===
+        function renderCheckout() {
+            const itemsContainer = document.getElementById('checkoutOrderItems');
+            const totalElement = document.getElementById('checkoutTotal');
+            
+            let total = 0;
+            itemsContainer.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                return `
+                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:0.5rem;">
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>€${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            totalElement.textContent = total.toFixed(2);
+            
+            // Rellenar datos del usuario si existe
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            if (user) {
+                document.getElementById('checkoutName').value = user.name || '';
+                document.getElementById('checkoutEmail').value = user.email || '';
+            }
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.payment-btn').forEach(btn => {
+                btn.style.border = '2px solid transparent';
+            });
+            event.target.closest('.payment-btn').style.border = '2px solid #FFD300';
+        }
+
+        function processCheckout() {
+            if (!selectedPaymentMethod) {
+                alert("Por favor, selecciona un método de pago.");
+                return;
+            }
+
+            const name = document.getElementById('checkoutName').value;
+            const email = document.getElementById('checkoutEmail').value;
+            const phone = document.getElementById('checkoutPhone').value;
+
+            if (!name || !email || !phone) {
+                alert("Por favor, completa todos los datos de contacto.");
+                return;
+            }
+
+            // Simular procesamiento de pago
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Guardar orden
+            const order = {
+                id: 'order_' + Date.now(),
+                items: [...cart],
+                total: total,
+                paymentMethod: selectedPaymentMethod,
+                customer: { name, email, phone },
+                timestamp: new Date().toISOString(),
+                status: 'completed'
+            };
+
+            const orders = JSON.parse(localStorage.getItem('gastroneo_orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('gastroneo_orders', JSON.stringify(orders));
+
+            // Limpiar carrito y mostrar confirmación
+            clearCart();
+            
+            alert(`✅ ¡Pago realizado con éxito!\nMétodo: ${selectedPaymentMethod}\nTotal: €${total.toFixed(2)}\n\nRecibirás un email de confirmación.`);
+            
+            showView('homeView');
         }
 
         // === Autenticación cliente ===
@@ -803,14 +1209,21 @@
                     </div>`;
             }
         }
+
         function showSignupModal() {
             const name = prompt("¿Cuál es tu nombre?");
-            if (name && name.trim()) {
-                localStorage.setItem('gastroneo_user', JSON.stringify({name: name.trim(), tokens: 50}));
+            const email = prompt("¿Cuál es tu email?");
+            if (name && name.trim() && email) {
+                localStorage.setItem('gastroneo_user', JSON.stringify({
+                    name: name.trim(), 
+                    email: email,
+                    tokens: 50
+                }));
                 alert("¡Bienvenido! 🎁 50 GastroTokens de bienvenida.");
                 renderAuthOrProfile();
             }
         }
+
         function showLoginModal() {
             const name = prompt("Ingresa tu nombre:");
             if (name && name.trim()) {
@@ -841,6 +1254,7 @@
             user.tokens -= cost;
             localStorage.setItem('gastroneo_user', JSON.stringify(user));
             alert(`✅ ¡Canjeado! ${item}`);
+            renderAuthOrProfile();
         }
 
         // === Dueño ===
