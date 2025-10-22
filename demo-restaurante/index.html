@@ -183,61 +183,77 @@
             transform: scale(1.1);
         }
 
-        /* === Menú Digital – Tarjetas profesionales === */
-        .menu-header, .category-title, .rewards-header {
-            font-family: 'Orbitron', sans-serif;
-            text-align: center;
-            margin: 1.4rem 0 1rem;
+        /* === Menú Digital – Tarjetas Profesionales === */
+        .menu-category {
+            margin-bottom: 1.8rem;
         }
-        .category-title {
+        .menu-category-title {
+            font-family: 'Orbitron', sans-serif;
             color: #FF2A6D;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
+            margin: 1.2rem 0 0.9rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid #FF2A6D;
         }
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
+            gap: 1.3rem;
         }
         .menu-card {
-            background: rgba(20, 8, 12, 0.6);
-            border-radius: 16px;
+            background: rgba(25, 10, 15, 0.65);
+            border-radius: 18px;
             overflow: hidden;
             border: 1px solid #3A1525;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .menu-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 42, 109, 0.25);
         }
-        .menu-card-image {
-            position: relative;
-            height: 140px;
+        .menu-card-img {
+            height: 150px;
             overflow: hidden;
         }
-        .menu-card-image img {
+        .menu-card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
         }
-        .menu-card-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        .menu-card:hover .menu-card-img img {
+            transform: scale(1.06);
+        }
+        .menu-card-body {
+            padding: 1.1rem;
+        }
+        .menu-card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #FFD300;
+            margin: 0 0 0.4rem;
+        }
+        .menu-card-desc {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            color: #F0D0E0;
+            margin: 0 0 0.8rem;
+            line-height: 1.5;
+        }
+        .menu-card-footer {
             display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-            padding: 0.6rem;
-            opacity: 0;
-            transition: opacity 0.3s;
+            justify-content: space-between;
+            align-items: center;
         }
-        .menu-card:hover .menu-card-overlay {
-            opacity: 1;
+        .menu-card-price {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            color: #FF2A6D;
+            font-size: 1.1rem;
         }
-        .menu-add-btn {
-            width: 36px;
-            height: 36px;
+        .menu-card-btn {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: linear-gradient(135deg, #FF2A6D, #D10047);
             color: white;
@@ -245,32 +261,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
         }
-        .menu-card-content {
-            padding: 1rem;
+        .menu-card-btn:hover {
+            transform: scale(1.15) rotate(90deg);
         }
-        .menu-card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.15rem;
-            color: #FFD300;
-            margin: 0 0 0.4rem;
-        }
-        .menu-card-desc {
-            font-size: 0.92rem;
-            color: #F0D0E0;
-            margin: 0 0 0.6rem;
-            line-height: 1.4;
-        }
-        .menu-card-footer {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-        }
-        .menu-price { color: #FF2A6D; font-weight: 600; }
-        .menu-rating { color: #FFD300; }
 
         /* === GastroPass – Botones de canjeo pequeños y elegantes === */
         .reward-item {
@@ -449,114 +446,99 @@
             </div>
         </div>
 
-        <!-- Menú Digital – CORREGIDO: ahora está al mismo nivel que las demás vistas -->
+        <!-- Menú Digital – CORREGIDO Y PROFESIONAL -->
         <div id="menuView" class="view">
             <div class="app-header">
                 <h1>📖 Menú Digital</h1>
             </div>
             <div class="app-content">
-                <div class="category-section">
-                    <div class="category-title">ENTRADAS</div>
+                <div class="menu-category">
+                    <h2 class="menu-category-title">ENTRADAS</h2>
                     <div class="menu-grid">
                         <div class="menu-card">
-                            <div class="menu-card-image">
+                            <div class="menu-card-img">
                                 <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún">
-                                <div class="menu-card-overlay">
-                                    <button class="menu-add-btn" onclick="alert('Agregado al pedido')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
                             </div>
-                            <div class="menu-card-content">
-                                <h3 class="menu-card-title">Tartar de Atún</h3>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Tartar de Atún</h3>
                                 <p class="menu-card-desc">Atún fresco con wasabi y aguacate</p>
                                 <div class="menu-card-footer">
-                                    <span class="menu-price">€16.50</span>
-                                    <span class="menu-rating">❤️ 4.9</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-card">
-                            <div class="menu-card-image">
-                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta">
-                                <div class="menu-card-overlay">
-                                    <button class="menu-add-btn" onclick="alert('Agregado al pedido')">
+                                    <span class="menu-card-price">€16.50</span>
+                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="menu-card-content">
-                                <h3 class="menu-card-title">Bruschetta</h3>
+                        </div>
+                        <div class="menu-card">
+                            <div class="menu-card-img">
+                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta">
+                            </div>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Bruschetta</h3>
                                 <p class="menu-card-desc">Pan tostado con tomate y albahaca</p>
                                 <div class="menu-card-footer">
-                                    <span class="menu-price">€9.90</span>
-                                    <span class="menu-rating">❤️ 4.7</span>
+                                    <span class="menu-card-price">€9.90</span>
+                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="category-section">
-                    <div class="category-title">PLATOS FUERTES</div>
+                <div class="menu-category">
+                    <h2 class="menu-category-title">PLATOS FUERTES</h2>
                     <div class="menu-grid">
                         <div class="menu-card">
-                            <div class="menu-card-image">
+                            <div class="menu-card-img">
                                 <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara">
-                                <div class="menu-card-overlay">
-                                    <button class="menu-add-btn" onclick="alert('Agregado al pedido')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
                             </div>
-                            <div class="menu-card-content">
-                                <h3 class="menu-card-title">Pasta Carbonara</h3>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Pasta Carbonara</h3>
                                 <p class="menu-card-desc">Pasta cremosa con panceta y huevo</p>
                                 <div class="menu-card-footer">
-                                    <span class="menu-price">€18.99</span>
-                                    <span class="menu-rating">❤️ 4.8</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-card">
-                            <div class="menu-card-image">
-                                <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa">
-                                <div class="menu-card-overlay">
-                                    <button class="menu-add-btn" onclick="alert('Agregado al pedido')">
+                                    <span class="menu-card-price">€18.99</span>
+                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="menu-card-content">
-                                <h3 class="menu-card-title">Risotto de Trufa</h3>
+                        </div>
+                        <div class="menu-card">
+                            <div class="menu-card-img">
+                                <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa">
+                            </div>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Risotto de Trufa</h3>
                                 <p class="menu-card-desc">Arroz cremoso con trufa negra</p>
                                 <div class="menu-card-footer">
-                                    <span class="menu-price">€24.00</span>
-                                    <span class="menu-rating">❤️ 5.0</span>
+                                    <span class="menu-card-price">€24.00</span>
+                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="category-section">
-                    <div class="category-title">POSTRES</div>
+                <div class="menu-category">
+                    <h2 class="menu-category-title">POSTRES</h2>
                     <div class="menu-grid">
                         <div class="menu-card">
-                            <div class="menu-card-image">
+                            <div class="menu-card-img">
                                 <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tiramisú">
-                                <div class="menu-card-overlay">
-                                    <button class="menu-add-btn" onclick="alert('Agregado al pedido')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
                             </div>
-                            <div class="menu-card-content">
-                                <h3 class="menu-card-title">Tiramisú</h3>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Tiramisú</h3>
                                 <p class="menu-card-desc">Capas de bizcocho y crema de mascarpone</p>
                                 <div class="menu-card-footer">
-                                    <span class="menu-price">€8.99</span>
-                                    <span class="menu-rating">❤️ 4.7</span>
+                                    <span class="menu-card-price">€8.99</span>
+                                    <button class="menu-card-btn" onclick="alert('✅ Añadido al pedido')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -701,7 +683,6 @@
                     </select>
                 </div>
 
-                <!-- Resumen del pedido -->
                 <div id="orderSummary" style="margin-top:1.5rem; background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; display:none;">
                     <h3 style="font-family:'Rajdhani';color:#FFD300;margin:0 0 0.8rem;">Pedido Actual</h3>
                     <div id="orderItemsList"></div>
