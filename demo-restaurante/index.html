@@ -245,63 +245,120 @@
                     </select>
                 </div>
 
-                <!-- Menú simplificado -->
-                <div class="category-section">
-                    <div class="category-title">ENTRADAS</div>
-                    <div class="menu-item" style="margin-bottom:0.8rem;">
-                        <div class="menu-item-content" style="padding:0.6rem;">
-                            <div class="menu-item-title">Tartar de Atún</div>
-                            <div class="menu-item-meta">
-                                <span>💰 €16.50</span>
-                                <button class="add-btn" style="padding:0.3rem 0.6rem;font-size:0.8rem;" onclick="addItemToOrder('Tartar de Atún', 16.50)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item" style="margin-bottom:0.8rem;">
-                        <div class="menu-item-content" style="padding:0.6rem;">
-                            <div class="menu-item-title">Bruschetta</div>
-                            <div class="menu-item-meta">
-                                <span>💰 €9.90</span>
-                                <button class="add-btn" style="padding:0.3rem 0.6rem;font-size:0.8rem;" onclick="addItemToOrder('Bruschetta', 9.90)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Menú Digital – Rediseñado -->
+<div id="menuView" class="view">
+    <div class="menu-header">📖 Menú Digital</div>
 
-                <div class="category-section">
-                    <div class="category-title">PLATOS FUERTES</div>
-                    <div class="menu-item" style="margin-bottom:0.8rem;">
-                        <div class="menu-item-content" style="padding:0.6rem;">
-                            <div class="menu-item-title">Pasta Carbonara</div>
-                            <div class="menu-item-meta">
-                                <span>💰 €18.99</span>
-                                <button class="add-btn" style="padding:0.3rem 0.6rem;font-size:0.8rem;" onclick="addItemToOrder('Pasta Carbonara', 18.99)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item" style="margin-bottom:0.8rem;">
-                        <div class="menu-item-content" style="padding:0.6rem;">
-                            <div class="menu-item-title">Risotto de Trufa</div>
-                            <div class="menu-item-meta">
-                                <span>💰 €24.00</span>
-                                <button class="add-btn" style="padding:0.3rem 0.6rem;font-size:0.8rem;" onclick="addItemToOrder('Risotto de Trufa', 24.00)">+</button>
-                            </div>
-                        </div>
+    <div class="category-section">
+        <div class="category-title">ENTRADAS</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-card-image">
+                    <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún">
+                    <div class="menu-card-overlay">
+                        <button class="menu-add-btn" onclick="addItemFromMenu('Tartar de Atún', 16.50)">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Tartar de Atún</h3>
+                    <p class="menu-card-desc">Atún fresco con wasabi y aguacate</p>
+                    <div class="menu-card-footer">
+                        <span class="menu-price">€16.50</span>
+                        <span class="menu-rating">❤️ 4.9</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="menu-card-image">
+                    <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta">
+                    <div class="menu-card-overlay">
+                        <button class="menu-add-btn" onclick="addItemFromMenu('Bruschetta', 9.90)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Bruschetta</h3>
+                    <p class="menu-card-desc">Pan tostado con tomate y albahaca</p>
+                    <div class="menu-card-footer">
+                        <span class="menu-price">€9.90</span>
+                        <span class="menu-rating">❤️ 4.7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="category-section">
-                    <div class="category-title">POSTRES</div>
-                    <div class="menu-item" style="margin-bottom:0.8rem;">
-                        <div class="menu-item-content" style="padding:0.6rem;">
-                            <div class="menu-item-title">Tiramisú</div>
-                            <div class="menu-item-meta">
-                                <span>💰 €8.99</span>
-                                <button class="add-btn" style="padding:0.3rem 0.6rem;font-size:0.8rem;" onclick="addItemToOrder('Tiramisú', 8.99)">+</button>
-                            </div>
-                        </div>
+    <div class="category-section">
+        <div class="category-title">PLATOS FUERTES</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-card-image">
+                    <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara">
+                    <div class="menu-card-overlay">
+                        <button class="menu-add-btn" onclick="addItemFromMenu('Pasta Carbonara', 18.99)">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Pasta Carbonara</h3>
+                    <p class="menu-card-desc">Pasta cremosa con panceta y huevo</p>
+                    <div class="menu-card-footer">
+                        <span class="menu-price">€18.99</span>
+                        <span class="menu-rating">❤️ 4.8</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="menu-card-image">
+                    <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa">
+                    <div class="menu-card-overlay">
+                        <button class="menu-add-btn" onclick="addItemFromMenu('Risotto de Trufa', 24.00)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Risotto de Trufa</h3>
+                    <p class="menu-card-desc">Arroz cremoso con trufa negra</p>
+                    <div class="menu-card-footer">
+                        <span class="menu-price">€24.00</span>
+                        <span class="menu-rating">❤️ 5.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-section">
+        <div class="category-title">POSTRES</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-card-image">
+                    <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tiramisú">
+                    <div class="menu-card-overlay">
+                        <button class="menu-add-btn" onclick="addItemFromMenu('Tiramisú', 8.99)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Tiramisú</h3>
+                    <p class="menu-card-desc">Capas de bizcocho y crema de mascarpone</p>
+                    <div class="menu-card-footer">
+                        <span class="menu-price">€8.99</span>
+                        <span class="menu-rating">❤️ 4.7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+</div>
 
                 <!-- Resumen del pedido -->
                 <div id="orderSummary" style="margin-top:1.5rem; background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; display:none;">
