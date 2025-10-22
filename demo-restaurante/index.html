@@ -123,6 +123,7 @@
         .btn-gold { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
         .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
         .btn-success { background: linear-gradient(135deg, #00D100, #009900); color: white; }
+        .btn-scan { background: linear-gradient(135deg, #00F0FF, #0099FF); color: #0D0916; }
 
         .form-control {
             width: 100%;
@@ -158,6 +159,7 @@
             font-size: 0.8rem;
             font-family: 'Rajdhani', sans-serif;
             transition: color 0.3s ease;
+            position: relative;
         }
         .nav-item.active, .nav-item:hover {
             color: #FFD300;
@@ -480,6 +482,21 @@
             margin-bottom: 1rem;
             color: #FF2A6D;
         }
+
+        /* === QR Scanner Styles === */
+        .scanner-container {
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px dashed #00F0FF;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .scanner-icon {
+            color: #00F0FF;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -512,6 +529,9 @@
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-utensils"></i> Reservar Mesa
                 </button>
+                <button class="btn-neo btn-scan" onclick="showView('qrScannerView')">
+                    <i class="fas fa-qrcode"></i> Escanear Mesa
+                </button>
                 <button class="btn-neo btn-gold" onclick="showView('menuView')">
                     <i class="fas fa-book-open"></i> Menú Digital
                 </button>
@@ -523,6 +543,46 @@
                 </button>
                 <button class="btn-neo" style="background:rgba(0,240,255,0.2);color:#00F0FF;border:1px solid #00F0FF;" onclick="showView('waiterLoginView')">
                     <i class="fas fa-user-tie"></i> Camarero
+                </button>
+            </div>
+        </div>
+
+        <!-- QR Scanner View -->
+        <div id="qrScannerView" class="view">
+            <div class="app-header">
+                <h1>📱 Escanear QR Mesa</h1>
+            </div>
+            <div class="app-content" style="text-align: center;">
+                <div style="margin: 2rem 0;">
+                    <i class="fas fa-qrcode" style="font-size: 4rem; color: #00F0FF; margin-bottom: 1rem;"></i>
+                    <div style="font-family: 'Rajdhani'; font-size: 1.1rem; color: #FFD300; margin-bottom: 1.5rem;">
+                        Escanea el código QR de tu mesa
+                    </div>
+                </div>
+                
+                <div class="scanner-container">
+                    <div class="scanner-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div style="color: #D0B0C0; margin-bottom: 1.5rem;">
+                        Cámara lista para escanear...
+                    </div>
+                    <button class="btn-neo btn-scan" onclick="simulateQRScan()">
+                        <i class="fas fa-camera"></i> Simular Escaneo
+                    </button>
+                </div>
+
+                <div style="background: rgba(255, 42, 109, 0.1); border-radius: 12px; padding: 1rem; margin: 1.5rem 0;">
+                    <div style="color: #FFD300; font-family: 'Rajdhani'; margin-bottom: 0.5rem;">💡 ¿Cómo escanear?</div>
+                    <div style="color: #D0B0C0; font-size: 0.9rem;">
+                        1. Enfoca el código QR de tu mesa<br>
+                        2. La app detectará automáticamente<br>
+                        3. ¡Accede al menú digital!
+                    </div>
+                </div>
+
+                <button class="btn-neo" style="background: #3A1525; color: #E0C0D0;" onclick="showView('homeView')">
+                    ← Volver
                 </button>
             </div>
         </div>
@@ -573,6 +633,12 @@
                 <h1>📖 Menú Digital</h1>
             </div>
             <div class="app-content">
+                <div id="mesaInfo" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; display: none;">
+                    <div style="color: #00F0FF; font-family: 'Orbitron'; font-size: 0.9rem;">
+                        <i class="fas fa-table"></i> Mesa: <span id="currentMesa">-</span>
+                    </div>
+                </div>
+
                 <div class="menu-category">
                     <h2 class="menu-category-title">ENTRADAS</h2>
                     <div class="menu-grid">
@@ -585,7 +651,7 @@
                                 <p class="menu-card-desc">Atún fresco con wasabi y aguacate, marinado en salsa de soja y aceite de sésamo</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€16.50</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50, 'https://www.paulinacocina.net/wp-content/uploads/2022/03/tartar-de-atun-receta.jpg.webp')">
+                                    <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50, 'https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg')">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -676,6 +742,12 @@
                 <h1>🛒 Mi Carrito</h1>
             </div>
             <div class="app-content">
+                <div id="mesaInfoCart" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; display: none;">
+                    <div style="color: #00F0FF; font-family: 'Orbitron'; font-size: 0.9rem;">
+                        <i class="fas fa-table"></i> Mesa: <span id="currentMesaCart">-</span>
+                    </div>
+                </div>
+
                 <div id="cartItemsContainer">
                     <!-- Los items del carrito se cargan dinámicamente -->
                 </div>
@@ -949,6 +1021,10 @@
             <i class="fas fa-book"></i>
             <span>Menú</span>
         </a>
+        <a href="#" class="nav-item" onclick="showView('qrScannerView'); return false;">
+            <i class="fas fa-qrcode"></i>
+            <span>Escanear</span>
+        </a>
         <a href="#" class="nav-item" onclick="showView('cartView'); return false;" id="cartNavItem">
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
@@ -974,6 +1050,7 @@
                 renderAuthOrProfile();
                 renderTablesGrid();
                 updateCartBadge();
+                checkMesaEscaneada();
             }, 2000);
         });
 
@@ -990,19 +1067,59 @@
             document.getElementById(viewId).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             
-            if (['homeView','bookingView','menuView','cartView'].includes(viewId)) {
-                const idx = ['homeView','bookingView','menuView','cartView'].indexOf(viewId);
+            if (['homeView','bookingView','menuView','qrScannerView','cartView'].includes(viewId)) {
+                const idx = ['homeView','bookingView','menuView','qrScannerView','cartView'].indexOf(viewId);
                 document.querySelectorAll('.nav-item')[idx].classList.add('active');
             }
             
             if (viewId === 'ownerDashboard') loadOwnerDashboard();
             if (viewId === 'cartView') renderCart();
             if (viewId === 'checkoutView') renderCheckout();
+            if (viewId === 'menuView') checkMesaEscaneada();
+        }
+
+        // === QR Scanner Functions ===
+        function simulateQRScan() {
+            // Simular escaneo de QR (en producción usarías una librería real)
+            const mesas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            const mesaAleatoria = mesas[Math.floor(Math.random() * mesas.length)];
+            
+            // Guardar mesa escaneada
+            localStorage.setItem('gastroneo_mesa_escaneada', mesaAleatoria);
+            
+            // Mostrar confirmación
+            alert(`✅ Mesa ${mesaAleatoria} detectada!\nRedirigiendo al menú...`);
+            
+            // Redirigir al menú
+            showView('menuView');
+        }
+
+        function getMesaEscaneada() {
+            return localStorage.getItem('gastroneo_mesa_escaneada');
+        }
+
+        function checkMesaEscaneada() {
+            const mesa = getMesaEscaneada();
+            const mesaInfo = document.getElementById('mesaInfo');
+            const currentMesa = document.getElementById('currentMesa');
+            const mesaInfoCart = document.getElementById('mesaInfoCart');
+            const currentMesaCart = document.getElementById('currentMesaCart');
+            
+            if (mesa) {
+                mesaInfo.style.display = 'block';
+                currentMesa.textContent = mesa;
+                mesaInfoCart.style.display = 'block';
+                currentMesaCart.textContent = mesa;
+            } else {
+                mesaInfo.style.display = 'none';
+                mesaInfoCart.style.display = 'none';
+            }
         }
 
         // === Sistema de Carrito ===
         function addToCart(name, price, image) {
             const existingItem = cart.find(item => item.name === name);
+            const mesaEscaneada = getMesaEscaneada();
             
             if (existingItem) {
                 existingItem.quantity += 1;
@@ -1011,7 +1128,8 @@
                     name: name,
                     price: price,
                     image: image,
-                    quantity: 1
+                    quantity: 1,
+                    mesa: mesaEscaneada // Añadir mesa al item
                 });
             }
             
@@ -1027,6 +1145,11 @@
                 btn.innerHTML = '<i class="fas fa-plus"></i>';
                 btn.style.background = 'linear-gradient(135deg, #FF2A6D, #D10047)';
             }, 1000);
+            
+            // Si hay mesa escaneada, mostrar info
+            if (mesaEscaneada) {
+                console.log(`Producto añadido para mesa ${mesaEscaneada}`);
+            }
         }
 
         function updateCartBadge() {
@@ -1067,6 +1190,7 @@
                         <div class="cart-item-info">
                             <div class="cart-item-name">${item.name}</div>
                             <div class="cart-item-price">€${item.price.toFixed(2)} c/u</div>
+                            ${item.mesa ? `<div style="color: #00F0FF; font-size: 0.8rem;">Mesa: ${item.mesa}</div>` : ''}
                         </div>
                         <div class="cart-item-controls">
                             <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
@@ -1164,6 +1288,7 @@
 
             // Simular procesamiento de pago
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const mesaEscaneada = getMesaEscaneada();
             
             // Guardar orden
             const order = {
@@ -1172,6 +1297,7 @@
                 total: total,
                 paymentMethod: selectedPaymentMethod,
                 customer: { name, email, phone },
+                mesa: mesaEscaneada,
                 timestamp: new Date().toISOString(),
                 status: 'completed'
             };
@@ -1183,7 +1309,13 @@
             // Limpiar carrito y mostrar confirmación
             clearCart();
             
-            alert(`✅ ¡Pago realizado con éxito!\nMétodo: ${selectedPaymentMethod}\nTotal: €${total.toFixed(2)}\n\nRecibirás un email de confirmación.`);
+            let mensaje = `✅ ¡Pago realizado con éxito!\nMétodo: ${selectedPaymentMethod}\nTotal: €${total.toFixed(2)}`;
+            if (mesaEscaneada) {
+                mensaje += `\nMesa: ${mesaEscaneada}`;
+            }
+            mensaje += `\n\nRecibirás un email de confirmación.`;
+            
+            alert(mensaje);
             
             showView('homeView');
         }
