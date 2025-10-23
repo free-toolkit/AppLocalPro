@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital, sistema de fidelización GastroPass, gestión para camareros y protocolos laborales cuánticos.">
+    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital, sistema de fidelización GastroPass y sistema de gestión disciplinaria para empleados.">
     <title>GastroNeo – Restaurante del Futuro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
@@ -119,14 +119,14 @@
         /* === Botones universales === */
         .btn-neo {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 600;
             font-family: 'Rajdhani', sans-serif;
             cursor: pointer;
-            margin: 0.8rem 0;
-            font-size: 1rem;
+            margin: 0.7rem 0;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
         }
         .btn-primary { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
@@ -134,8 +134,6 @@
         .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
         .btn-success { background: linear-gradient(135deg, #00D100, #009900); color: white; }
         .btn-scan { background: linear-gradient(135deg, #00F0FF, #0099FF); color: #0D0916; }
-        .btn-warning { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #220F18; }
-        .btn-danger { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
         .form-control {
             width: 100%;
             padding: 0.8rem;
@@ -175,29 +173,6 @@
             color: #FFD300;
         }
         .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
-        /* === Botón de descarga === */
-        .download-btn {
-            position: fixed;
-            bottom: 70px;
-            right: 10px;
-            background: linear-gradient(135deg, #FF2A6D, #D10047);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
-            z-index: 1000;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .download-btn:hover {
-            transform: scale(1.1);
-        }
         /* === Menú Digital – Tarjetas Optimizadas === */
         .menu-category {
             margin-bottom: 1.5rem;
@@ -277,8 +252,8 @@
             font-size: 1rem;
         }
         .menu-card-btn {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: linear-gradient(135deg, #FF2A6D, #D10047);
             color: white;
@@ -289,7 +264,7 @@
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             transition: all 0.2s ease;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .menu-card-btn:hover {
             transform: scale(1.1);
@@ -320,11 +295,11 @@
         .cart-item-controls {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         .quantity-btn {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background: #FF2A6D;
             color: white;
@@ -333,7 +308,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         .cart-total {
             background: linear-gradient(135deg, #2A1018, #3A1525);
@@ -366,40 +341,23 @@
         .protocol-desc {
             font-size: 0.9rem;
             color: #D0B0C0;
+            line-height: 1.4;
         }
         .penalty-badge {
             display: inline-block;
             background: #FF2A6D;
             color: white;
-            padding: 0.2rem 0.5rem;
+            padding: 0.15rem 0.4rem;
             border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
+            font-size: 0.75rem;
+            margin-left: 0.4rem;
         }
-        /* === NOTIFICACIONES INTELIGENTES === */
-        .notification-container {
-            position: fixed;
-            top: 80px;
-            right: 10px;
-            z-index: 1000;
-            max-width: 300px;
+        .risk-badge {
+            background: #FF4444 !important;
+            animation: blink 1.5s infinite;
         }
-        .notification {
-            background: #1A0A10;
-            border-left: 4px solid;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            animation: slideInRight 0.3s ease;
-        }
-        .notification.warning { border-color: #FFD300; }
-        .notification.danger { border-color: #FF2A6D; }
-        .notification.success { border-color: #00F0FF; }
-        .notification.info { border-color: #6E00FF; }
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        @keyframes blink {
+            50% { opacity: 0.4; }
         }
         /* === SISTEMA DE GAMIFICACIÓN LABORAL === */
         .leaderboard {
@@ -425,8 +383,8 @@
             border-radius: 8px;
         }
         .rank-badge {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -434,13 +392,14 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             margin-right: 1rem;
+            font-size: 0.8rem;
         }
         .rank-diamante { background: linear-gradient(135deg, #00FFFF, #0080FF); }
         .rank-oro { background: linear-gradient(135deg, #FFD700, #FFA500); }
         .rank-plata { background: linear-gradient(135deg, #E5E4E2, #A8A8A8); }
         .rank-bronce { background: linear-gradient(135deg, #CD7F32, #8B4513); }
         .rank-risk { background: linear-gradient(135deg, #FF4444, #8B0000); color: white; }
-        /* === ESTADOS VACÍOS === */
+        /* === Estados vacíos === */
         .empty-state {
             text-align: center;
             padding: 2rem 1rem;
@@ -461,9 +420,6 @@
         </div>
         <div class="splash-text">GASTRONEO</div>
     </div>
-
-    <!-- Notificaciones -->
-    <div class="notification-container" id="notificationContainer"></div>
 
     <div class="app-container">
         <!-- Home View -->
@@ -502,7 +458,6 @@
             </div>
         </div>
 
-        <!-- === Vistas principales (booking, menu, cart, etc.) === -->
         <!-- QR Scanner View -->
         <div id="qrScannerView" class="view">
             <div class="app-header">
@@ -638,18 +593,11 @@
                     </div>
                     <div style="font-size:0.85rem;color:#F0D0E0;margin-top:0.5rem;">280 / 500 pts</div>
                 </div>
-                <div class="benefits-section" style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
-                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin-bottom:1rem;">🎁 Tus Beneficios</h3>
-                    <div style="font-size:0.95rem;line-height:1.6;color:#FFD6E0;">
-                        <div>• Menú digital exclusivo</div>
-                        <div>• Cumpleaños gratis</div>
-                    </div>
-                </div>
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
 
-        <!-- Panel Dueño -->
+        <!-- Panel Dueño – CON SISTEMA DE CASTIGO -->
         <div id="ownerDashboard" class="view">
             <div class="app-header">
                 <h1>🔐 Panel Quantum</h1>
@@ -663,22 +611,22 @@
                     </div>
                 </div>
 
-                <!-- 🔥 NUEVO: Protocolos Laborales y Sistema de Castigo -->
+                <!-- 🔥 SISTEMA DE CASTIGO LABORAL -->
                 <div class="protocol-card">
-                    <div class="protocol-title">🛡️ Protocolo Quantum Laboral v2.1</div>
+                    <div class="protocol-title">🛡️ Protocolo Quantum Laboral v2.2</div>
                     <div class="protocol-desc">
-                        Cada empleado comienza con 100 puntos de conducta.
-                        Infracciones reducen puntos. Si cae bajo 30, se activa "Alerta Roja".
-                        Si llega a 0, despido automático.
-                        <span class="penalty-badge">-10 pts</span> por retraso.
-                        <span class="penalty-badge">-25 pts</span> por queja de cliente.
-                        <span class="penalty-badge">+15 pts</span> por elogio.
+                        Cada empleado comienza con <strong>100 puntos de conducta</strong>.<br>
+                        Infracciones reducen puntos. Si <strong>≤ 30</strong>, se activa <span class="penalty-badge risk-badge">ALERTA ROJA</span>.<br>
+                        Si llega a <strong>0</strong>, despido automático.<br>
+                        <span class="penalty-badge">-10 pts</span> por retraso.<br>
+                        <span class="penalty-badge">-25 pts</span> por queja de cliente.<br>
+                        <span class="penalty-badge" style="background:#00FF00;">+15 pts</span> por elogio.
                     </div>
                 </div>
 
                 <!-- Leaderboard con riesgo -->
                 <div class="leaderboard">
-                    <div class="leaderboard-title">🏆 Ranking Empleados (Conducta)</div>
+                    <div class="leaderboard-title">🏆 Conducta Empleados</div>
                     <div id="ownerLeaderboard"></div>
                 </div>
 
@@ -735,10 +683,6 @@
         </a>
     </div>
 
-    <button class="download-btn" onclick="installApp()">
-        <i class="fas fa-download"></i>
-    </button>
-
     <script>
         // === ESTADO GLOBAL ===
         let appState = {
@@ -768,7 +712,7 @@
             renderEmployeeLeaderboards();
         }
 
-        // === VISTAS ===
+        // === VISTAS – CORREGIDO PARA MÓVILES ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             const target = document.getElementById(viewId);
@@ -892,16 +836,6 @@
             appState.employee = null;
             showView('homeView');
         }
-        function renderTablesGrid() {
-            const grid = document.getElementById('tablesGrid');
-            if (!grid) return;
-            grid.innerHTML = Array.from({length:12}, (_,i) => 
-                `<div class="table-card ${Math.random()>0.5?'occupied':'free'}">
-                    <div class="table-number">${i+1}</div>
-                    <div class="table-status">${Math.random()>0.5?'OCUPADA':'LIBRE'}</div>
-                </div>`
-            ).join('');
-        }
 
         // === GAMIFICACIÓN + SISTEMA DE CASTIGO ===
         function renderOwnerLeaderboard() {
@@ -920,7 +854,7 @@
                             <div style="font-weight:600;">${emp.name}</div>
                             <div style="font-size:0.8rem;color:#D0B0C0;">
                                 Nivel: ${emp.level.toUpperCase()} • 
-                                ${risk ? '⚠️ ALERTA ROJA' : '✅ Estable'}
+                                ${risk ? '<span class="penalty-badge risk-badge">ALERTA ROJA</span>' : '✅ Estable'}
                             </div>
                         </div>
                     </div>
@@ -938,20 +872,7 @@
             renderWaiterLeaderboard();
         }
 
-        // === PWA ===
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', e => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt = null;
-            }
-        }
-
-        console.log('✅ GastroNeo Quantum v2.1 cargado – Sistema de castigo laboral activo');
+        console.log('✅ GastroNeo Quantum v2.2 cargado – Sistema de castigo laboral activo');
     </script>
 </body>
 </html>
