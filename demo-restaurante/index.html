@@ -327,46 +327,191 @@
         .rank-oro { background: linear-gradient(135deg, #FFD700, #FFA500); }
         .rank-plata { background: linear-gradient(135deg, #E5E4E2, #A8A8A8); }
 
-        /* === MENÚ DIGITAL === */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
+        /* === NUEVOS ESTILOS PARA EL MENÚ MODERNO === */
+        .quantum-portal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, 
+                transparent 0%, 
+                var(--neo-primary) 50%,
+                var(--neo-bg) 100%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+            animation: portal-expand 1.5s ease-out;
+        }
+
+        @keyframes portal-expand {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.8; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        .hologram-enter {
+            animation: hologram-appear 2s ease-out;
+        }
+
+        @keyframes hologram-appear {
+            0% { 
+                transform: translateY(100vh) rotateX(90deg);
+                opacity: 0;
+                filter: hue-rotate(180deg) blur(20px);
+            }
+            50% { 
+                transform: translateY(-20px) rotateX(20deg);
+                opacity: 0.8;
+                filter: hue-rotate(90deg) blur(10px);
+            }
+            100% { 
+                transform: translateY(0) rotateX(0);
+                opacity: 1;
+                filter: hue-rotate(0) blur(0);
+            }
+        }
+
+        .menu-header {
+            background: linear-gradient(135deg, 
+                rgba(255, 42, 109, 0.9), 
+                rgba(110, 0, 255, 0.9),
+                rgba(0, 240, 255, 0.9));
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 211, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 42, 109, 0.2) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--neo-accent), var(--neo-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 211, 0, 0.5);
+            margin: 2rem 0 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neo-secondary), transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .menu-card {
-            background: rgba(25, 10, 15, 0.7);
-            border-radius: 16px;
+            background: rgba(25, 10, 15, 0.9);
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255, 42, 109, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            backdrop-filter: blur(10px);
+            margin: 1rem;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .menu-card:hover::before {
+            left: 100%;
         }
 
         .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 42, 109, 0.3);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(255, 42, 109, 0.3),
+                0 0 80px rgba(0, 240, 255, 0.2),
+                inset 0 0 60px rgba(255, 211, 0, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.5);
         }
 
         .menu-card-img {
-            height: 140px;
+            height: 200px;
             overflow: hidden;
+            position: relative;
         }
 
         .menu-card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover .menu-card-img img {
+            transform: scale(1.1);
         }
 
         .menu-card-body {
-            padding: 1rem;
+            padding: 1.5rem;
         }
 
         .menu-card-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--neo-accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .menu-card-desc {
+            color: var(--neo-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .ingredients-container {
+            margin-bottom: 1rem;
+        }
+
+        .ingredient-tag {
+            background: rgba(0,240,255,0.2);
+            color: var(--neo-secondary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(0,240,255,0.3);
+            display: inline-block;
+            margin: 0.2rem;
         }
 
         .menu-card-footer {
@@ -380,12 +525,12 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             color: var(--neo-primary);
-            font-size: 1.1rem;
+            font-size: 1.4rem;
         }
 
-        .menu-card-btn {
-            width: 40px;
-            height: 40px;
+        .add-to-cart-btn {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--neo-primary), #D10047);
             color: white;
@@ -394,6 +539,172 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.2rem;
+        }
+
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .add-to-cart-btn:hover::before {
+            left: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 0 30px rgba(255, 42, 109, 0.8);
+        }
+
+        .cart-animation {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            animation: fly-to-cart 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fly-to-cart {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.5) rotate(180deg) translateY(-50px);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0.1) rotate(360deg) translate(150px, 300px);
+                opacity: 0;
+            }
+        }
+
+        .pulse-effect {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0, 240, 255, 0.5); 
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(0, 240, 255, 0.8), 0 0 60px rgba(255, 42, 109, 0.6); 
+            }
+        }
+
+        .highlight-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--neo-accent), #FF9A00);
+            color: var(--neo-bg);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--neo-secondary);
+            border-radius: 50%;
+            animation: float-particle 8s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+        }
+
+        .category-buttons {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.8rem;
+            padding: 1.5rem 1rem;
+            margin-bottom: 1rem;
+            scrollbar-width: none;
+        }
+
+        .category-buttons::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            flex-shrink: 0;
+            padding: 1rem 1.8rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, var(--neo-primary), #D10047);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 42, 109, 0.4);
+        }
+
+        .category-btn:not(.active) {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--neo-secondary);
+            color: var(--neo-text);
+        }
+
+        .category-btn:not(.active):hover {
+            background: rgba(0, 240, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            width: calc(100% - 2rem);
+            margin: 1rem;
+            padding: 1.2rem;
+            background: rgba(58, 21, 37, 0.8);
+            border: 1px solid var(--neo-primary);
+            border-radius: 15px;
+            color: #E0C0D0;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 42, 109, 0.2);
+            border-color: var(--neo-accent);
+            color: var(--neo-accent);
         }
 
         /* === FORMULARIOS === */
@@ -576,6 +887,12 @@
         <div class="splash-text">GASTRONEO QUANTUM</div>
     </div>
 
+    <!-- Portal de entrada futurista -->
+    <div id="quantumPortal" class="quantum-portal" style="display: none;"></div>
+
+    <!-- Partículas flotantes de fondo -->
+    <div class="floating-particles" id="floatingParticles"></div>
+
     <!-- Sistema de Notificaciones -->
     <div class="notification-container" id="notificationContainer"></div>
 
@@ -594,7 +911,7 @@
                 <button class="btn-neo btn-secondary" onclick="showView('qrScannerView')">
                     <i class="fas fa-qrcode"></i> Escanear Mesa
                 </button>
-                <button class="btn-neo btn-accent" onclick="showView('menuView')">
+                <button class="btn-neo btn-accent" onclick="showMenuWithEffects()">
                     <i class="fas fa-book-open"></i> Menú Digital
                 </button>
                 <button class="btn-neo btn-purple" onclick="showView('rewardsView')">
@@ -693,77 +1010,46 @@
             </div>
         </div>
 
-        <!-- ========== MENÚ DIGITAL ========== -->
+        <!-- ========== MENÚ DIGITAL MODERNO ========== -->
         <div id="menuView" class="view">
-            <div class="app-header">
-                <h1><i class="fas fa-book-open"></i> Menú Digital</h1>
+            <!-- Encabezado espectacular -->
+            <div class="menu-header">
+                <h1 style="font-family: 'Orbitron'; font-size: 2.5rem; color: white; text-shadow: 0 0 30px rgba(0,240,255,0.9); margin-bottom: 0.5rem;">
+                    MENÚ QUANTUM
+                </h1>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; font-weight: 500;">
+                    Experiencia Gastronómica del Futuro
+                </p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--neo-accent);">
+                    <i class="fas fa-bolt"></i> Tecnología Culinaria Avanzada
+                </div>
             </div>
-            <div class="app-content">
-                <div id="mesaInfo" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; display: none;">
-                    <div style="color: var(--neo-secondary); font-family: 'Orbitron'; font-size: 0.9rem;">
-                        <i class="fas fa-table"></i> Mesa: <span id="currentMesa">-</span>
-                    </div>
-                </div>
 
-                <div class="menu-category">
-                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">ENTRADAS</h2>
-                    <div class="menu-grid">
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Tartar de Atún</h3>
-                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Atún fresco con wasabi y aguacate, marinado en salsa de soja</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€16.50</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50)">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Bruschetta</h3>
-                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Pan tostado artesanal con tomate fresco y albahaca</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€9.90</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Bruschetta', 9.90)">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-category">
-                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">PLATOS FUERTES</h2>
-                    <div class="menu-grid">
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Pasta Carbonara</h3>
-                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Pasta fresca con salsa cremosa de panceta y queso</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€18.99</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Pasta Carbonara', 18.99)">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+            <!-- Selector de Categorías -->
+            <div class="category-buttons">
+                <button class="category-btn active" onclick="showCategory('entradas')">
+                    🚀 Entradas
+                </button>
+                <button class="category-btn" onclick="showCategory('principales')">
+                    ⚡ Principales
+                </button>
+                <button class="category-btn" onclick="showCategory('postres')">
+                    🌌 Postres
+                </button>
+                <button class="category-btn" onclick="showCategory('bebidas')">
+                    💫 Bebidas
+                </button>
             </div>
+
+            <!-- Contenido de las Categorías -->
+            <div id="menuContent">
+                <!-- Las categorías se cargan aquí dinámicamente -->
+            </div>
+
+            <!-- Botón de volver -->
+            <button class="back-btn" onclick="showView('homeView')">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </button>
         </div>
 
         <!-- ========== TIENDA LOCAL ========== -->
@@ -792,7 +1078,7 @@
                             <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Miel pura de abeja recolectada en los montes locales</p>
                             <div class="menu-card-footer">
                                 <span class="menu-card-price">€12.90</span>
-                                <button class="menu-card-btn" onclick="addToCart('Miel Artesanal', 12.90)">
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('Miel Artesanal', 12.90, this)">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -809,7 +1095,7 @@
                             <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Queso artesanal de cabra curado 6 meses</p>
                             <div class="menu-card-footer">
                                 <span class="menu-card-price">€18.50</span>
-                                <button class="menu-card-btn" onclick="addToCart('Queso de Cabra', 18.50)">
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('Queso de Cabra', 18.50, this)">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -826,7 +1112,7 @@
                             <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Primera prensada en frío, botella 500ml</p>
                             <div class="menu-card-footer">
                                 <span class="menu-card-price">€15.75</span>
-                                <button class="menu-card-btn" onclick="addToCart('Aceite de Oliva Virgen Extra', 15.75)">
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('Aceite de Oliva Virgen Extra', 15.75, this)">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -843,7 +1129,7 @@
                             <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Selección de chorizo, salchichón y lomo embuchado</p>
                             <div class="menu-card-footer">
                                 <span class="menu-card-price">€22.90</span>
-                                <button class="menu-card-btn" onclick="addToCart('Embutidos Caseros', 22.90)">
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('Embutidos Caseros', 22.90, this)">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -860,7 +1146,7 @@
                             <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Vino crianza 12 meses en barrica, botella 750ml</p>
                             <div class="menu-card-footer">
                                 <span class="menu-card-price">€14.50</span>
-                                <button class="menu-card-btn" onclick="addToCart('Vino Tinto de la Tierra', 14.50)">
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('Vino Tinto de la Tierra', 14.50, this)">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -877,7 +1163,7 @@
                             <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Elaborada artesanalmente con frutos silvestres</p>
                             <div class="menu-card-footer">
                                 <span class="menu-card-price">€8.90</span>
-                                <button class="menu-card-btn" onclick="addToCart('Mermelada de Frutos del Bosque', 8.90)">
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('Mermelada de Frutos del Bosque', 8.90, this)">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -1137,7 +1423,7 @@
             <i class="fas fa-calendar"></i>
             <span>Reservas</span>
         </a>
-        <a href="#" class="nav-item" onclick="showView('menuView'); return false;">
+        <a href="#" class="nav-item" onclick="showMenuWithEffects(); return false;">
             <i class="fas fa-book"></i>
             <span>Menú</span>
         </a>
@@ -1153,6 +1439,147 @@
     </div>
 
     <script>
+        // === DATOS DEL MENÚ MEJORADO ===
+        const menuData = {
+            entradas: {
+                title: "🚀 ENTRADAS CÓSMICAS",
+                items: [
+                    {
+                        name: "TARTAR DE ATÚN QUANTUM",
+                        description: "Atún de aguas profundas con algas espaciales, emulsión de wasabi y crujiente de sésamo negro. Una explosión de sabores del océano.",
+                        price: 18.50,
+                        image: "https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg",
+                        ingredients: ["Atún rojo premium", "Algas nori", "Aguacate", "Sésamo negro", "Wasabi", "Salsa de soja"],
+                        highlight: true,
+                        cookingTime: "10 min"
+                    },
+                    {
+                        name: "BRUSCHETTA GALÁCTICA",
+                        description: "Pan de cristal artesanal con tomates hidropónicos, albahaca fresca y aceite de oliva lunar. Texturas del espacio.",
+                        price: 12.90,
+                        image: "https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg",
+                        ingredients: ["Pan cristal", "Tomate hidropónico", "Albahaca fresca", "Ajo", "Aceite de oliva virgen"],
+                        highlight: false,
+                        cookingTime: "5 min"
+                    },
+                    {
+                        name: "CEVICHE NEBULOSA",
+                        description: "Corvina de roca marinada en leche de tigre con toques cítricos y maíz andino. Frescura interestelar.",
+                        price: 16.75,
+                        image: "https://images.pexels.com/photos/954677/pexels-photo-954677.jpeg",
+                        ingredients: ["Corvina fresca", "Limón", "Cilantro", "Cebolla morada", "Ají limo", "Maíz andino"],
+                        highlight: true,
+                        cookingTime: "15 min"
+                    },
+                    {
+                        name: "CROQUETAS DE JAMÓN IBÉRICO",
+                        description: "Cremosas croquetas con jamón ibérico de bellota y bechamel de trufa negra. Tradición mejorada.",
+                        price: 14.25,
+                        image: "https://images.pexels.com/photos/1055270/pexels-photo-1055270.jpeg",
+                        ingredients: ["Jamón ibérico", "Trufa negra", "Bechamel", "Pan rallado", "Aceite de oliva"],
+                        highlight: false,
+                        cookingTime: "8 min"
+                    }
+                ]
+            },
+            principales: {
+                title: "⚡ PLATOS PRINCIPALES",
+                items: [
+                    {
+                        name: "FILETE WAGYU A5",
+                        description: "Exquisito filete de res Wagyu grado A5 con puré de raíces trufado y reducción de vino tinto envejecido.",
+                        price: 89.90,
+                        image: "https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg",
+                        ingredients: ["Wagyu A5", "Trufa negra", "Puré de patata", "Vino tinto reserva", "Mantequilla"],
+                        highlight: true,
+                        cookingTime: "25 min"
+                    },
+                    {
+                        name: "RISOTTO DE AZAFRÁN Y GAMBAS",
+                        description: "Arroz carnaroli cremoso con azafrán de La Mancha, gambas rojas y parmesano 36 meses.",
+                        price: 24.50,
+                        image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
+                        ingredients: ["Arroz carnaroli", "Azafrán", "Gambas rojas", "Parmesano", "Caldo de marisco"],
+                        highlight: false,
+                        cookingTime: "20 min"
+                    },
+                    {
+                        name: "SALMÓN GLASEADO CON MIEL",
+                        description: "Lomo de salmón noruego glaseado con miel de flores y acompañado de verduras de temporada.",
+                        price: 22.75,
+                        image: "https://images.pexels.com/photos/3297807/pexels-photo-3297807.jpeg",
+                        ingredients: ["Salmón noruego", "Miel", "Verduras de temporada", "Eneldo", "Limón"],
+                        highlight: true,
+                        cookingTime: "18 min"
+                    }
+                ]
+            },
+            postres: {
+                title: "🌌 POSTRES ESTELARES",
+                items: [
+                    {
+                        name: "ESFERA DE CHOCOLATE Y ORO",
+                        description: "Esfera de chocolate 70% cacao con corazón líquido de frutos rojos y láminas de oro comestible 24k.",
+                        price: 14.90,
+                        image: "https://images.pexels.com/photos/302478/pexels-photo-302478.jpeg",
+                        ingredients: ["Chocolate 70%", "Frutos rojos", "Oro comestible", "Helado de vainilla", "Menta"],
+                        highlight: true,
+                        cookingTime: "12 min"
+                    },
+                    {
+                        name: "TORRIJA GALÁCTICA",
+                        description: "Torrija caramelizada con helado de canela y polvo de constelación de frutos secos.",
+                        price: 11.50,
+                        image: "https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg",
+                        ingredients: ["Pan brioche", "Leche", "Canela", "Helado artesanal", "Caramelo"],
+                        highlight: false,
+                        cookingTime: "15 min"
+                    },
+                    {
+                        name: "MOUSSE DE FRAMBUESA",
+                        description: "Mousse ligera de frambuesa con base de galleta y coulis de frutos del bosque.",
+                        price: 9.75,
+                        image: "https://images.pexels.com/photos/132694/pexels-photo-132694.jpeg",
+                        ingredients: ["Frambuesas", "Nata", "Galleta", "Gelatina", "Azúcar"],
+                        highlight: false,
+                        cookingTime: "10 min"
+                    }
+                ]
+            },
+            bebidas: {
+                title: "💫 BEBIDAS INTERGALÁCTICAS",
+                items: [
+                    {
+                        name: "COCTEL NEBULA",
+                        description: "Ginebra premium, licor de flor de saúco, zumo de limón fresco y tónica espumosa con toques cítricos.",
+                        price: 15.00,
+                        image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg",
+                        ingredients: ["Ginebra", "Flor de saúco", "Limón", "Tónica", "Hierbas"],
+                        highlight: true,
+                        cookingTime: "5 min"
+                    },
+                    {
+                        name: "VINO TINTO RESERVA ESPECIAL",
+                        description: "Selección de vinos tintos de añadas excepcionales con crianza en barricas de roble francés.",
+                        price: 8.50,
+                        image: "https://images.pexels.com/photos/290316/pexels-photo-290316.jpeg",
+                        ingredients: ["Uvas tempranillo", "Barrica de roble", "Añada especial"],
+                        highlight: false,
+                        cookingTime: "2 min"
+                    },
+                    {
+                        name: "ZUMO DETOX ENERGÉTICO",
+                        description: "Mezcla revitalizante de jengibre, limón, manzana verde y espinacas. Cargado de energía positiva.",
+                        price: 6.90,
+                        image: "https://images.pexels.com/photos/158109/kale-vegetables-healthy-158109.jpeg",
+                        ingredients: ["Jengibre", "Limón", "Manzana verde", "Espinacas", "Miel"],
+                        highlight: true,
+                        cookingTime: "3 min"
+                    }
+                ]
+            }
+        };
+
         // === ESTADO GLOBAL ===
         let appState = {
             user: null,
@@ -1183,6 +1610,24 @@
             startLiveActivities();
             renderEmployeeLeaderboard();
             renderTablesGrid();
+            createFloatingParticles();
+            showCategory('entradas');
+        }
+
+        // === CREAR PARTÍCULAS FLOTANTES ===
+        function createFloatingParticles() {
+            const container = document.getElementById('floatingParticles');
+            const colors = ['#00F0FF', '#FF2A6D', '#FFD300', '#6E00FF'];
+            
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+                container.appendChild(particle);
+            }
         }
 
         // === SISTEMA DE VISTAS ===
@@ -1204,6 +1649,137 @@
             if (viewId === 'cartView') renderCart();
             if (viewId === 'checkoutView') renderCheckout();
             if (viewId === 'employeeDashboard') renderEmployeeDashboard();
+        }
+
+        // === EFECTO DE ENTRADA ESPECTACULAR PARA EL MENÚ ===
+        function showMenuWithEffects() {
+            const portal = document.getElementById('quantumPortal');
+            
+            // Mostrar portal de entrada
+            portal.style.display = 'block';
+            portal.style.animation = 'none';
+            void portal.offsetWidth; // Trigger reflow
+            portal.style.animation = 'portal-expand 1.5s ease-out';
+            
+            // Aplicar efecto holográfico al menú
+            setTimeout(() => {
+                showView('menuView');
+                const menuView = document.getElementById('menuView');
+                menuView.classList.add('hologram-enter');
+                portal.style.display = 'none';
+                
+                // Mostrar notificación de bienvenida
+                createNotification('success', '🚀 Menú Quantum Activado', 'Bienvenido a la experiencia gastronómica del futuro');
+            }, 1000);
+        }
+
+        // === MOSTRAR CATEGORÍA ===
+        function showCategory(category) {
+            const menuContent = document.getElementById('menuContent');
+            const categoryData = menuData[category];
+            
+            // Actualizar botones activos
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Generar HTML de la categoría
+            let html = `
+                <h2 class="category-title">${categoryData.title}</h2>
+            `;
+            
+            categoryData.items.forEach((item, index) => {
+                html += `
+                    <div class="menu-card ${item.highlight ? 'pulse-effect' : ''}" 
+                         style="animation-delay: ${index * 0.1}s">
+                        ${item.highlight ? `<div class="highlight-badge">⭐ RECOMENDADO</div>` : ''}
+                        <div class="menu-card-img">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">${item.name}</h3>
+                            <p class="menu-card-desc">${item.description}</p>
+                            
+                            <div class="ingredients-container">
+                                <div style="font-size: 0.85rem; color: var(--neo-secondary); margin-bottom: 0.5rem;">
+                                    <strong>Ingredientes:</strong>
+                                </div>
+                                <div>
+                                    ${item.ingredients.map(ing => `
+                                        <span class="ingredient-tag">${ing}</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                                <div>
+                                    <div class="menu-card-price">€${item.price.toFixed(2)}</div>
+                                    <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">
+                                        <i class="fas fa-clock"></i> ${item.cookingTime}
+                                    </div>
+                                </div>
+                                <button class="add-to-cart-btn" onclick="addToCartWithEffect('${item.name}', ${item.price}, this)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            menuContent.innerHTML = html;
+        }
+
+        // === AÑADIR AL CARRITO CON EFECTO VISUAL ESPECTACULAR ===
+        function addToCartWithEffect(itemName, price, button) {
+            // Crear elemento de animación
+            const animation = document.createElement('div');
+            animation.className = 'cart-animation';
+            animation.innerHTML = `
+                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--neo-primary), #D10047); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                    <i class="fas fa-plus"></i>
+                </div>
+            `;
+            
+            // Posicionar animación
+            const rect = button.getBoundingClientRect();
+            animation.style.left = (rect.left + rect.width/2 - 25) + 'px';
+            animation.style.top = (rect.top + rect.height/2 - 25) + 'px';
+            
+            document.body.appendChild(animation);
+            
+            // Efecto en el botón
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.style.background = 'linear-gradient(135deg, #00D100, #009900)';
+            button.style.transform = 'scale(1.2)';
+            
+            // Añadir al carrito real
+            const existingItem = appState.cart.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                appState.cart.push({ name: itemName, price: price, quantity: 1 });
+            }
+            
+            localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
+            updateCartBadge();
+            
+            // Restaurar botón después de 1 segundo
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-plus"></i>';
+                button.style.background = 'linear-gradient(135deg, var(--neo-primary), #D10047)';
+                button.style.transform = 'scale(1)';
+            }, 1000);
+            
+            // Eliminar animación
+            setTimeout(() => {
+                animation.remove();
+            }, 1000);
+            
+            // Mostrar notificación
+            createNotification('success', '🛒 ¡Añadido!', `${itemName} se ha añadido al carrito`);
         }
 
         // === SISTEMA DE USUARIOS ===
@@ -1589,7 +2165,7 @@
             localStorage.setItem('gastroneo_mesa_escaneada', mesaAleatoria);
             
             alert(`✅ Mesa ${mesaAleatoria} detectada!\nRedirigiendo al menú...`);
-            showView('menuView');
+            showMenuWithEffects();
         }
 
         function checkMesaEscaneada() {
@@ -1600,10 +2176,14 @@
             const currentMesaCart = document.getElementById('currentMesaCart');
             
             if (mesa) {
-                mesaInfo.style.display = 'block';
-                currentMesa.textContent = mesa;
-                mesaInfoCart.style.display = 'block';
-                currentMesaCart.textContent = mesa;
+                if (mesaInfo) {
+                    mesaInfo.style.display = 'block';
+                    currentMesa.textContent = mesa;
+                }
+                if (mesaInfoCart) {
+                    mesaInfoCart.style.display = 'block';
+                    currentMesaCart.textContent = mesa;
+                }
             }
         }
 
