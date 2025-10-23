@@ -2,83 +2,138 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital, sistema de fidelización GastroPass y sistema de gestión disciplinaria para empleados.">
-    <title>GastroNeo – Restaurante del Futuro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GastroNeo: Restaurante del Futuro con IA, Gamificación y Neo-Glassmorphism">
+    <title>GastroNeo – Revolución Gastronómica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FF2A6D">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="GastroNeo">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <link rel="icon" href="icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* === Estilos base === */
+        /* === VARIABLES NEO-GLASSMORPHISM === */
+        :root {
+            --neo-primary: #FF2A6D;
+            --neo-secondary: #00F0FF;
+            --neo-accent: #FFD300;
+            --neo-purple: #6E00FF;
+            --neo-bg: #0D0916;
+            --neo-bg-light: #1A0A10;
+            --neo-text: #FFD6E0;
+            --neo-text-secondary: #D0B0C0;
+        }
+
+        /* === ESTILOS BASE === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #1A0A10;
-            color: #FFD6E0;
+            background: var(--neo-bg);
+            color: var(--neo-text);
             overflow-x: hidden;
             font-family: 'Rajdhani', sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            min-height: 100vh;
         }
+
         .app-container {
             max-width: 500px;
             margin: 0 auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: #220F18;
-            border: 1px solid #FF2A6D;
-            box-shadow: 0 0 30px rgba(255, 42, 109, 0.4);
+            background: var(--neo-bg-light);
             position: relative;
-            flex: 1;
+            overflow: hidden;
         }
+
+        /* === NEO-GLASSMORPHISM === */
+        .neo-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .neo-holographic {
+            background: linear-gradient(125deg, 
+                rgba(255, 42, 109, 0.1) 0%,
+                rgba(0, 240, 255, 0.1) 50%,
+                rgba(110, 0, 255, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .neo-holographic::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent
+            );
+            animation: hologram-shine 3s infinite;
+        }
+
+        @keyframes hologram-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* === HEADER HOLOGRÁFICO === */
         .app-header {
-            background: linear-gradient(135deg, #FF2A6D, #FFD300);
+            background: linear-gradient(135deg, var(--neo-primary), var(--neo-accent));
             padding: 1.2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
         }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.6), 
+                transparent
+            );
+            animation: header-shine 4s infinite;
+        }
+
+        @keyframes header-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
         .app-header h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 900;
             color: white;
             position: relative;
             z-index: 1;
-            text-shadow: 0 0 10px rgba(255,255,255,0.7);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
         }
+
+        /* === CONTENIDO PRINCIPAL === */
         .app-content {
             flex: 1;
             padding: 1rem;
             overflow-y: auto;
             background: rgba(34, 15, 24, 0.7);
-            /* 🔑 CORRECCIÓN CLAVE PARA MÓVILES */
-            min-height: 0;
-            -webkit-overflow-scrolling: touch;
         }
-        .view { 
-            display: none; 
-            flex: 1;
-            flex-direction: column;
-            min-height: 0;
-        }
-        .view.active { 
-            display: flex !important;
-        }
-        /* === Splash Screen === */
+
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* === SPLASH SCREEN === */
         #splashScreen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #1A0A10;
+            background: var(--neo-bg);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -87,293 +142,166 @@
             color: white;
             overflow: hidden;
         }
+
         .splash-logo {
             width: 120px;
             height: 120px;
-            background: linear-gradient(135deg, #FF2A6D, #FFD300);
+            background: linear-gradient(135deg, var(--neo-primary), var(--neo-accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 0 30px rgba(255, 42, 109, 0.6);
+            box-shadow: 0 0 50px rgba(255, 42, 109, 0.8);
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+
         .splash-text {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.4rem;
-            color: #00F0FF;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+            color: var(--neo-secondary);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
             animation: fadeIn 1s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* === Botones universales === */
+
+        /* === BOTONES NEO === */
         .btn-neo {
             width: 100%;
-            padding: 0.9rem;
+            padding: 1rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 600;
             font-family: 'Rajdhani', sans-serif;
             cursor: pointer;
-            margin: 0.7rem 0;
-            font-size: 0.95rem;
+            margin: 0.8rem 0;
+            font-size: 1rem;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-primary { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
-        .btn-gold { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #333; }
-        .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
-        .btn-success { background: linear-gradient(135deg, #00D100, #009900); color: white; }
-        .btn-scan { background: linear-gradient(135deg, #00F0FF, #0099FF); color: #0D0916; }
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            background: #1A1030;
-            color: #FFD6E0;
-            border: 1px solid #FF2A6D;
-            border-radius: 8px;
-            font-family: 'Rajdhani', sans-serif;
+
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--neo-primary), #D10047); 
+            color: white; 
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #D0B0C0;
+
+        .btn-secondary { 
+            background: linear-gradient(135deg, var(--neo-secondary), #00B8FF); 
+            color: var(--neo-bg); 
         }
-        /* === Navegación inferior === */
+
+        .btn-accent { 
+            background: linear-gradient(135deg, var(--neo-accent), #FF9A00); 
+            color: var(--neo-bg); 
+        }
+
+        .btn-purple { 
+            background: linear-gradient(135deg, var(--neo-purple), #3A00B8); 
+            color: white; 
+        }
+
+        /* === NAVEGACIÓN === */
         .app-nav {
             display: flex;
             justify-content: space-around;
             background: rgba(10, 7, 10, 0.9);
-            border-top: 1px solid #FF2A6D;
+            border-top: 1px solid var(--neo-primary);
             padding: 0.8rem 0;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             flex-shrink: 0;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #E0C0D0;
+            color: var(--neo-text-secondary);
             text-decoration: none;
             font-size: 0.8rem;
             font-family: 'Rajdhani', sans-serif;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem;
         }
+
         .nav-item.active, .nav-item:hover {
-            color: #FFD300;
+            color: var(--neo-accent);
+            transform: translateY(-2px);
         }
-        .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
-        /* === Menú Digital – Tarjetas Optimizadas === */
-        .menu-category {
-            margin-bottom: 1.5rem;
+
+        .nav-item i { 
+            font-size: 1.4rem; 
+            margin-bottom: 0.3rem; 
         }
-        .menu-category-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #FF2A6D;
-            font-size: 1.25rem;
-            margin: 1.2rem 0 0.9rem;
-            padding-bottom: 0.4rem;
-            border-bottom: 1px solid #FF2A6D;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        .menu-card {
-            background: rgba(25, 10, 15, 0.65);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #3A1525;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: auto;
-        }
-        .menu-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.25);
-        }
-        .menu-card-img {
-            height: 120px;
-            overflow: hidden;
-            position: relative;
-        }
-        .menu-card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        .menu-card:hover .menu-card-img img {
-            transform: scale(1.05);
-        }
-        .menu-card-body {
-            padding: 0.8rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .menu-card-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: #FFD300;
-            margin: 0 0 0.4rem;
-            line-height: 1.2;
-        }
-        .menu-card-desc {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.85rem;
-            color: #F0D0E0;
-            margin: 0 0 0.8rem;
-            line-height: 1.4;
-            flex: 1;
-        }
-        .menu-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .menu-card-price {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            color: #FF2A6D;
-            font-size: 1rem;
-        }
-        .menu-card-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #FF2A6D, #D10047);
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--neo-primary);
             color: white;
-            border: none;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 50%;
+            min-width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
-            font-size: 0.85rem;
         }
-        .menu-card-btn:hover {
-            transform: scale(1.1);
+
+        /* === NOTIFICACIONES === */
+        .notification-container {
+            position: fixed;
+            top: 80px;
+            right: 10px;
+            z-index: 1000;
+            max-width: 300px;
         }
-        /* === Carrito de Compras === */
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem;
-            background: rgba(30, 10, 15, 0.6);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            border: 1px solid #3A1525;
-        }
-        .cart-item-info {
-            flex: 1;
-        }
-        .cart-item-name {
-            font-weight: 600;
-            color: #FFD300;
-            font-size: 0.95rem;
-        }
-        .cart-item-price {
-            color: #FF2A6D;
-            font-size: 0.9rem;
-        }
-        .cart-item-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .quantity-btn {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: #FF2A6D;
-            color: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-        .cart-total {
-            background: linear-gradient(135deg, #2A1018, #3A1525);
+
+        .notification {
+            background: var(--neo-bg-light);
+            border-left: 4px solid;
             padding: 1rem;
-            border-radius: 12px;
-            margin: 1rem 0;
-            text-align: center;
-            border: 1px solid #FF2A6D;
-        }
-        .cart-total-amount {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: #FFD300;
-            margin: 0.5rem 0;
-        }
-        /* === Protocolos Laborales === */
-        .protocol-card {
-            background: rgba(30, 10, 15, 0.6);
-            border-left: 4px solid #FF2A6D;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-        .protocol-title {
-            font-family: 'Orbitron';
-            color: #FFD300;
-            font-size: 1rem;
             margin-bottom: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: slideInRight 0.3s ease;
         }
-        .protocol-desc {
-            font-size: 0.9rem;
-            color: #D0B0C0;
-            line-height: 1.4;
-        }
-        .penalty-badge {
-            display: inline-block;
-            background: #FF2A6D;
-            color: white;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-left: 0.4rem;
-        }
-        .risk-badge {
-            background: #FF4444 !important;
-            animation: blink 1.5s infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0.4; }
-        }
-        /* === SISTEMA DE GAMIFICACIÓN LABORAL === */
+
+        .notification.warning { border-color: var(--neo-accent); }
+        .notification.danger { border-color: var(--neo-primary); }
+        .notification.success { border-color: var(--neo-secondary); }
+
+        /* === GAMIFICACIÓN === */
         .leaderboard {
             background: rgba(20, 5, 10, 0.8);
             border-radius: 12px;
             padding: 1rem;
             margin: 1rem 0;
-            border: 1px solid #FF2A6D;
+            border: 1px solid var(--neo-primary);
         }
+
         .leaderboard-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
-            color: #FFD300;
+            color: var(--neo-accent);
             text-align: center;
             margin-bottom: 1rem;
         }
+
         .leaderboard-item {
             display: flex;
             align-items: center;
@@ -382,9 +310,10 @@
             background: rgba(255,255,255,0.05);
             border-radius: 8px;
         }
+
         .rank-badge {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -392,23 +321,249 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             margin-right: 1rem;
-            font-size: 0.8rem;
         }
+
         .rank-diamante { background: linear-gradient(135deg, #00FFFF, #0080FF); }
         .rank-oro { background: linear-gradient(135deg, #FFD700, #FFA500); }
         .rank-plata { background: linear-gradient(135deg, #E5E4E2, #A8A8A8); }
-        .rank-bronce { background: linear-gradient(135deg, #CD7F32, #8B4513); }
-        .rank-risk { background: linear-gradient(135deg, #FF4444, #8B0000); color: white; }
-        /* === Estados vacíos === */
-        .empty-state {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: #D0B0C0;
+
+        /* === MENÚ DIGITAL === */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
-        .empty-state i {
-            font-size: 3rem;
+
+        .menu-card {
+            background: rgba(25, 10, 15, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 42, 109, 0.3);
+        }
+
+        .menu-card-img {
+            height: 140px;
+            overflow: hidden;
+        }
+
+        .menu-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .menu-card-body {
+            padding: 1rem;
+        }
+
+        .menu-card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--neo-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .menu-card-price {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--neo-primary);
+            font-size: 1.1rem;
+        }
+
+        .menu-card-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neo-primary), #D10047);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* === FORMULARIOS === */
+        .form-group {
             margin-bottom: 1rem;
-            color: #FF2A6D;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(30, 10, 15, 0.6);
+            color: var(--neo-text);
+            border: 1px solid var(--neo-primary);
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neo-text-secondary);
+        }
+
+        /* === CARRITO === */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(30, 10, 15, 0.6);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--neo-primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            background: linear-gradient(135deg, #2A1018, #3A1525);
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px solid var(--neo-primary);
+        }
+
+        /* === MESAS CAMAREROS === */
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .table-card {
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            border: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .table-free {
+            background: rgba(40, 20, 30, 0.6);
+            border-color: #333;
+            color: #888;
+        }
+
+        .table-occupied {
+            background: linear-gradient(135deg, #2A1018, #3A1525);
+            border-color: var(--neo-primary);
+            color: var(--neo-accent);
+        }
+
+        /* === ACTIVIDAD EN VIVO === */
+        .activity-feed {
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        .activity-item {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            border-left: 3px solid;
+        }
+
+        .activity-positive { border-color: var(--neo-secondary); }
+        .activity-negative { border-color: var(--neo-primary); }
+
+        /* === NUEVOS ESTILOS PARA LAS FUNCIONALIDADES AÑADIDAS === */
+        .progress-bar {
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neo-secondary), var(--neo-primary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .timer-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neo-accent);
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .complaint-form {
+            background: rgba(30, 10, 15, 0.7);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+        }
+        
+        .complaint-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .token-transfer {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .token-transfer input {
+            flex: 1;
+        }
+        
+        .token-transfer button {
+            width: auto;
+            padding: 0.8rem 1.2rem;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
     </style>
 </head>
@@ -418,75 +573,61 @@
         <div class="splash-logo">
             <i class="fas fa-utensils"></i>
         </div>
-        <div class="splash-text">GASTRONEO</div>
+        <div class="splash-text">GASTRONEO QUANTUM</div>
     </div>
 
+    <!-- Sistema de Notificaciones -->
+    <div class="notification-container" id="notificationContainer"></div>
+
     <div class="app-container">
-        <!-- Home View -->
+        <!-- ========== HOME VIEW ========== -->
         <div id="homeView" class="view active">
             <div class="app-header">
-                <h1>GASTRONEO</h1>
+                <h1>GASTRONEO QUANTUM</h1>
             </div>
             <div class="app-content">
-                <div style="text-align:center;margin-bottom:1.5rem;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGwjDuHhDnYwyI7QyXJn0e1rPwH3aWt6PkRw&s" 
-                         alt="Equipo GastroNeo"
-                         style="width:100%;max-height:180px;object-fit:cover;border-radius:12px;">
-                    <div style="font-family:'Rajdhani';font-size:1rem;color:#FFD300;text-align:center;margin:1rem 0;font-style:italic;">
-                        "Más del 70% de los clientes eligen restaurantes con equipo visible y cercano."
-                    </div>
-                </div>
                 <div id="authOrProfile"></div>
+
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
-                    <i class="fas fa-utensils"></i> Reservar Mesa
+                    <i class="fas fa-calendar-plus"></i> Reservar Mesa
                 </button>
-                <button class="btn-neo btn-scan" onclick="showView('qrScannerView')">
+                <button class="btn-neo btn-secondary" onclick="showView('qrScannerView')">
                     <i class="fas fa-qrcode"></i> Escanear Mesa
                 </button>
-                <button class="btn-neo btn-gold" onclick="showView('menuView')">
+                <button class="btn-neo btn-accent" onclick="showView('menuView')">
                     <i class="fas fa-book-open"></i> Menú Digital
                 </button>
-                <button class="btn-neo btn-primary" onclick="showView('rewardsView')">
+                <button class="btn-neo btn-purple" onclick="showView('rewardsView')">
                     <i class="fas fa-coins"></i> Mi GastroPass
                 </button>
-                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="openOwnerAccess()">
-                    <i class="fas fa-user-lock"></i> Acceso Dueño
+                
+                <!-- NUEVO: Botón para tienda local -->
+                <button class="btn-neo" style="background:linear-gradient(135deg, #6E00FF, #3A00B8); color:white;" onclick="showView('localStoreView')">
+                    <i class="fas fa-store"></i> Tienda Local
                 </button>
-                <button class="btn-neo" style="background:rgba(0,240,255,0.2);color:#00F0FF;border:1px solid #00F0FF;" onclick="showView('waiterLoginView')">
-                    <i class="fas fa-user-tie"></i> Camarero
-                </button>
-            </div>
-        </div>
 
-        <!-- QR Scanner View -->
-        <div id="qrScannerView" class="view">
-            <div class="app-header">
-                <h1>📱 Escanear QR Mesa</h1>
-            </div>
-            <div class="app-content" style="text-align: center;">
-                <div style="margin: 2rem 0;">
-                    <i class="fas fa-qrcode" style="font-size: 4rem; color: #00F0FF; margin-bottom: 1rem;"></i>
-                    <div style="font-family: 'Rajdhani'; font-size: 1.1rem; color: #FFD300; margin-bottom: 1.5rem;">
-                        Escanea el código QR de tu mesa
+                <div class="neo-glass" style="padding: 1rem; margin: 1.5rem 0;">
+                    <div style="font-family: 'Orbitron'; color: var(--neo-secondary); text-align: center; margin-bottom: 0.8rem;">
+                        ACCESO EMPLEADOS
                     </div>
-                </div>
-                <div class="scanner-container" style="background:rgba(0,240,255,0.1);border:2px dashed #00F0FF;border-radius:12px;padding:2rem;margin:1.5rem 0;">
-                    <div class="scanner-icon" style="color:#00F0FF;font-size:5rem;margin-bottom:1rem;">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <div style="color:#D0B0C0;margin-bottom:1.5rem;">Cámara lista para escanear...</div>
-                    <button class="btn-neo btn-scan" onclick="simulateQRScan()">
-                        <i class="fas fa-camera"></i> Simular Escaneo
+                    <button class="btn-neo" style="background: rgba(0,240,255,0.2); color: var(--neo-secondary); border: 1px solid var(--neo-secondary);" 
+                            onclick="showView('employeeLoginView')">
+                        <i class="fas fa-user-tie"></i> Panel Empleados
+                    </button>
+                    <button class="btn-neo" style="background: rgba(255,42,109,0.2); color: var(--neo-primary); border: 1px solid var(--neo-primary);" 
+                            onclick="openOwnerAccess()">
+                        <i class="fas fa-user-lock"></i> Panel Quantum
                     </button>
                 </div>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
+
+                <div class="activity-feed" id="liveActivityFeed"></div>
             </div>
         </div>
 
-        <!-- Booking View -->
+        <!-- ========== RESERVAS ========== -->
         <div id="bookingView" class="view">
             <div class="app-header">
-                <h1>🍽️ Reservar Mesa</h1>
+                <h1><i class="fas fa-calendar-plus"></i> Reservar Mesa</h1>
             </div>
             <div class="app-content">
                 <div class="form-group">
@@ -523,27 +664,57 @@
             </div>
         </div>
 
-        <!-- Menú Digital -->
+        <!-- ========== ESCANER QR ========== -->
+        <div id="qrScannerView" class="view">
+            <div class="app-header">
+                <h1><i class="fas fa-qrcode"></i> Escanear Mesa</h1>
+            </div>
+            <div class="app-content" style="text-align: center;">
+                <div style="margin: 2rem 0;">
+                    <i class="fas fa-qrcode" style="font-size: 4rem; color: var(--neo-secondary);"></i>
+                    <div style="font-family: 'Rajdhani'; font-size: 1.1rem; color: var(--neo-accent); margin: 1rem 0;">
+                        Escanea el código QR de tu mesa
+                    </div>
+                </div>
+                
+                <div class="neo-glass" style="padding: 2rem; margin: 1.5rem 0;">
+                    <div class="scanner-icon">
+                        <i class="fas fa-camera" style="font-size: 3rem; color: var(--neo-secondary);"></i>
+                    </div>
+                    <div style="color: var(--neo-text-secondary); margin: 1.5rem 0;">
+                        Cámara lista para escanear...
+                    </div>
+                    <button class="btn-neo btn-secondary" onclick="simulateQRScan()">
+                        <i class="fas fa-camera"></i> Simular Escaneo
+                    </button>
+                </div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
+            </div>
+        </div>
+
+        <!-- ========== MENÚ DIGITAL ========== -->
         <div id="menuView" class="view">
             <div class="app-header">
-                <h1>📖 Menú Digital</h1>
+                <h1><i class="fas fa-book-open"></i> Menú Digital</h1>
             </div>
             <div class="app-content">
                 <div id="mesaInfo" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; display: none;">
-                    <div style="color: #00F0FF; font-family: 'Orbitron'; font-size: 0.9rem;">
+                    <div style="color: var(--neo-secondary); font-family: 'Orbitron'; font-size: 0.9rem;">
                         <i class="fas fa-table"></i> Mesa: <span id="currentMesa">-</span>
                     </div>
                 </div>
+
                 <div class="menu-category">
-                    <h2 class="menu-category-title">ENTRADAS</h2>
+                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">ENTRADAS</h2>
                     <div class="menu-grid">
                         <div class="menu-card">
                             <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
+                                <img src="https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tartar de Atún">
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Tartar de Atún</h3>
-                                <p class="menu-card-desc">Atún fresco con wasabi y aguacate</p>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Atún fresco con wasabi y aguacate, marinado en salsa de soja</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€16.50</span>
                                     <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50)">
@@ -552,133 +723,431 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="menu-card">
+                            <div class="menu-card-img">
+                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta">
+                            </div>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Bruschetta</h3>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Pan tostado artesanal con tomate fresco y albahaca</p>
+                                <div class="menu-card-footer">
+                                    <span class="menu-card-price">€9.90</span>
+                                    <button class="menu-card-btn" onclick="addToCart('Bruschetta', 9.90)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="menu-category">
+                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">PLATOS FUERTES</h2>
+                    <div class="menu-grid">
+                        <div class="menu-card">
+                            <div class="menu-card-img">
+                                <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara">
+                            </div>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Pasta Carbonara</h3>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Pasta fresca con salsa cremosa de panceta y queso</p>
+                                <div class="menu-card-footer">
+                                    <span class="menu-card-price">€18.99</span>
+                                    <button class="menu-card-btn" onclick="addToCart('Pasta Carbonara', 18.99)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
 
-        <!-- Carrito -->
-        <div id="cartView" class="view">
+        <!-- ========== TIENDA LOCAL ========== -->
+        <div id="localStoreView" class="view">
             <div class="app-header">
-                <h1>🛒 Mi Carrito</h1>
+                <h1><i class="fas fa-store"></i> Tienda Local</h1>
             </div>
             <div class="app-content">
-                <div id="cartItemsContainer"></div>
-                <div id="emptyCart" class="empty-state" style="display: none;">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h3>Tu carrito está vacío</h3>
+                <div class="neo-glass" style="padding: 1rem; margin-bottom: 1.5rem;">
+                    <div style="font-family: 'Orbitron'; color: var(--neo-accent); text-align: center; margin-bottom: 0.8rem;">
+                        PRODUCTOS ARTESANALES
+                    </div>
+                    <div style="color: var(--neo-text-secondary); text-align: center; font-size: 0.9rem;">
+                        Descubre los sabores auténticos de nuestra región
+                    </div>
                 </div>
+
+                <div class="menu-grid">
+                    <!-- Miel Artesanal -->
+                    <div class="menu-card">
+                        <div class="menu-card-img">
+                            <img src="https://images.pexels.com/photos/547263/pexels-photo-547263.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Miel Artesanal">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">Miel Artesanal</h3>
+                            <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Miel pura de abeja recolectada en los montes locales</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-card-price">€12.90</span>
+                                <button class="menu-card-btn" onclick="addToCart('Miel Artesanal', 12.90)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Queso de Cabra -->
+                    <div class="menu-card">
+                        <div class="menu-card-img">
+                            <img src="https://images.pexels.com/photos/8213650/pexels-photo-8213650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Queso de Cabra">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">Queso de Cabra</h3>
+                            <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Queso artesanal de cabra curado 6 meses</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-card-price">€18.50</span>
+                                <button class="menu-card-btn" onclick="addToCart('Queso de Cabra', 18.50)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aceite de Oliva Virgen Extra -->
+                    <div class="menu-card">
+                        <div class="menu-card-img">
+                            <img src="https://images.pexels.com/photos/33783/olive-oil-salad-dressing-healthy-eating.jpg?auto=compress&cs=tinysrgb&w=600" alt="Aceite de Oliva">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">Aceite de Oliva Virgen Extra</h3>
+                            <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Primera prensada en frío, botella 500ml</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-card-price">€15.75</span>
+                                <button class="menu-card-btn" onclick="addToCart('Aceite de Oliva Virgen Extra', 15.75)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embutidos Caseros -->
+                    <div class="menu-card">
+                        <div class="menu-card-img">
+                            <img src="https://images.pexels.com/photos/4109127/pexels-photo-4109127.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Embutidos Caseros">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">Embutidos Caseros</h3>
+                            <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Selección de chorizo, salchichón y lomo embuchado</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-card-price">€22.90</span>
+                                <button class="menu-card-btn" onclick="addToCart('Embutidos Caseros', 22.90)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vino Tinto de la Tierra -->
+                    <div class="menu-card">
+                        <div class="menu-card-img">
+                            <img src="https://images.pexels.com/photos/290316/pexels-photo-290316.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vino Tinto">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">Vino Tinto de la Tierra</h3>
+                            <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Vino crianza 12 meses en barrica, botella 750ml</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-card-price">€14.50</span>
+                                <button class="menu-card-btn" onclick="addToCart('Vino Tinto de la Tierra', 14.50)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mermelada de Frutos del Bosque -->
+                    <div class="menu-card">
+                        <div class="menu-card-img">
+                            <img src="https://images.pexels.com/photos/4207791/pexels-photo-4207791.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mermelada de Frutos del Bosque">
+                        </div>
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-name">Mermelada de Frutos del Bosque</h3>
+                            <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Elaborada artesanalmente con frutos silvestres</p>
+                            <div class="menu-card-footer">
+                                <span class="menu-card-price">€8.90</span>
+                                <button class="menu-card-btn" onclick="addToCart('Mermelada de Frutos del Bosque', 8.90)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+            </div>
+        </div>
+
+        <!-- ========== CARRITO ========== -->
+        <div id="cartView" class="view">
+            <div class="app-header">
+                <h1><i class="fas fa-shopping-cart"></i> Mi Carrito</h1>
+            </div>
+            <div class="app-content">
+                <div id="mesaInfoCart" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; display: none;">
+                    <div style="color: var(--neo-secondary); font-family: 'Orbitron'; font-size: 0.9rem;">
+                        <i class="fas fa-table"></i> Mesa: <span id="currentMesaCart">-</span>
+                    </div>
+                </div>
+
+                <div id="cartItemsContainer"></div>
+                
+                <div id="emptyCart" class="empty-state" style="display: none; text-align: center; padding: 2rem; color: var(--neo-text-secondary);">
+                    <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h3>Tu carrito está vacío</h3>
+                    <p>¡Añade algunos productos deliciosos!</p>
+                </div>
+
                 <div id="cartSummary" style="display: none;">
                     <div class="cart-total">
                         <div>Total del Pedido</div>
-                        <div class="cart-total-amount" id="cartTotalAmount">€0.00</div>
+                        <div style="font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neo-accent); margin: 0.5rem 0;" id="cartTotalAmount">€0.00</div>
                     </div>
+                    
+                    <button class="btn-neo btn-primary" onclick="showView('checkoutView')">
+                        <i class="fas fa-credit-card"></i> Proceder al Pago
+                    </button>
                 </div>
+
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('menuView')">← Seguir Comprando</button>
             </div>
         </div>
 
-        <!-- Mi GastroPass -->
-        <div id="rewardsView" class="view">
+        <!-- ========== CHECKOUT ========== -->
+        <div id="checkoutView" class="view">
             <div class="app-header">
-                <h1>🪙 Mi GastroPass</h1>
+                <h1><i class="fas fa-credit-card"></i> Checkout</h1>
             </div>
             <div class="app-content">
-                <div class="gastropass-card" style="text-align:center;background:linear-gradient(135deg,#2A1018,#3A1525);border:1px solid #FF2A6D;border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;">
-                    <div class="level-badge" style="font-family:'Orbitron';font-size:1.3rem;color:#FFD300;margin-bottom:0.5rem;">🥉 Bronce</div>
-                    <div style="font-size:0.9rem;color:#D0B0C0;margin-bottom:0.8rem;">Progreso hacia Plata</div>
-                    <div class="progress-bar" style="background:rgba(0,0,0,0.3);height:12px;border-radius:10px;overflow:hidden;margin:0 0.5rem;">
-                        <div class="progress-fill" style="height:100%;background:linear-gradient(90deg,#FF2A6D,#FFD300);width:56%;"></div>
-                    </div>
-                    <div style="font-size:0.85rem;color:#F0D0E0;margin-top:0.5rem;">280 / 500 pts</div>
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="checkoutName" class="form-control" placeholder="Como aparece en la tarjeta">
                 </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="checkoutEmail" class="form-control" placeholder="tu@email.com">
+                </div>
+
+                <div style="background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; margin:1.5rem 0;">
+                    <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin:0 0 0.8rem;">Resumen del Pedido</h3>
+                    <div id="checkoutOrderItems"></div>
+                    <div style="font-family:'Orbitron';color:var(--neo-primary);font-size:1.3rem;margin-top:0.8rem;">
+                        Total: €<span id="checkoutTotal">0.00</span>
+                    </div>
+                </div>
+
+                <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin:1.5rem 0 1rem;">Método de Pago</h3>
+                <div style="display: grid; gap: 0.8rem; margin: 1.5rem 0;">
+                    <button class="btn-neo" style="background:linear-gradient(135deg, #6E00FF, #3A00B8); color:white;" onclick="selectPaymentMethod('card')">
+                        <i class="fas fa-credit-card"></i> Tarjeta de Crédito
+                    </button>
+                    <button class="btn-neo" style="background:linear-gradient(135deg, #00F0FF, #00B8FF); color:var(--neo-bg);" onclick="selectPaymentMethod('cash')">
+                        <i class="fas fa-money-bill-wave"></i> Efectivo
+                    </button>
+                </div>
+
+                <button class="btn-neo btn-primary" onclick="processCheckout()">
+                    <i class="fas fa-lock"></i> Pagar Ahora
+                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('cartView')">← Volver al Carrito</button>
+            </div>
+        </div>
+
+        <!-- ========== GASTROPASS ========== -->
+        <div id="rewardsView" class="view">
+            <div class="app-header">
+                <h1><i class="fas fa-coins"></i> Mi GastroPass</h1>
+            </div>
+            <div class="app-content">
+                <div class="neo-glass" style="text-align:center; padding:1.5rem; margin-bottom:1.5rem;">
+                    <div style="font-family:'Orbitron';font-size:1.3rem;color:var(--neo-accent);margin-bottom:0.5rem;">🥉 Bronce</div>
+                    <div style="font-size:0.9rem;color:var(--neo-text-secondary);margin-bottom:0.8rem;">Progreso hacia Plata</div>
+                    <div style="background:rgba(0,0,0,0.3);height:12px;border-radius:10px;overflow:hidden;margin:0 0.5rem;">
+                        <div style="height:100%;background:linear-gradient(90deg,var(--neo-primary),var(--neo-accent));width:56%;"></div>
+                    </div>
+                    <div style="font-size:0.85rem;color:var(--neo-text);margin-top:0.5rem;">280 / 500 pts</div>
+                </div>
+
+                <div class="neo-glass" style="padding:1.2rem; margin-bottom:1.5rem;">
+                    <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:1rem;">🎁 Tus Beneficios</h3>
+                    <div style="font-size:0.95rem;line-height:1.6;">
+                        <div>• Menú digital exclusivo</div>
+                        <div>• Cumpleaños gratis</div>
+                        <div>• Acceso a eventos del chef</div>
+                    </div>
+                </div>
+
+                <!-- NUEVO: Funcionalidad para regalar tokens -->
+                <div class="neo-glass" style="padding:1.2rem; margin-bottom:1.5rem;">
+                    <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:1rem;">🎁 Regalar Tokens</h3>
+                    <div class="token-transfer">
+                        <input type="number" id="tokenAmount" class="form-control" placeholder="Cantidad" min="1" max="100">
+                        <input type="text" id="friendEmail" class="form-control" placeholder="Email del amigo">
+                    </div>
+                    <button class="btn-neo btn-accent" onclick="transferTokens()">
+                        <i class="fas fa-gift"></i> Enviar Tokens
+                    </button>
+                </div>
+
+                <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:0.8rem;">🛒 Canjear Recompensas</h3>
+                <div style="display: grid; gap: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                        <div><strong>Café Gourmet</strong><br><small>100 pts</small></div>
+                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;" onclick="redeemReward(100, 'Café Gourmet')">
+                            <i class="fas fa-gift"></i>
+                        </button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                        <div><strong>Postre del Chef</strong><br><small>250 pts</small></div>
+                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;" onclick="redeemReward(250, 'Postre del Chef')">
+                            <i class="fas fa-gift"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- NUEVO: Funcionalidad para llamar al camarero -->
+                <div class="neo-glass" style="padding:1.2rem; margin:1.5rem 0;">
+                    <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:1rem;">🛎️ Llamar al Camarero</h3>
+                    <button class="btn-neo btn-secondary" id="callWaiterBtn" onclick="callWaiter()">
+                        <i class="fas fa-bell"></i> Llamar al Camarero
+                    </button>
+                    <div id="waiterTimer" style="display:none;">
+                        <div class="timer-display" id="timerDisplay">05:00</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div id="waiterOptions" style="display:none; margin-top:1rem;">
+                            <p style="text-align:center; color:var(--neo-primary); margin-bottom:1rem;">El camarero no ha llegado. ¿Qué deseas hacer?</p>
+                            <button class="btn-neo btn-accent" onclick="callWaiterAgain()">
+                                <i class="fas fa-redo"></i> Volver a Llamar
+                            </button>
+                            <button class="btn-neo" style="background:#e74c3c;color:white;" onclick="callSupervisor()">
+                                <i class="fas fa-user-shield"></i> Reclamar al Supervisor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NUEVO: Formulario para presentar quejas -->
+                <div class="complaint-form">
+                    <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:1rem;">📝 Presentar Queja</h3>
+                    <div class="form-group">
+                        <label>Asunto</label>
+                        <input type="text" id="complaintSubject" class="form-control" placeholder="Ej: Problema con el servicio">
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea id="complaintDescription" class="form-control" placeholder="Describe tu queja en detalle..."></textarea>
+                    </div>
+                    <button class="btn-neo btn-primary" onclick="submitComplaint()">
+                        <i class="fas fa-paper-plane"></i> Enviar Queja
+                    </button>
+                </div>
+
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
 
-        <!-- Panel Dueño – CON SISTEMA DE CASTIGO -->
-        <div id="ownerDashboard" class="view">
+        <!-- ========== LOGIN EMPLEADOS ========== -->
+        <div id="employeeLoginView" class="view">
             <div class="app-header">
-                <h1>🔐 Panel Quantum</h1>
+                <h1><i class="fas fa-user-tie"></i> Acceso Empleados</h1>
+            </div>
+            <div class="app-content" style="text-align: center;">
+                <div style="margin:2rem 0;">
+                    <i class="fas fa-key" style="font-size:3rem;color:var(--neo-primary);"></i>
+                    <div style="margin-top:1rem;font-family:'Rajdhani';font-size:1.1rem;">Ingresa tu PIN de empleado</div>
+                </div>
+                <input type="password" id="employeePin" class="form-control" placeholder="****" style="max-width:200px;margin:0 auto;">
+                <button class="btn-neo btn-primary" onclick="loginEmployee()" style="margin-top:1.5rem;">
+                    Ingresar
+                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1rem;" onclick="showView('homeView')">
+                    ← Volver
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== PANEL EMPLEADOS ========== -->
+        <div id="employeeDashboard" class="view">
+            <div class="app-header">
+                <h1><i class="fas fa-concierge-bell"></i> Panel Empleados</h1>
             </div>
             <div class="app-content">
-                <div class="summary-card" style="background:rgba(30,10,15,0.5);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
-                    <div style="font-family:'Orbitron';color:#FFD300;font-size:1.1rem;margin-bottom:0.8rem;">📊 Resumen del Día</div>
-                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;font-size:0.9rem;">
-                        <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
-                        <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">0/12</span></div>
-                    </div>
-                </div>
-
-                <!-- 🔥 SISTEMA DE CASTIGO LABORAL -->
-                <div class="protocol-card">
-                    <div class="protocol-title">🛡️ Protocolo Quantum Laboral v2.2</div>
-                    <div class="protocol-desc">
-                        Cada empleado comienza con <strong>100 puntos de conducta</strong>.<br>
-                        Infracciones reducen puntos. Si <strong>≤ 30</strong>, se activa <span class="penalty-badge risk-badge">ALERTA ROJA</span>.<br>
-                        Si llega a <strong>0</strong>, despido automático.<br>
-                        <span class="penalty-badge">-10 pts</span> por retraso.<br>
-                        <span class="penalty-badge">-25 pts</span> por queja de cliente.<br>
-                        <span class="penalty-badge" style="background:#00FF00;">+15 pts</span> por elogio.
-                    </div>
-                </div>
-
-                <!-- Leaderboard con riesgo -->
                 <div class="leaderboard">
-                    <div class="leaderboard-title">🏆 Conducta Empleados</div>
+                    <div class="leaderboard-title">🏆 TABLERO DE EMPLEADOS</div>
+                    <div id="employeeLeaderboard"></div>
+                </div>
+
+                <div class="tables-grid" id="tablesGrid"></div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="logoutEmployee()">
+                    ← Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== PANEL QUANTUM (DUEÑO) ========== -->
+        <div id="ownerDashboard" class="view">
+            <div class="app-header">
+                <h1><i class="fas fa-user-lock"></i> Panel Quantum</h1>
+            </div>
+            <div class="app-content">
+                <div class="neo-glass" style="padding:1rem; margin-bottom:1.5rem;">
+                    <div style="font-family:'Orbitron';color:var(--neo-accent);font-size:1.1rem;margin-bottom:0.8rem;">📊 RESUMEN DEL DÍA</div>
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;font-size:0.9rem;">
+                        <div><strong>Ingresos:</strong> <span id="dailyRevenue">€420</span></div>
+                        <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">8/12</span></div>
+                        <div><strong>Pedidos pendientes:</strong> <span id="pendingOrders">3</span></div>
+                        <div><strong>Clientes en espera:</strong> <span id="waitingClients">2</span></div>
+                    </div>
+                </div>
+
+                <div class="leaderboard">
+                    <div class="leaderboard-title">⚡ EMPLEADOS DESTACADOS</div>
                     <div id="ownerLeaderboard"></div>
                 </div>
 
-                <button class="btn-neo btn-danger" onclick="logoutOwner()">Cerrar Sesión</button>
-            </div>
-        </div>
-
-        <!-- Login Camarero -->
-        <div id="waiterLoginView" class="view">
-            <div class="app-header">
-                <h1><i class="fas fa-user-tie"></i> Camarero</h1>
-            </div>
-            <div class="app-content" style="text-align:center;">
-                <input type="password" id="waiterPin" class="form-control" placeholder="****" style="max-width:200px;margin:0 auto;">
-                <button class="btn-neo btn-primary" onclick="loginWaiter()" style="margin-top:1.5rem;">Ingresar</button>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1rem;" onclick="showView('homeView')">← Volver</button>
-            </div>
-        </div>
-
-        <!-- Mesas Camarero -->
-        <div id="waiterTablesView" class="view">
-            <div class="app-header">
-                <h1><i class="fas fa-concierge-bell"></i> Mesas</h1>
-            </div>
-            <div class="app-content">
-                <div class="leaderboard">
-                    <div class="leaderboard-title">⚡ Tu Posición</div>
-                    <div id="waiterLeaderboard"></div>
-                </div>
-                <h3 style="font-family:'Rajdhani';color:#FFD300;margin:1.5rem 0 1rem;">Gestión de Mesas</h3>
-                <div id="tablesGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem;"></div>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="logoutWaiter()">← Cerrar Sesión</button>
+                <button class="btn-neo btn-primary" onclick="verifyAllOrders()">
+                    ✅ Verificar Todos los Pedidos
+                </button>
+                <button class="btn-neo" style="background:#e74c3c;color:white;margin-top:1rem;" onclick="logoutOwner()">Cerrar Sesión</button>
             </div>
         </div>
     </div>
 
-    <!-- Navegación -->
+    <!-- Navegación Inferior -->
     <div class="app-nav">
         <a href="#" class="nav-item active" onclick="showView('homeView'); return false;">
-            <i class="fas fa-home"></i><span>Inicio</span>
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('bookingView'); return false;">
-            <i class="fas fa-calendar"></i><span>Reservas</span>
+            <i class="fas fa-calendar"></i>
+            <span>Reservas</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('menuView'); return false;">
-            <i class="fas fa-book"></i><span>Menú</span>
+            <i class="fas fa-book"></i>
+            <span>Menú</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('qrScannerView'); return false;">
-            <i class="fas fa-qrcode"></i><span>Escanear</span>
+            <i class="fas fa-qrcode"></i>
+            <span>Escanear</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('cartView'); return false;" id="cartNavItem">
-            <i class="fas fa-shopping-cart"></i><span>Carrito</span>
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrito</span>
             <div class="cart-badge" id="cartBadge" style="display: none;">0</div>
         </a>
     </div>
@@ -690,189 +1159,615 @@
             employee: null,
             cart: JSON.parse(localStorage.getItem('gastroneo_cart')) || [],
             employees: [
-                { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', conducta: 92 },
-                { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', conducta: 100 },
-                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', conducta: 28 }, // ⚠️ Riesgo
-                { id: 'emp_4', name: 'María López', points: 380, level: 'bronce', conducta: 75 }
-            ]
+                { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', todayPoints: 45 },
+                { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', todayPoints: 32 },
+                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', todayPoints: -12 }
+            ],
+            activities: [],
+            waiterTimer: null,
+            waiterTimeLeft: 300 // 5 minutos en segundos
         };
 
         // === INICIALIZACIÓN ===
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 document.getElementById('splashScreen').style.display = 'none';
                 initializeApp();
-            }, 1500);
+            }, 2500);
         });
 
         function initializeApp() {
             loadUser();
-            renderAuthOrProfile();
             updateCartBadge();
-            renderEmployeeLeaderboards();
+            checkMesaEscaneada();
+            startLiveActivities();
+            renderEmployeeLeaderboard();
+            renderTablesGrid();
         }
 
-        // === VISTAS – CORREGIDO PARA MÓVILES ===
+        // === SISTEMA DE VISTAS ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            const target = document.getElementById(viewId);
-            if (target) target.classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            const navMap = {homeView:0, bookingView:1, menuView:2, qrScannerView:3, cartView:4};
-            const idx = navMap[viewId];
-            if (idx !== undefined) {
-                const items = document.querySelectorAll('.nav-item');
-                if (items[idx]) items[idx].classList.add('active');
+            document.getElementById(viewId).classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            const viewToNavMap = {
+                'homeView': 0, 'bookingView': 1, 'menuView': 2, 'qrScannerView': 3, 'cartView': 4
+            };
+            
+            if (viewToNavMap[viewId] !== undefined) {
+                document.querySelectorAll('.nav-item')[viewToNavMap[viewId]].classList.add('active');
             }
+
+            // Acciones específicas por vista
             if (viewId === 'cartView') renderCart();
-            if (viewId === 'ownerDashboard') renderOwnerLeaderboard();
+            if (viewId === 'checkoutView') renderCheckout();
+            if (viewId === 'employeeDashboard') renderEmployeeDashboard();
         }
 
-        // === CARRITO ===
-        function addToCart(name, price) {
-            const item = appState.cart.find(i => i.name === name);
-            if (item) item.quantity++;
-            else appState.cart.push({id:Date.now(), name, price, quantity:1});
-            saveCart();
-            updateCartBadge();
-        }
-        function saveCart() { localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart)); }
-        function updateCartBadge() {
-            const total = appState.cart.reduce((s,i) => s + i.quantity, 0);
-            const badge = document.getElementById('cartBadge');
-            if (badge) {
-                badge.textContent = total;
-                badge.style.display = total ? 'flex' : 'none';
+        // === SISTEMA DE USUARIOS ===
+        function loadUser() {
+            const user = JSON.parse(localStorage.getItem('gastroneo_user'));
+            if (user) {
+                appState.user = user;
+                renderUserProfile();
+            } else {
+                renderAuthSection();
             }
         }
+
+        function renderUserProfile() {
+            const container = document.getElementById('authOrProfile');
+            container.innerHTML = `
+                <div class="neo-glass" style="padding: 1rem; text-align: center; margin-bottom: 1rem;">
+                    <div style="font-family: 'Orbitron'; color: var(--neo-accent); font-size: 1.2rem;">
+                        Hola, ${appState.user.name} ✨
+                    </div>
+                    <div style="color: var(--neo-secondary); margin-top: 0.5rem;">
+                        GastroTokens: ${appState.user.tokens || 0}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAuthSection() {
+            const container = document.getElementById('authOrProfile');
+            container.innerHTML = `
+                <div class="neo-holographic" style="padding: 1.5rem; text-align: center; margin-bottom: 1.5rem; border-radius: 16px;">
+                    <div style="font-family: 'Orbitron'; color: var(--neo-accent); font-size: 1.3rem; margin-bottom: 1rem;">
+                        ¿NUEVO EN GASTRONEO?
+                    </div>
+                    <div style="color: var(--neo-text-secondary); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Crea tu GastroPass y accede a recompensas exclusivas del futuro.
+                    </div>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn-neo btn-accent" onclick="showSignupModal()">
+                            Crear Cuenta
+                        </button>
+                        <button class="btn-neo btn-primary" onclick="showLoginModal()">
+                            Iniciar Sesión
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showSignupModal() {
+            const name = prompt("¿Cuál es tu nombre?");
+            const email = prompt("¿Cuál es tu email?");
+            if (name && email) {
+                appState.user = { name: name.trim(), email: email, tokens: 50 };
+                localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
+                alert("¡Bienvenido! 🎁 50 GastroTokens de bienvenida.");
+                renderUserProfile();
+                createNotification('success', '¡Cuenta Creada!', 'Bienvenido a GastroNeo Quantum');
+            }
+        }
+
+        function showLoginModal() {
+            const name = prompt("Ingresa tu nombre:");
+            if (name) {
+                const existing = JSON.parse(localStorage.getItem('gastroneo_user'));
+                if (existing && existing.name === name.trim()) {
+                    appState.user = existing;
+                    renderUserProfile();
+                    alert("¡Bienvenido de nuevo!");
+                } else {
+                    alert("Usuario no encontrado. Créate una cuenta.");
+                }
+            }
+        }
+
+        // === SISTEMA DE CARRITO ===
+        function addToCart(name, price) {
+            const existingItem = appState.cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                appState.cart.push({ name, price, quantity: 1 });
+            }
+            
+            localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
+            updateCartBadge();
+            
+            // Efecto visual
+            const btn = event.target.closest('.menu-card-btn');
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = 'linear-gradient(135deg, #00D100, #009900)';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-plus"></i>';
+                btn.style.background = 'linear-gradient(135deg, var(--neo-primary), #D10047)';
+            }, 1000);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
         function renderCart() {
             const container = document.getElementById('cartItemsContainer');
-            const empty = document.getElementById('emptyCart');
-            const summary = document.getElementById('cartSummary');
+            const emptyCart = document.getElementById('emptyCart');
+            const cartSummary = document.getElementById('cartSummary');
+            const totalAmount = document.getElementById('cartTotalAmount');
+            
             if (appState.cart.length === 0) {
-                empty.style.display = 'block';
-                summary.style.display = 'none';
+                emptyCart.style.display = 'block';
+                cartSummary.style.display = 'none';
                 container.innerHTML = '';
-            } else {
-                empty.style.display = 'none';
-                summary.style.display = 'block';
-                let total = 0;
-                container.innerHTML = appState.cart.map(item => {
-                    const t = item.price * item.quantity;
-                    total += t;
-                    return `<div class="cart-item">
-                        <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">€${item.price} x${item.quantity}</div>
+                return;
+            }
+            
+            emptyCart.style.display = 'none';
+            cartSummary.style.display = 'block';
+            
+            let total = 0;
+            container.innerHTML = appState.cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                return `
+                    <div class="cart-item">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--neo-accent);">${item.name}</div>
+                            <div style="color: var(--neo-primary);">€${item.price.toFixed(2)} c/u</div>
                         </div>
-                    </div>`;
-                }).join('');
-                document.getElementById('cartTotalAmount').textContent = `€${total.toFixed(2)}`;
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
+                            <span style="margin: 0 0.5rem; min-width: 20px; text-align: center;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                            <button class="quantity-btn" onclick="removeFromCart('${item.name}')" style="background: #e74c3c;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            totalAmount.textContent = `€${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(itemName, change) {
+            const item = appState.cart.find(item => item.name === itemName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemName);
+                } else {
+                    localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
+                    updateCartBadge();
+                    renderCart();
+                }
             }
         }
 
-        // === USUARIO ===
-        function loadUser() {
-            const u = localStorage.getItem('gastroneo_user');
-            if (u) appState.user = JSON.parse(u);
+        function removeFromCart(itemName) {
+            appState.cart = appState.cart.filter(item => item.name !== itemName);
+            localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
+            updateCartBadge();
+            renderCart();
         }
-        function renderAuthOrProfile() {
-            const c = document.getElementById('authOrProfile');
-            if (!c) return;
-            if (appState.user) {
-                c.innerHTML = `<div style="background:rgba(255,42,109,0.1);border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
-                    <div>¡Hola, ${appState.user.name}!</div>
-                </div>`;
-            } else {
-                c.innerHTML = `<div style="background:rgba(0,240,255,0.1);border-radius:12px;padding:1rem;margin-bottom:1.5rem;text-align:center;">
-                    <button class="btn-neo btn-verify" onclick="showAuthModal()" style="padding:0.6rem 1rem;font-size:0.9rem;">
-                        <i class="fas fa-user-plus"></i> Registrarse
-                    </button>
-                </div>`;
+
+        // === CHECKOUT ===
+        function renderCheckout() {
+            const itemsContainer = document.getElementById('checkoutOrderItems');
+            const totalElement = document.getElementById('checkoutTotal');
+            
+            let total = 0;
+            itemsContainer.innerHTML = appState.cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                return `
+                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:0.5rem;">
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>€${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        function processCheckout() {
+            const name = document.getElementById('checkoutName').value;
+            const email = document.getElementById('checkoutEmail').value;
+
+            if (!name || !email) {
+                alert("Por favor, completa todos los datos.");
+                return;
             }
+
+            const total = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Simular pago
+            alert(`✅ ¡Pago realizado con éxito!\nTotal: €${total.toFixed(2)}\n\nRecibirás un email de confirmación.`);
+            
+            // Limpiar carrito
+            appState.cart = [];
+            localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
+            updateCartBadge();
+            
+            showView('homeView');
         }
-        function showAuthModal() {
-            const name = prompt("Nombre:");
-            if (name) {
-                appState.user = {name, points:0, level:'Bronce'};
-                localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
-                renderAuthOrProfile();
+
+        // === GASTROPASS ===
+        function redeemReward(cost, item) {
+            if (!appState.user) { 
+                alert("Crea una cuenta para canjear recompensas."); 
+                return; 
+            }
+            
+            if (appState.user.tokens < cost) { 
+                alert(`⚠️ Necesitas ${cost} tokens. Tienes ${appState.user.tokens}.`); 
+                return; 
+            }
+            
+            appState.user.tokens -= cost;
+            localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
+            alert(`✅ ¡Canjeado! ${item}`);
+            renderUserProfile();
+        }
+
+        // === NUEVAS FUNCIONALIDADES AÑADIDAS ===
+
+        // Transferir tokens a un amigo
+        function transferTokens() {
+            if (!appState.user) {
+                alert("Debes iniciar sesión para transferir tokens.");
+                return;
+            }
+            
+            const tokenAmount = parseInt(document.getElementById('tokenAmount').value);
+            const friendEmail = document.getElementById('friendEmail').value;
+            
+            if (!tokenAmount || tokenAmount <= 0) {
+                alert("Por favor, ingresa una cantidad válida de tokens.");
+                return;
+            }
+            
+            if (!friendEmail || !friendEmail.includes('@')) {
+                alert("Por favor, ingresa un email válido.");
+                return;
+            }
+            
+            if (tokenAmount > appState.user.tokens) {
+                alert(`No tienes suficientes tokens. Tienes ${appState.user.tokens} tokens.`);
+                return;
+            }
+            
+            appState.user.tokens -= tokenAmount;
+            localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
+            
+            alert(`✅ ¡Has enviado ${tokenAmount} tokens a ${friendEmail}!`);
+            renderUserProfile();
+            
+            // Limpiar formulario
+            document.getElementById('tokenAmount').value = '';
+            document.getElementById('friendEmail').value = '';
+        }
+
+        // Llamar al camarero
+        function callWaiter() {
+            if (!appState.user) {
+                alert("Debes iniciar sesión para llamar al camarero.");
+                return;
+            }
+            
+            const callBtn = document.getElementById('callWaiterBtn');
+            const waiterTimer = document.getElementById('waiterTimer');
+            const timerDisplay = document.getElementById('timerDisplay');
+            const progressFill = document.getElementById('progressFill');
+            const waiterOptions = document.getElementById('waiterOptions');
+            
+            // Deshabilitar botón y mostrar temporizador
+            callBtn.disabled = true;
+            callBtn.innerHTML = '<i class="fas fa-bell"></i> Camarero Notificado';
+            callBtn.style.background = 'linear-gradient(135deg, #888, #555)';
+            waiterTimer.style.display = 'block';
+            waiterOptions.style.display = 'none';
+            
+            // Reiniciar temporizador
+            appState.waiterTimeLeft = 300; // 5 minutos
+            updateTimerDisplay();
+            
+            // Iniciar temporizador
+            if (appState.waiterTimer) {
+                clearInterval(appState.waiterTimer);
+            }
+            
+            appState.waiterTimer = setInterval(() => {
+                appState.waiterTimeLeft--;
+                updateTimerDisplay();
+                
+                if (appState.waiterTimeLeft <= 0) {
+                    clearInterval(appState.waiterTimer);
+                    waiterOptions.style.display = 'block';
+                    createNotification('warning', 'Tiempo Agotado', 'El camarero no ha llegado. ¿Qué deseas hacer?');
+                }
+            }, 1000);
+            
+            // Notificar al sistema
+            createNotification('success', 'Camarero Notificado', 'Un camarero ha sido notificado y llegará en breve.');
+            addActivity('positive', `Cliente ${appState.user.name} llamó al camarero`);
+        }
+
+        function updateTimerDisplay() {
+            const timerDisplay = document.getElementById('timerDisplay');
+            const progressFill = document.getElementById('progressFill');
+            
+            const minutes = Math.floor(appState.waiterTimeLeft / 60);
+            const seconds = appState.waiterTimeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const progressPercentage = ((300 - appState.waiterTimeLeft) / 300) * 100;
+            progressFill.style.width = `${progressPercentage}%`;
+        }
+
+        function callWaiterAgain() {
+            const waiterOptions = document.getElementById('waiterOptions');
+            waiterOptions.style.display = 'none';
+            callWaiter();
+        }
+
+        function callSupervisor() {
+            const waiterOptions = document.getElementById('waiterOptions');
+            waiterOptions.style.display = 'none';
+            
+            createNotification('danger', 'Supervisor Notificado', 'Un supervisor ha sido notificado y llegará en breve.');
+            addActivity('negative', `Cliente ${appState.user.name} reclamó al supervisor`);
+            
+            // Restablecer botón
+            const callBtn = document.getElementById('callWaiterBtn');
+            callBtn.disabled = false;
+            callBtn.innerHTML = '<i class="fas fa-bell"></i> Llamar al Camarero';
+            callBtn.style.background = 'linear-gradient(135deg, var(--neo-secondary), #00B8FF)';
+            
+            document.getElementById('waiterTimer').style.display = 'none';
+        }
+
+        // Presentar queja
+        function submitComplaint() {
+            if (!appState.user) {
+                alert("Debes iniciar sesión para presentar una queja.");
+                return;
+            }
+            
+            const subject = document.getElementById('complaintSubject').value;
+            const description = document.getElementById('complaintDescription').value;
+            
+            if (!subject || !description) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+            
+            // Simular envío de queja
+            alert("✅ Tu queja ha sido enviada. Nos pondremos en contacto contigo pronto.");
+            
+            // Limpiar formulario
+            document.getElementById('complaintSubject').value = '';
+            document.getElementById('complaintDescription').value = '';
+            
+            // Notificar al sistema
+            createNotification('warning', 'Queja Registrada', 'Hemos recibido tu queja y la estamos revisando.');
+            addActivity('negative', `Cliente ${appState.user.name} presentó una queja: ${subject}`);
+        }
+
+        // === ESCANER QR ===
+        function simulateQRScan() {
+            const mesaAleatoria = Math.floor(Math.random() * 12) + 1;
+            localStorage.setItem('gastroneo_mesa_escaneada', mesaAleatoria);
+            
+            alert(`✅ Mesa ${mesaAleatoria} detectada!\nRedirigiendo al menú...`);
+            showView('menuView');
+        }
+
+        function checkMesaEscaneada() {
+            const mesa = localStorage.getItem('gastroneo_mesa_escaneada');
+            const mesaInfo = document.getElementById('mesaInfo');
+            const currentMesa = document.getElementById('currentMesa');
+            const mesaInfoCart = document.getElementById('mesaInfoCart');
+            const currentMesaCart = document.getElementById('currentMesaCart');
+            
+            if (mesa) {
+                mesaInfo.style.display = 'block';
+                currentMesa.textContent = mesa;
+                mesaInfoCart.style.display = 'block';
+                currentMesaCart.textContent = mesa;
             }
         }
 
         // === RESERVAS ===
         function confirmBooking() {
-            alert('✅ Reserva confirmada');
+            if (!appState.user) {
+                alert("Por favor, crea una cuenta primero.");
+                return;
+            }
+
+            appState.user.tokens = (appState.user.tokens || 0) + 100;
+            localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
+            
+            alert("✅ ¡Reserva confirmada!\n+100 GastroTokens.");
             showView('homeView');
         }
 
-        // === QR ===
-        function simulateQRScan() {
-            localStorage.setItem('current_mesa', Math.floor(Math.random()*12)+1);
-            showView('menuView');
-        }
-
-        // === DUEÑO ===
-        function openOwnerAccess() {
-            if (prompt('Contraseña:') === 'quantum2024') {
-                showView('ownerDashboard');
+        // === EMPLEADOS ===
+        function loginEmployee() {
+            const pin = document.getElementById('employeePin').value;
+            if (pin === "9876") {
+                appState.employee = { name: "Empleado Demo", role: "mesero" };
+                showView('employeeDashboard');
             } else {
-                alert('❌ Acceso denegado');
+                alert("PIN incorrecto.");
             }
         }
-        function logoutOwner() { showView('homeView'); }
 
-        // === CAMARERO ===
-        function loginWaiter() {
-            const pin = document.getElementById('waiterPin').value;
-            if (['1234','5678','9012','3456'].includes(pin)) {
-                appState.employee = {name: 'Empleado'};
-                showView('waiterTablesView');
-            } else {
-                alert('PIN incorrecto');
-            }
-        }
-        function logoutWaiter() {
+        function logoutEmployee() {
             appState.employee = null;
             showView('homeView');
         }
 
-        // === GAMIFICACIÓN + SISTEMA DE CASTIGO ===
-        function renderOwnerLeaderboard() {
-            const container = document.getElementById('ownerLeaderboard');
+        function renderEmployeeLeaderboard() {
+            const container = document.getElementById('employeeLeaderboard');
             if (!container) return;
-            container.innerHTML = appState.employees.map(emp => {
-                const risk = emp.conducta <= 30;
-                const badgeClass = risk ? 'rank-risk' : 
-                    emp.level === 'diamante' ? 'rank-diamante' :
-                    emp.level === 'oro' ? 'rank-oro' :
-                    emp.level === 'plata' ? 'rank-plata' : 'rank-bronce';
-                return `
-                    <div class="leaderboard-item">
-                        <div class="rank-badge ${badgeClass}">${emp.conducta}</div>
-                        <div style="flex:1;">
-                            <div style="font-weight:600;">${emp.name}</div>
-                            <div style="font-size:0.8rem;color:#D0B0C0;">
-                                Nivel: ${emp.level.toUpperCase()} • 
-                                ${risk ? '<span class="penalty-badge risk-badge">ALERTA ROJA</span>' : '✅ Estable'}
-                            </div>
+
+            const sortedEmployees = [...appState.employees].sort((a, b) => b.points - a.points);
+            
+            container.innerHTML = sortedEmployees.map(emp => `
+                <div class="leaderboard-item">
+                    <div class="rank-badge rank-${emp.level}">${emp.points}</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">${emp.name}</div>
+                        <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">
+                            ${emp.level.toUpperCase()} 
+                            ${emp.todayPoints !== 0 ? 
+                                `<span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'};">
+                                    ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}
+                                </span>` : ''}
                         </div>
                     </div>
+                </div>
+            `).join('');
+        }
+
+        function renderTablesGrid() {
+            const grid = document.getElementById('tablesGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            for (let i = 1; i <= 12; i++) {
+                const status = i <= 8 ? 'occupied' : 'free';
+                const card = document.createElement('div');
+                card.className = `table-card table-${status}`;
+                card.innerHTML = `
+                    <div style="font-size: 1.2rem; font-weight: 700;">${i}</div>
+                    <div style="font-size: 0.7rem;">${status === 'free' ? 'Libre' : 'Ocupada'}</div>
                 `;
-            }).join('');
+                card.onclick = () => openTableDetail(i, status);
+                grid.appendChild(card);
+            }
         }
 
-        function renderWaiterLeaderboard() {
-            const container = document.getElementById('waiterLeaderboard');
-            if (container) container.innerHTML = '<div style="color:#FFD300;">Tu conducta: 92/100 ✅</div>';
+        function openTableDetail(tableNum, status) {
+            alert(`Mesa ${tableNum} - ${status === 'free' ? 'Libre' : 'Ocupada'}`);
         }
 
-        function renderEmployeeLeaderboards() {
-            renderOwnerLeaderboard();
-            renderWaiterLeaderboard();
+        // === PANEL QUANTUM (DUEÑO) ===
+        function openOwnerAccess() {
+            const pin = prompt("🔐 PIN QUANTUM (demo: 1234):");
+            if (pin === "1234") {
+                showView('ownerDashboard');
+            } else if (pin) {
+                alert("⚠️ PIN incorrecto.");
+            }
         }
 
-        console.log('✅ GastroNeo Quantum v2.2 cargado – Sistema de castigo laboral activo');
+        function logoutOwner() {
+            showView('homeView');
+        }
+
+        function verifyAllOrders() {
+            alert("✅ Todos los pedidos verificados y actualizados.");
+        }
+
+        // === ACTIVIDAD EN VIVO ===
+        function startLiveActivities() {
+            // Actividades iniciales
+            addActivity('positive', 'Sistema GastroNeo Quantum iniciado');
+            addActivity('positive', '3 nuevas reservas esta mañana');
+            
+            // Simular actividad cada 20 segundos
+            setInterval(() => {
+                const activities = [
+                    'positive: Carlos +10pts: Cliente elogió servicio',
+                    'positive: Ana +8pts: Upselling exitoso',
+                    'negative: Luis -12pts: Tiempo excedido',
+                    'positive: Sistema: Pedido completado Mesa 5'
+                ];
+                const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+                const [type, message] = randomActivity.split(': ');
+                addActivity(type, message);
+            }, 20000);
+        }
+
+        function addActivity(type, message) {
+            const activity = {
+                id: Date.now(),
+                type: type,
+                message: message,
+                timestamp: new Date().toLocaleTimeString()
+            };
+            
+            appState.activities.unshift(activity);
+            appState.activities = appState.activities.slice(0, 5); // Mantener solo 5
+            renderActivityFeed();
+        }
+
+        function renderActivityFeed() {
+            const feed = document.getElementById('liveActivityFeed');
+            if (!feed) return;
+            
+            feed.innerHTML = appState.activities.map(activity => `
+                <div class="activity-item activity-${activity.type}">
+                    <div>${activity.message}</div>
+                    <div style="font-size: 0.7rem; color: var(--neo-text-secondary); margin-top: 0.2rem;">
+                        ${activity.timestamp}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // === NOTIFICACIONES ===
+        function createNotification(type, title, message) {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <div style="font-family: 'Orbitron'; font-weight: 700;">${title}</div>
+                    <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">Ahora</div>
+                </div>
+                <div style="font-size: 0.85rem;">${message}</div>
+            `;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
     </script>
 </body>
 </html>
