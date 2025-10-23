@@ -1,7 +1,8 @@
 {
   "name": "GastroNeo – Restaurante del Futuro",
   "short_name": "GastroNeo",
-  "start_url": "/AppLocalPro/demo-restaurante/index.html",
+  "description": "App de restaurante con menú digital, reservas inteligentes, sistema de fidelización GastroPass y gestión disciplinaria para empleados.",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#1A0A10",
   "theme_color": "#FF2A6D",
@@ -18,6 +19,16 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "lang": "es",
+  "categories": ["food", "lifestyle", "business"],
+  "screenshots": [
+    {
+      "src": "screenshot-home.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "mobile"
     }
   ]
 }
