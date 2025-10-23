@@ -2,12 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital, sistema de fidelización GastroPass y gestión para camareros.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="GastroNeo: app de restaurante del futuro con reservas inteligentes, menú digital, sistema de fidelización GastroPass, gestión para camareros y protocolos laborales cuánticos.">
     <title>GastroNeo – Restaurante del Futuro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FF2A6D">
@@ -16,7 +15,6 @@
     <meta name="apple-mobile-web-app-title" content="GastroNeo">
     <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="icon" href="icon-192.png">
-
     <style>
         /* === Estilos base === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,6 +23,9 @@
             color: #FFD6E0;
             overflow-x: hidden;
             font-family: 'Rajdhani', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .app-container {
             max-width: 500px;
@@ -36,6 +37,7 @@
             border: 1px solid #FF2A6D;
             box-shadow: 0 0 30px rgba(255, 42, 109, 0.4);
             position: relative;
+            flex: 1;
         }
         .app-header {
             background: linear-gradient(135deg, #FF2A6D, #FFD300);
@@ -59,16 +61,19 @@
             padding: 1rem;
             overflow-y: auto;
             background: rgba(34, 15, 24, 0.7);
+            /* 🔑 CORRECCIÓN CLAVE PARA MÓVILES */
+            min-height: 0;
+            -webkit-overflow-scrolling: touch;
         }
         .view { 
             display: none; 
             flex: 1;
             flex-direction: column;
+            min-height: 0;
         }
         .view.active { 
             display: flex !important;
         }
-
         /* === Splash Screen === */
         #splashScreen {
             position: fixed;
@@ -111,7 +116,6 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         /* === Botones universales === */
         .btn-neo {
             width: 100%;
@@ -130,7 +134,8 @@
         .btn-verify { background: linear-gradient(135deg, #00F0FF, #6E00FF); color: #0D0916; }
         .btn-success { background: linear-gradient(135deg, #00D100, #009900); color: white; }
         .btn-scan { background: linear-gradient(135deg, #00F0FF, #0099FF); color: #0D0916; }
-
+        .btn-warning { background: linear-gradient(135deg, #FFD300, #FF9A00); color: #220F18; }
+        .btn-danger { background: linear-gradient(135deg, #FF2A6D, #D10047); color: white; }
         .form-control {
             width: 100%;
             padding: 0.8rem;
@@ -145,7 +150,6 @@
             margin-bottom: 0.5rem;
             color: #D0B0C0;
         }
-
         /* === Navegación inferior === */
         .app-nav {
             display: flex;
@@ -171,7 +175,6 @@
             color: #FFD300;
         }
         .nav-item i { font-size: 1.4rem; margin-bottom: 0.3rem; }
-
         /* === Botón de descarga === */
         .download-btn {
             position: fixed;
@@ -195,7 +198,6 @@
         .download-btn:hover {
             transform: scale(1.1);
         }
-
         /* === Menú Digital – Tarjetas Optimizadas === */
         .menu-category {
             margin-bottom: 1.5rem;
@@ -292,7 +294,6 @@
         .menu-card-btn:hover {
             transform: scale(1.1);
         }
-
         /* === Carrito de Compras === */
         .cart-item {
             display: flex;
@@ -348,162 +349,33 @@
             color: #FFD300;
             margin: 0.5rem 0;
         }
-
-        /* === Checkout y Pagos === */
-        .payment-methods {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.8rem;
-            margin: 1.5rem 0;
+        /* === Protocolos Laborales === */
+        .protocol-card {
+            background: rgba(30, 10, 15, 0.6);
+            border-left: 4px solid #FF2A6D;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
         }
-        .payment-btn {
-            padding: 1.2rem;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: all 0.3s ease;
-        }
-        .btn-cash { 
-            background: linear-gradient(135deg, #00F0FF, #00B8FF); 
-            color: #0D0916; 
-        }
-        .btn-card { 
-            background: linear-gradient(135deg, #6E00FF, #3A00B8); 
-            color: white; 
-        }
-        .btn-paypal { 
-            background: linear-gradient(135deg, #0070BA, #009CDE); 
-            color: white; 
-        }
-        .payment-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* === GastroPass – Botones de canjeo pequeños y elegantes === */
-        .reward-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #44202A;
-        }
-        .reward-item:last-child {
-            border: none;
-        }
-        .reward-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #FFD300, #FF9A00);
-            color: #220F18;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.2s;
-        }
-        .reward-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 8px rgba(255, 211, 0, 0.6);
-        }
-
-        /* === Camarero === */
-        .table-card {
-            height: 80px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
-            font-family: 'Orbitron', sans-serif;
-            border: 2px solid;
-            transition: all 0.3s ease;
-        }
-        .table-card.free {
-            background: rgba(40, 20, 30, 0.6);
-            border-color: #333;
-            color: #888;
-        }
-        .table-card.occupied {
-            background: linear-gradient(135deg, #2A1018, #3A1525);
-            border-color: #FF2A6D;
+        .protocol-title {
+            font-family: 'Orbitron';
             color: #FFD300;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
-        .table-number {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        .table-status {
-            font-size: 0.7rem;
-            margin-top: 0.2rem;
-        }
-        .table-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #FF2A6D;
-            color: white;
-            font-size: 0.65rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 10px;
-        }
-
-        /* === Badge del Carrito === */
-        .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #FF2A6D;
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.4rem;
-            border-radius: 50%;
-            min-width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* === Estados vacíos === */
-        .empty-state {
-            text-align: center;
-            padding: 2rem 1rem;
+        .protocol-desc {
+            font-size: 0.9rem;
             color: #D0B0C0;
         }
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #FF2A6D;
+        .penalty-badge {
+            display: inline-block;
+            background: #FF2A6D;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
         }
-
-        /* === QR Scanner Styles === */
-        .scanner-container {
-            background: rgba(0, 240, 255, 0.1);
-            border: 2px dashed #00F0FF;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-        .scanner-icon {
-            color: #00F0FF;
-            font-size: 5rem;
-            margin-bottom: 1rem;
-        }
-
         /* === NOTIFICACIONES INTELIGENTES === */
         .notification-container {
             position: fixed;
@@ -529,7 +401,6 @@
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
-
         /* === SISTEMA DE GAMIFICACIÓN LABORAL === */
         .leaderboard {
             background: rgba(20, 5, 10, 0.8);
@@ -568,28 +439,17 @@
         .rank-oro { background: linear-gradient(135deg, #FFD700, #FFA500); }
         .rank-plata { background: linear-gradient(135deg, #E5E4E2, #A8A8A8); }
         .rank-bronce { background: linear-gradient(135deg, #CD7F32, #8B4513); }
-
-        /* === ACTIVIDAD EN VIVO === */
-        .activity-feed {
-            max-height: 200px;
-            overflow-y: auto;
-            margin: 1rem 0;
+        .rank-risk { background: linear-gradient(135deg, #FF4444, #8B0000); color: white; }
+        /* === ESTADOS VACÍOS === */
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #D0B0C0;
         }
-        .activity-item {
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 6px;
-            font-size: 0.8rem;
-            border-left: 3px solid;
-            animation: fadeInUp 0.5s ease;
-        }
-        .activity-positive { border-color: #00F0FF; }
-        .activity-negative { border-color: #FF2A6D; }
-        .activity-neutral { border-color: #D0B0C0; }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #FF2A6D;
         }
     </style>
 </head>
@@ -597,12 +457,12 @@
     <!-- Splash Screen -->
     <div id="splashScreen">
         <div class="splash-logo">
-            <img src="Logo GASTRONEO - Opción 3.jpg" alt="GastroNeo" style="width:100%;height:100%;border-radius:50%;">
+            <i class="fas fa-utensils"></i>
         </div>
         <div class="splash-text">GASTRONEO</div>
     </div>
 
-    <!-- Sistema de Notificaciones Inteligentes -->
+    <!-- Notificaciones -->
     <div class="notification-container" id="notificationContainer"></div>
 
     <div class="app-container">
@@ -620,9 +480,7 @@
                         "Más del 70% de los clientes eligen restaurantes con equipo visible y cercano."
                     </div>
                 </div>
-
                 <div id="authOrProfile"></div>
-
                 <button class="btn-neo btn-primary" onclick="showView('bookingView')">
                     <i class="fas fa-utensils"></i> Reservar Mesa
                 </button>
@@ -641,12 +499,10 @@
                 <button class="btn-neo" style="background:rgba(0,240,255,0.2);color:#00F0FF;border:1px solid #00F0FF;" onclick="showView('waiterLoginView')">
                     <i class="fas fa-user-tie"></i> Camarero
                 </button>
-
-                <!-- Actividad en Vivo -->
-                <div class="activity-feed" id="liveActivityFeed"></div>
             </div>
         </div>
 
+        <!-- === Vistas principales (booking, menu, cart, etc.) === -->
         <!-- QR Scanner View -->
         <div id="qrScannerView" class="view">
             <div class="app-header">
@@ -659,31 +515,16 @@
                         Escanea el código QR de tu mesa
                     </div>
                 </div>
-                
-                <div class="scanner-container">
-                    <div class="scanner-icon">
+                <div class="scanner-container" style="background:rgba(0,240,255,0.1);border:2px dashed #00F0FF;border-radius:12px;padding:2rem;margin:1.5rem 0;">
+                    <div class="scanner-icon" style="color:#00F0FF;font-size:5rem;margin-bottom:1rem;">
                         <i class="fas fa-camera"></i>
                     </div>
-                    <div style="color: #D0B0C0; margin-bottom: 1.5rem;">
-                        Cámara lista para escanear...
-                    </div>
+                    <div style="color:#D0B0C0;margin-bottom:1.5rem;">Cámara lista para escanear...</div>
                     <button class="btn-neo btn-scan" onclick="simulateQRScan()">
                         <i class="fas fa-camera"></i> Simular Escaneo
                     </button>
                 </div>
-
-                <div style="background: rgba(255, 42, 109, 0.1); border-radius: 12px; padding: 1rem; margin: 1.5rem 0;">
-                    <div style="color: #FFD300; font-family: 'Rajdhani'; margin-bottom: 0.5rem;">💡 ¿Cómo escanear?</div>
-                    <div style="color: #D0B0C0; font-size: 0.9rem;">
-                        1. Enfoca el código QR de tu mesa<br>
-                        2. La app detectará automáticamente<br>
-                        3. ¡Accede al menú digital!
-                    </div>
-                </div>
-
-                <button class="btn-neo" style="background: #3A1525; color: #E0C0D0;" onclick="showView('homeView')">
-                    ← Volver
-                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
 
@@ -727,7 +568,7 @@
             </div>
         </div>
 
-        <!-- Menú Digital – OPTIMIZADO -->
+        <!-- Menú Digital -->
         <div id="menuView" class="view">
             <div class="app-header">
                 <h1>📖 Menú Digital</h1>
@@ -738,7 +579,6 @@
                         <i class="fas fa-table"></i> Mesa: <span id="currentMesa">-</span>
                     </div>
                 </div>
-
                 <div class="menu-category">
                     <h2 class="menu-category-title">ENTRADAS</h2>
                     <div class="menu-grid">
@@ -748,25 +588,10 @@
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Tartar de Atún</h3>
-                                <p class="menu-card-desc">Atún fresco con wasabi y aguacate, marinado en salsa de soja y aceite de sésamo</p>
+                                <p class="menu-card-desc">Atún fresco con wasabi y aguacate</p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€16.50</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50, 'https://images.pexels.com/photos/3764643/pexels-photo-3764643.jpeg')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bruschetta" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Bruschetta</h3>
-                                <p class="menu-card-desc">Pan tostado artesanal con tomate fresco, albahaca y aceite de oliva virgen extra</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€9.90</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Bruschetta', 9.90, 'https://images.pexels.com/photos/7049761/pexels-photo-7049761.jpeg')">
+                                    <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50)">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
@@ -774,156 +599,28 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="menu-category">
-                    <h2 class="menu-category-title">PLATOS FUERTES</h2>
-                    <div class="menu-grid">
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pasta Carbonara" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Pasta Carbonara</h3>
-                                <p class="menu-card-desc">Pasta fresca con salsa cremosa de panceta, huevo y queso pecorino</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€18.99</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Pasta Carbonara', 18.99, 'https://images.pexels.com/photos/1199381/pexels-photo-1199381.jpeg')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Risotto de Trufa</h3>
-                                <p class="menu-card-desc">Arroz arbóreo cremoso con trufa negra fresca y queso parmesano</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€24.00</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Risotto de Trufa', 24.00, 'https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-category">
-                    <h2 class="menu-category-title">POSTRES</h2>
-                    <div class="menu-grid">
-                        <div class="menu-card">
-                            <div class="menu-card-img">
-                                <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tiramisú" onerror="this.src='https://via.placeholder.com/300x120/2A1018/FF2A6D?text=Imagen+No+Disponible'">
-                            </div>
-                            <div class="menu-card-body">
-                                <h3 class="menu-card-name">Tiramisú</h3>
-                                <p class="menu-card-desc">Capas de bizcocho de soletilla empapado en café y crema de mascarpone</p>
-                                <div class="menu-card-footer">
-                                    <span class="menu-card-price">€8.99</span>
-                                    <button class="menu-card-btn" onclick="addToCart('Tiramisú', 8.99, 'https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg')">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
 
-        <!-- Vista del Carrito -->
+        <!-- Carrito -->
         <div id="cartView" class="view">
             <div class="app-header">
                 <h1>🛒 Mi Carrito</h1>
             </div>
             <div class="app-content">
-                <div id="mesaInfoCart" style="background: rgba(0, 240, 255, 0.1); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; display: none;">
-                    <div style="color: #00F0FF; font-family: 'Orbitron'; font-size: 0.9rem;">
-                        <i class="fas fa-table"></i> Mesa: <span id="currentMesaCart">-</span>
-                    </div>
-                </div>
-
-                <div id="cartItemsContainer">
-                    <!-- Los items del carrito se cargan dinámicamente -->
-                </div>
-                
+                <div id="cartItemsContainer"></div>
                 <div id="emptyCart" class="empty-state" style="display: none;">
                     <i class="fas fa-shopping-cart"></i>
                     <h3>Tu carrito está vacío</h3>
-                    <p>¡Añade algunos productos deliciosos!</p>
                 </div>
-
                 <div id="cartSummary" style="display: none;">
                     <div class="cart-total">
                         <div>Total del Pedido</div>
                         <div class="cart-total-amount" id="cartTotalAmount">€0.00</div>
                     </div>
-                    
-                    <button class="btn-neo btn-success" onclick="showView('checkoutView')">
-                        <i class="fas fa-credit-card"></i> Proceder al Pago
-                    </button>
                 </div>
-
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('menuView')">
-                    ← Seguir Comprando
-                </button>
-            </div>
-        </div>
-
-        <!-- Vista de Checkout -->
-        <div id="checkoutView" class="view">
-            <div class="app-header">
-                <h1>💳 Checkout</h1>
-            </div>
-            <div class="app-content">
-                <div class="form-group">
-                    <label>Nombre Completo</label>
-                    <input type="text" id="checkoutName" class="form-control" placeholder="Como aparece en la tarjeta">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="checkoutEmail" class="form-control" placeholder="tu@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Teléfono</label>
-                    <input type="tel" id="checkoutPhone" class="form-control" placeholder="+34 600 000 000">
-                </div>
-
-                <div style="background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; margin:1.5rem 0;">
-                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin:0 0 0.8rem;">Resumen del Pedido</h3>
-                    <div id="checkoutOrderItems"></div>
-                    <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.3rem;margin-top:0.8rem;">
-                        Total: €<span id="checkoutTotal">0.00</span>
-                    </div>
-                </div>
-
-                <h3 style="font-family:'Rajdhani';color:#FFD300;margin:1.5rem 0 1rem;">Método de Pago</h3>
-                <div class="payment-methods">
-                    <button class="payment-btn btn-card" onclick="selectPaymentMethod('card')">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Tarjeta de Crédito</span>
-                    </button>
-                    <button class="payment-btn btn-paypal" onclick="selectPaymentMethod('paypal')">
-                        <i class="fab fa-paypal"></i>
-                        <span>PayPal</span>
-                    </button>
-                    <button class="payment-btn btn-cash" onclick="selectPaymentMethod('cash')">
-                        <i class="fas fa-money-bill-wave"></i>
-                        <span>Efectivo</span>
-                    </button>
-                </div>
-
-                <button class="btn-neo btn-success" onclick="processCheckout()" id="checkoutBtn">
-                    <i class="fas fa-lock"></i> Pagar Ahora
-                </button>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('cartView')">
-                    ← Volver al Carrito
-                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('menuView')">← Seguir Comprando</button>
             </div>
         </div>
 
@@ -941,50 +638,13 @@
                     </div>
                     <div style="font-size:0.85rem;color:#F0D0E0;margin-top:0.5rem;">280 / 500 pts</div>
                 </div>
-
                 <div class="benefits-section" style="background:rgba(30,10,15,0.6);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
                     <h3 style="font-family:'Rajdhani';color:#FFD300;margin-bottom:1rem;">🎁 Tus Beneficios</h3>
                     <div style="font-size:0.95rem;line-height:1.6;color:#FFD6E0;">
                         <div>• Menú digital exclusivo</div>
                         <div>• Cumpleaños gratis</div>
-                        <div>• Acceso a eventos del chef</div>
                     </div>
                 </div>
-
-                <div class="rewards-section">
-                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin-bottom:0.8rem;">🛒 Canjear Recompensas</h3>
-                    <div class="reward-item">
-                        <div><strong>Café Gourmet</strong><br><small>100 pts</small></div>
-                        <button class="reward-btn" onclick="redeemReward(100, 'Café Gourmet')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                    <div class="reward-item">
-                        <div><strong>Postre del Chef</strong><br><small>250 pts</small></div>
-                        <button class="reward-btn" onclick="redeemReward(250, 'Postre del Chef')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                    <div class="reward-item">
-                        <div><strong>Copa de Vino</strong><br><small>300 pts</small></div>
-                        <button class="reward-btn" onclick="redeemReward(300, 'Copa de Vino')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                    <div class="reward-item">
-                        <div><strong>Menú Degustación</strong><br><small>800 pts</small></div>
-                        <button class="reward-btn" onclick="redeemReward(800, 'Menú Degustación')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                    <div class="reward-item">
-                        <div><strong>Cena con el Chef</strong><br><small>1500 pts</small></div>
-                        <button class="reward-btn" onclick="redeemReward(1500, 'Cena con el Chef')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                </div>
-
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
@@ -1000,475 +660,267 @@
                     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;font-size:0.9rem;">
                         <div><strong>Ingresos:</strong> <span id="dailyRevenue">€0</span></div>
                         <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">0/12</span></div>
-                        <div><strong>Pedidos pendientes:</strong> <span id="pendingOrders">0</span></div>
-                        <div><strong>Clientes en espera:</strong> <span id="waitingClients">0</span></div>
                     </div>
                 </div>
 
-                <div id="alertsSection" class="alerts-section" style="background:rgba(255,42,109,0.1);border:1px solid #FF2A6D;border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:none;">
-                    <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.1rem;margin-bottom:0.8rem;">⚠️ Alertas</div>
-                    <div id="alertsList" style="font-size:0.9rem;color:#FFD300;line-height:1.5;"></div>
+                <!-- 🔥 NUEVO: Protocolos Laborales y Sistema de Castigo -->
+                <div class="protocol-card">
+                    <div class="protocol-title">🛡️ Protocolo Quantum Laboral v2.1</div>
+                    <div class="protocol-desc">
+                        Cada empleado comienza con 100 puntos de conducta.
+                        Infracciones reducen puntos. Si cae bajo 30, se activa "Alerta Roja".
+                        Si llega a 0, despido automático.
+                        <span class="penalty-badge">-10 pts</span> por retraso.
+                        <span class="penalty-badge">-25 pts</span> por queja de cliente.
+                        <span class="penalty-badge">+15 pts</span> por elogio.
+                    </div>
                 </div>
 
-                <!-- Leaderboard Empleados -->
+                <!-- Leaderboard con riesgo -->
                 <div class="leaderboard">
-                    <div class="leaderboard-title">🏆 Ranking Empleados</div>
+                    <div class="leaderboard-title">🏆 Ranking Empleados (Conducta)</div>
                     <div id="ownerLeaderboard"></div>
                 </div>
 
-                <button class="btn-neo btn-verify" onclick="verifyAllOrders()">
-                    ✅ Verificar Todos los Pedidos
-                </button>
-                <button class="btn-neo" style="background:#e74c3c;color:white;" onclick="logoutOwner()">Cerrar Sesión</button>
+                <button class="btn-neo btn-danger" onclick="logoutOwner()">Cerrar Sesión</button>
             </div>
         </div>
 
-        <!-- === Vistas de Camarero === -->
+        <!-- Login Camarero -->
         <div id="waiterLoginView" class="view">
             <div class="app-header">
                 <h1><i class="fas fa-user-tie"></i> Camarero</h1>
             </div>
             <div class="app-content" style="text-align:center;">
-                <div style="margin:2rem 0;">
-                    <i class="fas fa-key" style="font-size:3rem;color:#FF2A6D;"></i>
-                    <div style="margin-top:1rem;font-family:'Rajdhani';font-size:1.1rem;">Ingresa tu PIN</div>
-                </div>
                 <input type="password" id="waiterPin" class="form-control" placeholder="****" style="max-width:200px;margin:0 auto;">
-                <button class="btn-neo btn-primary" onclick="loginWaiter()" style="margin-top:1.5rem;">
-                    Ingresar
-                </button>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1rem;" onclick="showView('homeView')">
-                    ← Volver
-                </button>
+                <button class="btn-neo btn-primary" onclick="loginWaiter()" style="margin-top:1.5rem;">Ingresar</button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1rem;" onclick="showView('homeView')">← Volver</button>
             </div>
         </div>
 
+        <!-- Mesas Camarero -->
         <div id="waiterTablesView" class="view">
             <div class="app-header">
                 <h1><i class="fas fa-concierge-bell"></i> Mesas</h1>
             </div>
             <div class="app-content">
-                <!-- Leaderboard Empleados -->
                 <div class="leaderboard">
                     <div class="leaderboard-title">⚡ Tu Posición</div>
                     <div id="waiterLeaderboard"></div>
                 </div>
-
                 <h3 style="font-family:'Rajdhani';color:#FFD300;margin:1.5rem 0 1rem;">Gestión de Mesas</h3>
                 <div id="tablesGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem;"></div>
-                
-                <!-- Actividad Reciente -->
-                <div class="activity-feed" id="waiterActivityFeed"></div>
-
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="logoutWaiter()">
-                    ← Cerrar Sesión
-                </button>
-            </div>
-        </div>
-
-        <div id="waiterOrderView" class="view">
-            <div class="app-header">
-                <h1><i class="fas fa-clipboard-list"></i> Mesa <span id="orderTableNum">1</span></h1>
-            </div>
-            <div class="app-content">
-                <div class="form-group">
-                    <label>Comensales</label>
-                    <select id="guestsCount" class="form-control">
-                        <option>1</option><option>2</option><option>3</option><option>4</option>
-                    </select>
-                </div>
-
-                <div id="orderSummary" style="margin-top:1.5rem; background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; display:none;">
-                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin:0 0 0.8rem;">Pedido Actual</h3>
-                    <div id="orderItemsList"></div>
-                    <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.2rem;margin-top:0.8rem;">
-                        Total: €<span id="orderTotal">0.00</span>
-                    </div>
-                </div>
-
-                <button class="btn-neo btn-primary" onclick="sendOrderToKitchen()" style="margin-top:1rem; display:none;" id="sendOrderBtn">
-                    <i class="fas fa-fire"></i> Enviar a Cocina
-                </button>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('waiterTablesView')">
-                    ← Volver a Mesas
-                </button>
-            </div>
-        </div>
-
-        <div id="paymentView" class="view">
-            <div class="app-header">
-                <h1><i class="fas fa-cash-register"></i> Cobrar Mesa <span id="paymentTableNum">1</span></h1>
-            </div>
-            <div class="app-content">
-                <div style="background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; margin-bottom:1.5rem;">
-                    <h3 style="font-family:'Rajdhani';color:#FFD300;margin:0 0 0.8rem;">Resumen</h3>
-                    <div id="paymentOrderItems"></div>
-                    <div style="font-family:'Orbitron';color:#FF2A6D;font-size:1.3rem;margin-top:0.8rem;">
-                        Total: €<span id="paymentTotal">0.00</span>
-                    </div>
-                </div>
-
-                <div class="payment-methods">
-                    <button class="payment-btn btn-cash" onclick="processPayment('cash')">
-                        <i class="fas fa-money-bill-wave"></i> Efectivo
-                    </button>
-                    <button class="payment-btn btn-card" onclick="processPayment('card')">
-                        <i class="fas fa-credit-card"></i> Tarjeta
-                    </button>
-                </div>
-
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('waiterTablesView')">
-                    ← Volver
-                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="logoutWaiter()">← Cerrar Sesión</button>
             </div>
         </div>
     </div>
 
-    <!-- Navegación inferior -->
+    <!-- Navegación -->
     <div class="app-nav">
         <a href="#" class="nav-item active" onclick="showView('homeView'); return false;">
-            <i class="fas fa-home"></i>
-            <span>Inicio</span>
+            <i class="fas fa-home"></i><span>Inicio</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('bookingView'); return false;">
-            <i class="fas fa-calendar"></i>
-            <span>Reservas</span>
+            <i class="fas fa-calendar"></i><span>Reservas</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('menuView'); return false;">
-            <i class="fas fa-book"></i>
-            <span>Menú</span>
+            <i class="fas fa-book"></i><span>Menú</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('qrScannerView'); return false;">
-            <i class="fas fa-qrcode"></i>
-            <span>Escanear</span>
+            <i class="fas fa-qrcode"></i><span>Escanear</span>
         </a>
         <a href="#" class="nav-item" onclick="showView('cartView'); return false;" id="cartNavItem">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Carrito</span>
+            <i class="fas fa-shopping-cart"></i><span>Carrito</span>
             <div class="cart-badge" id="cartBadge" style="display: none;">0</div>
         </a>
     </div>
 
-    <!-- Botón Descarga App -->
     <button class="download-btn" onclick="installApp()">
         <i class="fas fa-download"></i>
     </button>
 
     <script>
-        // === ESTADO GLOBAL MEJORADO ===
+        // === ESTADO GLOBAL ===
         let appState = {
             user: null,
             employee: null,
             cart: JSON.parse(localStorage.getItem('gastroneo_cart')) || [],
-            currentOrder: null,
-            currentPaymentOrder: null,
-            selectedPaymentMethod: null,
             employees: [
-                { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', todayPoints: 45 },
-                { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', todayPoints: 32 },
-                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', todayPoints: -12 },
-                { id: 'emp_4', name: 'María López', points: 380, level: 'bronce', todayPoints: 18 }
-            ],
-            activities: [],
-            notifications: JSON.parse(localStorage.getItem('gastroneo_notifications')) || []
+                { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', conducta: 92 },
+                { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', conducta: 100 },
+                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', conducta: 28 }, // ⚠️ Riesgo
+                { id: 'emp_4', name: 'María López', points: 380, level: 'bronce', conducta: 75 }
+            ]
         };
 
-        // === INICIALIZACIÓN MEJORADA ===
+        // === INICIALIZACIÓN ===
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                const splash = document.getElementById('splashScreen');
-                if (splash) {
-                    splash.style.display = 'none';
-                }
+                document.getElementById('splashScreen').style.display = 'none';
                 initializeApp();
-            }, 2000);
+            }, 1500);
         });
 
         function initializeApp() {
-            console.log('🚀 Inicializando GastroNeo Quantum...');
-            
-            // Inicializar sistemas
             loadUser();
             renderAuthOrProfile();
-            renderTablesGrid();
             updateCartBadge();
-            checkMesaEscaneada();
-            
-            // Inicializar sistemas inteligentes
-            initializeNotificationSystem();
-            initializeGamificationSystem();
-            startLiveActivities();
-            
-            // Mostrar notificación de bienvenida
-            setTimeout(() => {
-                createNotification('success', '¡Bienvenido!', 'Sistema GastroNeo Quantum iniciado');
-            }, 500);
+            renderEmployeeLeaderboards();
         }
 
-        // === SISTEMA DE VISTAS CORREGIDO ===
+        // === VISTAS ===
         function showView(viewId) {
-            console.log('🔀 Cambiando a vista:', viewId);
-            
-            // Ocultar todas las vistas
-            document.querySelectorAll('.view').forEach(v => {
-                v.classList.remove('active');
-            });
-            
-            // Mostrar vista objetivo
-            const targetView = document.getElementById(viewId);
-            if (targetView) {
-                targetView.classList.add('active');
-            } else {
-                console.error('❌ Vista no encontrada:', viewId);
-                return;
-            }
-            
-            // Actualizar navegación
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            const target = document.getElementById(viewId);
+            if (target) target.classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            
-            const viewToNavMap = {
-                'homeView': 0, 
-                'bookingView': 1, 
-                'menuView': 2, 
-                'qrScannerView': 3, 
-                'cartView': 4
-            };
-            
-            if (viewToNavMap[viewId] !== undefined) {
-                const navItems = document.querySelectorAll('.nav-item');
-                if (navItems[viewToNavMap[viewId]]) {
-                    navItems[viewToNavMap[viewId]].classList.add('active');
-                }
+            const navMap = {homeView:0, bookingView:1, menuView:2, qrScannerView:3, cartView:4};
+            const idx = navMap[viewId];
+            if (idx !== undefined) {
+                const items = document.querySelectorAll('.nav-item');
+                if (items[idx]) items[idx].classList.add('active');
             }
-            
-            // Ejecutar acciones específicas de vista
-            switch(viewId) {
-                case 'ownerDashboard':
-                    loadOwnerDashboard();
-                    break;
-                case 'cartView':
-                    renderCart();
-                    break;
-                case 'checkoutView':
-                    renderCheckout();
-                    break;
-                case 'menuView':
-                    checkMesaEscaneada();
-                    break;
-                case 'waiterTablesView':
-                    renderWaiterDashboard();
-                    break;
+            if (viewId === 'cartView') renderCart();
+            if (viewId === 'ownerDashboard') renderOwnerLeaderboard();
+        }
+
+        // === CARRITO ===
+        function addToCart(name, price) {
+            const item = appState.cart.find(i => i.name === name);
+            if (item) item.quantity++;
+            else appState.cart.push({id:Date.now(), name, price, quantity:1});
+            saveCart();
+            updateCartBadge();
+        }
+        function saveCart() { localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart)); }
+        function updateCartBadge() {
+            const total = appState.cart.reduce((s,i) => s + i.quantity, 0);
+            const badge = document.getElementById('cartBadge');
+            if (badge) {
+                badge.textContent = total;
+                badge.style.display = total ? 'flex' : 'none';
             }
         }
-
-        // === SISTEMA DE NOTIFICACIONES INTELIGENTES ===
-        function initializeNotificationSystem() {
-            // Cargar notificaciones existentes
-            renderNotifications();
-            
-            // Simular nuevas notificaciones
-            setInterval(() => {
-                if (Math.random() > 0.7) { // 30% probabilidad
-                    simulateIntelligentNotification();
-                }
-            }, 30000);
-        }
-
-        function createNotification(type, title, message, actions = []) {
-            const notification = {
-                id: 'notif_' + Date.now(),
-                type: type,
-                title: title,
-                message: message,
-                timestamp: new Date().toISOString(),
-                read: false,
-                actions: actions
-            };
-            
-            appState.notifications.unshift(notification);
-            localStorage.setItem('gastroneo_notifications', JSON.stringify(appState.notifications));
-            
-            renderNotification(notification);
-            playNotificationSound(type);
-        }
-
-        function renderNotifications() {
-            const container = document.getElementById('notificationContainer');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            // Mostrar últimas 3 notificaciones no leídas
-            const unreadNotifications = appState.notifications
-                .filter(n => !n.read)
-                .slice(0, 3);
-            
-            unreadNotifications.forEach(notification => {
-                renderNotification(notification);
-            });
-        }
-
-        function renderNotification(notification) {
-            const container = document.getElementById('notificationContainer');
-            const notificationEl = document.createElement('div');
-            notificationEl.className = `notification ${notification.type}`;
-            notificationEl.innerHTML = `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <div style="font-family: 'Orbitron'; font-weight: 700; font-size: 0.9rem;">${notification.title}</div>
-                    <div style="font-size: 0.7rem; color: #D0B0C0;">Ahora</div>
-                </div>
-                <div style="font-size: 0.85rem; line-height: 1.3;">${notification.message}</div>
-                ${notification.actions.length > 0 ? `
-                    <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
-                        ${notification.actions.map(action => `
-                            <button style="padding: 0.3rem 0.8rem; border: none; border-radius: 6px; font-size: 0.8rem; cursor: pointer; background: ${getActionColor(action.type)}; color: white;" 
-                                    onclick="${action.handler}">
-                                ${action.label}
-                            </button>
-                        `).join('')}
-                    </div>
-                ` : ''}
-            `;
-            
-            container.appendChild(notificationEl);
-            
-            // Auto-remover después de 8 segundos
-            setTimeout(() => {
-                if (notificationEl.parentNode) {
-                    notificationEl.style.animation = 'slideInRight 0.3s ease reverse';
-                    setTimeout(() => {
-                        if (notificationEl.parentNode) {
-                            notificationEl.remove();
-                        }
-                    }, 300);
-                }
-            }, 8000);
-        }
-
-        function getActionColor(type) {
-            const colors = {
-                'resolve': '#00F0FF',
-                'escalate': '#FF2A6D', 
-                'ignore': '#6E00FF'
-            };
-            return colors[type] || '#FF2A6D';
-        }
-
-        function playNotificationSound(type) {
-            // En implementación real, aquí cargarías sonidos
-            console.log(`🔊 Reproduciendo sonido para: ${type}`);
-        }
-
-        function simulateIntelligentNotification() {
-            const notifications = [
-                {
-                    type: 'warning',
-                    title: '⏰ ALERTA TIEMPO',
-                    message: 'Mesa 8 - 15min esperando pedido\nResponsable: Carlos\n📍 Terraza derecha',
-                    actions: [
-                        { type: 'resolve', label: 'Resolver', handler: "resolveNotification('temp_alert')" },
-                        { type: 'escalate', label: 'Escalar', handler: "escalateNotification('temp_alert')" }
-                    ]
-                },
-                {
-                    type: 'success',
-                    title: '⭐ CLIENTE FELIZ',
-                    message: 'Ana recibió elogios de Mesa 3\n+15 puntos automáticos',
-                    actions: [
-                        { type: 'resolve', label: 'OK', handler: "resolveNotification('praise_alert')" }
-                    ]
-                },
-                {
-                    type: 'danger', 
-                    title: '🚨 ATENCIÓN URGENTE',
-                    message: 'Mesa 12 - 2do pedido incorrecto\nLuis -25 puntos',
-                    actions: [
-                        { type: 'escalate', label: 'Supervisor', handler: "escalateNotification('error_alert')" },
-                        { type: 'ignore', label: 'Ignorar', handler: "ignoreNotification('error_alert')" }
-                    ]
-                }
-            ];
-            
-            const randomNotif = notifications[Math.floor(Math.random() * notifications.length)];
-            createNotification(randomNotif.type, randomNotif.title, randomNotif.message, randomNotif.actions);
-        }
-
-        // === SISTEMA DE GAMIFICACIÓN LABORAL ===
-        function initializeGamificationSystem() {
-            renderEmployeeLeaderboards();
-            
-            // Simular actualizaciones de puntos
-            setInterval(() => {
-                updateRandomEmployeePoints();
-            }, 45000);
-        }
-
-        function updateRandomEmployeePoints() {
-            const employees = appState.employees;
-            const randomEmp = employees[Math.floor(Math.random() * employees.length)];
-            const pointsChange = Math.random() > 0.3 ? 
-                Math.floor(Math.random() * 15) + 5 : 
-                -Math.floor(Math.random() * 10) - 5;
-            
-            randomEmp.points += pointsChange;
-            randomEmp.todayPoints += pointsChange;
-            
-            // Actualizar nivel
-            updateEmployeeLevel(randomEmp);
-            
-            // Guardar y renderizar
-            localStorage.setItem('gastroneo_employees', JSON.stringify(employees));
-            renderEmployeeLeaderboards();
-            
-            // Agregar actividad
-            const activityType = pointsChange > 0 ? 'positive' : 'negative';
-            addActivity(activityType, `${randomEmp.name} ${pointsChange > 0 ? '+' : ''}${pointsChange} puntos`);
-        }
-
-        function updateEmployeeLevel(employee) {
-            const levels = {
-                novato: { min: 0, max: 100 },
-                bronce: { min: 101, max: 300 },
-                plata: { min: 301, max: 600 },
-                oro: { min: 601, max: 1000 },
-                diamante: { min: 1001, max: Infinity }
-            };
-            
-            for (const [level, range] of Object.entries(levels)) {
-                if (employee.points >= range.min && employee.points <= range.max) {
-                    employee.level = level;
-                    break;
-                }
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const empty = document.getElementById('emptyCart');
+            const summary = document.getElementById('cartSummary');
+            if (appState.cart.length === 0) {
+                empty.style.display = 'block';
+                summary.style.display = 'none';
+                container.innerHTML = '';
+            } else {
+                empty.style.display = 'none';
+                summary.style.display = 'block';
+                let total = 0;
+                container.innerHTML = appState.cart.map(item => {
+                    const t = item.price * item.quantity;
+                    total += t;
+                    return `<div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">€${item.price} x${item.quantity}</div>
+                        </div>
+                    </div>`;
+                }).join('');
+                document.getElementById('cartTotalAmount').textContent = `€${total.toFixed(2)}`;
             }
         }
 
-        function renderEmployeeLeaderboards() {
-            renderOwnerLeaderboard();
-            renderWaiterLeaderboard();
+        // === USUARIO ===
+        function loadUser() {
+            const u = localStorage.getItem('gastroneo_user');
+            if (u) appState.user = JSON.parse(u);
+        }
+        function renderAuthOrProfile() {
+            const c = document.getElementById('authOrProfile');
+            if (!c) return;
+            if (appState.user) {
+                c.innerHTML = `<div style="background:rgba(255,42,109,0.1);border-radius:12px;padding:1rem;margin-bottom:1.5rem;">
+                    <div>¡Hola, ${appState.user.name}!</div>
+                </div>`;
+            } else {
+                c.innerHTML = `<div style="background:rgba(0,240,255,0.1);border-radius:12px;padding:1rem;margin-bottom:1.5rem;text-align:center;">
+                    <button class="btn-neo btn-verify" onclick="showAuthModal()" style="padding:0.6rem 1rem;font-size:0.9rem;">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                </div>`;
+            }
+        }
+        function showAuthModal() {
+            const name = prompt("Nombre:");
+            if (name) {
+                appState.user = {name, points:0, level:'Bronce'};
+                localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
+                renderAuthOrProfile();
+            }
         }
 
+        // === RESERVAS ===
+        function confirmBooking() {
+            alert('✅ Reserva confirmada');
+            showView('homeView');
+        }
+
+        // === QR ===
+        function simulateQRScan() {
+            localStorage.setItem('current_mesa', Math.floor(Math.random()*12)+1);
+            showView('menuView');
+        }
+
+        // === DUEÑO ===
+        function openOwnerAccess() {
+            if (prompt('Contraseña:') === 'quantum2024') {
+                showView('ownerDashboard');
+            } else {
+                alert('❌ Acceso denegado');
+            }
+        }
+        function logoutOwner() { showView('homeView'); }
+
+        // === CAMARERO ===
+        function loginWaiter() {
+            const pin = document.getElementById('waiterPin').value;
+            if (['1234','5678','9012','3456'].includes(pin)) {
+                appState.employee = {name: 'Empleado'};
+                showView('waiterTablesView');
+            } else {
+                alert('PIN incorrecto');
+            }
+        }
+        function logoutWaiter() {
+            appState.employee = null;
+            showView('homeView');
+        }
+        function renderTablesGrid() {
+            const grid = document.getElementById('tablesGrid');
+            if (!grid) return;
+            grid.innerHTML = Array.from({length:12}, (_,i) => 
+                `<div class="table-card ${Math.random()>0.5?'occupied':'free'}">
+                    <div class="table-number">${i+1}</div>
+                    <div class="table-status">${Math.random()>0.5?'OCUPADA':'LIBRE'}</div>
+                </div>`
+            ).join('');
+        }
+
+        // === GAMIFICACIÓN + SISTEMA DE CASTIGO ===
         function renderOwnerLeaderboard() {
             const container = document.getElementById('ownerLeaderboard');
             if (!container) return;
-
-            const sortedEmployees = [...appState.employees].sort((a, b) => b.points - a.points);
-            
-            container.innerHTML = sortedEmployees.map((emp, index) => {
-                const rankClass = index === 0 ? 'rank-diamante' : 
-                                index === 1 ? 'rank-oro' : 
-                                index === 2 ? 'rank-plata' : 'rank-bronce';
-                
+            container.innerHTML = appState.employees.map(emp => {
+                const risk = emp.conducta <= 30;
+                const badgeClass = risk ? 'rank-risk' : 
+                    emp.level === 'diamante' ? 'rank-diamante' :
+                    emp.level === 'oro' ? 'rank-oro' :
+                    emp.level === 'plata' ? 'rank-plata' : 'rank-bronce';
                 return `
                     <div class="leaderboard-item">
-                        <div class="rank-badge ${rankClass}">${emp.points}</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600;">${emp.name}</div>
-                            <div style="font-size: 0.8rem; color: #D0B0C0;">
-                                ${emp.level.toUpperCase()} 
-                                • Hoy: 
-                                <span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'};">
-                                    ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}
-                                </span>
+                        <div class="rank-badge ${badgeClass}">${emp.conducta}</div>
+                        <div style="flex:1;">
+                            <div style="font-weight:600;">${emp.name}</div>
+                            <div style="font-size:0.8rem;color:#D0B0C0;">
+                                Nivel: ${emp.level.toUpperCase()} • 
+                                ${risk ? '⚠️ ALERTA ROJA' : '✅ Estable'}
                             </div>
                         </div>
                     </div>
@@ -1478,720 +930,28 @@
 
         function renderWaiterLeaderboard() {
             const container = document.getElementById('waiterLeaderboard');
-            if (!container) return;
-
-            const sortedEmployees = [...appState.employees].sort((a, b) => b.points - a.points);
-            
-            container.innerHTML = sortedEmployees.slice(0, 3).map((emp, index) => {
-                const rankClass = index === 0 ? 'rank-diamante' : 
-                                index === 1 ? 'rank-oro' : 
-                                'rank-plata';
-                
-                return `
-                    <div class="leaderboard-item">
-                        <div class="rank-badge ${rankClass}">${index + 1}</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600; color: #FFD300;">${emp.name}</div>
-                            <div style="font-size: 0.8rem; color: #D0B0C0;">
-                                ${emp.points} pts
-                                ${emp.todayPoints !== 0 ? 
-                                    `<span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'};">
-                                        ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}
-                                    </span>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            if (container) container.innerHTML = '<div style="color:#FFD300;">Tu conducta: 92/100 ✅</div>';
         }
 
-        // === ACTIVIDAD EN VIVO ===
-        function startLiveActivities() {
-            // Actividades iniciales
-            addActivity('positive', 'Sistema GastroNeo Quantum iniciado');
-            addActivity('neutral', 'Todos los sistemas operativos');
-            
-            // Simular actividad periódica
-            setInterval(() => {
-                simulateLiveActivity();
-            }, 20000);
+        function renderEmployeeLeaderboards() {
+            renderOwnerLeaderboard();
+            renderWaiterLeaderboard();
         }
 
-        function addActivity(type, message) {
-            const activity = {
-                id: 'act_' + Date.now(),
-                type: type,
-                message: message,
-                timestamp: new Date().toLocaleTimeString('es-ES', { 
-                    hour: '2-digit', 
-                    minute: '2-digit'
-                })
-            };
-            
-            appState.activities.unshift(activity);
-            appState.activities = appState.activities.slice(0, 6);
-            renderActivityFeeds();
-        }
-
-        function renderActivityFeeds() {
-            renderHomeActivityFeed();
-            renderWaiterActivityFeed();
-        }
-
-        function renderHomeActivityFeed() {
-            const feed = document.getElementById('liveActivityFeed');
-            if (!feed) return;
-            
-            feed.innerHTML = appState.activities.map(activity => `
-                <div class="activity-item activity-${activity.type}">
-                    <div>${activity.message}</div>
-                    <div style="font-size: 0.7rem; color: #D0B0C0; margin-top: 0.2rem;">
-                        ${activity.timestamp}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderWaiterActivityFeed() {
-            const feed = document.getElementById('waiterActivityFeed');
-            if (!feed) return;
-            
-            // Filtrar actividades relevantes para empleados
-            const employeeActivities = appState.activities.filter(act => 
-                act.message.includes('puntos') || 
-                act.message.includes('pedido') ||
-                act.message.includes('Mesa')
-            );
-            
-            feed.innerHTML = employeeActivities.map(activity => `
-                <div class="activity-item activity-${activity.type}">
-                    <div>${activity.message}</div>
-                    <div style="font-size: 0.7rem; color: #D0B0C0; margin-top: 0.2rem;">
-                        ${activity.timestamp}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function simulateLiveActivity() {
-            const activities = [
-                'positive: Carlos +10pts: Cliente elogió servicio en Mesa 3',
-                'positive: Ana +8pts: Upselling exitoso en Mesa 7',
-                'negative: Luis -12pts: Tiempo excedido en pedido Mesa 5',
-                'positive: Sistema: Nuevo pedido completado - Mesa 8',
-                'neutral: Inventario: Stock bajo en ingrediente premium',
-                'positive: María +15pts: Cliente frecuente',
-                'positive: Cliente recomienda restaurante en redes'
-            ];
-            
-            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
-            const [type, message] = randomActivity.split(': ');
-            addActivity(type, message);
-        }
-
-        // === SISTEMA DE USUARIO Y AUTENTICACIÓN ===
-        function loadUser() {
-            const savedUser = localStorage.getItem('gastroneo_user');
-            if (savedUser) {
-                appState.user = JSON.parse(savedUser);
-            }
-        }
-
-        function renderAuthOrProfile() {
-            const container = document.getElementById('authOrProfile');
-            if (!container) return;
-
-            if (appState.user) {
-                container.innerHTML = `
-                    <div style="background: rgba(255,42,109,0.1); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <div style="font-family: 'Orbitron'; color: #FFD300; font-size: 1rem;">¡Hola, ${appState.user.name}!</div>
-                                <div style="font-size: 0.8rem; color: #D0B0C0;">Nivel: ${appState.user.level || 'Bronce'}</div>
-                            </div>
-                            <button class="menu-card-btn" onclick="logoutUser()" style="background: #FF2A6D;">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            } else {
-                container.innerHTML = `
-                    <div style="background: rgba(0,240,255,0.1); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <div style="text-align: center;">
-                            <div style="font-family: 'Orbitron'; color: #00F0FF; margin-bottom: 0.5rem;">¿Eres Nuevo?</div>
-                            <button class="btn-neo btn-verify" onclick="showAuthModal()" style="padding: 0.6rem 1rem; font-size: 0.9rem;">
-                                <i class="fas fa-user-plus"></i> Registrarse
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        function showAuthModal() {
-            // En una implementación real, mostrarías un modal de registro
-            const name = prompt("Nombre completo:");
-            const email = prompt("Email:");
-            const phone = prompt("Teléfono:");
-            
-            if (name && email) {
-                appState.user = {
-                    id: 'user_' + Date.now(),
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    level: 'Bronce',
-                    points: 0,
-                    joinDate: new Date().toISOString()
-                };
-                
-                localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
-                renderAuthOrProfile();
-                createNotification('success', '¡Bienvenido!', `Cuenta creada para ${name}`);
-            }
-        }
-
-        function logoutUser() {
-            appState.user = null;
-            localStorage.removeItem('gastroneo_user');
-            renderAuthOrProfile();
-            createNotification('info', 'Sesión cerrada', 'Has cerrado sesión correctamente');
-        }
-
-        // === SISTEMA DE CARRITO MEJORADO ===
-        function addToCart(itemName, price, image) {
-            const existingItem = appState.cart.find(item => item.name === itemName);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                appState.cart.push({
-                    id: 'item_' + Date.now(),
-                    name: itemName,
-                    price: price,
-                    image: image,
-                    quantity: 1,
-                    addedAt: new Date().toISOString()
-                });
-            }
-            
-            saveCart();
-            updateCartBadge();
-            createNotification('success', '✅ Añadido', `${itemName} agregado al carrito`);
-            
-            // Vibrar si está disponible
-            if (navigator.vibrate) {
-                navigator.vibrate(100);
-            }
-        }
-
-        function removeFromCart(itemId) {
-            appState.cart = appState.cart.filter(item => item.id !== itemId);
-            saveCart();
-            updateCartBadge();
-            renderCart();
-        }
-
-        function updateQuantity(itemId, change) {
-            const item = appState.cart.find(item => item.id === itemId);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    removeFromCart(itemId);
-                    return;
-                }
-                saveCart();
-                renderCart();
-            }
-        }
-
-        function saveCart() {
-            localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
-        }
-
-        function updateCartBadge() {
-            const badge = document.getElementById('cartBadge');
-            const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            if (badge) {
-                if (totalItems > 0) {
-                    badge.textContent = totalItems;
-                    badge.style.display = 'flex';
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cartItemsContainer');
-            const emptyState = document.getElementById('emptyCart');
-            const summary = document.getElementById('cartSummary');
-            const totalAmount = document.getElementById('cartTotalAmount');
-            
-            if (!container) return;
-
-            if (appState.cart.length === 0) {
-                emptyState.style.display = 'block';
-                summary.style.display = 'none';
-                container.innerHTML = '';
-                return;
-            }
-
-            emptyState.style.display = 'none';
-            summary.style.display = 'block';
-
-            let total = 0;
-            container.innerHTML = appState.cart.map(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                
-                return `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">€${item.price.toFixed(2)} x ${item.quantity}</div>
-                        </div>
-                        <div class="cart-item-controls">
-                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-                            <span style="margin: 0 0.5rem; font-weight: 600;">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-                            <button class="quantity-btn" onclick="removeFromCart('${item.id}')" style="background: #FF2A6D; margin-left: 0.5rem;">
-                                <i class="fas fa-trash" style="font-size: 0.7rem;"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            if (totalAmount) {
-                totalAmount.textContent = `€${total.toFixed(2)}`;
-            }
-        }
-
-        // === SISTEMA DE RESERVAS ===
-        function confirmBooking() {
-            const name = document.getElementById('clientName').value;
-            const phone = document.getElementById('clientPhone').value;
-            const date = document.getElementById('bookingDate').value;
-            const time = document.getElementById('bookingTime').value;
-            const guests = document.getElementById('guests').value;
-
-            if (!name || !phone || !date || !time) {
-                createNotification('danger', 'Datos incompletos', 'Por favor completa todos los campos');
-                return;
-            }
-
-            const booking = {
-                id: 'book_' + Date.now(),
-                name: name,
-                phone: phone,
-                date: date,
-                time: time,
-                guests: guests,
-                status: 'confirmed',
-                createdAt: new Date().toISOString()
-            };
-
-            // Guardar reserva
-            const bookings = JSON.parse(localStorage.getItem('gastroneo_bookings')) || [];
-            bookings.push(booking);
-            localStorage.setItem('gastroneo_bookings', JSON.stringify(bookings));
-
-            // Mostrar confirmación
-            createNotification('success', '✅ Reserva Confirmada', 
-                `Mesa para ${guests} personas el ${date} a las ${time}`);
-
-            // Limpiar formulario
-            document.getElementById('clientName').value = '';
-            document.getElementById('clientPhone').value = '';
-            
-            showView('homeView');
-        }
-
-        // === SISTEMA DE ESCANEO QR MEJORADO ===
-        function simulateQRScan() {
-            const mesaNumber = Math.floor(Math.random() * 12) + 1;
-            setCurrentMesa(mesaNumber);
-            
-            createNotification('success', '📱 QR Escaneado', 
-                `Mesa ${mesaNumber} detectada. ¡Bienvenido!`);
-                
-            showView('menuView');
-        }
-
-        function setCurrentMesa(mesaNumber) {
-            localStorage.setItem('current_mesa', mesaNumber);
-            checkMesaEscaneada();
-        }
-
-        function checkMesaEscaneada() {
-            const mesaNumber = localStorage.getItem('current_mesa');
-            const mesaInfo = document.getElementById('mesaInfo');
-            const currentMesaSpan = document.getElementById('currentMesa');
-            const mesaInfoCart = document.getElementById('mesaInfoCart');
-            const currentMesaCart = document.getElementById('currentMesaCart');
-
-            if (mesaNumber && mesaInfo && currentMesaSpan) {
-                mesaInfo.style.display = 'block';
-                currentMesaSpan.textContent = mesaNumber;
-            }
-
-            if (mesaNumber && mesaInfoCart && currentMesaCart) {
-                mesaInfoCart.style.display = 'block';
-                currentMesaCart.textContent = mesaNumber;
-            }
-        }
-
-        // === SISTEMA DE PAGOS ===
-        function selectPaymentMethod(method) {
-            appState.selectedPaymentMethod = method;
-            document.querySelectorAll('.payment-btn').forEach(btn => {
-                btn.style.opacity = '0.7';
-            });
-            
-            const selectedBtn = document.querySelector(`.btn-${method}`);
-            if (selectedBtn) {
-                selectedBtn.style.opacity = '1';
-                selectedBtn.style.transform = 'scale(1.02)';
-            }
-        }
-
-        function renderCheckout() {
-            const orderItems = document.getElementById('checkoutOrderItems');
-            const checkoutTotal = document.getElementById('checkoutTotal');
-            
-            if (!orderItems) return;
-
-            let total = 0;
-            orderItems.innerHTML = appState.cart.map(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                return `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
-                        <span>${item.name} x${item.quantity}</span>
-                        <span>€${itemTotal.toFixed(2)}</span>
-                    </div>
-                `;
-            }).join('');
-
-            if (checkoutTotal) {
-                checkoutTotal.textContent = total.toFixed(2);
-            }
-
-            // Rellenar datos del usuario si existe
-            if (appState.user) {
-                const nameInput = document.getElementById('checkoutName');
-                const emailInput = document.getElementById('checkoutEmail');
-                const phoneInput = document.getElementById('checkoutPhone');
-                
-                if (nameInput) nameInput.value = appState.user.name || '';
-                if (emailInput) emailInput.value = appState.user.email || '';
-                if (phoneInput) phoneInput.value = appState.user.phone || '';
-            }
-        }
-
-        function processCheckout() {
-            if (!appState.selectedPaymentMethod) {
-                createNotification('danger', 'Método requerido', 'Selecciona un método de pago');
-                return;
-            }
-
-            const name = document.getElementById('checkoutName').value;
-            const email = document.getElementById('checkoutEmail').value;
-            const phone = document.getElementById('checkoutPhone').value;
-
-            if (!name || !email) {
-                createNotification('danger', 'Datos incompletos', 'Completa nombre y email');
-                return;
-            }
-
-            // Simular procesamiento de pago
-            const checkoutBtn = document.getElementById('checkoutBtn');
-            checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-            checkoutBtn.disabled = true;
-
-            setTimeout(() => {
-                // Crear orden
-                const order = {
-                    id: 'order_' + Date.now(),
-                    items: [...appState.cart],
-                    total: appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-                    paymentMethod: appState.selectedPaymentMethod,
-                    customer: { name, email, phone },
-                    status: 'completed',
-                    mesa: localStorage.getItem('current_mesa'),
-                    createdAt: new Date().toISOString()
-                };
-
-                // Guardar orden
-                const orders = JSON.parse(localStorage.getItem('gastroneo_orders')) || [];
-                orders.push(order);
-                localStorage.setItem('gastroneo_orders', JSON.stringify(orders));
-
-                // Limpiar carrito
-                appState.cart = [];
-                saveCart();
-                updateCartBadge();
-
-                // Mostrar confirmación
-                createNotification('success', '✅ Pago Exitoso', 
-                    `Pedido #${order.id} completado. Total: €${order.total.toFixed(2)}`);
-
-                // Redirigir a home
-                showView('homeView');
-            }, 2000);
-        }
-
-        // === SISTEMA GASTROPASS (RECOMPENSAS) ===
-        function redeemReward(pointsCost, rewardName) {
-            if (!appState.user) {
-                createNotification('danger', 'Inicia sesión', 'Necesitas una cuenta para canjear recompensas');
-                return;
-            }
-
-            if ((appState.user.points || 0) < pointsCost) {
-                createNotification('danger', 'Puntos insuficientes', 
-                    `Necesitas ${pointsCost} puntos. Tienes: ${appState.user.points || 0}`);
-                return;
-            }
-
-            if (confirm(`¿Canjear ${rewardName} por ${pointsCost} puntos?`)) {
-                appState.user.points -= pointsCost;
-                localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
-                
-                createNotification('success', '🎁 Recompensa Canjeada', 
-                    `¡Disfruta tu ${rewardName}! Puntos restantes: ${appState.user.points}`);
-                
-                renderAuthOrProfile();
-            }
-        }
-
-        // === SISTEMA PROPIETARIO/DUEÑO ===
-        function openOwnerAccess() {
-            const password = prompt('🔐 Contraseña de acceso dueño:');
-            // En producción, esto debería ser seguro
-            if (password === 'quantum2024') {
-                showView('ownerDashboard');
-            } else {
-                createNotification('danger', 'Acceso denegado', 'Contraseña incorrecta');
-            }
-        }
-
-        function loadOwnerDashboard() {
-            updateOwnerStats();
-            loadAlerts();
-        }
-
-        function updateOwnerStats() {
-            // Simular datos del día
-            document.getElementById('dailyRevenue').textContent = '€' + (Math.random() * 2000 + 500).toFixed(0);
-            document.getElementById('occupiedTables').textContent = Math.floor(Math.random() * 8 + 4) + '/12';
-            document.getElementById('pendingOrders').textContent = Math.floor(Math.random() * 5);
-            document.getElementById('waitingClients').textContent = Math.floor(Math.random() * 3);
-        }
-
-        function loadAlerts() {
-            const alerts = [
-                'Stock bajo: Vino tinto reserva',
-                'Mesa 8 - 25min esperando pedido',
-                'Cliente solicita manager en Mesa 3',
-                'Sistema: Actualización requerida'
-            ];
-
-            const alertsList = document.getElementById('alertsList');
-            const alertsSection = document.getElementById('alertsSection');
-
-            if (alerts.length > 0) {
-                alertsSection.style.display = 'block';
-                alertsList.innerHTML = alerts.map(alert => 
-                    `<div style="margin-bottom: 0.5rem;">• ${alert}</div>`
-                ).join('');
-            }
-        }
-
-        function verifyAllOrders() {
-            createNotification('success', 'Sistema verificado', 'Todos los pedidos confirmados y en proceso');
-        }
-
-        function logoutOwner() {
-            showView('homeView');
-            createNotification('info', 'Sesión cerrada', 'Panel dueño cerrado');
-        }
-
-        // === SISTEMA CAMARERO ===
-        function loginWaiter() {
-            const pinInput = document.getElementById('waiterPin');
-            const pin = pinInput.value;
-
-            // PINs de ejemplo (en producción usar autenticación segura)
-            const employees = {
-                '1234': { id: 'emp_1', name: 'Carlos Rodríguez' },
-                '5678': { id: 'emp_2', name: 'Ana Martínez' },
-                '9012': { id: 'emp_3', name: 'Luis García' },
-                '3456': { id: 'emp_4', name: 'María López' }
-            };
-
-            if (employees[pin]) {
-                appState.employee = employees[pin];
-                createNotification('success', 'Acceso concedido', `Bienvenido ${appState.employee.name}`);
-                showView('waiterTablesView');
-                pinInput.value = '';
-            } else {
-                createNotification('danger', 'PIN incorrecto', 'Verifica tu código de acceso');
-            }
-        }
-
-        function renderWaiterDashboard() {
-            renderTablesGrid();
-        }
-
-        function renderTablesGrid() {
-            const grid = document.getElementById('tablesGrid');
-            if (!grid) return;
-
-            const tables = [];
-            for (let i = 1; i <= 12; i++) {
-                const occupied = Math.random() > 0.4;
-                const needsAttention = occupied && Math.random() > 0.7;
-                
-                tables.push(`
-                    <div class="table-card ${occupied ? 'occupied' : 'free'}" 
-                         onclick="openTable(${i}, ${occupied})">
-                        <div class="table-number">${i}</div>
-                        <div class="table-status">${occupied ? 'OCUPADA' : 'LIBRE'}</div>
-                        ${needsAttention ? '<div class="table-badge">!</div>' : ''}
-                    </div>
-                `);
-            }
-
-            grid.innerHTML = tables.join('');
-        }
-
-        function openTable(tableNumber, isOccupied) {
-            if (!isOccupied) {
-                // Mesa libre - tomar pedido
-                appState.currentOrder = {
-                    table: tableNumber,
-                    items: [],
-                    status: 'ordering'
-                };
-                document.getElementById('orderTableNum').textContent = tableNumber;
-                showView('waiterOrderView');
-            } else {
-                // Mesa ocupada - cobrar o ver pedido
-                appState.currentPaymentOrder = {
-                    table: tableNumber,
-                    items: [
-                        { name: 'Menú del día', price: 15.90, quantity: 2 },
-                        { name: 'Agua mineral', price: 2.50, quantity: 1 },
-                        { name: 'Café', price: 2.00, quantity: 2 }
-                    ],
-                    total: 38.30
-                };
-                document.getElementById('paymentTableNum').textContent = tableNumber;
-                showPaymentView();
-            }
-        }
-
-        function showPaymentView() {
-            const itemsContainer = document.getElementById('paymentOrderItems');
-            const totalSpan = document.getElementById('paymentTotal');
-            
-            if (itemsContainer && totalSpan && appState.currentPaymentOrder) {
-                itemsContainer.innerHTML = appState.currentPaymentOrder.items.map(item => `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                        <span>${item.name} x${item.quantity}</span>
-                        <span>€${(item.price * item.quantity).toFixed(2)}</span>
-                    </div>
-                `).join('');
-                
-                totalSpan.textContent = appState.currentPaymentOrder.total.toFixed(2);
-            }
-            
-            showView('paymentView');
-        }
-
-        function processPayment(method) {
-            createNotification('success', 'Pago procesado', `Mesa ${appState.currentPaymentOrder.table} pagada con ${method}`);
-            
-            // Actualizar puntos del empleado
-            if (appState.employee) {
-                const emp = appState.employees.find(e => e.id === appState.employee.id);
-                if (emp) {
-                    emp.points += 10;
-                    emp.todayPoints += 10;
-                    updateEmployeeLevel(emp);
-                    renderEmployeeLeaderboards();
-                    addActivity('positive', `${emp.name} +10pts: Cobro exitoso Mesa ${appState.currentPaymentOrder.table}`);
-                }
-            }
-            
-            showView('waiterTablesView');
-        }
-
-        function logoutWaiter() {
-            appState.employee = null;
-            showView('homeView');
-            createNotification('info', 'Sesión cerrada', 'Modo camarero finalizado');
-        }
-
-        // === PWA INSTALLATION ===
+        // === PWA ===
         let deferredPrompt;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
+        window.addEventListener('beforeinstallprompt', e => {
             e.preventDefault();
             deferredPrompt = e;
         });
-
         function installApp() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        createNotification('success', 'App instalada', 'GastroNeo instalado correctamente');
-                    }
-                    deferredPrompt = null;
-                });
-            } else {
-                createNotification('info', 'Instalación', 'La app ya está instalada o no es compatible');
+                deferredPrompt = null;
             }
         }
 
-        // === SERVICE WORKER REGISTRATION ===
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-
-        // === UTILIDADES ADICIONALES ===
-        function resolveNotification(notificationId) {
-            createNotification('success', 'Alerta resuelta', 'Problema solucionado correctamente');
-        }
-
-        function escalateNotification(notificationId) {
-            createNotification('warning', 'Alerta escalada', 'Supervisor notificado');
-        }
-
-        function ignoreNotification(notificationId) {
-            createNotification('info', 'Alerta ignorada', 'Notificación archivada');
-        }
-
-        // Manejo de errores global
-        window.addEventListener('error', (e) => {
-            console.error('Error global:', e.error);
-            createNotification('danger', 'Error del sistema', 'Se produjo un error inesperado');
-        });
-
-        console.log('✅ GastroNeo Quantum completamente inicializado');
+        console.log('✅ GastroNeo Quantum v2.1 cargado – Sistema de castigo laboral activo');
     </script>
 </body>
 </html>
