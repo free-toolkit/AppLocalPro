@@ -326,6 +326,7 @@
         .rank-diamante { background: linear-gradient(135deg, #00FFFF, #0080FF); }
         .rank-oro { background: linear-gradient(135deg, #FFD700, #FFA500); }
         .rank-plata { background: linear-gradient(135deg, #E5E4E2, #A8A8A8); }
+        .rank-bronce { background: linear-gradient(135deg, #CD7F32, #8B4513); }
 
         /* === MENÚ DIGITAL === */
         .menu-grid {
@@ -394,6 +395,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-card-btn:hover {
+            transform: scale(1.1);
         }
 
         /* === FORMULARIOS === */
@@ -446,6 +452,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            transform: scale(1.1);
         }
 
         .cart-total {
@@ -478,6 +489,10 @@
             transition: all 0.3s ease;
         }
 
+        .table-card:hover {
+            transform: scale(1.05);
+        }
+
         .table-free {
             background: rgba(40, 20, 30, 0.6);
             border-color: #333;
@@ -504,14 +519,49 @@
             border-radius: 6px;
             font-size: 0.8rem;
             border-left: 3px solid;
+            animation: fadeInUp 0.5s ease;
         }
 
         .activity-positive { border-color: var(--neo-secondary); }
         .activity-negative { border-color: var(--neo-primary); }
+        .activity-neutral { border-color: var(--neo-text-secondary); }
 
         @keyframes slideInRight {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === ESTADOS VACÍOS === */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--neo-text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--neo-primary);
+        }
+
+        /* === SCROLLBAR PERSONALIZADO === */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--neo-primary), var(--neo-secondary));
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -522,6 +572,9 @@
             <i class="fas fa-utensils"></i>
         </div>
         <div class="splash-text">GASTRONEO QUANTUM</div>
+        <div style="margin-top: 1rem; font-family: 'Rajdhani'; color: var(--neo-text-secondary);">
+            Iniciando sistema...
+        </div>
     </div>
 
     <!-- Sistema de Notificaciones -->
@@ -551,7 +604,7 @@
 
                 <div class="neo-glass" style="padding: 1rem; margin: 1.5rem 0;">
                     <div style="font-family: 'Orbitron'; color: var(--neo-secondary); text-align: center; margin-bottom: 0.8rem;">
-                        ACCESO EMPLEADOS
+                        🚀 ACCESO EMPLEADOS
                     </div>
                     <button class="btn-neo" style="background: rgba(0,240,255,0.2); color: var(--neo-secondary); border: 1px solid var(--neo-secondary);" 
                             onclick="showView('employeeLoginView')">
@@ -563,7 +616,9 @@
                     </button>
                 </div>
 
-                <div class="activity-feed" id="liveActivityFeed"></div>
+                <div class="activity-feed" id="liveActivityFeed">
+                    <!-- Las actividades se cargan dinámicamente -->
+                </div>
             </div>
         </div>
 
@@ -600,10 +655,15 @@
                     <label>Comensales</label>
                     <select id="guests" class="form-control">
                         <option>1</option><option>2</option><option>3</option><option>4</option>
+                        <option>5</option><option>6</option><option>7</option><option>8</option>
                     </select>
                 </div>
-                <button class="btn-neo btn-primary" onclick="confirmBooking()">Confirmar Reserva</button>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
+                <button class="btn-neo btn-primary" onclick="confirmBooking()">
+                    <i class="fas fa-check"></i> Confirmar Reserva
+                </button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
             </div>
         </div>
 
@@ -632,7 +692,20 @@
                     </button>
                 </div>
 
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">← Volver</button>
+                <div style="background: rgba(255, 42, 109, 0.1); border-radius: 12px; padding: 1rem; margin: 1.5rem 0;">
+                    <div style="color: var(--neo-accent); font-family: 'Rajdhani'; margin-bottom: 0.5rem;">
+                        <i class="fas fa-lightbulb"></i> ¿Cómo escanear?
+                    </div>
+                    <div style="color: var(--neo-text-secondary); font-size: 0.9rem; text-align: left;">
+                        1. Enfoca el código QR de tu mesa<br>
+                        2. La app detectará automáticamente<br>
+                        3. ¡Accede al menú digital!
+                    </div>
+                </div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
             </div>
         </div>
 
@@ -649,7 +722,9 @@
                 </div>
 
                 <div class="menu-category">
-                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">ENTRADAS</h2>
+                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">
+                        🍽️ ENTRADAS
+                    </h2>
                     <div class="menu-grid">
                         <div class="menu-card">
                             <div class="menu-card-img">
@@ -657,7 +732,9 @@
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Tartar de Atún</h3>
-                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Atún fresco con wasabi y aguacate, marinado en salsa de soja</p>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">
+                                    Atún fresco con wasabi y aguacate, marinado en salsa de soja y aceite de sésamo
+                                </p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€16.50</span>
                                     <button class="menu-card-btn" onclick="addToCart('Tartar de Atún', 16.50)">
@@ -672,7 +749,9 @@
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Bruschetta</h3>
-                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Pan tostado artesanal con tomate fresco y albahaca</p>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">
+                                    Pan tostado artesanal con tomate fresco, albahaca y aceite de oliva virgen extra
+                                </p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€9.90</span>
                                     <button class="menu-card-btn" onclick="addToCart('Bruschetta', 9.90)">
@@ -685,7 +764,9 @@
                 </div>
 
                 <div class="menu-category">
-                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">PLATOS FUERTES</h2>
+                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">
+                        🍝 PLATOS FUERTES
+                    </h2>
                     <div class="menu-grid">
                         <div class="menu-card">
                             <div class="menu-card-img">
@@ -693,7 +774,9 @@
                             </div>
                             <div class="menu-card-body">
                                 <h3 class="menu-card-name">Pasta Carbonara</h3>
-                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Pasta fresca con salsa cremosa de panceta y queso</p>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">
+                                    Pasta fresca con salsa cremosa de panceta, huevo y queso pecorino
+                                </p>
                                 <div class="menu-card-footer">
                                     <span class="menu-card-price">€18.99</span>
                                     <button class="menu-card-btn" onclick="addToCart('Pasta Carbonara', 18.99)">
@@ -702,10 +785,54 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="menu-card">
+                            <div class="menu-card-img">
+                                <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Risotto de Trufa">
+                            </div>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Risotto de Trufa</h3>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">
+                                    Arroz arbóreo cremoso con trufa negra fresca y queso parmesano
+                                </p>
+                                <div class="menu-card-footer">
+                                    <span class="menu-card-price">€24.00</span>
+                                    <button class="menu-card-btn" onclick="addToCart('Risotto de Trufa', 24.00)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+                <div class="menu-category">
+                    <h2 style="font-family: 'Orbitron'; color: var(--neo-primary); margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--neo-primary); padding-bottom: 0.5rem;">
+                        🍰 POSTRES
+                    </h2>
+                    <div class="menu-grid">
+                        <div class="menu-card">
+                            <div class="menu-card-img">
+                                <img src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tiramisú">
+                            </div>
+                            <div class="menu-card-body">
+                                <h3 class="menu-card-name">Tiramisú</h3>
+                                <p style="color: var(--neo-text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.4;">
+                                    Capas de bizcocho de soletilla empapado en café y crema de mascarpone
+                                </p>
+                                <div class="menu-card-footer">
+                                    <span class="menu-card-price">€8.99</span>
+                                    <button class="menu-card-btn" onclick="addToCart('Tiramisú', 8.99)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
             </div>
         </div>
 
@@ -723,16 +850,16 @@
 
                 <div id="cartItemsContainer"></div>
                 
-                <div id="emptyCart" class="empty-state" style="display: none; text-align: center; padding: 2rem; color: var(--neo-text-secondary);">
-                    <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <div id="emptyCart" class="empty-state" style="display: none;">
+                    <i class="fas fa-shopping-cart"></i>
                     <h3>Tu carrito está vacío</h3>
                     <p>¡Añade algunos productos deliciosos!</p>
                 </div>
 
                 <div id="cartSummary" style="display: none;">
                     <div class="cart-total">
-                        <div>Total del Pedido</div>
-                        <div style="font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neo-accent); margin: 0.5rem 0;" id="cartTotalAmount">€0.00</div>
+                        <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">Total del Pedido</div>
+                        <div style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--neo-accent); margin: 0.5rem 0;" id="cartTotalAmount">€0.00</div>
                     </div>
                     
                     <button class="btn-neo btn-primary" onclick="showView('checkoutView')">
@@ -740,7 +867,9 @@
                     </button>
                 </div>
 
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('menuView')">← Seguir Comprando</button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('menuView')">
+                    <i class="fas fa-arrow-left"></i> Seguir Comprando
+                </button>
             </div>
         </div>
 
@@ -757,6 +886,10 @@
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" id="checkoutEmail" class="form-control" placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="checkoutPhone" class="form-control" placeholder="+34 600 000 000">
                 </div>
 
                 <div style="background:rgba(30,10,15,0.6); padding:1rem; border-radius:12px; margin:1.5rem 0;">
@@ -775,12 +908,17 @@
                     <button class="btn-neo" style="background:linear-gradient(135deg, #00F0FF, #00B8FF); color:var(--neo-bg);" onclick="selectPaymentMethod('cash')">
                         <i class="fas fa-money-bill-wave"></i> Efectivo
                     </button>
+                    <button class="btn-neo" style="background:linear-gradient(135deg, #0070BA, #009CDE); color:white;" onclick="selectPaymentMethod('paypal')">
+                        <i class="fab fa-paypal"></i> PayPal
+                    </button>
                 </div>
 
-                <button class="btn-neo btn-primary" onclick="processCheckout()">
+                <button class="btn-neo btn-primary" onclick="processCheckout()" id="checkoutBtn">
                     <i class="fas fa-lock"></i> Pagar Ahora
                 </button>
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('cartView')">← Volver al Carrito</button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;" onclick="showView('cartView')">
+                    <i class="fas fa-arrow-left"></i> Volver al Carrito
+                </button>
             </div>
         </div>
 
@@ -805,6 +943,8 @@
                         <div>• Menú digital exclusivo</div>
                         <div>• Cumpleaños gratis</div>
                         <div>• Acceso a eventos del chef</div>
+                        <div>• Descuentos especiales</div>
+                        <div>• Atención prioritaria</div>
                     </div>
                 </div>
 
@@ -812,19 +952,33 @@
                 <div style="display: grid; gap: 0.5rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
                         <div><strong>Café Gourmet</strong><br><small>100 pts</small></div>
-                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;" onclick="redeemReward(100, 'Café Gourmet')">
+                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;transition:all 0.2s ease;" 
+                                onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                                onclick="redeemReward(100, 'Café Gourmet')">
                             <i class="fas fa-gift"></i>
                         </button>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
                         <div><strong>Postre del Chef</strong><br><small>250 pts</small></div>
-                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;" onclick="redeemReward(250, 'Postre del Chef')">
+                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;transition:all 0.2s ease;" 
+                                onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                                onclick="redeemReward(250, 'Postre del Chef')">
+                            <i class="fas fa-gift"></i>
+                        </button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                        <div><strong>Copa de Vino</strong><br><small>300 pts</small></div>
+                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;transition:all 0.2s ease;" 
+                                onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                                onclick="redeemReward(300, 'Copa de Vino')">
                             <i class="fas fa-gift"></i>
                         </button>
                     </div>
                 </div>
 
-                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">← Volver</button>
+                <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
             </div>
         </div>
 
@@ -838,12 +992,12 @@
                     <i class="fas fa-key" style="font-size:3rem;color:var(--neo-primary);"></i>
                     <div style="margin-top:1rem;font-family:'Rajdhani';font-size:1.1rem;">Ingresa tu PIN de empleado</div>
                 </div>
-                <input type="password" id="employeePin" class="form-control" placeholder="****" style="max-width:200px;margin:0 auto;">
+                <input type="password" id="employeePin" class="form-control" placeholder="****" style="max-width:200px;margin:0 auto; text-align: center; font-size: 1.2rem; letter-spacing: 0.3rem;">
                 <button class="btn-neo btn-primary" onclick="loginEmployee()" style="margin-top:1.5rem;">
-                    Ingresar
+                    <i class="fas fa-sign-in-alt"></i> Ingresar
                 </button>
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1rem;" onclick="showView('homeView')">
-                    ← Volver
+                    <i class="fas fa-arrow-left"></i> Volver
                 </button>
             </div>
         </div>
@@ -859,10 +1013,11 @@
                     <div id="employeeLeaderboard"></div>
                 </div>
 
+                <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin:1.5rem 0 1rem;">📋 Gestión de Mesas</h3>
                 <div class="tables-grid" id="tablesGrid"></div>
 
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="logoutEmployee()">
-                    ← Cerrar Sesión
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                 </button>
             </div>
         </div>
@@ -889,9 +1044,11 @@
                 </div>
 
                 <button class="btn-neo btn-primary" onclick="verifyAllOrders()">
-                    ✅ Verificar Todos los Pedidos
+                    <i class="fas fa-check-double"></i> Verificar Todos los Pedidos
                 </button>
-                <button class="btn-neo" style="background:#e74c3c;color:white;margin-top:1rem;" onclick="logoutOwner()">Cerrar Sesión</button>
+                <button class="btn-neo" style="background:#e74c3c;color:white;margin-top:1rem;" onclick="logoutOwner()">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
             </div>
         </div>
     </div>
@@ -930,9 +1087,11 @@
             employees: [
                 { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', todayPoints: 45 },
                 { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', todayPoints: 32 },
-                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', todayPoints: -12 }
+                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', todayPoints: -12 },
+                { id: 'emp_4', name: 'María López', points: 380, level: 'bronce', todayPoints: 18 }
             ],
-            activities: []
+            activities: [],
+            selectedPaymentMethod: null
         };
 
         // === INICIALIZACIÓN ===
@@ -950,6 +1109,12 @@
             startLiveActivities();
             renderEmployeeLeaderboard();
             renderTablesGrid();
+            renderOwnerLeaderboard();
+            
+            // Mostrar notificación de bienvenida
+            setTimeout(() => {
+                createNotification('success', '¡Bienvenido!', 'Sistema GastroNeo Quantum iniciado correctamente');
+            }, 3000);
         }
 
         // === SISTEMA DE VISTAS ===
@@ -989,10 +1154,15 @@
             container.innerHTML = `
                 <div class="neo-glass" style="padding: 1rem; text-align: center; margin-bottom: 1rem;">
                     <div style="font-family: 'Orbitron'; color: var(--neo-accent); font-size: 1.2rem;">
-                        Hola, ${appState.user.name} ✨
+                        👋 Hola, ${appState.user.name}
                     </div>
                     <div style="color: var(--neo-secondary); margin-top: 0.5rem;">
-                        GastroTokens: ${appState.user.tokens || 0}
+                        <i class="fas fa-coins"></i> ${appState.user.tokens || 0} GastroTokens
+                    </div>
+                    <div style="margin-top: 0.8rem;">
+                        <button class="btn-neo" style="background: rgba(255,42,109,0.2); color: var(--neo-primary); border: 1px solid var(--neo-primary); padding: 0.5rem; font-size: 0.9rem;" onclick="logoutUser()">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </button>
                     </div>
                 </div>
             `;
@@ -1003,17 +1173,17 @@
             container.innerHTML = `
                 <div class="neo-holographic" style="padding: 1.5rem; text-align: center; margin-bottom: 1.5rem; border-radius: 16px;">
                     <div style="font-family: 'Orbitron'; color: var(--neo-accent); font-size: 1.3rem; margin-bottom: 1rem;">
-                        ¿NUEVO EN GASTRONEO?
+                        🚀 ¿NUEVO EN GASTRONEO?
                     </div>
                     <div style="color: var(--neo-text-secondary); margin-bottom: 1.5rem; line-height: 1.5;">
                         Crea tu GastroPass y accede a recompensas exclusivas del futuro.
                     </div>
                     <div style="display: flex; gap: 1rem; justify-content: center;">
                         <button class="btn-neo btn-accent" onclick="showSignupModal()">
-                            Crear Cuenta
+                            <i class="fas fa-user-plus"></i> Crear Cuenta
                         </button>
                         <button class="btn-neo btn-primary" onclick="showLoginModal()">
-                            Iniciar Sesión
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
                         </button>
                     </div>
                 </div>
@@ -1021,29 +1191,43 @@
         }
 
         function showSignupModal() {
-            const name = prompt("¿Cuál es tu nombre?");
-            const email = prompt("¿Cuál es tu email?");
+            const name = prompt("👤 ¿Cuál es tu nombre?");
+            const email = prompt("📧 ¿Cuál es tu email?");
             if (name && email) {
-                appState.user = { name: name.trim(), email: email, tokens: 50 };
+                appState.user = { 
+                    name: name.trim(), 
+                    email: email, 
+                    tokens: 100,
+                    joinDate: new Date().toISOString()
+                };
                 localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
-                alert("¡Bienvenido! 🎁 50 GastroTokens de bienvenida.");
+                alert("🎉 ¡Bienvenido a GastroNeo Quantum!\n🎁 100 GastroTokens de bienvenida.");
                 renderUserProfile();
-                createNotification('success', '¡Cuenta Creada!', 'Bienvenido a GastroNeo Quantum');
+                createNotification('success', '¡Cuenta Creada!', `Bienvenido ${name}, empieza a ganar recompensas`);
+                addActivity('positive', `Nuevo usuario: ${name} se unió a GastroNeo`);
             }
         }
 
         function showLoginModal() {
-            const name = prompt("Ingresa tu nombre:");
+            const name = prompt("👤 Ingresa tu nombre:");
             if (name) {
                 const existing = JSON.parse(localStorage.getItem('gastroneo_user'));
                 if (existing && existing.name === name.trim()) {
                     appState.user = existing;
                     renderUserProfile();
-                    alert("¡Bienvenido de nuevo!");
+                    alert(`¡Bienvenido de nuevo, ${name}!`);
+                    createNotification('success', '¡Bienvenido!', 'Sesión iniciada correctamente');
                 } else {
-                    alert("Usuario no encontrado. Créate una cuenta.");
+                    alert("❌ Usuario no encontrado. Créate una cuenta primero.");
                 }
             }
+        }
+
+        function logoutUser() {
+            appState.user = null;
+            localStorage.removeItem('gastroneo_user');
+            renderAuthSection();
+            alert("👋 Sesión cerrada correctamente");
         }
 
         // === SISTEMA DE CARRITO ===
@@ -1061,13 +1245,18 @@
             
             // Efecto visual
             const btn = event.target.closest('.menu-card-btn');
+            const originalHTML = btn.innerHTML;
+            const originalBackground = btn.style.background;
+            
             btn.innerHTML = '<i class="fas fa-check"></i>';
             btn.style.background = 'linear-gradient(135deg, #00D100, #009900)';
             
             setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-plus"></i>';
-                btn.style.background = 'linear-gradient(135deg, var(--neo-primary), #D10047)';
+                btn.innerHTML = originalHTML;
+                btn.style.background = originalBackground;
             }, 1000);
+            
+            createNotification('success', '🛒 Producto Añadido', `${name} añadido al carrito`);
         }
 
         function updateCartBadge() {
@@ -1106,13 +1295,17 @@
                 return `
                     <div class="cart-item">
                         <div style="flex: 1;">
-                            <div style="font-weight: 600; color: var(--neo-accent);">${item.name}</div>
-                            <div style="color: var(--neo-primary);">€${item.price.toFixed(2)} c/u</div>
+                            <div style="font-weight: 600; color: var(--neo-accent); font-size: 1rem;">${item.name}</div>
+                            <div style="color: var(--neo-primary); font-size: 0.9rem;">€${item.price.toFixed(2)} c/u</div>
                         </div>
                         <div class="cart-item-controls">
-                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
-                            <span style="margin: 0 0.5rem; min-width: 20px; text-align: center;">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span style="margin: 0 0.5rem; min-width: 20px; text-align: center; font-weight: 600;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
                             <button class="quantity-btn" onclick="removeFromCart('${item.name}')" style="background: #e74c3c;">
                                 <i class="fas fa-trash"></i>
                             </button>
@@ -1143,6 +1336,7 @@
             localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
             updateCartBadge();
             renderCart();
+            createNotification('warning', '🗑️ Producto Eliminado', `${itemName} removido del carrito`);
         }
 
         // === CHECKOUT ===
@@ -1156,34 +1350,88 @@
                 total += itemTotal;
                 
                 return `
-                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:0.5rem;">
+                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:0.5rem;padding:0.3rem 0;">
                         <span>${item.name} x${item.quantity}</span>
-                        <span>€${itemTotal.toFixed(2)}</span>
+                        <span style="color: var(--neo-accent);">€${itemTotal.toFixed(2)}</span>
                     </div>
                 `;
             }).join('');
             
             totalElement.textContent = total.toFixed(2);
+            
+            // Rellenar datos del usuario si existe
+            if (appState.user) {
+                document.getElementById('checkoutName').value = appState.user.name || '';
+                document.getElementById('checkoutEmail').value = appState.user.email || '';
+            }
+        }
+
+        function selectPaymentMethod(method) {
+            appState.selectedPaymentMethod = method;
+            
+            // Resetear todos los botones
+            document.querySelectorAll('.btn-neo').forEach(btn => {
+                btn.style.border = 'none';
+            });
+            
+            // Resaltar el botón seleccionado
+            event.target.style.border = '2px solid var(--neo-accent)';
+            
+            createNotification('info', '💳 Método Seleccionado', `Pago con ${method === 'card' ? 'Tarjeta' : method === 'cash' ? 'Efectivo' : 'PayPal'}`);
         }
 
         function processCheckout() {
+            if (!appState.selectedPaymentMethod) {
+                alert("❌ Por favor, selecciona un método de pago.");
+                return;
+            }
+
             const name = document.getElementById('checkoutName').value;
             const email = document.getElementById('checkoutEmail').value;
+            const phone = document.getElementById('checkoutPhone').value;
 
-            if (!name || !email) {
-                alert("Por favor, completa todos los datos.");
+            if (!name || !email || !phone) {
+                alert("❌ Por favor, completa todos los datos de contacto.");
                 return;
             }
 
             const total = appState.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const mesaEscaneada = localStorage.getItem('gastroneo_mesa_escaneada');
             
-            // Simular pago
-            alert(`✅ ¡Pago realizado con éxito!\nTotal: €${total.toFixed(2)}\n\nRecibirás un email de confirmación.`);
+            // Simular procesamiento de pago
+            const paymentMethods = {
+                'card': 'Tarjeta de Crédito',
+                'cash': 'Efectivo',
+                'paypal': 'PayPal'
+            };
+            
+            let mensaje = `✅ ¡Pago realizado con éxito!\n`;
+            mensaje += `💳 Método: ${paymentMethods[appState.selectedPaymentMethod]}\n`;
+            mensaje += `💰 Total: €${total.toFixed(2)}\n`;
+            
+            if (mesaEscaneada) {
+                mensaje += `🍽️ Mesa: ${mesaEscaneada}\n`;
+            }
+            
+            mensaje += `\n📧 Recibirás un email de confirmación en: ${email}`;
+            
+            // Añadir tokens al usuario por la compra
+            if (appState.user) {
+                const tokensEarned = Math.floor(total);
+                appState.user.tokens = (appState.user.tokens || 0) + tokensEarned;
+                localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
+                mensaje += `\n\n🎁 +${tokensEarned} GastroTokens ganados!`;
+            }
+            
+            alert(mensaje);
             
             // Limpiar carrito
             appState.cart = [];
             localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
             updateCartBadge();
+            
+            createNotification('success', '🎉 ¡Compra Exitosa!', `Pedido procesado por €${total.toFixed(2)}`);
+            addActivity('positive', `Nueva venta: €${total.toFixed(2)} - ${paymentMethods[appState.selectedPaymentMethod]}`);
             
             showView('homeView');
         }
@@ -1191,19 +1439,27 @@
         // === GASTROPASS ===
         function redeemReward(cost, item) {
             if (!appState.user) { 
-                alert("Crea una cuenta para canjear recompensas."); 
+                alert("❌ Crea una cuenta para canjear recompensas."); 
                 return; 
             }
             
             if (appState.user.tokens < cost) { 
-                alert(`⚠️ Necesitas ${cost} tokens. Tienes ${appState.user.tokens}.`); 
+                alert(`❌ Necesitas ${cost} tokens. Tienes ${appState.user.tokens}.`); 
                 return; 
+            }
+            
+            if (!confirm(`¿Canjear ${item} por ${cost} GastroTokens?`)) {
+                return;
             }
             
             appState.user.tokens -= cost;
             localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
-            alert(`✅ ¡Canjeado! ${item}`);
+            
+            alert(`🎉 ¡Canjeado exitosamente!\n${item} - ${cost} GastroTokens`);
             renderUserProfile();
+            
+            createNotification('success', '🎁 Recompensa Canjeada', `${item} - ${cost} tokens`);
+            addActivity('positive', `Usuario canjeó: ${item} por ${cost} tokens`);
         }
 
         // === ESCANER QR ===
@@ -1211,7 +1467,11 @@
             const mesaAleatoria = Math.floor(Math.random() * 12) + 1;
             localStorage.setItem('gastroneo_mesa_escaneada', mesaAleatoria);
             
-            alert(`✅ Mesa ${mesaAleatoria} detectada!\nRedirigiendo al menú...`);
+            alert(`📱 ¡QR Escaneado!\n✅ Mesa ${mesaAleatoria} detectada\n\nRedirigiendo al menú...`);
+            
+            createNotification('success', '🔍 QR Escaneado', `Mesa ${mesaAleatoria} identificada`);
+            addActivity('positive', `Cliente escaneó QR - Mesa ${mesaAleatoria}`);
+            
             showView('menuView');
         }
 
@@ -1233,14 +1493,38 @@
         // === RESERVAS ===
         function confirmBooking() {
             if (!appState.user) {
-                alert("Por favor, crea una cuenta primero.");
+                alert("❌ Por favor, crea una cuenta primero.");
                 return;
             }
 
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const guests = document.getElementById('guests').value;
+
+            if (!name || !phone || !date || !time) {
+                alert("❌ Por favor, completa todos los campos.");
+                return;
+            }
+
+            // Añadir tokens por reserva
             appState.user.tokens = (appState.user.tokens || 0) + 100;
             localStorage.setItem('gastroneo_user', JSON.stringify(appState.user));
             
-            alert("✅ ¡Reserva confirmada!\n+100 GastroTokens.");
+            let mensaje = `✅ ¡Reserva confirmada!\n\n`;
+            mensaje += `👤 Nombre: ${name}\n`;
+            mensaje += `📞 Teléfono: ${phone}\n`;
+            mensaje += `📅 Fecha: ${date}\n`;
+            mensaje += `⏰ Hora: ${time}\n`;
+            mensaje += `👥 Comensales: ${guests}\n\n`;
+            mensaje += `🎁 +100 GastroTokens`;
+            
+            alert(mensaje);
+            
+            createNotification('success', '📅 Reserva Confirmada', `Mesa para ${guests} personas - ${time}`);
+            addActivity('positive', `Nueva reserva: ${name} - ${guests} personas`);
+            
             showView('homeView');
         }
 
@@ -1248,16 +1532,25 @@
         function loginEmployee() {
             const pin = document.getElementById('employeePin').value;
             if (pin === "9876") {
-                appState.employee = { name: "Empleado Demo", role: "mesero" };
+                appState.employee = { 
+                    name: "Empleado Demo", 
+                    role: "mesero",
+                    id: 'demo_emp'
+                };
+                localStorage.setItem('gastroneo_current_employee', JSON.stringify(appState.employee));
                 showView('employeeDashboard');
+                createNotification('success', '👨‍💼 Sesión Iniciada', 'Panel de empleados activo');
+                addActivity('positive', 'Empleado inició sesión en el panel');
             } else {
-                alert("PIN incorrecto.");
+                alert("❌ PIN incorrecto. Intenta con 9876");
             }
         }
 
         function logoutEmployee() {
             appState.employee = null;
+            localStorage.removeItem('gastroneo_current_employee');
             showView('homeView');
+            createNotification('info', '👋 Sesión Cerrada', 'Panel de empleados cerrado');
         }
 
         function renderEmployeeLeaderboard() {
@@ -1266,21 +1559,56 @@
 
             const sortedEmployees = [...appState.employees].sort((a, b) => b.points - a.points);
             
-            container.innerHTML = sortedEmployees.map(emp => `
-                <div class="leaderboard-item">
-                    <div class="rank-badge rank-${emp.level}">${emp.points}</div>
-                    <div style="flex: 1;">
-                        <div style="font-weight: 600;">${emp.name}</div>
-                        <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">
-                            ${emp.level.toUpperCase()} 
-                            ${emp.todayPoints !== 0 ? 
-                                `<span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'};">
-                                    ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}
-                                </span>` : ''}
+            container.innerHTML = sortedEmployees.map((emp, index) => {
+                const rankClass = index === 0 ? 'rank-diamante' : 
+                                index === 1 ? 'rank-oro' : 
+                                index === 2 ? 'rank-plata' : 'rank-bronce';
+                
+                return `
+                    <div class="leaderboard-item">
+                        <div class="rank-badge ${rankClass}">${index + 1}</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--neo-accent);">${emp.name}</div>
+                            <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">
+                                ${emp.points} pts • ${emp.level.toUpperCase()}
+                                ${emp.todayPoints !== 0 ? 
+                                    `<span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'}; font-weight: 600;">
+                                        ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}
+                                    </span>` : ''}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function renderOwnerLeaderboard() {
+            const container = document.getElementById('ownerLeaderboard');
+            if (!container) return;
+
+            const sortedEmployees = [...appState.employees].sort((a, b) => b.points - a.points);
+            
+            container.innerHTML = sortedEmployees.map((emp, index) => {
+                const rankClass = index === 0 ? 'rank-diamante' : 
+                                index === 1 ? 'rank-oro' : 
+                                index === 2 ? 'rank-plata' : 'rank-bronce';
+                
+                return `
+                    <div class="leaderboard-item">
+                        <div class="rank-badge ${rankClass}">${emp.points}</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">${emp.name}</div>
+                            <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">
+                                ${emp.level.toUpperCase()} 
+                                • Hoy: 
+                                <span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'};">
+                                    ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         function renderTablesGrid() {
@@ -1294,7 +1622,7 @@
                 card.className = `table-card table-${status}`;
                 card.innerHTML = `
                     <div style="font-size: 1.2rem; font-weight: 700;">${i}</div>
-                    <div style="font-size: 0.7rem;">${status === 'free' ? 'Libre' : 'Ocupada'}</div>
+                    <div style="font-size: 0.7rem; margin-top: 0.2rem;">${status === 'free' ? '🟢 Libre' : '🔴 Ocupada'}</div>
                 `;
                 card.onclick = () => openTableDetail(i, status);
                 grid.appendChild(card);
@@ -1302,45 +1630,71 @@
         }
 
         function openTableDetail(tableNum, status) {
-            alert(`Mesa ${tableNum} - ${status === 'free' ? 'Libre' : 'Ocupada'}`);
+            if (status === 'free') {
+                alert(`📋 Mesa ${tableNum} - LIBRE\n\n¿Quieres asignar esta mesa?`);
+            } else {
+                alert(`📋 Mesa ${tableNum} - OCUPADA\n\nClientes: 4 personas\nPedido: En proceso\nTiempo: 25 minutos`);
+            }
         }
 
         // === PANEL QUANTUM (DUEÑO) ===
         function openOwnerAccess() {
-            const pin = prompt("🔐 PIN QUANTUM (demo: 1234):");
+            const pin = prompt("🔐 PANEL QUANTUM\n\nIngresa el PIN de acceso:");
             if (pin === "1234") {
                 showView('ownerDashboard');
+                createNotification('success', '🔐 Acceso Concedido', 'Panel Quantum activado');
+                addActivity('positive', 'Dueño accedió al Panel Quantum');
             } else if (pin) {
-                alert("⚠️ PIN incorrecto.");
+                alert("❌ PIN incorrecto. Acceso denegado.");
+                createNotification('danger', '🚫 Acceso Denegado', 'Intento fallido de acceso al Panel Quantum');
             }
         }
 
         function logoutOwner() {
             showView('homeView');
+            createNotification('info', '🔒 Sesión Cerrada', 'Panel Quantum desactivado');
         }
 
         function verifyAllOrders() {
-            alert("✅ Todos los pedidos verificados y actualizados.");
+            // Simular verificación de pedidos
+            const pendingOrders = Math.floor(Math.random() * 5) + 1;
+            
+            alert(`✅ Verificación completada\n\n📊 ${pendingOrders} pedidos verificados\n🔄 Sistema actualizado`);
+            
+            createNotification('success', '✅ Verificación Exitosa', `${pendingOrders} pedidos verificados`);
+            addActivity('positive', `Sistema: ${pendingOrders} pedidos verificados automáticamente`);
+            
+            // Actualizar métricas
+            document.getElementById('pendingOrders').textContent = '0';
         }
 
         // === ACTIVIDAD EN VIVO ===
         function startLiveActivities() {
             // Actividades iniciales
-            addActivity('positive', 'Sistema GastroNeo Quantum iniciado');
-            addActivity('positive', '3 nuevas reservas esta mañana');
+            addActivity('positive', '🚀 Sistema GastroNeo Quantum iniciado');
+            addActivity('positive', '📱 Aplicación cargada correctamente');
+            addActivity('neutral', '🔧 Todos los sistemas operativos');
             
-            // Simular actividad cada 20 segundos
+            // Simular actividad cada 15-25 segundos
             setInterval(() => {
                 const activities = [
-                    'positive: Carlos +10pts: Cliente elogió servicio',
-                    'positive: Ana +8pts: Upselling exitoso',
-                    'negative: Luis -12pts: Tiempo excedido',
-                    'positive: Sistema: Pedido completado Mesa 5'
+                    'positive: Carlos +10pts: Cliente elogió servicio en Mesa 3',
+                    'positive: Ana +8pts: Upselling exitoso en Mesa 7',
+                    'negative: Luis -12pts: Tiempo excedido en pedido Mesa 5',
+                    'positive: Sistema: Nuevo pedido completado - Mesa 8',
+                    'neutral: Inventario: Stock bajo en ingrediente premium',
+                    'positive: María +15pts: Cliente frecuente muy satisfecho'
                 ];
                 const randomActivity = activities[Math.floor(Math.random() * activities.length)];
                 const [type, message] = randomActivity.split(': ');
                 addActivity(type, message);
-            }, 20000);
+                
+                // Actualizar leaderboards si es una actividad de empleados
+                if (message.includes('+') || message.includes('-')) {
+                    renderEmployeeLeaderboard();
+                    renderOwnerLeaderboard();
+                }
+            }, 15000 + Math.random() * 10000);
         }
 
         function addActivity(type, message) {
@@ -1348,11 +1702,15 @@
                 id: Date.now(),
                 type: type,
                 message: message,
-                timestamp: new Date().toLocaleTimeString()
+                timestamp: new Date().toLocaleTimeString('es-ES', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit'
+                })
             };
             
             appState.activities.unshift(activity);
-            appState.activities = appState.activities.slice(0, 5); // Mantener solo 5
+            appState.activities = appState.activities.slice(0, 8); // Mantener solo 8 actividades
             renderActivityFeed();
         }
 
@@ -1362,9 +1720,11 @@
             
             feed.innerHTML = appState.activities.map(activity => `
                 <div class="activity-item activity-${activity.type}">
-                    <div>${activity.message}</div>
-                    <div style="font-size: 0.7rem; color: var(--neo-text-secondary); margin-top: 0.2rem;">
-                        ${activity.timestamp}
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="flex: 1;">${activity.message}</div>
+                        <div style="font-size: 0.7rem; color: var(--neo-text-secondary); white-space: nowrap;">
+                            ${activity.timestamp}
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -1376,21 +1736,69 @@
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.innerHTML = `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <div style="font-family: 'Orbitron'; font-weight: 700;">${title}</div>
-                    <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">Ahora</div>
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                    <div style="font-family: 'Orbitron'; font-weight: 700; font-size: 0.9rem;">${title}</div>
+                    <div style="font-size: 0.7rem; color: var(--neo-text-secondary); white-space: nowrap;">Ahora</div>
                 </div>
-                <div style="font-size: 0.85rem;">${message}</div>
+                <div style="font-size: 0.85rem; line-height: 1.3;">${message}</div>
             `;
             
             container.appendChild(notification);
             
+            // Auto-remover después de 6 segundos
             setTimeout(() => {
                 if (notification.parentNode) {
-                    notification.remove();
+                    notification.style.animation = 'slideInRight 0.3s ease reverse';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 300);
                 }
-            }, 5000);
+            }, 6000);
         }
+
+        // === SERVICE WORKER PARA PWA ===
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registrado:', registration);
+                    })
+                    .catch(error => {
+                        console.log('❌ Error registrando Service Worker:', error);
+                    });
+            });
+        }
+
+        // === MANIFEST PWA ===
+        const manifest = {
+            "name": "GastroNeo Quantum",
+            "short_name": "GastroNeo",
+            "description": "Restaurante del Futuro con IA y Gamificación",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#0D0916",
+            "theme_color": "#FF2A6D",
+            "orientation": "portrait",
+            "icons": [
+                {
+                    "src": "icon-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "icon-512.png", 
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+
+        console.log('🚀 GastroNeo Quantum - Sistema 100% Operativo');
+        console.log('📊 Estado:', appState);
+        console.log('🎯 Carrito:', appState.cart.length + ' items');
+        console.log('👥 Empleados:', appState.employees.length);
     </script>
 </body>
 </html>
