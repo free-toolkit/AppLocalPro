@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppLocalPro - Oportunidad Comercial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --quantum-blue: #00F0FF;
+            --neon-pink: #FF2A6D;
+            --matrix-green: #00FF88;
+            --hologram-purple: #6E00FF;
+            --cyber-yellow: #FFD300;
+            --void-black: #0A0B1A;
+            --hologram-white: rgba(255,255,255,0.9);
+            --deep-space: #0D0916;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--deep-space);
+            color: var(--hologram-white);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .quantum-container {
+            max-width: 500px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, var(--deep-space) 0%, #1A0A10 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* === EFECTO HOLOGRAMA CUÁNTICO === */
+        .quantum-hologram {
+            background: linear-gradient(125deg, 
+                rgba(255, 42, 109, 0.1) 0%,
+                rgba(0, 240, 255, 0.1) 50%,
+                rgba(110, 0, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .quantum-hologram::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.6), 
+                transparent
+            );
+            animation: quantum-shine 3s infinite;
+        }
+
+        @keyframes quantum-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* === HEADER CUÁNTICO === */
+        .quantum-header {
+            background: linear-gradient(135deg, var(--hologram-purple), var(--quantum-blue));
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quantum-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+            letter-spacing: 3px;
+        }
+
+        .quantum-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        /* === BOTONES CUÁNTICOS === */
+        .btn-quantum {
+            width: 100%;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--hologram-purple), #3A00B8); 
+            color: white; 
+            box-shadow: 0 5px 25px rgba(110, 0, 255, 0.4);
+        }
+
+        .btn-success { 
+            background: linear-gradient(135deg, var(--matrix-green), #00B800); 
+            color: white; 
+            box-shadow: 0 5px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-whatsapp { 
+            background: linear-gradient(135deg, #25D366, #128C7E); 
+            color: white; 
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-quantum:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(0, 240, 255, 0.6);
+        }
+
+        /* === TARJETAS DE INFORMACIÓN === */
+        .info-card {
+            background: rgba(25, 10, 15, 0.9);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 42, 109, 0.3);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--quantum-blue);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* === LISTA DE BENEFICIOS === */
+        .benefits-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: rgba(30, 10, 15, 0.6);
+            border-radius: 10px;
+            border-left: 4px solid var(--matrix-green);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--matrix-green), #00B800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* === COMISIONES === */
+        .commission-display {
+            background: linear-gradient(135deg, rgba(255, 211, 0, 0.1), rgba(255, 42, 109, 0.1));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid var(--cyber-yellow);
+            animation: commission-glow 2s infinite alternate;
+        }
+
+        @keyframes commission-glow {
+            from { box-shadow: 0 0 20px rgba(255, 211, 0, 0.3); }
+            to { box-shadow: 0 0 40px rgba(255, 211, 0, 0.6); }
+        }
+
+        .commission-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--cyber-yellow);
+            text-shadow: 0 0 20px rgba(255, 211, 0, 0.5);
+            margin: 0.5rem 0;
+        }
+
+        /* === PARTÍCULAS CUÁNTICAS === */
+        .quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .quantum-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--quantum-blue);
+            border-radius: 50%;
+            animation: quantum-float 8s infinite linear;
+        }
+
+        @keyframes quantum-float {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px) rotate(360deg); opacity: 0; }
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .quantum-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .commission-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas Cuánticas -->
+    <div class="quantum-particles" id="quantumParticles"></div>
+
+    <div class="quantum-container">
+        <div class="quantum-header">
+            <h1>QUANTUMSHOP NEO</h1>
+            <div style="font-size:0.9rem; margin-top:0.5rem; opacity:0.8;">
+                OPORTUNIDAD COMERCIAL EXCLUSIVA
+            </div>
+        </div>
+
+        <div class="quantum-content">
+            <!-- Hero Section -->
+            <div style="text-align:center; margin-bottom:2rem;">
+                <div style="font-family:'Orbitron'; color:var(--cyber-yellow); font-size:1.5rem; margin-bottom:1rem;">
+                    SOFTWARE DE GESTIÓN PARA NEGOCIOS
+                </div>
+                <div style="color:var(--quantum-blue); font-size:1.1rem;">
+                    Únete al equipo comercial más innovador
+                </div>
+            </div>
+
+            <!-- Display de Comisiones -->
+            <div class="commission-display">
+                <div style="font-family:'Orbitron'; color:var(--neon-pink); margin-bottom:0.5rem;">
+                    COMISIONES HASTA
+                </div>
+                <div class="commission-amount">30%</div>
+                <div style="color:var(--hologram-white);">
+                    por cada venta realizada
+                </div>
+            </div>
+
+            <!-- Información del Software -->
+            <div class="info-card">
+                <div class="card-title">
+                    <i class="fas fa-rocket"></i> EL SOFTWARE QUE VENDEMOS
+                </div>
+                <p style="margin-bottom:1rem;">
+                    Sistema de gestión completo para negocios locales con tecnología cuántica:
+                </p>
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <strong>Gestión de Inventario</strong>
+                            <div style="font-size:0.9rem;">Control automático de stock</div>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-cash-register"></i>
+                        </div>
+                        <div>
+                            <strong>Facturación Electrónica</strong>
+                            <div style="font-size:0.9rem;">Sistema POS integrado</div>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <strong>E-commerce Integrado</strong>
+                            <div style="font-size:0.9rem;">Tienda online automática</div>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <strong>IA Predictiva</strong>
+                            <div style="font-size:0.9rem;">Análisis de ventas inteligente</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Beneficios para Comerciales -->
+            <div class="info-card">
+                <div class="card-title">
+                    <i class="fas fa-gem"></i> BENEFICIOS PARA TI
+                </div>
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div>
+                            <strong>Comisiones del 30%</strong>
+                            <div style="font-size:0.9rem;">Ingresos ilimitados según resultados</div>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <strong>Formación Completa</strong>
+                            <div style="font-size:0.9rem;">Aprende a vender tecnología futurista</div>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <strong>Clientes Asignados</strong>
+                            <div style="font-size:0.9rem;">Base de datos de negocios local</div>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <strong>Bonos por Objetivos</strong>
+                            <div style="font-size:0.9rem;">Premios adicionales mensuales</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Requisitos -->
+            <div class="info-card">
+                <div class="card-title">
+                    <i class="fas fa-user-check"></i> BUSCAMOS A ALGUIEN CON
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
+                    <div style="text-align:center; padding:1rem; background:rgba(0,240,255,0.1); border-radius:10px; border:1px solid var(--quantum-blue);">
+                        <i class="fas fa-language" style="color:var(--quantum-blue); font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                        <div>Español Fluido</div>
+                    </div>
+                    <div style="text-align:center; padding:1rem; background:rgba(255,42,109,0.1); border-radius:10px; border:1px solid var(--neon-pink);">
+                        <i class="fas fa-hands-helping" style="color:var(--neon-pink); font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                        <div>Cultura Marroquí</div>
+                    </div>
+                    <div style="text-align:center; padding:1rem; background:rgba(0,255,136,0.1); border-radius:10px; border:1px solid var(--matrix-green);">
+                        <i class="fas fa-bullhorn" style="color:var(--matrix-green); font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                        <div>Ganas de Vender</div>
+                    </div>
+                    <div style="text-align:center; padding:1rem; background:rgba(110,0,255,0.1); border-radius:10px; border:1px solid var(--hologram-purple);">
+                        <i class="fas fa-brain" style="color:var(--hologram-purple); font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                        <div>Actitud Positiva</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Llamada a la Acción -->
+            <div style="text-align:center; margin:2rem 0;">
+                <div style="font-family:'Orbitron'; color:var(--neon-pink); margin-bottom:1rem; font-size:1.2rem;">
+                    ¿LISTO PARA EMPEZAR A GANAR?
+                </div>
+                <a href="https://wa.me/34631102324?text=¡Hola!%20Me%20interesa%20la%20oportunidad%20comercial%20de%20QuantumShop%20Neo" 
+                   class="btn-quantum btn-whatsapp" 
+                   target="_blank">
+                    <i class="fab fa-whatsapp"></i> CONTACTAR POR WHATSAPP
+                </a>
+                <div style="font-size:0.8rem; color:var(--hologram-white); margin-top:0.5rem;">
+                    Responde en menos de 24 horas
+                </div>
+            </div>
+
+            <!-- Información Adicional -->
+            <div class="info-card">
+                <div class="card-title">
+                    <i class="fas fa-info-circle"></i> INFORMACIÓN ADICIONAL
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem; color:var(--quantum-blue); font-family:'Orbitron';">€€€</div>
+                        <div style="font-size:0.8rem;">Pagos Semanales</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem; color:var(--matrix-green); font-family:'Orbitron';">📱</div>
+                        <div style="font-size:0.8rem;">Trabajo Flexible</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem; color:var(--cyber-yellow); font-family:'Orbitron';">🚀</div>
+                        <div style="font-size:0.8rem;">Crecimiento Rápido</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem; color:var(--neon-pink); font-family:'Orbitron';">💎</div>
+                        <div style="font-size:0.8rem;">Producto Exclusivo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === SISTEMA DE PARTÍCULAS ===
+        function createQuantumParticles() {
+            const container = document.getElementById('quantumParticles');
+            const colors = ['#00F0FF', '#FF2A6D', '#FFD300', '#6E00FF', '#00FF88'];
+            
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (5 + Math.random() * 8) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // === INICIALIZACIÓN ===
+        document.addEventListener('DOMContentLoaded', function() {
+            createQuantumParticles();
+            
+            // Efectos de entrada
+            const elements = document.querySelectorAll('.info-card, .commission-display');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'all 0.6s ease-out';
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+
+        // === ANÁLITICAS SIMPLES ===
+        function trackConversion() {
+            const whatsappBtn = document.querySelector('.btn-whatsapp');
+            whatsappBtn.addEventListener('click', function() {
+                // Aquí puedes añadir Google Analytics o Facebook Pixel
+                console.log('Conversión: Click en WhatsApp');
+            });
+        }
+
+        trackConversion();
+    </script>
+</body>
+</html>
