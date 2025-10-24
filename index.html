@@ -106,7 +106,7 @@
             font-size: 1.8rem;
         }
 
-        /* === HERO BANNER ESPECTACULAR === */
+        /* === SLIDER BANNER ESPECTACULAR === */
         .hero-banner {
             position: relative;
             height: 80vh;
@@ -114,7 +114,26 @@
             margin-top: 80px;
         }
 
-        .hero-image {
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .slide {
+            width: 33.333%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -160,46 +179,64 @@
             font-weight: 300;
         }
 
-        .hero-buttons {
+        /* === CONTROLES DEL SLIDER === */
+        .slider-controls {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            gap: 1rem;
+            z-index: 10;
         }
 
-        /* === BOTONES NEO === */
-        .btn-neo {
-            padding: 1.2rem 2.5rem;
-            border: none;
-            border-radius: 15px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            font-size: 1.1rem;
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid transparent;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
+        }
+
+        .slider-dot.active {
+            background: var(--neo-electric);
+            border-color: var(--neo-plasma);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 240, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            gap: 0.8rem;
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neo-laser), #D10047);
-            color: white;
-            box-shadow: 0 5px 25px rgba(255, 42, 109, 0.4);
+        .slider-nav:hover {
+            background: rgba(0, 240, 255, 0.4);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+        .slider-prev {
+            left: 2rem;
         }
 
-        .btn-neo:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 35px rgba(0, 240, 255, 0.6);
+        .slider-next {
+            right: 2rem;
         }
 
         /* === CONTENEDOR PRINCIPAL === */
@@ -492,14 +529,18 @@
                 grid-template-columns: 1fr;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .slider-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
             
-            .btn-neo {
-                width: 100%;
-                justify-content: center;
+            .slider-prev {
+                left: 1rem;
+            }
+            
+            .slider-next {
+                right: 1rem;
             }
         }
     </style>
@@ -518,21 +559,62 @@
         </div>
     </header>
 
-    <!-- Hero Banner Espectacular -->
-<section class="hero-banner">
-    <img src="https://i.postimg.cc/X758RMj9/Banner-Web-App-Local-Pro.png" 
-         alt="Apps móviles para negocios" 
-         class="hero-image">
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <h1></h1>
-            <p></p>
-            <div class="hero-buttons">
-                <!-- Botones removidos - espacio limpio -->
+    <!-- Hero Banner con Slider -->
+    <section class="hero-banner">
+        <div class="slider-container">
+            <div class="slider-track" id="sliderTrack">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="https://i.postimg.cc/X758RMj9/Banner-Web-App-Local-Pro.png" 
+                         alt="AppLocalPro - Apps móviles para negocios" 
+                         class="slide-image">
+                    <div class="hero-overlay">
+                        <div class="hero-content">
+                            <!-- Contenido limpio sin botones -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="https://i.postimg.cc/cC1kBFy8/Banner-App-App-Local-Pro-Horizontal.png" 
+                         alt="Soluciones móviles para tu negocio" 
+                         class="slide-image">
+                    <div class="hero-overlay">
+                        <div class="hero-content">
+                            <!-- Contenido limpio sin botones -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="https://i.postimg.cc/Z5ymN5L0/image-1.png" 
+                         alt="Digitaliza tu negocio con AppLocalPro" 
+                         class="slide-image">
+                    <div class="hero-overlay">
+                        <div class="hero-content">
+                            <!-- Contenido limpio sin botones -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles del Slider -->
+            <button class="slider-nav slider-prev" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav slider-next" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="slider-controls">
+                <div class="slider-dot active" onclick="goToSlide(0)"></div>
+                <div class="slider-dot" onclick="goToSlide(1)"></div>
+                <div class="slider-dot" onclick="goToSlide(2)"></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <div class="container">
         <!-- Frase de neuromarketing futurista -->
@@ -541,6 +623,7 @@
             No es un lujo: es tu ventaja competitiva.
         </div>
 
+        <!-- El resto de tu contenido se mantiene igual -->
         <div class="section-header" id="demos">
             <h2>Nuestras Soluciones por Sector</h2>
             <p>Descubre aplicaciones móviles personalizadas para diferentes tipos de negocios locales</p>
@@ -703,7 +786,44 @@
     </div>
 
     <script>
-        // Crear partículas flotantes
+        // === SISTEMA DEL SLIDER ===
+        let currentSlide = 0;
+        const totalSlides = 3;
+        const sliderTrack = document.getElementById('sliderTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        // Función para cambiar slide
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateSlider();
+        }
+
+        // Función siguiente slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        // Función anterior slide
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        // Actualizar slider y dots
+        function updateSlider() {
+            sliderTrack.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+            
+            // Actualizar dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-slide cada 5 segundos
+        setInterval(nextSlide, 5000);
+
+        // === PARTÍCULAS FLOTANTES ===
         function createFloatingParticles() {
             const container = document.getElementById('floatingParticles');
             const colors = ['#00F0FF', '#FF2A6D', '#FFD300', '#6E00FF'];
@@ -719,7 +839,7 @@
             }
         }
 
-        // Navegación dropdown
+        // === NAVEGACIÓN DROPDOWN ===
         document.getElementById('navToggle').addEventListener('click', function() {
             const menu = document.getElementById('navMenu');
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
@@ -735,7 +855,7 @@
             }
         });
 
-        // Inicializar
+        // === INICIALIZACIÓN ===
         document.addEventListener('DOMContentLoaded', function() {
             createFloatingParticles();
             
