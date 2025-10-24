@@ -6,73 +6,537 @@
     <meta name="description" content="Crea tu app móvil personalizada para peluquerías, gimnasios, restaurantes y más. Gestión de citas, fidelización y más. ¡Prueba la demo ahora!">
     <title>AppLocalPro - Apps Móviles para Negocios Locales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="shared/shared.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Corrección de espaciado para evitar solapamiento con header fijo */
-        body {
-            padding-top: 80px; /* Igual al alto del header */
+        /* === VARIABLES NEO-GLASSMORPHISM === */
+        :root {
+            --neo-electric: #00F0FF;
+            --neo-laser: #FF2A6D;
+            --neo-plasma: #FFD300;
+            --neo-crystal: #6E00FF;
+            --neo-space: #0A0B1A;
+            --neo-matrix: #00FF88;
+            --neo-hologram: rgba(255,255,255,0.9);
+            --neo-bg: #0D0916;
+            --neo-bg-light: #1A0A10;
         }
 
-        /* Frases de neuromarketing */
+        /* === RESET Y ESTILOS BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--neo-bg);
+            color: var(--neo-hologram);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* === NEO-GLASSMORPHISM === */
+        .neo-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .neo-holographic {
+            background: linear-gradient(125deg, 
+                rgba(255, 42, 109, 0.15) 0%,
+                rgba(0, 240, 255, 0.15) 50%,
+                rgba(110, 0, 255, 0.15) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neo-holographic::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent
+            );
+            animation: hologram-shine 3s infinite;
+        }
+
+        @keyframes hologram-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* === HEADER FUTURISTA === */
+        .main-header {
+            background: rgba(10, 7, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neo-electric);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--neo-electric);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+        }
+
+        .logo-icon {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        /* === HERO BANNER ESPECTACULAR === */
+        .hero-banner {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, 
+                transparent 0%, 
+                rgba(10, 7, 20, 0.8) 70%,
+                rgba(10, 7, 20, 0.9) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neo-electric), var(--neo-plasma));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--neo-hologram);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* === BOTONES NEO === */
+        .btn-neo {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neo-laser), #D10047);
+            color: white;
+            box-shadow: 0 5px 25px rgba(255, 42, 109, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-neo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(0, 240, 255, 0.6);
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* === BANNER NEUROMARKETING FUTURISTA === */
         .neuro-banner {
             text-align: center;
-            background: rgba(18, 13, 37, 0.4);
-            border-radius: 16px;
-            padding: 1.4rem;
-            margin: 2.5rem 0;
-            border: 1px solid #6E00FF;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-radius: 20px;
             font-family: 'Rajdhani', sans-serif;
-            color: #D0C0FF;
-            font-size: 1.15rem;
-            line-height: 1.5;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
         }
+
+        .neuro-banner.neo-glass {
+            border: 1px solid var(--neo-electric);
+        }
+
         .neuro-banner strong {
-            color: #00F0FF;
+            color: var(--neo-plasma);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        /* === SECCIÓN DEMOS === */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            color: var(--neo-electric);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--neo-hologram);
+            opacity: 0.9;
+        }
+
+        /* === GRID DE CATEGORÍAS FUTURISTA === */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .category-card.neo-glass {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(255, 42, 109, 0.3),
+                0 0 80px rgba(0, 240, 255, 0.2);
+            border: 1px solid var(--neo-electric);
+        }
+
+        .category-image {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(255, 42, 109, 0.2), 
+                rgba(0, 240, 255, 0.2));
+        }
+
+        .category-image i {
+            font-size: 3rem;
+            color: var(--neo-electric);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--neo-plasma);
+            color: var(--neo-space);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .category-content {
+            padding: 2rem;
+        }
+
+        .category-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neo-plasma);
+            margin-bottom: 1rem;
+        }
+
+        .category-description {
+            color: var(--neo-hologram);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .features-list {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--neo-hologram);
+        }
+
+        .feature i {
+            color: var(--neo-matrix);
+            font-size: 0.9rem;
+        }
+
+        .benefit-note {
+            background: rgba(0, 240, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--neo-electric);
+        }
+
+        .benefit-note strong {
+            color: var(--neo-plasma);
+        }
+
+        /* === BOTONES DE DEMO === */
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .demo-ready {
+            background: linear-gradient(135deg, var(--neo-electric), #00B8FF);
+            color: var(--neo-space);
+        }
+
+        .coming-soon {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--neo-hologram);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .demo-ready:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 240, 255, 0.4);
+        }
+
+        /* === NAVEGACIÓN ENTRE DEMOS === */
+        .demos-navigation {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--neo-crystal), #3A00B8);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(110, 0, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(110, 0, 255, 0.6);
+        }
+
+        .nav-menu {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            margin-bottom: 1rem;
+            background: rgba(10, 7, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--neo-electric);
+            border-radius: 15px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 200px;
+        }
+
+        .nav-menu a {
+            color: var(--neo-hologram);
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--neo-electric);
+        }
+
+        /* === EFECTOS DE PARTÍCULAS === */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neo-electric);
+            border-radius: 50%;
+            animation: float-particle 8s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-neo {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header SIN WhatsApp (solo logo) -->
+    <!-- Partículas flotantes -->
+    <div class="floating-particles" id="floatingParticles"></div>
+
+    <!-- Header Futurista -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo">
                 <i class="fas fa-mobile-alt logo-icon"></i>
                 <span class="logo-text">AppLocalPro</span>
             </a>
-            <!-- WhatsApp REMOVIDO del header -->
         </div>
     </header>
 
-    <!-- Banner Hero -->
-    <section class="hero-banner">
-        <img src="https://cdn.pixabay.com/photo/2014/03/22/22/17/phone-292994_1280.jpg" 
-             alt="Apps móviles para negocios" 
-             class="hero-image">
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <h1>Impulsa Tu Negocio Con Una App Móvil</h1>
-                <p>Soluciones personalizadas para peluquerías, gimnasios, restaurantes y más. Digitaliza tu negocio hoy.</p>
-                <div class="hero-buttons">
-                    <a href="demo-peluqueria/index.html" class="btn-hero btn-primary">
-                        <i class="fas fa-play"></i> Probar Demo
-                    </a>
-                    <a href="https://wa.me/34631102324?text=¡Hola!%20Quiero%20saber%20más%20sobre%20las%20apps%20para%20mi%20negocio" 
-                       target="_blank" 
-                       class="btn-hero btn-whatsapp">
-                        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
-                    </a>
-                </div>
+    <!-- Hero Banner Espectacular -->
+<section class="hero-banner">
+    <img src="https://i.postimg.cc/X758RMj9/Banner-Web-App-Local-Pro.png" 
+         alt="Apps móviles para negocios" 
+         class="hero-image">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1></h1>
+            <p></p>
+            <div class="hero-buttons">
+                <!-- Botones removidos - espacio limpio -->
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <div class="container">
-        <!-- Frase de neuromarketing estratégica -->
-        <div class="neuro-banner">
+        <!-- Frase de neuromarketing futurista -->
+        <div class="neuro-banner neo-glass neo-holographic">
             <strong>El 78% de los clientes prefiere negocios con app propia.</strong>  
             No es un lujo: es tu ventaja competitiva.
         </div>
@@ -84,7 +548,7 @@
 
         <div class="categories-grid">
             <!-- Peluquerías -->
-            <div class="category-card peluqueria">
+            <div class="category-card neo-glass">
                 <div class="category-image">
                     <i class="fas fa-scissors"></i>
                     <div class="category-badge">Demo Activo</div>
@@ -106,7 +570,7 @@
             </div>
 
             <!-- Gimnasios -->
-            <div class="category-card gimnasio">
+            <div class="category-card neo-glass">
                 <div class="category-image">
                     <i class="fas fa-dumbbell"></i>
                     <div class="category-badge">Demo Activo</div>
@@ -128,7 +592,7 @@
             </div>
 
             <!-- Restaurantes -->
-            <div class="category-card restaurante">
+            <div class="category-card neo-glass">
                 <div class="category-image">
                     <i class="fas fa-utensils"></i>
                     <div class="category-badge">Demo Activo</div>
@@ -150,7 +614,7 @@
             </div>
 
             <!-- Tiendas Minoristas -->
-            <div class="category-card tienda">
+            <div class="category-card neo-glass">
                 <div class="category-image">
                     <i class="fas fa-shopping-bag"></i>
                     <div class="category-badge">Próximamente</div>
@@ -172,7 +636,7 @@
             </div>
 
             <!-- Servicios a Domicilio -->
-            <div class="category-card servicios">
+            <div class="category-card neo-glass">
                 <div class="category-image">
                     <i class="fas fa-tools"></i>
                     <div class="category-badge">Próximamente</div>
@@ -194,7 +658,7 @@
             </div>
 
             <!-- Consultorios Médicos -->
-            <div class="category-card consultorio">
+            <div class="category-card neo-glass">
                 <div class="category-image">
                     <i class="fas fa-stethoscope"></i>
                     <div class="category-badge">Próximamente</div>
@@ -217,13 +681,13 @@
         </div>
 
         <!-- Segunda frase de neuromarketing -->
-        <div class="neuro-banner" style="margin-top: 3rem;">
+        <div class="neuro-banner neo-glass" style="margin-top: 3rem;">
             <strong>Tus clientes ya usan apps. ¿Por qué no la tuya?</strong>  
             La primera impresión digital dura para siempre.
         </div>
     </div>
 
-    <!-- Navegación entre demos -->
+    <!-- Navegación entre demos futurista -->
     <div class="demos-navigation">
         <div class="nav-dropdown">
             <button class="nav-btn" id="navToggle">
@@ -238,13 +702,49 @@
         </div>
     </div>
 
-    <script src="shared/shared.js"></script>
     <script>
-        // Comportamiento específico de la página principal
-        document.querySelectorAll('.btn.coming-soon').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('¡Esta categoría estará disponible pronto!');
+        // Crear partículas flotantes
+        function createFloatingParticles() {
+            const container = document.getElementById('floatingParticles');
+            const colors = ['#00F0FF', '#FF2A6D', '#FFD300', '#6E00FF'];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Navegación dropdown
+        document.getElementById('navToggle').addEventListener('click', function() {
+            const menu = document.getElementById('navMenu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const navToggle = document.getElementById('navToggle');
+            
+            if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.style.display = 'none';
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingParticles();
+            
+            // Comportamiento para botones próximamente
+            document.querySelectorAll('.btn.coming-soon').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('¡Esta categoría estará disponible pronto!');
+                });
             });
         });
     </script>
