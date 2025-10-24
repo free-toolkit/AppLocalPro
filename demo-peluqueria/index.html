@@ -330,7 +330,7 @@
             width: 100%;
             padding: 1rem;
             background: rgba(30, 10, 15, 0.6);
-            color: var(--neo-text);
+            color: var(--neo-hologram);
             border: 1px solid var(--neo-electric);
             border-radius: 12px;
             font-family: 'Rajdhani', sans-serif;
@@ -558,7 +558,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: var(--neo-text-secondary);
+            color: var(--neo-hologram);
             text-decoration: none;
             font-size: 0.9rem;
             font-family: 'Rajdhani', sans-serif;
@@ -621,6 +621,129 @@
             100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
         }
 
+        /* === NUEVOS ESTILOS PARA LOS PANELES === */
+        .pin-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .pin-btn {
+            padding: 1.5rem;
+            background: rgba(30, 10, 15, 0.6);
+            border: 1px solid var(--neo-electric);
+            border-radius: 12px;
+            color: var(--neo-hologram);
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pin-btn:hover {
+            background: rgba(0, 240, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .pin-display {
+            background: rgba(30, 10, 15, 0.8);
+            border: 1px solid var(--neo-plasma);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neo-plasma);
+            box-shadow: 0 0 15px rgba(255, 211, 0, 0.3);
+        }
+
+        .dashboard-card {
+            background: rgba(25, 10, 15, 0.9);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 42, 109, 0.3);
+        }
+
+        .dashboard-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neo-electric);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .metric-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--neo-plasma);
+            text-shadow: 0 0 15px rgba(255, 211, 0, 0.5);
+        }
+
+        .metric-label {
+            color: var(--neo-hologram);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .reservation-item {
+            background: rgba(30, 10, 15, 0.6);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 42, 109, 0.3);
+        }
+
+        .reservation-status {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .status-pending { background: rgba(255, 211, 0, 0.2); color: var(--neo-plasma); }
+        .status-confirmed { background: rgba(0, 255, 136, 0.2); color: var(--neo-matrix); }
+        .status-cancelled { background: rgba(255, 42, 109, 0.2); color: var(--neo-laser); }
+
+        .token-count {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neo-plasma);
+            text-align: center;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 211, 0, 0.5);
+        }
+
+        .token-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stylist-points {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 42, 109, 0.3);
+        }
+
+        .points-positive { color: var(--neo-matrix); }
+        .points-negative { color: var(--neo-laser); }
+
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .team-grid {
@@ -633,6 +756,10 @@
             
             .app-header h1 {
                 font-size: 1.5rem;
+            }
+            
+            .token-actions {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -698,7 +825,7 @@
                 <button class="btn-neo btn-primary" onclick="showView('rewardsView')">
                     <i class="fas fa-crown"></i> Mis Beauty Tokens
                 </button>
-                <button class="btn-neo" style="background:rgba(110,0,255,0.2);color:#6E00FF;border:1px solid #6E00FF;" onclick="openOwnerAccess()">
+                <button class="btn-neo" style="background:rgba(110,0,255,0.2);color:#6E00FF;border:1px solid #6E00FF;" onclick="showView('ownerLoginView')">
                     <i class="fas fa-user-lock"></i> Acceso Dueño
                 </button>
                 <button class="btn-neo" style="background:rgba(0,240,255,0.2);color:#00F0FF;border:1px solid #00F0FF;" onclick="showView('stylistLoginView')">
@@ -706,9 +833,459 @@
                 </button>
             </div>
 
-            <!-- El resto de las vistas se mantienen con el mismo contenido pero ahora con el diseño futurista -->
-            <!-- Booking View, Products View, Cart View, Checkout View, Rewards View, Stylist Login, Stylist Dashboard, Owner Dashboard -->
-            <!-- ... (mantengo el mismo contenido HTML de las otras vistas pero con las clases futuristas) ... -->
+            <!-- Booking View -->
+            <div id="bookingView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">RESERVAR CITA</h2>
+                
+                <div class="form-group">
+                    <label for="stylistSelect"><i class="fas fa-user-tie"></i> Selecciona Estilista</label>
+                    <select id="stylistSelect" class="form-control">
+                        <option value="">-- Selecciona un estilista --</option>
+                        <option value="nova">Nova - Tratamientos Biométricos</option>
+                        <option value="zayn">Zayn Al-Qubit - Barba Quantum</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="serviceSelect"><i class="fas fa-cut"></i> Servicio</label>
+                    <select id="serviceSelect" class="form-control">
+                        <option value="">-- Selecciona un servicio --</option>
+                        <option value="cut">Corte de Cabello - 25€</option>
+                        <option value="color">Coloración - 45€</option>
+                        <option value="treatment">Tratamiento Biométrico - 60€</option>
+                        <option value="beard">Afeitado Barba Quantum - 30€</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingDate"><i class="fas fa-calendar"></i> Fecha</label>
+                    <input type="date" id="bookingDate" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingTime"><i class="fas fa-clock"></i> Hora</label>
+                    <select id="bookingTime" class="form-control">
+                        <option value="">-- Selecciona una hora --</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                    </select>
+                </div>
+                
+                <button class="btn-neo btn-success" onclick="makeReservation()">
+                    <i class="fas fa-check-circle"></i> Confirmar Reserva
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Products View -->
+            <div id="productsView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">PRODUCTOS PREMIUM</h2>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Los productos se cargarán dinámicamente -->
+                </div>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Cart View -->
+            <div id="cartView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">MI CARRITO</h2>
+                
+                <div id="cartItems">
+                    <!-- Los items del carrito se cargarán dinámicamente -->
+                </div>
+                
+                <div class="cart-total">
+                    <div>Total a Pagar</div>
+                    <div class="cart-total-amount" id="cartTotal">0€</div>
+                </div>
+                
+                <button class="btn-neo btn-success" onclick="showView('checkoutView')">
+                    <i class="fas fa-credit-card"></i> Proceder al Pago
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('productsView')">
+                    <i class="fas fa-arrow-left"></i> Seguir Comprando
+                </button>
+            </div>
+
+            <!-- Checkout View -->
+            <div id="checkoutView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">FINALIZAR COMPRA</h2>
+                
+                <div class="form-group">
+                    <label for="customerName"><i class="fas fa-user"></i> Nombre Completo</label>
+                    <input type="text" id="customerName" class="form-control" placeholder="Ingresa tu nombre">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerEmail"><i class="fas fa-envelope"></i> Correo Electrónico</label>
+                    <input type="email" id="customerEmail" class="form-control" placeholder="Ingresa tu email">
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-title" style="color:var(--neo-electric);margin-bottom:1rem;font-family:'Orbitron';">Método de Pago</div>
+                    
+                    <button class="payment-btn btn-cash" onclick="selectPaymentMethod('cash')">
+                        <i class="fas fa-money-bill-wave"></i> Efectivo
+                    </button>
+                    
+                    <button class="payment-btn btn-card" onclick="selectPaymentMethod('card')">
+                        <i class="fas fa-credit-card"></i> Tarjeta
+                    </button>
+                    
+                    <button class="payment-btn btn-paypal" onclick="selectPaymentMethod('paypal')">
+                        <i class="fab fa-paypal"></i> PayPal
+                    </button>
+                    
+                    <button class="payment-btn btn-bizum" onclick="selectPaymentMethod('bizum')">
+                        <i class="fas fa-mobile-alt"></i> Bizum
+                    </button>
+                </div>
+                
+                <button class="btn-neo btn-success" id="completePurchaseBtn" onclick="completePurchase()" disabled>
+                    <i class="fas fa-check-circle"></i> Completar Compra
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('cartView')">
+                    <i class="fas fa-arrow-left"></i> Volver al Carrito
+                </button>
+            </div>
+
+            <!-- Rewards View -->
+            <div id="rewardsView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">MIS BEAUTY TOKENS</h2>
+                
+                <div class="dashboard-card">
+                    <div class="token-count" id="userTokens">0</div>
+                    <div style="text-align:center;color:var(--neo-electric);">Tokens Disponibles</div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">¿Qué son los Beauty Tokens?</div>
+                    <p style="margin-bottom:1rem;">Los Beauty Tokens son puntos que puedes ganar con cada compra o servicio. ¡Acumula tokens y canjéalos por productos o servicios exclusivos!</p>
+                    
+                    <div class="token-actions">
+                        <button class="btn-neo btn-primary" onclick="showView('giftTokensView')">
+                            <i class="fas fa-gift"></i> Regalar Tokens
+                        </button>
+                        
+                        <button class="btn-neo btn-magic" onclick="showView('redeemTokensView')">
+                            <i class="fas fa-sync-alt"></i> Canjear Tokens
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Historial de Tokens</div>
+                    <div id="tokenHistory">
+                        <!-- El historial se cargará dinámicamente -->
+                    </div>
+                </div>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Gift Tokens View -->
+            <div id="giftTokensView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">REGALAR TOKENS</h2>
+                
+                <div class="form-group">
+                    <label for="stylistGiftSelect"><i class="fas fa-user-tie"></i> Selecciona Estilista</label>
+                    <select id="stylistGiftSelect" class="form-control">
+                        <option value="">-- Selecciona un estilista --</option>
+                        <option value="nova">Nova</option>
+                        <option value="zayn">Zayn Al-Qubit</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tokenAmount"><i class="fas fa-coins"></i> Cantidad de Tokens</label>
+                    <input type="number" id="tokenAmount" class="form-control" min="1" max="100" placeholder="Ingresa la cantidad">
+                </div>
+                
+                <div class="form-group">
+                    <label for="giftMessage"><i class="fas fa-comment"></i> Mensaje (Opcional)</label>
+                    <textarea id="giftMessage" class="form-control" rows="3" placeholder="Escribe un mensaje para el estilista..."></textarea>
+                </div>
+                
+                <button class="btn-neo btn-success" onclick="giftTokens()">
+                    <i class="fas fa-gift"></i> Enviar Tokens
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('rewardsView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Redeem Tokens View -->
+            <div id="redeemTokensView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">CANJEAR TOKENS</h2>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Opciones de Canje</div>
+                    
+                    <div class="reservation-item">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div>
+                                <div style="font-weight:600;color:var(--neo-plasma);">Corte de Cabello</div>
+                                <div style="font-size:0.9rem;">Canjea 50 tokens por un corte gratuito</div>
+                            </div>
+                            <button class="chat-btn" onclick="redeemTokens(50, 'Corte de Cabello')">
+                                Canjear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="reservation-item">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div>
+                                <div style="font-weight:600;color:var(--neo-plasma);">Producto Premium</div>
+                                <div style="font-size:0.9rem;">Canjea 100 tokens por un producto seleccionado</div>
+                            </div>
+                            <button class="chat-btn" onclick="redeemTokens(100, 'Producto Premium')">
+                                Canjear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="reservation-item">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div>
+                                <div style="font-weight:600;color:var(--neo-plasma);">Tratamiento Especial</div>
+                                <div style="font-size:0.9rem;">Canjea 150 tokens por un tratamiento biométrico</div>
+                            </div>
+                            <button class="chat-btn" onclick="redeemTokens(150, 'Tratamiento Especial')">
+                                Canjear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('rewardsView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Stylist Login View -->
+            <div id="stylistLoginView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">ACCESO ESTILISTA</h2>
+                
+                <div class="form-group">
+                    <label for="stylistPinSelect"><i class="fas fa-user-tie"></i> Selecciona Estilista</label>
+                    <select id="stylistPinSelect" class="form-control">
+                        <option value="">-- Selecciona tu perfil --</option>
+                        <option value="nova">Nova</option>
+                        <option value="zayn">Zayn Al-Qubit</option>
+                    </select>
+                </div>
+                
+                <div class="pin-display" id="stylistPinDisplay">____</div>
+                
+                <div class="pin-pad">
+                    <button class="pin-btn" onclick="addPinDigit(1)">1</button>
+                    <button class="pin-btn" onclick="addPinDigit(2)">2</button>
+                    <button class="pin-btn" onclick="addPinDigit(3)">3</button>
+                    <button class="pin-btn" onclick="addPinDigit(4)">4</button>
+                    <button class="pin-btn" onclick="addPinDigit(5)">5</button>
+                    <button class="pin-btn" onclick="addPinDigit(6)">6</button>
+                    <button class="pin-btn" onclick="addPinDigit(7)">7</button>
+                    <button class="pin-btn" onclick="addPinDigit(8)">8</button>
+                    <button class="pin-btn" onclick="addPinDigit(9)">9</button>
+                    <button class="pin-btn" style="visibility:hidden;"></button>
+                    <button class="pin-btn" onclick="addPinDigit(0)">0</button>
+                    <button class="pin-btn" onclick="clearPin()"><i class="fas fa-backspace"></i></button>
+                </div>
+                
+                <button class="btn-neo btn-success" onclick="verifyStylistPin()">
+                    <i class="fas fa-sign-in-alt"></i> Acceder
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Stylist Dashboard View -->
+            <div id="stylistDashboardView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';" id="stylistDashboardTitle">PANEL ESTILISTA</h2>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Reservas del Día</div>
+                    <div id="stylistReservations">
+                        <!-- Las reservas se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Clientes en Espera</div>
+                    <div id="waitingClients">
+                        <!-- Los clientes en espera se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Mis Métricas</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div style="text-align:center;">
+                            <div class="metric-value" id="stylistPoints">0</div>
+                            <div class="metric-label">Puntos</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div class="metric-value" id="stylistTokens">0</div>
+                            <div class="metric-label">Tokens</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top:1.5rem;">
+                        <div class="dashboard-title" style="font-size:1.1rem;">Historial de Puntos</div>
+                        <div id="stylistPointsHistory">
+                            <!-- El historial de puntos se cargará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="logoutStylist()">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+
+            <!-- Owner Login View -->
+            <div id="ownerLoginView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">ACCESO DUEÑO</h2>
+                
+                <div class="pin-display" id="ownerPinDisplay">____</div>
+                
+                <div class="pin-pad">
+                    <button class="pin-btn" onclick="addOwnerPinDigit(1)">1</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(2)">2</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(3)">3</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(4)">4</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(5)">5</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(6)">6</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(7)">7</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(8)">8</button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(9)">9</button>
+                    <button class="pin-btn" style="visibility:hidden;"></button>
+                    <button class="pin-btn" onclick="addOwnerPinDigit(0)">0</button>
+                    <button class="pin-btn" onclick="clearOwnerPin()"><i class="fas fa-backspace"></i></button>
+                </div>
+                
+                <button class="btn-neo btn-success" onclick="verifyOwnerPin()">
+                    <i class="fas fa-sign-in-alt"></i> Acceder
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
+
+            <!-- Owner Dashboard View -->
+            <div id="ownerDashboardView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">PANEL DE CONTROL - DUEÑO</h2>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Métricas del Salón</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="text-align:center;">
+                            <div class="metric-value" id="totalRevenue">0€</div>
+                            <div class="metric-label">Ingresos Totales</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div class="metric-value" id="totalReservations">0</div>
+                            <div class="metric-label">Reservas Hoy</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div style="text-align:center;">
+                            <div class="metric-value" id="activeClients">0</div>
+                            <div class="metric-label">Clientes Activos</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div class="metric-value" id="complaintsCount">0</div>
+                            <div class="metric-label">Quejas Pendientes</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Gestión de Estilistas</div>
+                    <div id="stylistsManagement">
+                        <!-- La gestión de estilistas se cargará dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Quejas y Sugerencias</div>
+                    <div id="complaintsList">
+                        <!-- Las quejas se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Sistema Anti-Fraude</div>
+                    <div id="fraudAlerts">
+                        <!-- Las alertas de fraude se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="logoutOwner()">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+
+            <!-- Complaint View -->
+            <div id="complaintView" class="view">
+                <h2 style="text-align:center;margin-bottom:2rem;color:var(--neo-plasma);font-family:'Orbitron';">PRESENTAR QUEJA</h2>
+                
+                <div class="form-group">
+                    <label for="complaintType"><i class="fas fa-exclamation-triangle"></i> Tipo de Queja</label>
+                    <select id="complaintType" class="form-control">
+                        <option value="">-- Selecciona el tipo --</option>
+                        <option value="service">Servicio Insatisfactorio</option>
+                        <option value="attitude">Actitud del Estilista</option>
+                        <option value="hygiene">Problemas de Higiene</option>
+                        <option value="pricing">Problemas con Precios</option>
+                        <option value="other">Otro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="complaintStylist"><i class="fas fa-user-tie"></i> Estilista Involucrado (Opcional)</label>
+                    <select id="complaintStylist" class="form-control">
+                        <option value="">-- Selecciona un estilista --</option>
+                        <option value="nova">Nova</option>
+                        <option value="zayn">Zayn Al-Qubit</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="complaintDetails"><i class="fas fa-comment-dots"></i> Detalles de la Queja</label>
+                    <textarea id="complaintDetails" class="form-control" rows="5" placeholder="Describe detalladamente tu queja..."></textarea>
+                </div>
+                
+                <button class="btn-neo btn-success" onclick="submitComplaint()">
+                    <i class="fas fa-paper-plane"></i> Enviar Queja
+                </button>
+                
+                <button class="btn-neo" style="background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="showView('homeView')">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </button>
+            </div>
 
         </div>
 
@@ -725,6 +1302,10 @@
                 <i class="fas fa-shopping-bag"></i>
                 <span>Productos</span>
                 <div class="cart-badge" id="cartNavBadge" style="display: none;">0</div>
+            </a>
+            <a href="#" class="nav-item" onclick="showView('complaintView'); return false;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Quejas</span>
             </a>
         </div>
     </div>
@@ -752,21 +1333,35 @@
                 document.getElementById('splashScreen').style.display = 'none';
                 document.querySelector('.app-container').style.display = 'flex';
                 createFloatingParticles();
-                // Tu código de inicialización existente
+                
+                // Inicializar datos
+                initializeAppData();
                 renderAuthOrProfile();
                 loadProducts();
                 updateCartBadge();
             }, 2500);
         });
 
-        // === MANTENGO TODO TU JAVASCRIPT EXISTENTE ===
-        // (Todo el código JavaScript de funcionalidades se mantiene igual)
+        // === DATOS DE LA APLICACIÓN ===
         let currentStylist = null;
+        let currentOwner = null;
         let selectedPaymentMethod = null;
         let cart = JSON.parse(localStorage.getItem('styleplus_cart')) || [];
         let PRODUCTS = [];
+        let currentPin = '';
+        let currentOwnerPin = '';
 
-        function loadProducts() {
+        // Datos de ejemplo para la aplicación
+        const STYLISTS = {
+            nova: { name: 'Nova', pin: '1234', points: 85, tokens: 12, reservations: [] },
+            zayn: { name: 'Zayn Al-Qubit', pin: '5678', points: 72, tokens: 8, reservations: [] }
+        };
+
+        const OWNER_PIN = '9999';
+
+        // Inicializar datos de la aplicación
+        function initializeAppData() {
+            // Inicializar productos
             PRODUCTS = [
                 {
                     id: 1,
@@ -775,41 +1370,660 @@
                     image: "https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=600",
                     description: "Shampoo con keratina para cabello dañado"
                 },
-                // ... resto de productos
+                {
+                    id: 2,
+                    name: "Aceite Argan",
+                    price: 24.50,
+                    image: "https://images.pexels.com/photos/4041391/pexels-photo-4041391.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    description: "Aceite de argán puro para hidratación profunda"
+                },
+                {
+                    id: 3,
+                    name: "Mascarilla Reparadora",
+                    price: 32.00,
+                    image: "https://images.pexels.com/photos/3993467/pexels-photo-3993467.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    description: "Mascarilla intensiva para cabello muy dañado"
+                },
+                {
+                    id: 4,
+                    name: "Spray Termoprotector",
+                    price: 15.75,
+                    image: "https://images.pexels.com/photos/3993318/pexels-photo-3993318.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    description: "Protección térmica hasta 230°C"
+                }
             ];
-            renderProducts();
+
+            // Inicializar datos de usuario si no existen
+            if (!localStorage.getItem('styleplus_user')) {
+                localStorage.setItem('styleplus_user', JSON.stringify({
+                    tokens: 50,
+                    tokenHistory: [
+                        { date: '2023-10-15', action: 'Compra', amount: 25, description: 'Compra de producto' },
+                        { date: '2023-10-10', action: 'Servicio', amount: 15, description: 'Corte de cabello' }
+                    ]
+                }));
+            }
+
+            // Inicializar quejas si no existen
+            if (!localStorage.getItem('styleplus_complaints')) {
+                localStorage.setItem('styleplus_complaints', JSON.stringify([]));
+            }
+
+            // Inicializar reservas si no existen
+            if (!localStorage.getItem('styleplus_reservations')) {
+                localStorage.setItem('styleplus_reservations', JSON.stringify([]));
+            }
         }
 
-        // ... resto de tus funciones JavaScript exactamente igual ...
-
-        // === SISTEMA DE NAVEGACIÓN MEJORADO ===
+        // === SISTEMA DE NAVEGACIÓN ===
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
             
-            // Efecto de transición holográfica
-            const view = document.getElementById(viewId);
-            view.style.animation = 'hologram-appear 0.8s ease-out';
-            
-            setTimeout(() => {
-                view.style.animation = '';
-            }, 800);
-            
-            if (viewId === 'ownerDashboard') loadOwnerDashboard();
-            if (viewId === 'cartView') renderCart();
-            if (viewId === 'checkoutView') renderCheckout();
-            if (viewId === 'productsView') renderProducts();
-            if (viewId === 'stylistDashboard' && currentStylist) loadStylistDashboard();
-            
             // Actualizar navegación
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            if (['homeView','bookingView','productsView'].includes(viewId)) {
-                const idx = ['homeView','bookingView','productsView'].indexOf(viewId);
+            if (['homeView','bookingView','productsView','complaintView'].includes(viewId)) {
+                const idx = ['homeView','bookingView','productsView','complaintView'].indexOf(viewId);
                 document.querySelectorAll('.nav-item')[idx].classList.add('active');
+            }
+            
+            // Cargar datos específicos de la vista
+            if (viewId === 'productsView') renderProducts();
+            if (viewId === 'cartView') renderCart();
+            if (viewId === 'checkoutView') renderCheckout();
+            if (viewId === 'rewardsView') loadUserTokens();
+            if (viewId === 'stylistDashboardView' && currentStylist) loadStylistDashboard();
+            if (viewId === 'ownerDashboardView' && currentOwner) loadOwnerDashboard();
+            
+            // Limpiar PINs al cambiar de vista
+            if (!viewId.includes('Login')) {
+                currentPin = '';
+                currentOwnerPin = '';
+                document.getElementById('stylistPinDisplay').textContent = '____';
+                document.getElementById('ownerPinDisplay').textContent = '____';
             }
         }
 
-        // Las demás funciones se mantienen exactamente igual...
+        // === SISTEMA DE RESERVAS ===
+        function makeReservation() {
+            const stylist = document.getElementById('stylistSelect').value;
+            const service = document.getElementById('serviceSelect').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            
+            if (!stylist || !service || !date || !time) {
+                alert('Por favor, completa todos los campos para hacer la reserva.');
+                return;
+            }
+            
+            // Obtener reservas existentes
+            const reservations = JSON.parse(localStorage.getItem('styleplus_reservations')) || [];
+            
+            // Crear nueva reserva
+            const newReservation = {
+                id: Date.now(),
+                stylist: stylist,
+                service: service,
+                date: date,
+                time: time,
+                status: 'pending',
+                client: 'Usuario Actual'
+            };
+            
+            reservations.push(newReservation);
+            localStorage.setItem('styleplus_reservations', JSON.stringify(reservations));
+            
+            // Añadir reserva al estilista correspondiente
+            if (STYLISTS[stylist]) {
+                STYLISTS[stylist].reservations.push(newReservation);
+            }
+            
+            alert('¡Reserva realizada con éxito! Te esperamos en la fecha y hora seleccionada.');
+            showView('homeView');
+        }
+
+        // === SISTEMA DE PRODUCTOS Y CARRITO ===
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            PRODUCTS.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" class="product-image" alt="${product.name}">
+                    <div class="product-body">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${product.price}€</div>
+                        <p style="font-size:0.9rem;margin:0.5rem 0;color:var(--neo-hologram);">${product.description}</p>
+                        <button class="product-btn" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Añadir al Carrito
+                        </button>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('styleplus_cart', JSON.stringify(cart));
+            updateCartBadge();
+            alert('Producto añadido al carrito');
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align:center;color:var(--neo-hologram);">Tu carrito está vacío</p>';
+                document.getElementById('cartTotal').textContent = '0€';
+                return;
+            }
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price}€ x ${item.quantity} = ${itemTotal.toFixed(2)}€</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            document.getElementById('cartTotal').textContent = total.toFixed(2) + '€';
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (!item) return;
+            
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            }
+            
+            localStorage.setItem('styleplus_cart', JSON.stringify(cart));
+            renderCart();
+            updateCartBadge();
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartNavBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        // === SISTEMA DE PAGO ===
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.getElementById('completePurchaseBtn').disabled = false;
+            
+            // Resaltar el método seleccionado
+            document.querySelectorAll('.payment-btn').forEach(btn => {
+                btn.style.boxShadow = 'none';
+            });
+            
+            event.target.style.boxShadow = '0 0 20px rgba(0, 240, 255, 0.8)';
+        }
+
+        function completePurchase() {
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            
+            if (!name || !email) {
+                alert('Por favor, completa tu información personal.');
+                return;
+            }
+            
+            if (!selectedPaymentMethod) {
+                alert('Por favor, selecciona un método de pago.');
+                return;
+            }
+            
+            // Calcular total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Procesar pago (simulado)
+            alert(`¡Pago procesado con éxito por ${total.toFixed(2)}€! Recibirás un correo de confirmación en ${email}`);
+            
+            // Añadir tokens al usuario por la compra
+            const user = JSON.parse(localStorage.getItem('styleplus_user'));
+            const tokensEarned = Math.floor(total);
+            user.tokens += tokensEarned;
+            user.tokenHistory.push({
+                date: new Date().toISOString().split('T')[0],
+                action: 'Compra',
+                amount: tokensEarned,
+                description: `Compra de productos por ${total.toFixed(2)}€`
+            });
+            localStorage.setItem('styleplus_user', JSON.stringify(user));
+            
+            // Limpiar carrito
+            cart = [];
+            localStorage.setItem('styleplus_cart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            showView('homeView');
+        }
+
+        function renderCheckout() {
+            // Asegurarse de que el botón de pago esté deshabilitado inicialmente
+            document.getElementById('completePurchaseBtn').disabled = true;
+            
+            // Restablecer selección de método de pago
+            selectedPaymentMethod = null;
+            document.querySelectorAll('.payment-btn').forEach(btn => {
+                btn.style.boxShadow = 'none';
+            });
+        }
+
+        // === SISTEMA DE TOKENS ===
+        function loadUserTokens() {
+            const user = JSON.parse(localStorage.getItem('styleplus_user'));
+            document.getElementById('userTokens').textContent = user.tokens;
+            
+            // Cargar historial de tokens
+            const tokenHistory = document.getElementById('tokenHistory');
+            tokenHistory.innerHTML = '';
+            
+            user.tokenHistory.slice(-5).reverse().forEach(entry => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'reservation-item';
+                historyItem.innerHTML = `
+                    <div style="display:flex;justify-content:space-between;">
+                        <div>
+                            <div style="font-weight:600;color:var(--neo-plasma);">${entry.action}</div>
+                            <div style="font-size:0.9rem;">${entry.description}</div>
+                            <div style="font-size:0.8rem;color:var(--neo-hologram);">${entry.date}</div>
+                        </div>
+                        <div style="color:${entry.amount > 0 ? 'var(--neo-matrix)' : 'var(--neo-laser)'};font-weight:600;">
+                            ${entry.amount > 0 ? '+' : ''}${entry.amount}
+                        </div>
+                    </div>
+                `;
+                tokenHistory.appendChild(historyItem);
+            });
+        }
+
+        function giftTokens() {
+            const stylist = document.getElementById('stylistGiftSelect').value;
+            const amount = parseInt(document.getElementById('tokenAmount').value);
+            const message = document.getElementById('giftMessage').value;
+            
+            if (!stylist || !amount || amount <= 0) {
+                alert('Por favor, selecciona un estilista y una cantidad válida de tokens.');
+                return;
+            }
+            
+            const user = JSON.parse(localStorage.getItem('styleplus_user'));
+            
+            if (user.tokens < amount) {
+                alert('No tienes suficientes tokens para realizar este regalo.');
+                return;
+            }
+            
+            // Restar tokens al usuario
+            user.tokens -= amount;
+            user.tokenHistory.push({
+                date: new Date().toISOString().split('T')[0],
+                action: 'Regalo',
+                amount: -amount,
+                description: `Regalo a ${STYLISTS[stylist].name}${message ? ': ' + message : ''}`
+            });
+            localStorage.setItem('styleplus_user', JSON.stringify(user));
+            
+            // Añadir tokens al estilista (en un sistema real, esto se guardaría en una base de datos)
+            STYLISTS[stylist].tokens += amount;
+            
+            alert(`¡Has regalado ${amount} tokens a ${STYLISTS[stylist].name} con éxito!`);
+            showView('rewardsView');
+        }
+
+        function redeemTokens(amount, item) {
+            const user = JSON.parse(localStorage.getItem('styleplus_user'));
+            
+            if (user.tokens < amount) {
+                alert('No tienes suficientes tokens para canjear este artículo.');
+                return;
+            }
+            
+            if (confirm(`¿Estás seguro de que quieres canjear ${amount} tokens por ${item}?`)) {
+                // Restar tokens al usuario
+                user.tokens -= amount;
+                user.tokenHistory.push({
+                    date: new Date().toISOString().split('T')[0],
+                    action: 'Canje',
+                    amount: -amount,
+                    description: `Canje por: ${item}`
+                });
+                localStorage.setItem('styleplus_user', JSON.stringify(user));
+                
+                alert(`¡Has canjeado ${amount} tokens por ${item} con éxito!`);
+                showView('rewardsView');
+            }
+        }
+
+        // === SISTEMA DE ACCESO ESTILISTA ===
+        function addPinDigit(digit) {
+            if (currentPin.length < 4) {
+                currentPin += digit;
+                updatePinDisplay();
+            }
+        }
+
+        function clearPin() {
+            currentPin = '';
+            updatePinDisplay();
+        }
+
+        function updatePinDisplay() {
+            const display = document.getElementById('stylistPinDisplay');
+            let displayText = '';
+            
+            for (let i = 0; i < 4; i++) {
+                if (i < currentPin.length) {
+                    displayText += '•';
+                } else {
+                    displayText += '_';
+                }
+            }
+            
+            display.textContent = displayText;
+        }
+
+        function verifyStylistPin() {
+            const selectedStylist = document.getElementById('stylistPinSelect').value;
+            
+            if (!selectedStylist) {
+                alert('Por favor, selecciona tu perfil de estilista.');
+                return;
+            }
+            
+            if (currentPin.length !== 4) {
+                alert('Por favor, ingresa un PIN de 4 dígitos.');
+                return;
+            }
+            
+            if (STYLISTS[selectedStylist].pin === currentPin) {
+                currentStylist = selectedStylist;
+                document.getElementById('stylistDashboardTitle').textContent = `PANEL DE ${STYLISTS[selectedStylist].name.toUpperCase()}`;
+                showView('stylistDashboardView');
+            } else {
+                alert('PIN incorrecto. Por favor, inténtalo de nuevo.');
+                clearPin();
+            }
+        }
+
+        function loadStylistDashboard() {
+            if (!currentStylist) return;
+            
+            const stylist = STYLISTS[currentStylist];
+            
+            // Cargar reservas del estilista
+            const reservationsContainer = document.getElementById('stylistReservations');
+            reservationsContainer.innerHTML = '';
+            
+            if (stylist.reservations.length === 0) {
+                reservationsContainer.innerHTML = '<p style="text-align:center;color:var(--neo-hologram);">No tienes reservas para hoy</p>';
+            } else {
+                stylist.reservations.forEach(reservation => {
+                    const reservationItem = document.createElement('div');
+                    reservationItem.className = 'reservation-item';
+                    reservationItem.innerHTML = `
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div>
+                                <div style="font-weight:600;color:var(--neo-plasma);">${reservation.client}</div>
+                                <div style="font-size:0.9rem;">${reservation.service} - ${reservation.time}</div>
+                            </div>
+                            <span class="reservation-status status-${reservation.status}">${reservation.status.toUpperCase()}</span>
+                        </div>
+                    `;
+                    reservationsContainer.appendChild(reservationItem);
+                });
+            }
+            
+            // Cargar clientes en espera (simulado)
+            const waitingClientsContainer = document.getElementById('waitingClients');
+            waitingClientsContainer.innerHTML = `
+                <div class="reservation-item">
+                    <div style="font-weight:600;color:var(--neo-plasma);">Cliente Ejemplo</div>
+                    <div style="font-size:0.9rem;">Corte de cabello - Esperando: 5 min</div>
+                </div>
+            `;
+            
+            // Cargar métricas del estilista
+            document.getElementById('stylistPoints').textContent = stylist.points;
+            document.getElementById('stylistTokens').textContent = stylist.tokens;
+            
+            // Cargar historial de puntos (simulado)
+            const pointsHistoryContainer = document.getElementById('stylistPointsHistory');
+            pointsHistoryContainer.innerHTML = `
+                <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+                    <span>Servicio excelente</span>
+                    <span class="points-positive">+10</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+                    <span>Retraso en atención</span>
+                    <span class="points-negative">-5</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;">
+                    <span>Recomendación de cliente</span>
+                    <span class="points-positive">+15</span>
+                </div>
+            `;
+        }
+
+        function logoutStylist() {
+            currentStylist = null;
+            currentPin = '';
+            showView('homeView');
+        }
+
+        // === SISTEMA DE ACCESO DUEÑO ===
+        function addOwnerPinDigit(digit) {
+            if (currentOwnerPin.length < 4) {
+                currentOwnerPin += digit;
+                updateOwnerPinDisplay();
+            }
+        }
+
+        function clearOwnerPin() {
+            currentOwnerPin = '';
+            updateOwnerPinDisplay();
+        }
+
+        function updateOwnerPinDisplay() {
+            const display = document.getElementById('ownerPinDisplay');
+            let displayText = '';
+            
+            for (let i = 0; i < 4; i++) {
+                if (i < currentOwnerPin.length) {
+                    displayText += '•';
+                } else {
+                    displayText += '_';
+                }
+            }
+            
+            display.textContent = displayText;
+        }
+
+        function verifyOwnerPin() {
+            if (currentOwnerPin.length !== 4) {
+                alert('Por favor, ingresa un PIN de 4 dígitos.');
+                return;
+            }
+            
+            if (currentOwnerPin === OWNER_PIN) {
+                currentOwner = true;
+                showView('ownerDashboardView');
+            } else {
+                alert('PIN incorrecto. Por favor, inténtalo de nuevo.');
+                clearOwnerPin();
+            }
+        }
+
+        function loadOwnerDashboard() {
+            if (!currentOwner) return;
+            
+            // Cargar métricas del salón (simuladas)
+            document.getElementById('totalRevenue').textContent = '1,250€';
+            document.getElementById('totalReservations').textContent = '8';
+            document.getElementById('activeClients').textContent = '24';
+            
+            // Cargar quejas
+            const complaints = JSON.parse(localStorage.getItem('styleplus_complaints')) || [];
+            document.getElementById('complaintsCount').textContent = complaints.length;
+            
+            const complaintsContainer = document.getElementById('complaintsList');
+            complaintsContainer.innerHTML = '';
+            
+            if (complaints.length === 0) {
+                complaintsContainer.innerHTML = '<p style="text-align:center;color:var(--neo-hologram);">No hay quejas pendientes</p>';
+            } else {
+                complaints.slice(-3).forEach(complaint => {
+                    const complaintItem = document.createElement('div');
+                    complaintItem.className = 'reservation-item';
+                    complaintItem.innerHTML = `
+                        <div style="font-weight:600;color:var(--neo-plasma);">${complaint.type}</div>
+                        <div style="font-size:0.9rem;margin:0.5rem 0;">${complaint.details}</div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                            <span>${complaint.stylist ? 'Estilista: ' + complaint.stylist : ''}</span>
+                            <span>${complaint.date}</span>
+                        </div>
+                    `;
+                    complaintsContainer.appendChild(complaintItem);
+                });
+            }
+            
+            // Cargar gestión de estilistas
+            const stylistsContainer = document.getElementById('stylistsManagement');
+            stylistsContainer.innerHTML = '';
+            
+            Object.values(STYLISTS).forEach(stylist => {
+                const stylistItem = document.createElement('div');
+                stylistItem.className = 'reservation-item';
+                stylistItem.innerHTML = `
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <div style="font-weight:600;color:var(--neo-plasma);">${stylist.name}</div>
+                            <div style="font-size:0.9rem;">Puntos: ${stylist.points} | Tokens: ${stylist.tokens}</div>
+                        </div>
+                        <div>
+                            <button class="chat-btn" style="font-size:0.8rem;padding:0.5rem 0.8rem;" onclick="adjustStylistPoints('${stylist.name}', 10)">
+                                <i class="fas fa-plus"></i> Premiar
+                            </button>
+                            <button class="chat-btn" style="font-size:0.8rem;padding:0.5rem 0.8rem;background:rgba(255,42,109,0.2);color:#FF2A6D;border:1px solid #FF2A6D;" onclick="adjustStylistPoints('${stylist.name}', -10)">
+                                <i class="fas fa-minus"></i> Penalizar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                stylistsContainer.appendChild(stylistItem);
+            });
+            
+            // Cargar alertas anti-fraude (simuladas)
+            const fraudContainer = document.getElementById('fraudAlerts');
+            fraudContainer.innerHTML = `
+                <div class="reservation-item" style="border-left:4px solid var(--neo-matrix);">
+                    <div style="font-weight:600;color:var(--neo-plasma);">Sistema Seguro</div>
+                    <div style="font-size:0.9rem;margin:0.5rem 0;">No se detectaron actividades sospechosas en las últimas 24 horas.</div>
+                </div>
+                <div class="reservation-item" style="border-left:4px solid var(--neo-laser);">
+                    <div style="font-weight:600;color:var(--neo-plasma);">Alerta de Inventario</div>
+                    <div style="font-size:0.9rem;margin:0.5rem 0;">Producto "Shampoo Keratina" con stock bajo.</div>
+                </div>
+            `;
+        }
+
+        function adjustStylistPoints(stylistName, points) {
+            const stylistKey = Object.keys(STYLISTS).find(key => STYLISTS[key].name === stylistName);
+            if (stylistKey) {
+                STYLISTS[stylistKey].points += points;
+                if (STYLISTS[stylistKey].points < 0) STYLISTS[stylistKey].points = 0;
+                
+                alert(`Puntos de ${stylistName} ${points > 0 ? 'aumentados' : 'reducidos'} en ${Math.abs(points)}. Nuevo total: ${STYLISTS[stylistKey].points}`);
+                loadOwnerDashboard();
+            }
+        }
+
+        function logoutOwner() {
+            currentOwner = null;
+            currentOwnerPin = '';
+            showView('homeView');
+        }
+
+        // === SISTEMA DE QUEJAS ===
+        function submitComplaint() {
+            const type = document.getElementById('complaintType').value;
+            const stylist = document.getElementById('complaintStylist').value;
+            const details = document.getElementById('complaintDetails').value;
+            
+            if (!type || !details) {
+                alert('Por favor, completa al menos el tipo y los detalles de la queja.');
+                return;
+            }
+            
+            // Obtener quejas existentes
+            const complaints = JSON.parse(localStorage.getItem('styleplus_complaints')) || [];
+            
+            // Crear nueva queja
+            const newComplaint = {
+                id: Date.now(),
+                type: type,
+                stylist: stylist || 'No especificado',
+                details: details,
+                date: new Date().toISOString().split('T')[0],
+                status: 'pending'
+            };
+            
+            complaints.push(newComplaint);
+            localStorage.setItem('styleplus_complaints', JSON.stringify(complaints));
+            
+            alert('¡Queja enviada con éxito! El dueño revisará tu caso pronto.');
+            showView('homeView');
+        }
+
+        // === FUNCIONES AUXILIARES ===
+        function renderAuthOrProfile() {
+            // Esta función podría usarse para mostrar información del usuario si se implementa un sistema de autenticación
+        }
     </script>
 </body>
 </html>
