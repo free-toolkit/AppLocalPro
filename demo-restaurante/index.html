@@ -872,6 +872,85 @@
             padding: 0.8rem 1.2rem;
         }
 
+        /* === NUEVOS ESTILOS PARA FUNCIONALIDADES AVANZADAS === */
+        .call-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .call-option {
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+
+        .call-option.urgent {
+            background: rgba(255, 42, 109, 0.2);
+            border-color: var(--neo-primary);
+        }
+
+        .call-option.normal {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--neo-secondary);
+        }
+
+        .call-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .camera-feed {
+            width: 100%;
+            height: 200px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 12px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neo-text-secondary);
+            border: 1px solid var(--neo-secondary);
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--neo-accent), #FF9A00);
+            color: var(--neo-bg);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin: 0.2rem;
+        }
+
+        .prediction-card {
+            background: rgba(30, 10, 15, 0.7);
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid var(--neo-secondary);
+        }
+
+        .prediction-meter {
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .prediction-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neo-secondary), var(--neo-primary));
+            width: 0%;
+            transition: width 1s ease;
+        }
+
         @keyframes slideInRight {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -1286,41 +1365,35 @@
                     </button>
                 </div>
 
-                <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:0.8rem;">🛒 Canjear Recompensas</h3>
-                <div style="display: grid; gap: 0.5rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                        <div><strong>Café Gourmet</strong><br><small>100 pts</small></div>
-                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;" onclick="redeemReward(100, 'Café Gourmet')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                        <div><strong>Postre del Chef</strong><br><small>250 pts</small></div>
-                        <button style="width:32px;height:32px;border-radius:50%;background:var(--neo-accent);color:var(--neo-bg);border:none;cursor:pointer;" onclick="redeemReward(250, 'Postre del Chef')">
-                            <i class="fas fa-gift"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- NUEVO: Funcionalidad para llamar al camarero -->
-                <div class="neo-glass" style="padding:1.2rem; margin:1.5rem 0;">
+                <!-- NUEVO: Sistema de llamada al camarero mejorado -->
+                <div class="neo-glass" style="padding:1.2rem; margin-bottom:1.5rem;">
                     <h3 style="font-family:'Rajdhani';color:var(--neo-accent);margin-bottom:1rem;">🛎️ Llamar al Camarero</h3>
-                    <button class="btn-neo btn-secondary" id="callWaiterBtn" onclick="callWaiter()">
-                        <i class="fas fa-bell"></i> Llamar al Camarero
-                    </button>
-                    <div id="waiterTimer" style="display:none;">
-                        <div class="timer-display" id="timerDisplay">05:00</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill"></div>
+                    <div class="call-options-grid">
+                        <div class="call-option urgent" onclick="callWaiterAdvanced('urgent')">
+                            <i class="fas fa-exclamation-triangle" style="font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                            <div>Urgente</div>
+                            <small>Problema grave</small>
                         </div>
-                        <div id="waiterOptions" style="display:none; margin-top:1rem;">
-                            <p style="text-align:center; color:var(--neo-primary); margin-bottom:1rem;">El camarero no ha llegado. ¿Qué deseas hacer?</p>
-                            <button class="btn-neo btn-accent" onclick="callWaiterAgain()">
-                                <i class="fas fa-redo"></i> Volver a Llamar
-                            </button>
-                            <button class="btn-neo" style="background:#e74c3c;color:white;" onclick="callSupervisor()">
-                                <i class="fas fa-user-shield"></i> Reclamar al Supervisor
-                            </button>
+                        <div class="call-option normal" onclick="callWaiterAdvanced('order')">
+                            <i class="fas fa-utensils" style="font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                            <div>Pedir</div>
+                            <small>Hacer pedido</small>
+                        </div>
+                        <div class="call-option normal" onclick="callWaiterAdvanced('bill')">
+                            <i class="fas fa-receipt" style="font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                            <div>Cuenta</div>
+                            <small>Pagar</small>
+                        </div>
+                        <div class="call-option normal" onclick="callWaiterAdvanced('other')">
+                            <i class="fas fa-question" style="font-size:1.5rem; margin-bottom:0.5rem;"></i>
+                            <div>Otro</div>
+                            <small>Otra consulta</small>
+                        </div>
+                    </div>
+                    <div id="advancedWaiterTimer" style="display:none; margin-top:1rem;">
+                        <div class="timer-display" id="advancedTimerDisplay">05:00</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="advancedProgressFill"></div>
                         </div>
                     </div>
                 </div>
@@ -1376,6 +1449,16 @@
                     <div id="employeeLeaderboard"></div>
                 </div>
 
+                <!-- NUEVO: Sistema de logros para empleados -->
+                <div class="neo-glass" style="padding:1rem; margin:1.5rem 0;">
+                    <div style="font-family:'Orbitron';color:var(--neo-accent);margin-bottom:0.8rem;">🎯 TUS LOGROS</div>
+                    <div id="employeeAchievements">
+                        <span class="achievement-badge">⭐ 50 Ventas</span>
+                        <span class="achievement-badge">🚀 Velocidad</span>
+                        <span class="achievement-badge">💫 Cliente Estrella</span>
+                    </div>
+                </div>
+
                 <div class="tables-grid" id="tablesGrid"></div>
 
                 <button class="btn-neo" style="background:#3A1525;color:#E0C0D0;margin-top:1.5rem;" onclick="logoutEmployee()">
@@ -1397,6 +1480,30 @@
                         <div><strong>Mesas ocupadas:</strong> <span id="occupiedTables">8/12</span></div>
                         <div><strong>Pedidos pendientes:</strong> <span id="pendingOrders">3</span></div>
                         <div><strong>Clientes en espera:</strong> <span id="waitingClients">2</span></div>
+                    </div>
+                </div>
+
+                <!-- NUEVO: Sistema de vigilancia básico -->
+                <div class="neo-glass" style="padding:1rem; margin-bottom:1.5rem;">
+                    <div style="font-family:'Orbitron';color:var(--neo-accent);margin-bottom:0.8rem;">📹 VIGILANCIA EN VIVO</div>
+                    <div class="camera-feed">
+                        <i class="fas fa-video" style="font-size:2rem;"></i>
+                        <div style="margin-left:1rem;">Sistema de cámaras conectado</div>
+                    </div>
+                    <button class="btn-neo btn-secondary" onclick="toggleCameraFeed()" style="margin-top:0.8rem;">
+                        <i class="fas fa-eye"></i> Ver Cámaras
+                    </button>
+                </div>
+
+                <!-- NUEVO: Predicción de demanda -->
+                <div class="prediction-card">
+                    <div style="font-family:'Orbitron';color:var(--neo-accent);margin-bottom:0.8rem;">🔮 PREDICCIÓN DE DEMANDA</div>
+                    <div style="font-size:0.9rem; margin-bottom:0.5rem;">Próxima hora: <strong id="demandPrediction">Alta</strong></div>
+                    <div class="prediction-meter">
+                        <div class="prediction-fill" id="predictionFill" style="width: 75%;"></div>
+                    </div>
+                    <div style="font-size:0.8rem; color:var(--neo-text-secondary);">
+                        Recomendación: <span id="staffRecommendation">+1 camarero</span>
                     </div>
                 </div>
 
@@ -1580,19 +1687,21 @@
             }
         };
 
-        // === ESTADO GLOBAL ===
+        // === ESTADO GLOBAL MEJORADO ===
         let appState = {
             user: null,
             employee: null,
             cart: JSON.parse(localStorage.getItem('gastroneo_cart')) || [],
             employees: [
-                { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', todayPoints: 45 },
-                { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', todayPoints: 32 },
-                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', todayPoints: -12 }
+                { id: 'emp_1', name: 'Carlos Rodríguez', points: 850, level: 'diamante', todayPoints: 45, achievements: ['50 Ventas', 'Velocidad'] },
+                { id: 'emp_2', name: 'Ana Martínez', points: 720, level: 'oro', todayPoints: 32, achievements: ['Cliente Estrella'] },
+                { id: 'emp_3', name: 'Luis García', points: 450, level: 'plata', todayPoints: -12, achievements: [] }
             ],
             activities: [],
             waiterTimer: null,
-            waiterTimeLeft: 300 // 5 minutos en segundos
+            waiterTimeLeft: 300, // 5 minutos en segundos
+            cameraEnabled: false,
+            demandPrediction: 75 // Porcentaje de predicción de demanda
         };
 
         // === INICIALIZACIÓN ===
@@ -1612,6 +1721,7 @@
             renderTablesGrid();
             createFloatingParticles();
             showCategory('entradas');
+            updateDemandPrediction();
         }
 
         // === CREAR PARTÍCULAS FLOTANTES ===
@@ -1649,6 +1759,7 @@
             if (viewId === 'cartView') renderCart();
             if (viewId === 'checkoutView') renderCheckout();
             if (viewId === 'employeeDashboard') renderEmployeeDashboard();
+            if (viewId === 'ownerDashboard') renderOwnerDashboard();
         }
 
         // === EFECTO DE ENTRADA ESPECTACULAR PARA EL MENÚ ===
@@ -1856,29 +1967,6 @@
         }
 
         // === SISTEMA DE CARRITO ===
-        function addToCart(name, price) {
-            const existingItem = appState.cart.find(item => item.name === name);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                appState.cart.push({ name, price, quantity: 1 });
-            }
-            
-            localStorage.setItem('gastroneo_cart', JSON.stringify(appState.cart));
-            updateCartBadge();
-            
-            // Efecto visual
-            const btn = event.target.closest('.menu-card-btn');
-            btn.innerHTML = '<i class="fas fa-check"></i>';
-            btn.style.background = 'linear-gradient(135deg, #00D100, #009900)';
-            
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-plus"></i>';
-                btn.style.background = 'linear-gradient(135deg, var(--neo-primary), #D10047)';
-            }, 1000);
-        }
-
         function updateCartBadge() {
             const badge = document.getElementById('cartBadge');
             const totalItems = appState.cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -2015,7 +2103,7 @@
             renderUserProfile();
         }
 
-        // === NUEVAS FUNCIONALIDADES AÑADIDAS ===
+        // === NUEVAS FUNCIONALIDADES AVANZADAS ===
 
         // Transferir tokens a un amigo
         function transferTokens() {
@@ -2053,29 +2141,35 @@
             document.getElementById('friendEmail').value = '';
         }
 
-        // Llamar al camarero
-        function callWaiter() {
+        // Llamada al camarero mejorada con prioridades
+        function callWaiterAdvanced(type) {
             if (!appState.user) {
                 alert("Debes iniciar sesión para llamar al camarero.");
                 return;
             }
             
-            const callBtn = document.getElementById('callWaiterBtn');
-            const waiterTimer = document.getElementById('waiterTimer');
-            const timerDisplay = document.getElementById('timerDisplay');
-            const progressFill = document.getElementById('progressFill');
-            const waiterOptions = document.getElementById('waiterOptions');
+            const timerDisplay = document.getElementById('advancedTimerDisplay');
+            const progressFill = document.getElementById('advancedProgressFill');
+            const timerContainer = document.getElementById('advancedWaiterTimer');
             
-            // Deshabilitar botón y mostrar temporizador
-            callBtn.disabled = true;
-            callBtn.innerHTML = '<i class="fas fa-bell"></i> Camarero Notificado';
-            callBtn.style.background = 'linear-gradient(135deg, #888, #555)';
-            waiterTimer.style.display = 'block';
-            waiterOptions.style.display = 'none';
+            // Configurar según el tipo de llamada
+            const callTypes = {
+                'urgent': { time: 120, message: '🚨 URGENTE - Ayuda inmediata requerida', priority: 1 },
+                'order': { time: 300, message: '📝 Cliente quiere hacer un pedido', priority: 2 },
+                'bill': { time: 180, message: '💳 Cliente solicita la cuenta', priority: 1 },
+                'other': { time: 300, message: '❓ Cliente necesita asistencia', priority: 3 }
+            };
             
-            // Reiniciar temporizador
-            appState.waiterTimeLeft = 300; // 5 minutos
-            updateTimerDisplay();
+            const callConfig = callTypes[type];
+            
+            // Mostrar temporizador
+            timerContainer.style.display = 'block';
+            appState.waiterTimeLeft = callConfig.time;
+            updateAdvancedTimerDisplay();
+            
+            // Notificar al sistema
+            createNotification('success', 'Camarero Notificado', callConfig.message);
+            addActivity('positive', `Cliente ${appState.user.name}: ${callConfig.message}`);
             
             // Iniciar temporizador
             if (appState.waiterTimer) {
@@ -2084,52 +2178,31 @@
             
             appState.waiterTimer = setInterval(() => {
                 appState.waiterTimeLeft--;
-                updateTimerDisplay();
+                updateAdvancedTimerDisplay();
                 
                 if (appState.waiterTimeLeft <= 0) {
                     clearInterval(appState.waiterTimer);
-                    waiterOptions.style.display = 'block';
-                    createNotification('warning', 'Tiempo Agotado', 'El camarero no ha llegado. ¿Qué deseas hacer?');
+                    createNotification('warning', 'Tiempo Agotado', 'El camarero no ha llegado. ¿Necesitas ayuda adicional?');
                 }
             }, 1000);
-            
-            // Notificar al sistema
-            createNotification('success', 'Camarero Notificado', 'Un camarero ha sido notificado y llegará en breve.');
-            addActivity('positive', `Cliente ${appState.user.name} llamó al camarero`);
         }
 
-        function updateTimerDisplay() {
-            const timerDisplay = document.getElementById('timerDisplay');
-            const progressFill = document.getElementById('progressFill');
+        function updateAdvancedTimerDisplay() {
+            const timerDisplay = document.getElementById('advancedTimerDisplay');
+            const progressFill = document.getElementById('advancedProgressFill');
             
             const minutes = Math.floor(appState.waiterTimeLeft / 60);
             const seconds = appState.waiterTimeLeft % 60;
             timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            const progressPercentage = ((300 - appState.waiterTimeLeft) / 300) * 100;
+            const callTypes = {
+                'urgent': 120, 'order': 300, 'bill': 180, 'other': 300
+            };
+            
+            // Calcular progreso basado en el tipo de llamada
+            const maxTime = 300; // 5 minutos máximo
+            const progressPercentage = ((maxTime - appState.waiterTimeLeft) / maxTime) * 100;
             progressFill.style.width = `${progressPercentage}%`;
-        }
-
-        function callWaiterAgain() {
-            const waiterOptions = document.getElementById('waiterOptions');
-            waiterOptions.style.display = 'none';
-            callWaiter();
-        }
-
-        function callSupervisor() {
-            const waiterOptions = document.getElementById('waiterOptions');
-            waiterOptions.style.display = 'none';
-            
-            createNotification('danger', 'Supervisor Notificado', 'Un supervisor ha sido notificado y llegará en breve.');
-            addActivity('negative', `Cliente ${appState.user.name} reclamó al supervisor`);
-            
-            // Restablecer botón
-            const callBtn = document.getElementById('callWaiterBtn');
-            callBtn.disabled = false;
-            callBtn.innerHTML = '<i class="fas fa-bell"></i> Llamar al Camarero';
-            callBtn.style.background = 'linear-gradient(135deg, var(--neo-secondary), #00B8FF)';
-            
-            document.getElementById('waiterTimer').style.display = 'none';
         }
 
         // Presentar queja
@@ -2240,6 +2313,21 @@
             `).join('');
         }
 
+        function renderEmployeeDashboard() {
+            renderEmployeeLeaderboard();
+            renderTablesGrid();
+            
+            // Mostrar logros del empleado actual
+            const currentEmployee = appState.employees[0]; // Simulamos que es el primero
+            const achievementsContainer = document.getElementById('employeeAchievements');
+            
+            if (currentEmployee.achievements.length > 0) {
+                achievementsContainer.innerHTML = currentEmployee.achievements.map(achievement => 
+                    `<span class="achievement-badge">${achievement}</span>`
+                ).join('');
+            }
+        }
+
         function renderTablesGrid() {
             const grid = document.getElementById('tablesGrid');
             if (!grid) return;
@@ -2276,8 +2364,91 @@
             showView('homeView');
         }
 
+        function renderOwnerDashboard() {
+            // Actualizar métricas
+            document.getElementById('dailyRevenue').textContent = '€' + (Math.random() * 1000 + 200).toFixed(0);
+            document.getElementById('occupiedTables').textContent = Math.floor(Math.random() * 6 + 6) + '/12';
+            document.getElementById('pendingOrders').textContent = Math.floor(Math.random() * 5);
+            document.getElementById('waitingClients').textContent = Math.floor(Math.random() * 3);
+            
+            // Renderizar leaderboard
+            const container = document.getElementById('ownerLeaderboard');
+            const sortedEmployees = [...appState.employees].sort((a, b) => b.points - a.points);
+            
+            container.innerHTML = sortedEmployees.map(emp => `
+                <div class="leaderboard-item">
+                    <div class="rank-badge rank-${emp.level}">${emp.points}</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">${emp.name}</div>
+                        <div style="font-size: 0.8rem; color: var(--neo-text-secondary);">
+                            ${emp.level.toUpperCase()} | Hoy: 
+                            <span style="color: ${emp.todayPoints > 0 ? '#00FF00' : '#FF4444'};">
+                                ${emp.todayPoints > 0 ? '+' : ''}${emp.todayPoints}pts
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCameraFeed() {
+            appState.cameraEnabled = !appState.cameraEnabled;
+            const cameraFeed = document.querySelector('.camera-feed');
+            
+            if (appState.cameraEnabled) {
+                cameraFeed.innerHTML = `
+                    <div style="text-align: center;">
+                        <i class="fas fa-video" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <div>Feed de cámara simulado</div>
+                        <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--neo-accent);">
+                            🔴 EN VIVO - Sala Principal
+                        </div>
+                    </div>
+                `;
+                cameraFeed.style.background = 'rgba(0,240,255,0.1)';
+                createNotification('success', 'Cámaras Activadas', 'Sistema de vigilancia en línea');
+            } else {
+                cameraFeed.innerHTML = `
+                    <i class="fas fa-video" style="font-size: 2rem;"></i>
+                    <div style="margin-left: 1rem;">Sistema de cámaras conectado</div>
+                `;
+                cameraFeed.style.background = 'rgba(0,0,0,0.5)';
+            }
+        }
+
+        function updateDemandPrediction() {
+            // Simular predicción de demanda
+            const prediction = Math.floor(Math.random() * 100);
+            appState.demandPrediction = prediction;
+            
+            const predictionElement = document.getElementById('demandPrediction');
+            const predictionFill = document.getElementById('predictionFill');
+            const staffRecommendation = document.getElementById('staffRecommendation');
+            
+            predictionFill.style.width = `${prediction}%`;
+            
+            if (prediction >= 80) {
+                predictionElement.textContent = 'Muy Alta';
+                predictionElement.style.color = 'var(--neo-primary)';
+                staffRecommendation.textContent = '+2 camareros recomendados';
+            } else if (prediction >= 60) {
+                predictionElement.textContent = 'Alta';
+                predictionElement.style.color = 'var(--neo-accent)';
+                staffRecommendation.textContent = '+1 camarero recomendado';
+            } else if (prediction >= 40) {
+                predictionElement.textContent = 'Moderada';
+                predictionElement.style.color = 'var(--neo-secondary)';
+                staffRecommendation.textContent = 'Personal adecuado';
+            } else {
+                predictionElement.textContent = 'Baja';
+                predictionElement.style.color = 'var(--neo-text-secondary)';
+                staffRecommendation.textContent = 'Personal reducido posible';
+            }
+        }
+
         function verifyAllOrders() {
             alert("✅ Todos los pedidos verificados y actualizados.");
+            createNotification('success', 'Pedidos Verificados', 'Todos los pedidos han sido revisados');
         }
 
         // === ACTIVIDAD EN VIVO ===
