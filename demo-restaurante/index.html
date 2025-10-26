@@ -42,6 +42,127 @@
             overflow: hidden;
         }
 
+        /* === SPLASH SCREEN PANTALLA COMPLETA === */
+        #splashScreen {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background: var(--neo-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+            overflow: hidden;
+        }
+
+        .splash-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .splash-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .splash-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.1);
+            animation: imagePulse 4s infinite alternate;
+        }
+
+        @keyframes imagePulse {
+            0% { transform: scale(1); filter: brightness(0.8) contrast(1.1); }
+            100% { transform: scale(1.05); filter: brightness(0.9) contrast(1.2); }
+        }
+
+        .splash-image::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 42, 109, 0.3) 0%,
+                rgba(0, 240, 255, 0.2) 50%,
+                rgba(110, 0, 255, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .splash-image::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent
+            );
+            animation: hologramScan 3s infinite;
+            z-index: 2;
+        }
+
+        @keyframes hologramScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--neo-primary), var(--neo-accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 50px rgba(255, 42, 109, 0.8);
+            animation: pulse 2s infinite;
+            z-index: 3;
+            position: relative;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .splash-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--neo-secondary);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.9);
+            animation: fadeIn 1s ease-in-out;
+            z-index: 3;
+            position: relative;
+            text-align: center;
+            background: rgba(13, 9, 22, 0.7);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* === NEO-GLASSMORPHISM === */
         .neo-glass {
             background: rgba(255, 255, 255, 0.1);
@@ -128,53 +249,6 @@
 
         .view { display: none; }
         .view.active { display: block; }
-
-        /* === SPLASH SCREEN === */
-        #splashScreen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--neo-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            color: white;
-            overflow: hidden;
-        }
-
-        .splash-logo {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, var(--neo-primary), var(--neo-accent));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 50px rgba(255, 42, 109, 0.8);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .splash-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--neo-secondary);
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         /* === BOTONES NEO === */
         .btn-neo {
@@ -958,12 +1032,17 @@
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
+    <!-- Splash Screen Pantalla Completa -->
     <div id="splashScreen">
-        <div class="splash-logo">
-            <i class="fas fa-utensils"></i>
+        <div class="splash-container">
+            <div class="splash-image">
+                <img src="https://cdn.leonardo.ai/users/10dcf12a-8d89-44e9-85ea-84c862f0252f/generations/24e92457-4a55-405a-b2e2-d4f98a745d7d/segments/4:4:1/Lucid_Origin_a_cinematic_photo_of_Sophisticated_modern_restaur_3.jpg" alt="GastroNeo Quantum Restaurant">
+            </div>
+            <div class="splash-logo">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <div class="splash-text">GASTRONEO QUANTUM</div>
         </div>
-        <div class="splash-text">GASTRONEO QUANTUM</div>
     </div>
 
     <!-- Portal de entrada futurista -->
@@ -1709,7 +1788,7 @@
             setTimeout(() => {
                 document.getElementById('splashScreen').style.display = 'none';
                 initializeApp();
-            }, 2500);
+            }, 3500); // Tiempo suficiente para apreciar la imagen a pantalla completa
         });
 
         function initializeApp() {
